@@ -1,5 +1,6 @@
 package customer;
 import java.awt.Color;
+
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -21,7 +22,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
-import sun.java2d.loops.DrawLine;
 public class E_PostPanel extends JPanel implements ActionListener {
     private JButton BSend;
      private JLabel LTo,LHardCopy,LSoftCopy,LFirstName,LLastName,LAddress,LState,LDistrict,LPincode,LPhoneNumber,LMessage;
