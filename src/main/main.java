@@ -4,20 +4,30 @@ import Admin.*;
 import javax.swing.*;
 import java.awt.*;
 import Login.*;
-
-
+import e_post.*;
 
 public class main extends JFrame {
     static JPanel mainPanel;
     static CardLayout card;
     main() {
-        mainPanel = new JPanel(null);
+        card = new CardLayout();
+        mainPanel = new JPanel(card);
         mainPanel.setBackground(new Color(34, 34, 45));
         mainPanel.setPreferredSize(new Dimension(1350, 890));
         
-        JPanel customerDetailsPanel = new deliveryDetails();
+        login login = new login();
+        register register = new register();
+        CustomerPanel customerPanel = new CustomerPanel();
+        Profile_View profileView = new Profile_View();
+        Profile_Update profileUpdate = new Profile_Update();
         
-        mainPanel.add(customerDetailsPanel);
+        mainPanel.add(login, "login");
+        mainPanel.add(register, "register");
+        mainPanel.add(customerPanel, "customerPanel");
+        mainPanel.add(profileView, "Profile");
+        mainPanel.add(profileUpdate, "Profile update");
+        
+        card.first(mainPanel);
         this.add(mainPanel);
         this.pack();
         this.setVisible(true);

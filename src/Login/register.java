@@ -166,6 +166,8 @@ public class register extends JPanel implements ActionListener {
         registerButton.setBorder(null);
         registerButton.setUI(new BasicButtonUI());
         
+        registerButton.addActionListener(this);
+        
         
         registerMessageLabel = new JLabel("Already have an Account?");
         registerMessageLabel.setBounds(550, 840, 300, 40);
@@ -223,6 +225,12 @@ public class register extends JPanel implements ActionListener {
     }
     
     public void actionPerformed(ActionEvent e) {
-        main.switchPage("login");
+        if(e.getSource() == registerButton){
+            main.switchPage("customerPanel");
+        }
+        else if(e.getSource() == registerLoginButton || e.getSource() == backButton){
+            main.switchPage("login");
+        }
+        
     }
 }
