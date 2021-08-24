@@ -184,11 +184,11 @@ public class register extends JPanel implements ActionListener {
         registerLoginButton.setContentAreaFilled(false);
         registerLoginButton.addActionListener(this);
         
-        backButton = new JButton();
+        ImageIcon backImage = new ImageIcon(getClass().getResource("/Images/arrow_back_button.png"));
+        backButton = new JButton(backImage);
         backButton.setBounds(20, 20, 50, 50);
-        backButton.setBackground(new Color(71, 63, 145));
+        backButton.setBackground(new Color(34, 34, 45));
         backButton.setBorder(null);
-        backButton.setUI(new BasicButtonUI());
         backButton.addActionListener(this);
         
         
