@@ -33,7 +33,7 @@ public class ProductsPanel extends JPanel implements ActionListener{
         
         JPanel prod = new JPanel(null);
         prod.setBackground(fg);
-        prod.setPreferredSize(new Dimension(1260, 750));
+        prod.setPreferredSize(new Dimension(1260, 780));
         
         revenueStampImage = new ImageIcon(getClass().getResource("/Images/REVENUE STAMP.jpg"));
         image = revenueStampImage.getImage(); // transform it 
