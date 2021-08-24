@@ -1,4 +1,4 @@
-package e_post;
+package customer;
 import javax.swing.JLabel;
 import java.awt.Color;
 import java.awt.event.ActionEvent;

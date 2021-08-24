@@ -1,4 +1,4 @@
-package e_post;
+package customer;
 import javax.swing.JPanel;
 import java.awt.CardLayout;
 import java.awt.Color;

@@ -1,4 +1,4 @@
-package e_post;
+package customer;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;

@@ -1,4 +1,4 @@
-package e_post;
+package customer;
 import javax.swing.*;
 import javax.swing.border.Border;
 

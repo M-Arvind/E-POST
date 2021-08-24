@@ -4,7 +4,7 @@ import Admin.*;
 import javax.swing.*;
 import java.awt.*;
 import Login.*;
-import e_post.*;
+import customer.*;
 
 public class main extends JFrame {
     static JPanel mainPanel;

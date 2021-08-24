@@ -1,4 +1,4 @@
-package e_post;
+package customer;
 
 import java.awt.Dimension;
 import java.awt.Graphics;

@@ -1,4 +1,4 @@
-package e_post;
+package customer;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
