@@ -1,10 +1,13 @@
 package customer;
+import main.*;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -12,10 +15,12 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.ScrollPaneConstants;
 
-public class PaymentParcel 
+public class PaymentParcel extends JPanel implements MouseListener
 {
     
     Color background_Color = new Color(34,34,45);
@@ -26,7 +31,7 @@ public class PaymentParcel
 
     JLabel p_payment_title;
     JButton p_payment_btn_confirm;
-    JButton p_payment_btn_back;
+    JLabel p_payment_btn_back;
     
     //Left Label
     JLabel p_payment_beneficiary;
@@ -61,11 +66,12 @@ public class PaymentParcel
     
     public PaymentParcel()
     { 
-        JFrame frame= new JFrame("Money Order");    
+            
         p_payment_Panel = new JPanel();
         
         p_payment_btn_confirm = new JButton();
-        p_payment_btn_back = new JButton();
+        p_payment_btn_back = new JLabel(new ImageIcon(getClass().getResource("/Images/arrow_back_button.png")));
+         p_payment_btn_back.addMouseListener(this);
         
         //Label
         p_payment_title = new JLabel("Payment");
@@ -119,7 +125,7 @@ public class PaymentParcel
         
         //Button and title
         p_payment_title.setBounds(585, 25, 200, 50);
-        p_payment_btn_confirm.setBounds(585,675,150,40);
+        p_payment_btn_confirm.setBounds(585,675 + 80,150,40);
         p_payment_btn_confirm.setBackground(primary_Color);
         p_payment_btn_confirm.setText("Confirm");
         p_payment_btn_confirm.setForeground(on_background_Color);
@@ -139,32 +145,32 @@ public class PaymentParcel
         }
         
         //Label Bounds
-        p_payment_beneficiary.setBounds(120, 0, 150, 50);
-        p_payment_amount.setBounds(120, 50, 150, 50);
-        p_payment_to.setBounds(120,100,150,50);
-        p_payment_contact.setBounds(120,150,150,50);
-        p_payment_type.setBounds(120,200,150,50);
-        p_payment_weight.setBounds(120,250,150,50);
-        p_payment_firstName.setBounds(120,300,150,50);
-        p_payment_lastName.setBounds(120,350,150,50);
-        p_payment_address.setBounds(120,400,150,50);
-        p_payment_state.setBounds(120,500,150,50);
-        p_payment_district.setBounds(120,550,150,50);
-        p_payment_pincode.setBounds(120,600,150,50);
+        p_payment_beneficiary.setBounds(120, 0 + 80, 150, 50);
+        p_payment_amount.setBounds(120, 50 + 80, 150, 50);
+        p_payment_to.setBounds(120,100 + 80,150,50);
+        p_payment_contact.setBounds(120,150 + 80,150,50);
+        p_payment_type.setBounds(120,200 + 80,150,50);
+        p_payment_weight.setBounds(120,250 + 80,150,50);
+        p_payment_firstName.setBounds(120,300 + 80,150,50);
+        p_payment_lastName.setBounds(120,350 + 80,150,50);
+        p_payment_address.setBounds(120,400 + 80,150,50);
+        p_payment_state.setBounds(120,500 + 80,150,50);
+        p_payment_district.setBounds(120,550 + 80,150,50);
+        p_payment_pincode.setBounds(120,600 + 80,150,50);
         
         //Content Label Bounds
-        p_payment_beneficiary_info.setBounds(400, 0, 150, 50);
-        p_payment_amount_info.setBounds(400, 50, 150, 50);
-        p_payment_to_info.setBounds(400,100,150, 50);
-        p_payment_contact_info.setBounds(400,150,150, 50);
-        p_payment_type_info.setBounds(400,200,150, 50);
-        p_payment_weight_info.setBounds(400,250,150, 50);
-        p_payment_firstName_info.setBounds(400,300,150, 50);
-        p_payment_lastName_info.setBounds(400,350,150, 50);
-        p_payment_address_info.setBounds(400,410,800,90);
-        p_payment_state_info.setBounds(400,500,150, 50);
-        p_payment_district_info.setBounds(400,550,150, 50);
-        p_payment_pincode_info.setBounds(400,600,150, 50);
+        p_payment_beneficiary_info.setBounds(400, 0 + 80, 150, 50);
+        p_payment_amount_info.setBounds(400, 50 + 80, 150, 50);
+        p_payment_to_info.setBounds(400,100 + 80,150, 50);
+        p_payment_contact_info.setBounds(400,150 + 80,150, 50);
+        p_payment_type_info.setBounds(400,200 + 80,150, 50);
+        p_payment_weight_info.setBounds(400,250 + 80,150, 50);
+        p_payment_firstName_info.setBounds(400,300 + 80,150, 50);
+        p_payment_lastName_info.setBounds(400,350 + 80,150, 50);
+        p_payment_address_info.setBounds(400,410 + 80,800,90);
+        p_payment_state_info.setBounds(400,500 + 80,150, 50);
+        p_payment_district_info.setBounds(400,550 + 80,150, 50);
+        p_payment_pincode_info.setBounds(400,600 + 80,150, 50);
         
         
         //Label Text Color
@@ -229,75 +235,78 @@ public class PaymentParcel
         p_payment_Panel.setPreferredSize(new Dimension(1350, 890));
         
         //Add to Panel
-        p_payment_Panel.add(p_payment_title);
-        p_payment_Panel.add(p_payment_beneficiary); 
-        p_payment_Panel.add(p_payment_amount); 
-        p_payment_Panel.add(p_payment_to); 
-        p_payment_Panel.add(p_payment_contact); 
-        p_payment_Panel.add(p_payment_type); 
-        p_payment_Panel.add(p_payment_weight); 
-        p_payment_Panel.add(p_payment_firstName); 
-        p_payment_Panel.add(p_payment_lastName); 
-        p_payment_Panel.add(p_payment_address);
-        p_payment_Panel.add(p_payment_state);
-        p_payment_Panel.add(p_payment_district);
-        p_payment_Panel.add(p_payment_pincode);        
+        add(p_payment_title);
+        add(p_payment_beneficiary); 
+        add(p_payment_amount); 
+        add(p_payment_to); 
+        add(p_payment_contact); 
+        add(p_payment_type); 
+        add(p_payment_weight); 
+        add(p_payment_firstName); 
+        add(p_payment_lastName); 
+        add(p_payment_address);
+        add(p_payment_state);
+        add(p_payment_district);
+        add(p_payment_pincode);        
         
-        p_payment_Panel.add(p_payment_beneficiary_info); 
-        p_payment_Panel.add(p_payment_amount_info); 
-        p_payment_Panel.add(p_payment_to_info); 
-        p_payment_Panel.add(p_payment_contact_info); 
-        p_payment_Panel.add(p_payment_type_info); 
-        p_payment_Panel.add(p_payment_weight_info); 
-        p_payment_Panel.add(p_payment_firstName_info); 
-        p_payment_Panel.add(p_payment_lastName_info); 
-        p_payment_Panel.add(p_payment_address_info);
-        p_payment_Panel.add(p_payment_state_info); 
-        p_payment_Panel.add(p_payment_district_info); 
-        p_payment_Panel.add(p_payment_pincode_info);
-        p_payment_Panel.add(p_payment_btn_confirm);
+        add(p_payment_beneficiary_info); 
+        add(p_payment_amount_info); 
+        add(p_payment_to_info); 
+        add(p_payment_contact_info); 
+        add(p_payment_type_info); 
+        add(p_payment_weight_info); 
+        add(p_payment_firstName_info); 
+        add(p_payment_lastName_info); 
+        add(p_payment_address_info);
+        add(p_payment_state_info); 
+        add(p_payment_district_info); 
+        add(p_payment_pincode_info);
+        add(p_payment_btn_confirm);
+        add(p_payment_btn_back);
         
         
-        p_payment_btn_back.addActionListener(new ActionListener()
-        {
-            @Override
-            public void actionPerformed(ActionEvent e) 
-            {
-                JOptionPane.showMessageDialog(null, "This goes back to Parcel Panel");
-            }
-            
-        });
-        
+      
         p_payment_btn_confirm.addActionListener(new ActionListener()
         {
             @Override
             public void actionPerformed(ActionEvent e) 
             {
-                //e_payment_authentication.show(p_payment_Panel, 500, 500);
+               
                 new Authentication();
             }
             
         });  
         
         //Panel
-        p_payment_Panel.setLayout(null);
-        p_payment_Panel.setBackground(background_Color);
-        p_payment_Panel.setSize(1350, 900);
+        setLayout(null);
+        setBackground(background_Color);
+        setPreferredSize(new Dimension(1350,850));
+        setVisible(true);
         
-        //Frame
-        frame.add(p_payment_Panel);
-        frame.add(p_payment_title);
-        frame.add(p_payment_btn_back);
-        
-        frame.setSize(1350,890);
-        frame.getContentPane().setBackground(background_Color);
-        frame.setLayout(null);
-        frame.setVisible(true);    
     }
-    
-//    public static void main(String arg[])
-//    {
-//        PaymentParcel paymentParcel = new PaymentParcel();
-//    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        if(e.getSource()== p_payment_btn_back){
+            main.switchPage("customerPanel");
+            
+        }
+          }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+            }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+           }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+            }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+            }
     
 }
