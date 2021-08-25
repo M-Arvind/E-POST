@@ -1,7 +1,7 @@
 package customer;
 import main.*;
 import java.awt.Color;
-
+import customer.DatasForCustomer.*;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -250,6 +250,9 @@ public class E_PostPanel extends JPanel implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         main.switchPage("paymentEPost");
+        TTo,TFirstname,TLastName,TPincode,TPhoneNumber,TSubject;
+        TAddress,Message
+      
     }
     
 }

@@ -51,8 +51,8 @@ public class WalletPanel extends JPanel
 			
 		
 		
-		bMoney_Order = new JButton("Money Order");
-    	bAdd_Money = new JButton("Add Money");    	
+                bMoney_Order = new JButton("Money Order");
+                bAdd_Money = new JButton("Add Money");    	
     	UserName = new JLabel("Username   : ABHI@2001 ");    	
     	Account_no = new JLabel("Account no : 1000125690");    	
     	WalletBalance = new JLabel("Rs.35,000");      	

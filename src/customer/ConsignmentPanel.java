@@ -26,8 +26,6 @@ class ConsignmentPanel extends JPanel implements ActionListener{
         this.setLayout(null);
         this.setBackground(Color.white);
         Object[][] rows =DatabaseOperations.getCustomerConsignmentDetails();
-     
-        
         String[] columns = {"Consignment ID", "From","To", "Item", "Delivery ID", "Payment Method", "Date", "Status"};
         
         Border border = new LineBorder(new Color(71, 63, 145), 1, true);
