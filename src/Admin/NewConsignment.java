@@ -25,18 +25,13 @@ public class NewConsignment extends JPanel implements ActionListener{
 
         this.setLayout(null);
         this.setBackground(Color.white);
-        Object[][] rows = {{"12345", "Keshav", "Arvind", "E Post", "12345", "E PAY", "29.09.2001", "Order Placed"}, {"2345", "Keshav", "Arvind", "E Post", "12345", "E PAY", "29.09.2001", "Order Placed"}};
+        Object[][] rows = {{"12345", "Keshav", "Arvind", "E Post", "    ", "E PAY", "29.09.2001", "Order Placed"}, {"2345", "Keshav", "Arvind", "E Post", "   ", "E PAY", "29.09.2001", "Order Placed"}};
         String[] columns = {"Consignment ID", "From","To", "Item", "Delivery ID", "Payment Method", "Date", "Status"};
         
         Border border = new LineBorder(new Color(71, 63, 145), 1, true);
         
         
-        table =new JTable(rows, columns){
-          @Override
-         public boolean editCellAt(int row, int column, java.util.EventObject e) {
-            return false;
-         }
-        };
+        table =new JTable(rows, columns);
     
         table.setRowHeight(30);
         table.setBorder(border);
@@ -45,27 +40,29 @@ public class NewConsignment extends JPanel implements ActionListener{
         ListSelectionModel select = table.getSelectionModel();
         select.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         
-        select.addListSelectionListener(new ListSelectionListener() {
-       public void valueChanged(ListSelectionEvent e) {
-        String selectedData = null;
-
-        int[] selectedRow = table.getSelectedRows();
-
-        selectedData = (String) table.getValueAt(selectedRow[0], 0);
-   
-        AdminPanel.adminCard.show(AdminPanel.contentForAdmin,"ConsignmentDetails");
-        System.out.println("Selected: " + selectedData);
-      }
-
-    });
+//        select.addListSelectionListener(new ListSelectionListener() {
+//       public void valueChanged(ListSelectionEvent e) {
+//        String selectedData = null;
+//
+//        int[] selectedRow = table.getSelectedRows();
+//
+//        selectedData = (String) table.getValueAt(selectedRow[0], 0);
+//   
+//        AdminPanel.adminCard.show(AdminPanel.contentForAdmin,"ConsignmentDetails");
+//        System.out.println("Selected: " + selectedData);
+//      }
+//
+//    });
         
-       /* TableColumn testColumn = table.getColumnModel().getColumn(7);
+       TableColumn testColumn = table.getColumnModel().getColumn(4);
         JComboBox<String> comboBox = new JComboBox<>();
-        comboBox.addItem("Picked Up");
-        comboBox.addItem("In Transit");
-        comboBox.addItem("Delivered");
+        comboBox.addItem("Barath.B");
+        comboBox.addItem("Abhijith");
+        comboBox.addItem("Keshav B");
+        comboBox.addItem("Arvind M");
+        comboBox.addItem("Gowtham S");
 
-        testColumn.setCellEditor(new DefaultCellEditor(comboBox));*/
+        testColumn.setCellEditor(new DefaultCellEditor(comboBox));
         
         JTableHeader tab = table.getTableHeader();
         JTableHeader tableHeader = table.getTableHeader();

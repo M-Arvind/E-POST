@@ -21,6 +21,8 @@ public class main extends JFrame {
         AdminPanel adminPanel = new AdminPanel();
         Profile_View profileView = new Profile_View();
         Profile_Update profileUpdate = new Profile_Update();
+        AdminProfileView adminProfileVi = new AdminProfileView();
+        AdminProfileUpdate adminprofileUp = new AdminProfileUpdate();
         
         mainPanel.add(login, "login");
         mainPanel.add(register, "register");
@@ -28,6 +30,8 @@ public class main extends JFrame {
         mainPanel.add(adminPanel, "AdminPanel");
         mainPanel.add(profileView, "Profile");
         mainPanel.add(profileUpdate, "Profile update");
+        mainPanel.add(adminProfileVi, "AdminProfileView");
+        mainPanel.add(adminprofileUp, "AdminProfileUpdate");
         
         card.first(mainPanel);
         this.add(mainPanel);
