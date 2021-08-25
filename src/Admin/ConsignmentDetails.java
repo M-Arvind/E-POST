@@ -249,6 +249,12 @@ class ConsignmentDetails extends JPanel implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         Object o = e.getSource();
         if(o == back){
+            AdminPanel.bNew.setBounds(55,120,160,30);
+            AdminPanel.bOnGoing.setBounds(55+180,110,160,30);
+            AdminPanel.bCompleted.setBounds(55+180+180,110,160,30);
+            AdminPanel.bCustomer.setBounds(55+180+180+180,110,160,30);
+            AdminPanel.bDelivery.setBounds(55+180+180+180+180,110,160,30);
+            AdminPanel.bStocks.setBounds(55+180+180+180+180+180,110,160,30);
             AdminPanel.adminCard.show(AdminPanel.contentForAdmin, "NewConsignment");
         }
     }

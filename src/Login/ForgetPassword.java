@@ -16,7 +16,7 @@ import javax.swing.JTextField;
  * @author kesha
  */
 public class ForgetPassword{
-        JDialog newdialog = new JDialog();
+    JDialog newdialog = new JDialog();
     
     Color background_Color = new Color(34,34,45);
     Color on_background_Color = new Color(254,254,254);
