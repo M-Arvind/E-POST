@@ -1,4 +1,5 @@
 package customer;
+import main.*;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -64,7 +65,10 @@ public class Authentication
             @Override
             public void actionPerformed(ActionEvent e) 
             {
-                JOptionPane.showMessageDialog(null, "This goes to Back to E-Post or Parcel");                
+                CustomerPanel.customerCard.show(CustomerPanel.contentForCustomer,"E-Post");
+                main.switchPage("customerPanel");
+                newdialog.dispose();
+                               
             }
                         
         });        

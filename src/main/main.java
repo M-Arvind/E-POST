@@ -23,6 +23,8 @@ public class main extends JFrame {
         Profile_Update profileUpdate = new Profile_Update();
         AdminProfileView adminProfileVi = new AdminProfileView();
         AdminProfileUpdate adminprofileUp = new AdminProfileUpdate();
+        PaymentEPost paymentEPost=new PaymentEPost();
+        PaymentParcel paymentParcel=new PaymentParcel();
         
         mainPanel.add(login, "login");
         mainPanel.add(register, "register");
@@ -32,9 +34,12 @@ public class main extends JFrame {
         mainPanel.add(profileUpdate, "Profile update");
         mainPanel.add(adminProfileVi, "AdminProfileView");
         mainPanel.add(adminprofileUp, "AdminProfileUpdate");
-        
+        mainPanel.add(paymentEPost,"paymentEPost");
+        mainPanel.add(paymentParcel,"paymentParcel");
         card.first(mainPanel);
-        this.add(mainPanel);
+        JScrollPane scroll=new JScrollPane(mainPanel,ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        scroll.setBounds(0,0,2000, 1000);
+        this.add(scroll);
         this.pack();
         this.setVisible(true);
         this.setLayout(null);
