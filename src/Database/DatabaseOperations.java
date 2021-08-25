@@ -16,10 +16,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import customer.DatasForCustomer.*;
+import java.sql.Statement;
 public class DatabaseOperations 
 {
    private static Connection connection;
@@ -42,7 +40,91 @@ public class DatabaseOperations
         }
         return connection;
 
+              ConsignmentData.listForConsignment.add(ob); 
+             
+              
+           }
+           System.out.println("Success in Consignment--->"+ConsignmentData.listForConsignment.size());
+       } catch (Exception ex) {
+           System.out.println("Error in getCustomerConsignmentDetails---->"+ex.toString());
+       }
+       Object[][] row=new Object[ConsignmentData.listForConsignment.size()][8];
+       int i=0;
+       for(ConsignmentData Data:ConsignmentData.listForConsignment){
+           row[i][0]=Data.getConsignment_ID();
+           row[i][1]=Data.getCustomer_first_name();
+           row[i][2]=Data.getReceiver_first_name();
+           row[i][3]=Data.getItem();
+           row[i][4]=Data.getDelivery_ID();
+           row[i][5]=Data.getPayment_method();
+           row[i][6]=Data.getOrder_date();
+           row[i][7]=Data.getStatus();
+          
+          
+         i++;
+             
+       }
+       return row;
     }
+    
+   public static String getConsignmentIdGenerator() {
+       try{
+          Connection con=DatabaseOperations.getConnection();
+				Statement st=con.createStatement();
+				String stsql="select count(*) from CONSIGNMENT";
+				ResultSet rs=st.executeQuery(stsql);
+				rs.next();
+				int c=rs.getInt(1);
+				con.setAutoCommit(true);
+				
+				String s="CONID";
+                                System.out.println(s+Integer.toString(c+1));
+				return s+Integer.toString(c+1); 
+       }
+       catch(Exception ex1){
+            System.out.println("Error in getconsignmentIdGenerator---->"+ex1.toString());
+       }
+				
+	return "";			
+     }
+   public static String getTransactionIdGenerator()  {
+       try{
+          Connection con=DatabaseOperations.getConnection();
+		Statement st=con.createStatement();
+		String stsql="select count(*) from WALLET";
+		ResultSet rs=st.executeQuery(stsql);
+		rs.next();
+		int c=rs.getInt(1);
+		con.setAutoCommit(true);
+		String s="TRANSID";
+		return s+Integer.toString(c+1); 
+       }
+       catch(Exception ex1){
+            System.out.println("Error in getTransactionIdGenerator---->"+ex1.toString());
+       }
+       
+      return "";
+   }
+   
+   public static String getMessageIdGenerator() {
+      try{
+          Connection con=DatabaseOperations.getConnection();
+		Statement st=con.createStatement();
+		String stsql="select count(*) from INBOX";
+		ResultSet rs=st.executeQuery(stsql);
+		rs.next();
+		int c=rs.getInt(1);
+		con.setAutoCommit(true);
+		String s="MSGID";
+		return s+Integer.toString(c+1);
+          
+      }
+      catch(Exception ex1){
+            System.out.println("Error in getTransactionIdGenerator---->"+ex1.toString());
+       }
+	return "";	
+  }
+ 
    
    //Database
     public static ArrayList getLoginCredentials(JTextField usernameTextField, JTextField passwordField)
@@ -203,3 +285,4 @@ public class DatabaseOperations
 //       return row;
 //    }
 }
+
