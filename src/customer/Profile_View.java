@@ -36,6 +36,7 @@ public class Profile_View extends JPanel implements ActionListener, MouseListene
 				ProfIconLabel.setVisible(true);
 				ProfIconLabel.setBackground(new Color(R,G,B));
 				ProfIconLabel.setBorder(emptyBorder);
+                                ProfIconLabel.setContentAreaFilled(false);
 				add(ProfIconLabel);
 				
 				//back icon
@@ -46,6 +47,7 @@ public class Profile_View extends JPanel implements ActionListener, MouseListene
 				BackIconLabel.setBackground(new Color(R,G,B));
 				BackIconLabel.setBorder(emptyBorder);
 				BackIconLabel.setVisible(true);
+                                BackIconLabel.setContentAreaFilled(false);
 				BackIconLabel.addMouseListener(this);
 				add(BackIconLabel);
 				
@@ -57,6 +59,7 @@ public class Profile_View extends JPanel implements ActionListener, MouseListene
 				EditIconLabel.setBackground(new Color(R,G,B));
 				EditIconLabel.setBorder(emptyBorder);
 				EditIconLabel.setVisible(true);
+                                EditIconLabel.setContentAreaFilled(false);
 				EditIconLabel.addActionListener(this);
 				
 				add(EditIconLabel);

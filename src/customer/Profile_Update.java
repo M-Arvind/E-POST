@@ -31,6 +31,7 @@ public class Profile_Update extends JPanel implements MouseListener{
 		ProfIconLabel.setBounds(X-150,Y-70,120,120);
 		ProfIconLabel.setVisible(true);
 		ProfIconLabel.setBackground(new Color(R,G,B));
+                ProfIconLabel.setContentAreaFilled(false);
 		ProfIconLabel.setBorder(emptyBorder);
 		add(ProfIconLabel);
 		
@@ -42,6 +43,7 @@ public class Profile_Update extends JPanel implements MouseListener{
 		BackIconLabel.setVisible(true);
 		BackIconLabel.setBackground(new Color(R,G,B));
 		BackIconLabel.setBorder(emptyBorder);
+                BackIconLabel.setContentAreaFilled(false);
                 BackIconLabel.addMouseListener(this);
 		add(BackIconLabel);
 		
@@ -71,7 +73,7 @@ public class Profile_Update extends JPanel implements MouseListener{
 		UserNameValue=new JTextArea("Username");
 		UserNameValue.setBounds(X+240,Y+62,800,25);
 		UserNameValue.setFont(new Font("Bold",Font.BOLD,labelFontSize));
-		UserNameValue.setBackground(new Color(R,G,B));
+		//UserNameValue.setBackground(new Color(R,G,B));
 		UserNameValue.setForeground(Color.WHITE);
 		
 		add(UserNameLabel);
@@ -96,7 +98,7 @@ public class Profile_Update extends JPanel implements MouseListener{
 		ContactNoValue.setBounds(X+240,Y+124,800,25);
 		ContactNoValue.setFont(new Font("Bold",Font.BOLD,labelFontSize));
 		ContactNoValue.setForeground(Color.WHITE);
-		ContactNoValue.setBackground(new Color(R,G,B));
+		//ContactNoValue.setBackground(new Color(R,G,B));
 		
 		add(ContactNoLabel);
 		add(Collon2);
@@ -119,7 +121,7 @@ public class Profile_Update extends JPanel implements MouseListener{
 		DOBValue=new JTextArea("DOB");
 		DOBValue.setBounds(X+240,Y+184,800,25);
 		DOBValue.setFont(new Font("Bold",Font.BOLD,labelFontSize));
-		DOBValue.setBackground(new Color(R,G,B));
+		//DOBValue.setBackground(new Color(R,G,B));
 		DOBValue.setForeground(Color.WHITE);
 		
 		add(DOBLabel);
@@ -143,7 +145,7 @@ public class Profile_Update extends JPanel implements MouseListener{
 		AgeValue=new JTextArea("Age");
 		AgeValue.setBounds(X+240,Y+244,800,25);
 		AgeValue.setFont(new Font("Bold",Font.BOLD,labelFontSize));
-		AgeValue.setBackground(new Color(R,G,B));
+		//AgeValue.setBackground(new Color(R,G,B));
 		AgeValue.setForeground(Color.WHITE);
 		
 		add(AgeLabel);
@@ -167,7 +169,7 @@ public class Profile_Update extends JPanel implements MouseListener{
 		JoinDateValue.setBounds(X+240,Y+304,800,25);
 		JoinDateValue.setFont(new Font("Bold",Font.BOLD,labelFontSize));
 		JoinDateValue.setForeground(Color.WHITE);
-		JoinDateValue.setBackground(new Color(R,G,B));
+		//JoinDateValue.setBackground(new Color(R,G,B));
 		
 		add(JoinDateLabel);
 		add(Collon5);
@@ -189,7 +191,7 @@ public class Profile_Update extends JPanel implements MouseListener{
 		PAddressValue=new JTextArea("Address");
 		PAddressValue.setBounds(X+240,Y+364,800,50);
 		PAddressValue.setFont(new Font("Bold",Font.BOLD,labelFontSize));
-		PAddressValue.setBackground(new Color(R,G,B));
+		//PAddressValue.setBackground(new Color(R,G,B));
 		PAddressValue.setForeground(Color.WHITE);
 		PAddressValue.setLineWrap(true);
 		
@@ -214,7 +216,7 @@ public class Profile_Update extends JPanel implements MouseListener{
 		TAddressValue=new JTextArea("Address");
 		TAddressValue.setBounds(X+240,Y+454,800,50);
 		TAddressValue.setFont(new Font("Bold",Font.BOLD,labelFontSize));
-		TAddressValue.setBackground(new Color(R,G,B));
+		//TAddressValue.setBackground(new Color(R,G,B));
 		TAddressValue.setForeground(Color.WHITE);
 		TAddressValue.setLineWrap(true);
 		
@@ -239,7 +241,7 @@ public class Profile_Update extends JPanel implements MouseListener{
 		MaritalValue=new JTextArea("Marital Status");
 		MaritalValue.setBounds(X+240,Y+530,800,25);
 		MaritalValue.setFont(new Font("Bold",Font.BOLD,labelFontSize));
-		MaritalValue.setBackground(new Color(R,G,B));
+		//MaritalValue.setBackground(new Color(R,G,B));
 		MaritalValue.setForeground(Color.WHITE);
 		
 		add(MaritalStatusLabel);
@@ -262,7 +264,7 @@ public class Profile_Update extends JPanel implements MouseListener{
 		DesignationValue=new JTextArea("Designation");
 		DesignationValue.setBounds(X+240,Y+590,800,25);
 		DesignationValue.setFont(new Font("Bold",Font.BOLD,labelFontSize));
-		DesignationValue.setBackground(new Color(R,G,B));
+		//DesignationValue.setBackground(new Color(R,G,B));
 		DesignationValue.setForeground(Color.WHITE);
 		
 		add(DesignationLabel);
