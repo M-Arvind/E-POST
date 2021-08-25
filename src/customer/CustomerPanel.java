@@ -209,7 +209,7 @@ public class CustomerPanel extends JPanel implements ActionListener, MouseListen
         }
     
     }  
-
+  
     @Override
     public void mouseClicked(MouseEvent e) {
         if(e.getSource()==search){
