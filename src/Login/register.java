@@ -1,6 +1,7 @@
 
 package Login;
 
+import Database.DatabaseOperations;
 import main.main;
 import Admin.StyledButtonUi;
 
@@ -10,6 +11,7 @@ import java.awt.Font;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import javax.swing.*;
 import javax.swing.plaf.basic.BasicButtonUI;
 
@@ -250,8 +252,10 @@ public class register extends JPanel implements ActionListener {
         this.add(registerPanel);
     }
     
-    public void actionPerformed(ActionEvent e) {
-        if(e.getSource() == registerButton){
+    public void actionPerformed(ActionEvent e) 
+    {
+        if(e.getSource() == registerButton)
+        {
             main.switchPage("AdminPanel");
         }
         else if(e.getSource() == registerLoginButton || e.getSource() == backButton){
