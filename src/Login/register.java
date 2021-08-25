@@ -3,6 +3,7 @@ package Login;
 
 import Database.DatabaseOperations;
 import main.main;
+import Admin.StyledButtonUi;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -17,11 +18,16 @@ import javax.swing.plaf.basic.BasicButtonUI;
 public class register extends JPanel implements ActionListener {
     JPanel registerPanel;
     private JLabel registerLabel,  firstNameLabel, lastNameLabel, usernameLabel, phoneNumberLabel, passwordLabel, 
-            confirmPasswordLabel, DOBLabel, ageLabel, stateLabel, districtLabel, addressLabel, pincodeLabel, registerMessageLabel;
+            confirmPasswordLabel, DOBLabel, ageLabel, stateLabel, districtLabel, addressLabel, pincodeLabel, registerMessageLabel,genderLabel;
     private JTextField firstNameText, lastNameText, usernameText, phoneNumberText, passwordText, confirmPasswordText, DOBText, ageText, stateText, districtText, pincodeText;
     private JTextArea addressTextArea;
     private JButton registerButton, backButton, registerLoginButton;
+    private ButtonGroup gender;
+    private JRadioButton gMale,gFemale,gOther;
     public register() {
+        Color fg = new Color(35, 34, 45);
+        Color bg = new Color(254, 254, 254);
+        Font font = new Font(Font.SANS_SERIF,  Font.BOLD, 20);
         registerPanel = new JPanel(null);
         registerPanel.setPreferredSize(new Dimension(1350, 890));
         registerPanel.setBackground(new Color(34, 34, 45));
@@ -38,8 +44,7 @@ public class register extends JPanel implements ActionListener {
         
         firstNameText = new JTextField(20);
         firstNameText.setBounds(330, 110, 300, 40);
-        firstNameText.setFont(new Font(Font.SANS_SERIF,  Font.BOLD, 20));
-        firstNameText.setBorder(BorderFactory.createEmptyBorder(10,10, 10, 10));
+        firstNameText.setFont(new Font(Font.SANS_SERIF,  Font.PLAIN, 22));
         firstNameText.setForeground(Color.BLACK);
         
         lastNameLabel = new JLabel("Last Name");
@@ -49,8 +54,7 @@ public class register extends JPanel implements ActionListener {
         
         lastNameText = new JTextField(20);
         lastNameText.setBounds(750, 110, 300, 40);
-        lastNameText.setFont(new Font(Font.SANS_SERIF,  Font.BOLD, 20));
-        lastNameText.setBorder(BorderFactory.createEmptyBorder(10,10, 10, 10));
+        lastNameText.setFont(new Font(Font.SANS_SERIF,  Font.PLAIN, 22));
         lastNameText.setForeground(Color.BLACK);
         
         usernameLabel = new JLabel("Username");
@@ -60,8 +64,7 @@ public class register extends JPanel implements ActionListener {
         
         usernameText = new JTextField(20);
         usernameText.setBounds(330, 210, 300, 40);
-        usernameText.setFont(new Font(Font.SANS_SERIF,  Font.BOLD, 20));
-        usernameText.setBorder(BorderFactory.createEmptyBorder(10,10, 10, 10));
+        usernameText.setFont(new Font(Font.SANS_SERIF,  Font.PLAIN, 22));
         usernameText.setForeground(Color.BLACK);
         
         phoneNumberLabel = new JLabel("Phone Number");
@@ -71,8 +74,7 @@ public class register extends JPanel implements ActionListener {
         
         phoneNumberText = new JTextField(20);
         phoneNumberText.setBounds(750, 210, 300, 40);
-        phoneNumberText.setFont(new Font(Font.SANS_SERIF,  Font.BOLD, 20));
-        phoneNumberText.setBorder(BorderFactory.createEmptyBorder(10,10, 10, 10));
+        phoneNumberText.setFont(new Font(Font.SANS_SERIF,  Font.PLAIN, 22));
         phoneNumberText.setForeground(Color.BLACK);
         
         passwordLabel = new JLabel("Password");
@@ -80,10 +82,9 @@ public class register extends JPanel implements ActionListener {
         passwordLabel.setFont(new Font(Font.SANS_SERIF,  Font.BOLD, 20));
         passwordLabel.setForeground(Color.WHITE);
         
-        passwordText = new JTextField(20);
+        passwordText = new JPasswordField(20);
         passwordText.setBounds(330, 310, 300, 40);
-        passwordText.setFont(new Font(Font.SANS_SERIF,  Font.BOLD, 20));
-        passwordText.setBorder(BorderFactory.createEmptyBorder(10,10, 10, 10));
+        passwordText.setFont(new Font(Font.SANS_SERIF,  Font.PLAIN, 22));
         passwordText.setForeground(Color.BLACK);
         
         confirmPasswordLabel = new JLabel("Confirm Password");
@@ -91,10 +92,9 @@ public class register extends JPanel implements ActionListener {
         confirmPasswordLabel.setFont(new Font(Font.SANS_SERIF,  Font.BOLD, 20));
         confirmPasswordLabel.setForeground(Color.WHITE);
         
-        confirmPasswordText = new JTextField(20);
+        confirmPasswordText = new JPasswordField(20);
         confirmPasswordText.setBounds(750, 310, 300, 40);
-        confirmPasswordText.setFont(new Font(Font.SANS_SERIF,  Font.BOLD, 20));
-        confirmPasswordText.setBorder(BorderFactory.createEmptyBorder(10,10, 10, 10));
+        confirmPasswordText.setFont(new Font(Font.SANS_SERIF,  Font.PLAIN, 22));
         confirmPasswordText.setForeground(Color.BLACK);
         
         DOBLabel = new JLabel("DOB");
@@ -104,8 +104,7 @@ public class register extends JPanel implements ActionListener {
         
         DOBText = new JTextField(20);
         DOBText.setBounds(330, 410, 300, 40);
-        DOBText.setFont(new Font(Font.SANS_SERIF,  Font.BOLD, 20));
-        DOBText.setBorder(BorderFactory.createEmptyBorder(10,10, 10, 10));
+        DOBText.setFont(new Font(Font.SANS_SERIF,  Font.PLAIN, 22));
         DOBText.setForeground(Color.BLACK);
         
         ageLabel = new JLabel("Age");
@@ -115,8 +114,7 @@ public class register extends JPanel implements ActionListener {
         
         ageText = new JTextField(20);
         ageText.setBounds(750, 410, 300, 40);
-        ageText.setFont(new Font(Font.SANS_SERIF,  Font.BOLD, 20));
-        ageText.setBorder(BorderFactory.createEmptyBorder(10,10, 10, 10));
+        ageText.setFont(new Font(Font.SANS_SERIF,  Font.PLAIN, 22));
         ageText.setForeground(Color.BLACK);
         
         stateLabel = new JLabel("State");
@@ -126,8 +124,7 @@ public class register extends JPanel implements ActionListener {
         
         stateText = new JTextField(20);
         stateText.setBounds(330, 510, 300, 40);
-        stateText.setFont(new Font(Font.SANS_SERIF,  Font.BOLD, 20));
-        stateText.setBorder(BorderFactory.createEmptyBorder(10,10, 10, 10));
+        stateText.setFont(new Font(Font.SANS_SERIF,  Font.PLAIN, 22));
         stateText.setForeground(Color.BLACK);
         
         districtLabel = new JLabel("District");
@@ -137,8 +134,7 @@ public class register extends JPanel implements ActionListener {
         
         districtText = new JTextField(20);
         districtText.setBounds(750, 510, 300, 40);
-        districtText.setFont(new Font(Font.SANS_SERIF,  Font.BOLD, 20));
-        districtText.setBorder(BorderFactory.createEmptyBorder(10,10, 10, 10));
+        districtText.setFont(new Font(Font.SANS_SERIF,  Font.PLAIN, 22));
         districtText.setForeground(Color.BLACK);
         
         addressLabel = new JLabel("Address");
@@ -147,6 +143,7 @@ public class register extends JPanel implements ActionListener {
         addressLabel.setForeground(Color.WHITE);
         
         addressTextArea = new JTextArea(20, 20);
+        addressTextArea.setFont(new Font(Font.SANS_SERIF,  Font.PLAIN, 22));
         addressTextArea.setBounds(330, 610, 720, 70);
         
         pincodeLabel = new JLabel("Pincode");
@@ -156,9 +153,33 @@ public class register extends JPanel implements ActionListener {
         
         pincodeText = new JTextField(20);
         pincodeText.setBounds(330, 730, 300, 40);
-        pincodeText.setFont(new Font(Font.SANS_SERIF,  Font.BOLD, 20));
-        pincodeText.setBorder(BorderFactory.createEmptyBorder(10,10, 10, 10));
+        pincodeText.setFont(new Font(Font.SANS_SERIF,  Font.PLAIN, 22));
         pincodeText.setForeground(Color.BLACK);
+        
+        genderLabel = new JLabel("Gender");
+        genderLabel.setForeground(Color.WHITE);
+        genderLabel.setFont(new Font(Font.SANS_SERIF,  Font.BOLD, 20));
+        genderLabel.setBounds(750, 690, 150, 40);
+        
+        gender = new ButtonGroup();
+        gMale = new JRadioButton("Male");
+        gMale.setBounds(750, 730, 100, 40);
+        gMale.setBackground(fg);
+        gMale.setForeground(bg);
+        gMale.setFont(font);
+        gFemale = new JRadioButton("Female");
+        gFemale.setBounds(850, 730, 100, 40);
+        gFemale.setBackground(fg);
+        gFemale.setForeground(bg);
+        gFemale.setFont(font);
+        gOther = new JRadioButton("Other");
+        gOther.setBounds(950, 730, 100, 40);
+        gOther.setBackground(fg);
+        gOther.setForeground(bg);
+        gOther.setFont(font);
+        gender.add(gMale);
+        gender.add(gFemale);
+        gender.add(gOther);
         
         registerButton = new JButton("Register");
         registerButton.setBounds(615, 800, 130, 40);
@@ -166,7 +187,7 @@ public class register extends JPanel implements ActionListener {
         registerButton.setBackground(new Color(71, 63, 145));
         registerButton.setForeground(Color.WHITE);
         registerButton.setBorder(null);
-        registerButton.setUI(new BasicButtonUI());
+        registerButton.setUI(new StyledButtonUi());
         
         registerButton.addActionListener(this);
         
@@ -223,6 +244,11 @@ public class register extends JPanel implements ActionListener {
         registerPanel.add(registerMessageLabel);
         registerPanel.add(registerLoginButton);
         registerPanel.add(backButton);
+        registerPanel.add(gMale);
+        registerPanel.add(gFemale);
+        registerPanel.add(gOther);
+        registerPanel.add(genderLabel);
+        
         this.add(registerPanel);
     }
     

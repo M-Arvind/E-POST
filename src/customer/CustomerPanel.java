@@ -28,7 +28,7 @@ public class CustomerPanel extends JPanel implements ActionListener, MouseListen
     public static CardLayout customerCard=null;
     private  JButton BInbox,BConsignment,BE_Post,BParcel,BProducts,BWallet;
     private  int xForInbox=0,xForConsignment=0,xForE_post=0,xForParcel=0,xForProducts=0,xForWallets=0;
-    private  JPanel PInbox,PConsignment,PE_Post,PParcel,PProducts,PWallet,PConsignmentDetails;
+    public  static JPanel PInbox,PConsignment,PE_Post,PParcel,PProducts,PWallet,PConsignmentDetails;
     int X_FORCUSTOMER=55,Y_FORCUSTOMER=150,WIDTHFORCUSTOMER=1260,HIGHTFORCUSTOMER=570;
     int R=34,G=34,B=45;
     private Color Buttoncolor=new Color(240,238,240);
@@ -48,6 +48,7 @@ public class CustomerPanel extends JPanel implements ActionListener, MouseListen
        PProducts=new ProductsPanel();
        PWallet=new WalletPanel();
        PConsignmentDetails=new ConsignmentDetails();
+      
        //InboxPanel inboxPanel=(InboxPanel)PInbox;
        contentForCustomer.add(PInbox,"Inbox");
        contentForCustomer.add(PConsignment,"Consignment");
@@ -141,7 +142,7 @@ public class CustomerPanel extends JPanel implements ActionListener, MouseListen
        
        
    }
-
+   
     @Override
     public void actionPerformed(ActionEvent e) {
         Object o=e.getSource();

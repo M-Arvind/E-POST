@@ -2,6 +2,7 @@ package Admin;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.Icon;
@@ -11,6 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import java.awt.Image;
 import javax.swing.JScrollPane;
+import javax.swing.JTextField;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 import javax.swing.ScrollPaneConstants;
@@ -20,16 +22,20 @@ import static javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER;
 public class Stocks extends JPanel implements ActionListener{
     
     JButton revenueStamp, postageStamp, postageStamp1, collectorStamp, inlandLetter, postCard, envelope;
+    JButton confirm;
     JLabel revenueStampName, postageStampName, postageStamp1Name, collectorStampName, inlandLetterName, postCardName, envelopeName;
     JLabel revenueStampPrice, postageStampPrice, postageStamp1Price, collectorStampPrice, inlandLetterPrice, postCardPrice, envelopePrice;
     JLabel revenueStampQuantity, postageStampQuantity, postageStamp1Quantity, collectorStampQuantity, inlandLetterQuantity, postCardQuantity, envelopeQuantity;
+    JTextField revenueStampQuantity_Info, postageStampQuantity_Info, postageStamp1Quantity_Info, collectorStampQuantity_Info, inlandLetterQuantity_Info, postCardQuantity_Info, envelopeQuantity_Info;
     ImageIcon revenueStampImage, postageStampImage, postageStamp1Image, collectorStampImage, inlandLetterImage, postCardImage, envelopeImage;
     Image image,newimg;
     public Stocks() {
         Color bg = new Color(34, 34, 45);
         Color fg = new Color(254, 254, 254);
+        Color but = new Color(71, 63, 145);
         Border border = new LineBorder(new Color(71, 63, 145), 5, true);
-        
+        Border borde = new LineBorder(new Color(71, 63, 145), 3, true);
+        Font fon = new Font("Segoe UI", Font.PLAIN, 16);
         
         JPanel prod = new JPanel(null);
         prod.setBackground(fg);
@@ -49,13 +55,19 @@ public class Stocks extends JPanel implements ActionListener{
         revenueStampName.setBounds(50, 250, 240, 40);
         revenueStampPrice = new JLabel("Item Price : Rs.5");
         revenueStampPrice.setBounds(50, 290, 240, 40);
-        revenueStampQuantity = new JLabel("Item Quantity : 10");
+        revenueStampQuantity = new JLabel("Item Quantity :");
         revenueStampQuantity.setBounds(50, 330, 240, 40);
+        revenueStampQuantity_Info = new JTextField();
+        revenueStampQuantity_Info.setBounds(150, 330, 50, 40);
+        revenueStampQuantity_Info.setFont(fon);
+        revenueStampQuantity_Info.setBackground(fg);
+        revenueStampQuantity_Info.setBorder(borde);
         
         prod.add(revenueStamp);
         prod.add(revenueStampName);
         prod.add(revenueStampPrice);
         prod.add(revenueStampQuantity);
+        prod.add(revenueStampQuantity_Info);
         
         
         postageStampImage = new ImageIcon(getClass().getResource("/Images/M.S. SUBULAKSHMI STAMP.jpg"));
@@ -72,13 +84,20 @@ public class Stocks extends JPanel implements ActionListener{
         postageStampName.setBounds(350, 250, 240, 40);
         postageStampPrice = new JLabel("Item Price : Rs.5");
         postageStampPrice.setBounds(350, 290, 240, 40);
-        postageStampQuantity = new JLabel("Item Quantity : 10");
+        postageStampQuantity = new JLabel("Item Quantity :");
         postageStampQuantity.setBounds(350, 330, 240, 40);
+        postageStampQuantity_Info = new JTextField();
+        postageStampQuantity_Info.setBounds(450, 330, 50, 40);
+        postageStampQuantity_Info.setFont(fon);
+        postageStampQuantity_Info.setBackground(fg);
+        postageStampQuantity_Info.setBorder(borde);
         
+        prod.add(postageStampQuantity_Info);
         prod.add(postageStamp);
         prod.add(postageStampName);
         prod.add(postageStampPrice);
         prod.add(postageStampQuantity);
+        
         
         
         postageStamp1Image = new ImageIcon(getClass().getResource("/Images/BAL GANGADHAR TILAK STAMP.jpg"));
@@ -95,9 +114,15 @@ public class Stocks extends JPanel implements ActionListener{
         postageStamp1Name.setBounds(650, 250, 240, 40);
         postageStamp1Price = new JLabel("Item Price : Rs.5");
         postageStamp1Price.setBounds(650, 290, 240, 40);
-        postageStamp1Quantity = new JLabel("Item Quantity : 10");
+        postageStamp1Quantity = new JLabel("Item Quantity :");
         postageStamp1Quantity.setBounds(650, 330, 240, 40);
+        postageStamp1Quantity_Info = new JTextField();
+        postageStamp1Quantity_Info.setBounds(750, 330, 50, 40);
+        postageStamp1Quantity_Info.setFont(fon);
+        postageStamp1Quantity_Info.setBackground(fg);
+        postageStamp1Quantity_Info.setBorder(borde);
         
+        prod.add(postageStamp1Quantity_Info);        
         prod.add(postageStamp1);
         prod.add(postageStamp1Name);
         prod.add(postageStamp1Price);
@@ -118,9 +143,15 @@ public class Stocks extends JPanel implements ActionListener{
         collectorStampName.setBounds(950, 250, 240, 40);
         collectorStampPrice = new JLabel("Item Price : Rs.5");
         collectorStampPrice.setBounds(950, 290, 240, 40);
-        collectorStampQuantity = new JLabel("Item Quantity : 10");
+        collectorStampQuantity = new JLabel("Item Quantity :");
         collectorStampQuantity.setBounds(950, 330, 240, 40);
+        collectorStampQuantity_Info = new JTextField();
+        collectorStampQuantity_Info.setBounds(1050, 330, 50, 40);
+        collectorStampQuantity_Info.setFont(fon);
+        collectorStampQuantity_Info.setBackground(fg);
+        collectorStampQuantity_Info.setBorder(borde);
         
+        prod.add(collectorStampQuantity_Info);        
         prod.add(collectorStamp);
         prod.add(collectorStampName);
         prod.add(collectorStampPrice);
@@ -141,9 +172,15 @@ public class Stocks extends JPanel implements ActionListener{
         inlandLetterName.setBounds(50, 600, 240, 40);
         inlandLetterPrice = new JLabel("Item Price : Rs.5");
         inlandLetterPrice.setBounds(50, 640, 240, 40);
-        inlandLetterQuantity = new JLabel("Item Quantity : 10");
+        inlandLetterQuantity = new JLabel("Item Quantity :");
         inlandLetterQuantity.setBounds(50, 680, 240, 40);
+        inlandLetterQuantity_Info = new JTextField();
+        inlandLetterQuantity_Info.setBounds(150, 680, 50, 40);
+        inlandLetterQuantity_Info.setFont(fon);
+        inlandLetterQuantity_Info.setBackground(fg);
+        inlandLetterQuantity_Info.setBorder(borde);
         
+        prod.add(inlandLetterQuantity_Info);           
         prod.add(inlandLetter);
         prod.add(inlandLetterName);
         prod.add(inlandLetterPrice);
@@ -165,9 +202,15 @@ public class Stocks extends JPanel implements ActionListener{
         envelopeName.setBounds(350, 600, 240, 40);
         envelopePrice = new JLabel("Item Price : Rs.5");
         envelopePrice.setBounds(350, 640, 240, 40);
-        envelopeQuantity = new JLabel("Item Quantity : 10");
+        envelopeQuantity = new JLabel("Item Quantity :");
         envelopeQuantity.setBounds(350, 680, 240, 40);
+        envelopeQuantity_Info = new JTextField();
+        envelopeQuantity_Info.setBounds(450, 680, 50, 40);
+        envelopeQuantity_Info.setFont(fon);
+        envelopeQuantity_Info.setBackground(fg);
+        envelopeQuantity_Info.setBorder(borde);
         
+        prod.add(envelopeQuantity_Info);        
         prod.add(envelope);
         prod.add(envelopeName);
         prod.add(envelopePrice);
@@ -189,18 +232,33 @@ public class Stocks extends JPanel implements ActionListener{
         postCardName.setBounds(650, 600, 240, 40);
         postCardPrice = new JLabel("Item Price : Rs.5");
         postCardPrice.setBounds(650, 640, 240, 40);
-        postCardQuantity = new JLabel("Item Quantity : 10");
+        postCardQuantity = new JLabel("Item Quantity :");
         postCardQuantity.setBounds(650, 680, 240, 40);
+        postCardQuantity_Info = new JTextField();
+        postCardQuantity_Info.setBounds(750, 680, 50, 40);
+        postCardQuantity_Info.setFont(fon);
+        postCardQuantity_Info.setBackground(fg);
+        postCardQuantity_Info.setBorder(borde);
         
+        prod.add(postCardQuantity_Info);        
         prod.add(postCard);
         prod.add(postCardName);
         prod.add(postCardPrice);
         prod.add(postCardQuantity);
         
+        confirm = new JButton("Confirm");
+        confirm.setBorder(null);
+        confirm.setBounds(950, 680, 180, 40);
+        confirm.addActionListener(this);
+        confirm.setBackground(but);
+        confirm.setForeground(fg);
+        confirm.setUI(new StyledButtonUi());
+        prod.add(confirm);
         
         JScrollPane scroll = new JScrollPane(prod);
         scroll.setPreferredSize(new Dimension(1260, 570));
         scroll.setHorizontalScrollBarPolicy(HORIZONTAL_SCROLLBAR_NEVER);
+        scroll.setBorder(null);
         this.add(scroll);
         this.setBackground(fg);
     }
@@ -208,15 +266,14 @@ public class Stocks extends JPanel implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         Object oe = e.getSource();
-        if(oe == revenueStamp){
-            System.out.print("Revenue Stamp");
-        }
-        
-        else if(oe == postageStamp){
-            System.out.print("Postage Stamp");
-        }
-        else if(oe == postageStamp1){
-            
+        if(oe == confirm){
+            System.out.println("RevenueStamp : "+revenueStampQuantity_Info.getText());
+            System.out.println("RevenueStamp : "+postageStampQuantity_Info.getText());
+            System.out.println("RevenueStamp : "+postageStamp1Quantity_Info.getText());
+            System.out.println("RevenueStamp : "+collectorStampQuantity_Info.getText());
+            System.out.println("RevenueStamp : "+inlandLetterQuantity_Info.getText());
+            System.out.println("RevenueStamp : "+postCardQuantity_Info.getText());
+            System.out.println("RevenueStamp : "+envelopeQuantity_Info.getText());
         }
     }
     

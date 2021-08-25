@@ -1,4 +1,6 @@
 package customer;
+import Database.*;
+import customer.DatasForCustomer.ConsignmentData;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -244,10 +246,36 @@ class ConsignmentDetails extends JPanel implements ActionListener{
         
        
     }
+    public void setConignmentDetails(int Index) {
+            ConsignmentData Data=ConsignmentData.listForConsignment.get(Index);
+        vSenderId.setText(Data.getCustomer_ID());
+        vSeFirstName.setText(Data.getCustomer_first_name());
+        vSeLastName.setText(Data.getCustomer_last_name());     
+        vSeConstact.setText(Data.getCustomer_contact_number().toString());      
+        vSeAddress.setText(Data.getShipping_address().toString());       
+        vReceId.setText(Data.getReceiver_ID());
+        vReceFirstName.setText(Data.getReceiver_first_name());
+        vReceLastName.setText(Data.getReceiver_last_name());
+        vReceContact.setText(Data.getReceiver_contact_number().toString());
+        vReceAdress.setText(Data.getReceiver_address());  
+        vItem.setText(Data.getItem());
+        vItemPrice.setText(Data.getItem_price().toString());    
+        vItemWeight.setText(Data.getItem_weight().toString());   
+        vItemCode.setText(Data.getItem_code());
+        vAgentId.setText(Data.getDelivery_ID()); 
+        vOrderDate.setText(Data.getOrder_date().toString());
+        vDeliverDate.setText(Data.getDelivery_date().toString());    
+        vPayment.setText(Data.getPayment_method()); 
+        vStatus.setText(Data.getStatus());       
+    
+    }
     
     @Override
     public void actionPerformed(ActionEvent e) {
         CustomerPanel.customerCard.show(CustomerPanel.contentForCustomer,"Consignment");
     }
+  
+
+   
 
 }

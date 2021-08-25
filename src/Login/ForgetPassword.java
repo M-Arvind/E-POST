@@ -18,6 +18,7 @@ import javax.swing.JTextField;
  */
 public class ForgetPassword
 {
+    
     JDialog newdialog = new JDialog();
     
     Color background_Color = new Color(34,34,45);
@@ -110,6 +111,7 @@ public class ForgetPassword
         newdialog.setVisible(true);
     }
     
+    
     public void forgetPassword()
     {
         int min = 200;  
@@ -132,7 +134,7 @@ public class ForgetPassword
         System.out.println("Confirm Password" + hash_confirm_pass);
         System.out.println("Salt" + salt);
         
-        if(hash_pass.equals(hash_confirm_pass))
+        if(hash_pass.equals(hash_confirm_pass) || hash_pass != null || hash_confirm_pass != null)
         {
             loginUpdate(userName, hash_pass, hash_confirm_pass, salt);
         }
@@ -141,6 +143,5 @@ public class ForgetPassword
             JOptionPane.showMessageDialog(null, "Please make sure that Password and Confirm Password are same");
         }        
     }
-     
 }
 

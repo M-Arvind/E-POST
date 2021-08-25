@@ -27,7 +27,7 @@ public class AdminPanel extends JPanel implements ActionListener, MouseListener{
  //   private  JPanel AdminPanel;
     public static JPanel contentForAdmin;
     public static CardLayout adminCard;
-    private  JButton bNew,bOnGoing,bCompleted,bCustomer,bDelivery,bStocks;
+    public static  JButton bNew,bOnGoing,bCompleted,bCustomer,bDelivery,bStocks;
     private  int xForInbox=0,xForConsignment=0,xForE_post=0,xForParcel=0,xForProducts=0,xForWallets=0;
     private  JPanel pNewconsignment,pOnGoingConsignment,pCompletedConsignment,pCustomer,pDelivery,pConsignmentDetails,pStocks;
     int X_FORCUSTOMER=55,Y_FORCUSTOMER=150,WIDTHFORCUSTOMER=1260,HIGHTFORCUSTOMER=570;
@@ -103,7 +103,7 @@ public class AdminPanel extends JPanel implements ActionListener, MouseListener{
        bNew = new JButton("New");
        bNew.setFont(font);
        bNew.setBorder(null);
-       bNew.setUI(new StyledButtonUI());
+       bNew.setUI(new StyledButtonUi());
        bNew.setBounds(X_FORCUSTOMER,120,160,30);
        bNew.setBackground(Buttoncolor);
        bNew.addActionListener(this);
@@ -113,6 +113,7 @@ public class AdminPanel extends JPanel implements ActionListener, MouseListener{
        bOnGoing.setFont(font);
        bOnGoing.setBackground(Buttoncolor);
        bOnGoing.setBounds(X_FORCUSTOMER+180,110,160,30);
+       bOnGoing.setUI(new StyledButtonUi());
        bOnGoing.addActionListener(this);
        add(bOnGoing);
        
@@ -120,6 +121,7 @@ public class AdminPanel extends JPanel implements ActionListener, MouseListener{
        bCompleted.setFont(font);
        bCompleted.setBackground(Buttoncolor);
        bCompleted.setBounds(X_FORCUSTOMER+180+180,110,160,30);
+       bCompleted.setUI(new StyledButtonUi());
        bCompleted.addActionListener(this);
        add(bCompleted);
        
@@ -129,6 +131,7 @@ public class AdminPanel extends JPanel implements ActionListener, MouseListener{
        bCustomer.setFont(font);
        bCustomer.setBackground(Buttoncolor);
        bCustomer.setBounds(X_FORCUSTOMER+180+180+180,110,160,30);
+       bCustomer.setUI(new StyledButtonUi());
        bCustomer.addActionListener(this);
        add(bCustomer);
        
@@ -136,6 +139,7 @@ public class AdminPanel extends JPanel implements ActionListener, MouseListener{
        bDelivery.setFont(font);
        bDelivery.setBackground(Buttoncolor);
        bDelivery.setBounds(X_FORCUSTOMER+180+180+180+180,110,160,30);
+       bDelivery.setUI(new StyledButtonUi());
        bDelivery.addActionListener(this);
        add(bDelivery);
        
@@ -143,6 +147,7 @@ public class AdminPanel extends JPanel implements ActionListener, MouseListener{
        bStocks.setBackground(Buttoncolor);
        bStocks.setFont(font);
        bStocks.setBounds(X_FORCUSTOMER+180+180+180+180+180,110,160,30);
+       bStocks.setUI(new StyledButtonUi());
        bStocks.addActionListener(this);
        add(bStocks);
        
