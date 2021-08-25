@@ -5,7 +5,7 @@ import java.sql.Date;
 import java.util.ArrayList;
 
 public class CustomerData {
-    private String customer_ID;
+   private String customer_ID;
    private String first_name;
    private String last_name;
    private Date dob;
