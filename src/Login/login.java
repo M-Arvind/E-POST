@@ -3,22 +3,16 @@ import main.main;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.Insets;
+import java.awt.List;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ComponentEvent;
-import java.awt.event.ComponentListener;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 import javax.swing.*;
@@ -102,15 +96,12 @@ public class login extends JPanel implements ActionListener
         //loginButton.addActionListener(this);
         loginButton.addActionListener(new ActionListener() 
     	{
-    		public void actionPerformed(ActionEvent e) 
-    		{
-    			
-    			{
-    				login();
-    			}
-    			
-    		} 			
-    		
+            public void actionPerformed(ActionEvent e) 
+            {
+                {
+                    getLoginCredentials();
+                }
+            }
     	});
         
         
@@ -126,79 +117,99 @@ public class login extends JPanel implements ActionListener
         
         this.add(loginPanel);
     }
-    String createHash(String input,String salt)//create hash
+    
+    String createHash(String input, String salt)
     {
-    		String hashtext = new String();
-            for(int i=0;i<5;i++){
+	String hashtext = new String();
+        for(int i=0;i<5;i++)
+        {
             try 
             {
-                
-                input += salt;               
-                MessageDigest md = MessageDigest.getInstance("MD5");                   
-                byte[] messageDigest = md.digest(input.getBytes());                 
-                BigInteger no = new BigInteger(1, messageDigest);                      
+
+                input += salt;
+                MessageDigest md = MessageDigest.getInstance("MD5");
+
+                byte[] messageDigest = md.digest(input.getBytes());
+
+                BigInteger no = new BigInteger(1, messageDigest);
+
                 hashtext = no.toString(16);
-                while (hashtext.length() < 32) 
-                {
+                while (hashtext.length() < 32) {
                     hashtext = "0" + hashtext;
                 }
                 input = hashtext;
-                
+
             } 
-      
-           
+  
             catch (NoSuchAlgorithmException e) 
             {
                 throw new RuntimeException(e);
             }
         }
-            return hashtext;
+        return hashtext;
     }
-    String getlogincredentials()
+
+
+    //Database
+    public List getLoginCredentials()
     {
-    	try
-		{
-			Class.forName("oracle.jdbc.driver.OracleDriver");
-            Connection conec = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE","E_post","123");
-            String query="select salt from Login where user_id='"+usernameTextField.getText()+"'";
-            PreparedStatement smt = conec.prepareStatement(query);
-            ResultSet rs = smt.executeQuery();
-            if(rs.next())
-            {
-            	salt = rs.getString("salt")	;
-            	System.out.println(salt);
-            	pass = passwordField.getText();
-            	hash_pass = createHash(pass,salt);
-            	System.out.println(hash_pass);
-            	String query2="select user_ID,password from Login	 where user_id='"+usernameTextField.getText()+"' and password='"+hash_pass+"'";
-	            PreparedStatement smt2 = conec.prepareStatement(query2);
-	            ResultSet rs2 = smt2.executeQuery();            	            
-	            if(rs2.next())
-	            {
-	            	JOptionPane.showMessageDialog(null, "LOGIN SUCESSFULL");		            	
-	            	
-	            }
-	            else
-	            {
-	            	JOptionPane.showMessageDialog(null, "INVALID USER NAME AND PASSWORD");
-	            }
-            	
+          List loginCredentials = new List();
+          
+          try
+            {                
+                String userName = usernameTextField.getText();
+                String userPassword = passwordField.getText();                
+
+                Class.forName("oracle.jdbc.driver.OracleDriver");
+                Connection con=DriverManager.getConnection("jdbc:oracle:thin:@127.0.0.1:1521:XE","E_Post","123");
+                Statement st = con.createStatement();
+                ResultSet rs = st.executeQuery("select user_ID from Login where user_ID like '"+'%'+userName+'%'+"'");
+                boolean next = rs.next();
+                
+                if(next)
+                {
+                    ResultSet rspass = st.executeQuery("select password,salt,login_type from Login where user_ID like '"+'%'+userName+'%'+"'");
+                    if(rspass.next())
+                    {         
+                        String pass = rspass.getString("password");
+                        String salt = rspass.getString("salt");
+                        String type = rspass.getString("login_type");
+                        String hash_pass = createHash(userPassword, salt);
+                        
+                        System.out.println(pass);
+                        System.out.println(salt);
+                        System.out.println(type);
+                        System.out.println(hash_pass);
+                        
+                        loginCredentials.add(pass);
+                        loginCredentials.add(salt);
+                        loginCredentials.add(type);
+                        loginCredentials.add(hash_pass);                        
+                        
+                        if(pass.equals(hash_pass))
+                        {
+                            JOptionPane.showMessageDialog(null,"Login Successful");                            
+                        }
+                        else
+                        {
+                            JOptionPane.showMessageDialog(this, "Wrong E-mail/Password");
+                        }   
+                    }                    
+                }
+                else
+                {
+                    JOptionPane.showMessageDialog(this, "This account is not yet Registered");
+                }
+                  
             }
-            else
+            catch(Exception ex)
             {
-            	JOptionPane.showMessageDialog(null, "wrong-salt");
+                JOptionPane.showMessageDialog(this, ex.toString());
             }
-		}
-		catch(Exception e1)
-		{
-			JOptionPane.showMessageDialog(null, "CATCH"+e1.toString());
-		}    	
-		
-	} 
-    public void login()
-    {
-    	getlogincredentials();
+          
+          return loginCredentials;
     }
+    
     public void actionPerformed(ActionEvent e) 
     {
         main.switchPage("register");
