@@ -8,7 +8,7 @@ import javax.swing.AbstractButton;
 import javax.swing.JComponent;
 import javax.swing.border.EmptyBorder;
 import javax.swing.plaf.basic.BasicButtonUI;
-class StyledButtonUI extends BasicButtonUI {
+public class StyledButtonUi extends BasicButtonUI {
 
     @Override
     public void installUI (JComponent c) {

@@ -1,9 +1,11 @@
 package Delivery;
 
+import Database.DatabaseOperations;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -12,8 +14,10 @@ import javax.swing.table.JTableHeader;
 
 public class ongoing extends JPanel 
 {
-    private String column_name[] = {"Con-ID","From","To","Date","Delivery Id","Payment ","Date","Staus","Details"};
-    private Object row[][] = {};
+    String delivery_ID = "Barath.B";
+    private String column_name[] = {"Con-ID","From","To","Item","Delivery Id","Payment ","Date","Status"};
+    Object row[][] = DatabaseOperations.getCustomerConsignmentDetails();
+    
     private JTable table;
     private JScrollPane sp;
     private Color panel = new Color(240,238,240);
@@ -53,6 +57,5 @@ public class ongoing extends JPanel
         setVisible(true);
         this.setBackground(panel);
     }
-
     
 }
