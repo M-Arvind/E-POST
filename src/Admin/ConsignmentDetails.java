@@ -247,7 +247,10 @@ class ConsignmentDetails extends JPanel implements ActionListener{
     
     @Override
     public void actionPerformed(ActionEvent e) {
-        AdminPanel.adminCard.show(AdminPanel.contentForAdmin,"Consignment");
+        Object o = e.getSource();
+        if(o == back){
+            AdminPanel.adminCard.show(AdminPanel.contentForAdmin, "NewConsignment");
+        }
     }
 
 }

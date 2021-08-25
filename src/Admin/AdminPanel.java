@@ -57,7 +57,7 @@ public class AdminPanel extends JPanel implements ActionListener, MouseListener{
        contentForAdmin.add(pOnGoingConsignment,"OnGoingConsignment");
        contentForAdmin.add(pCompletedConsignment,"CompletedConsignment");
        contentForAdmin.add(pCustomer,"CustomerDetails");
-       contentForAdmin.add(pDelivery,"Deliverydetails");
+       contentForAdmin.add(pDelivery,"DeliveryDetails");
        contentForAdmin.add(pStocks,"Stocks");
        contentForAdmin.add(pConsignmentDetails,"ConsignmentDetails");
        
@@ -164,7 +164,7 @@ public class AdminPanel extends JPanel implements ActionListener, MouseListener{
            
         }
         else if(o == bOnGoing){
-            adminCard.show(contentForAdmin,"OngoingConsignment");
+            adminCard.show(contentForAdmin,"OnGoingConsignment");
             
             bNew.setBounds(X_FORCUSTOMER,110,160,30);
             bOnGoing.setBounds(X_FORCUSTOMER+180,120,160,30);
@@ -222,7 +222,7 @@ public class AdminPanel extends JPanel implements ActionListener, MouseListener{
             search.setText("");
         }
         else if(e.getSource() == IProfile)
-            main.switchPage("Profile");
+            main.switchPage("AdminProfileView");
         }
 
     @Override
@@ -241,9 +241,4 @@ public class AdminPanel extends JPanel implements ActionListener, MouseListener{
     public void mouseExited(MouseEvent e) {
      }  
     
-    
-    
-    public static void main(String args[]){
-        AdminPanel aa = new AdminPanel();
-    }
 }

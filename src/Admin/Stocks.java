@@ -202,7 +202,7 @@ public class Stocks extends JPanel implements ActionListener{
         scroll.setPreferredSize(new Dimension(1260, 570));
         scroll.setHorizontalScrollBarPolicy(HORIZONTAL_SCROLLBAR_NEVER);
         this.add(scroll);
-        this.setBackground(bg);
+        this.setBackground(fg);
     }
 
     @Override
