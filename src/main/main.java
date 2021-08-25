@@ -18,12 +18,14 @@ public class main extends JFrame {
         login login = new login();
         register register = new register();
         CustomerPanel customerPanel = new CustomerPanel();
+        AdminPanel adminPanel = new AdminPanel();
         Profile_View profileView = new Profile_View();
         Profile_Update profileUpdate = new Profile_Update();
         
         mainPanel.add(login, "login");
         mainPanel.add(register, "register");
         mainPanel.add(customerPanel, "customerPanel");
+        mainPanel.add(adminPanel, "AdminPanel");
         mainPanel.add(profileView, "Profile");
         mainPanel.add(profileUpdate, "Profile update");
         
