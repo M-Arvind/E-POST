@@ -99,7 +99,8 @@ public class login extends JPanel implements ActionListener
             public void actionPerformed(ActionEvent e) 
             {
                 {
-                    getLoginCredentials();
+                    //getLoginCredentials();
+                    main.switchPage("customerPanel");
                 }
             }
     	});

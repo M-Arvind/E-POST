@@ -1,5 +1,5 @@
 package customer;
-
+import main.*;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -29,7 +30,7 @@ import javax.swing.ScrollPaneConstants;
  *
  * @author htara
  */
-public class PaymentEPost extends JPanel
+public class PaymentEPost extends JPanel implements MouseListener
 {
     
     Color background_Color = new Color(34,34,45);
@@ -41,7 +42,7 @@ public class PaymentEPost extends JPanel
 
     JLabel e_payment_title;
     JButton e_payment_btn_confirm;
-    JButton e_payment_btn_back;
+    JLabel e_payment_btn_back;
     
     JPopupMenu e_payment_authentication;
     
@@ -83,7 +84,11 @@ public class PaymentEPost extends JPanel
         
         
         e_payment_btn_confirm = new JButton();
-        e_payment_btn_back = new JButton();
+        e_payment_btn_confirm.addActionListener((a)->{
+            new Authentication();
+        });
+        e_payment_btn_back = new JLabel(new ImageIcon(getClass().getResource("/Images/arrow_back_button.png")));
+         e_payment_btn_back.addMouseListener(this);
         
         //Label
         e_payment_title = new JLabel("Payment");
@@ -151,15 +156,7 @@ public class PaymentEPost extends JPanel
         e_payment_btn_back.setBounds(25,25,40,40);
         e_payment_btn_back.setBackground(null);
         e_payment_btn_back.setBorder(null);
-        try 
-        {
-          Image img = ImageIO.read(getClass().getResource("/Images/arroe_back_button.png"));
-          e_payment_btn_back.setIcon(new ImageIcon(img));
-        } 
-        catch (Exception ex) 
-        {
-          System.out.println(ex);
-        }
+  
         
         //Label Bounds
         e_payment_beneficiary.setBounds(120, 80, 150, 50);
@@ -279,6 +276,7 @@ public class PaymentEPost extends JPanel
         add(e_payment_pincode_info);
         add(e_payment_btn_confirm);
         add(e_payment_message_info); 
+         add(e_payment_btn_back);
         
         //Panel
         setLayout(null);
@@ -291,47 +289,33 @@ public class PaymentEPost extends JPanel
         e_payment_authentication.setBackground(background_Color);
         e_payment_authentication.setBounds(X_FORCUSTOMER, Y_FORCUSTOMER, 1000, 1000);
         e_payment_authentication.setLayout(null);
+       
         
-        e_payment_btn_back.addActionListener(new ActionListener()
-        {
-            @Override
-            public void actionPerformed(ActionEvent e) 
-            {
-                JOptionPane.showMessageDialog(null, "This goes Back to E-Post panel");
-            }
-            
-        });
-        
-        e_payment_btn_confirm.addActionListener(new ActionListener()
-        {
-            @Override
-            public void actionPerformed(ActionEvent e) 
-            {
-                //e_payment_authentication.show(p_payment_Panel, 500, 500);
-                new Authentication();
-            }
-            
-        });  
-        
-        
-        //Frame
          
     }
-    
-//    public static void main(String arg[])
-//    {
-//        JFrame frame= new JFrame();
-//        PaymentEPost paymentEPost = new PaymentEPost();
-//        
-//        JScrollPane scroll=new JScrollPane(paymentEPost,ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-//        scroll.setBounds(0,0,1320,850);
-//        frame.add(scroll);
-//        //frame.add(e_payment_title);
-//       
-//        frame.setSize(1350,890);
-//        //frame.getContentPane().setBackground(background_Color);
-//        frame.setLayout(null);
-//        frame.setVisible(true);   
-//    }
+   
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        if(e.getSource()==e_payment_btn_back){
+            main.switchPage("customerPanel");
+        }
+       }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+            }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+           }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+            }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+            }
     
 }
