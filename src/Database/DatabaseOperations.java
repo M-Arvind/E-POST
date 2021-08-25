@@ -18,6 +18,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import customer.DatasForCustomer.*;
 import java.sql.Statement;
+import java.util.ArrayList;
 public class DatabaseOperations 
 {
    private static Connection connection;
@@ -29,8 +30,6 @@ public class DatabaseOperations
         {
             Class.forName("oracle.jdbc.driver.OracleDriver");
             connection = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE","E_Post","123");
-
-            connection = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE","epost","123"); 
         }
   
         
@@ -39,6 +38,38 @@ public class DatabaseOperations
             System.out.println("  "+ex);
         }
         return connection;
+    }  
+    public static Object[][] getCustomerConsignmentDetails(){
+       try {
+           Connection con=DatabaseOperations.getConnection();
+           String Customer_ID="Kishore P";
+           String query="select *from Consignment where customer_ID='"+Customer_ID+"'";
+           PreparedStatement  st1=con.prepareStatement(query);
+           ResultSet res=st1.executeQuery(query);
+           
+           while(res.next()){
+              ConsignmentData ob=new ConsignmentData();
+            
+              ob.setConsignment_ID(res.getString("consignment_ID"));
+              ob.setCustomer_ID(res.getString("customer_ID"));
+              ob.setDelivery_ID(res.getString("delivery_ID"));
+              ob.setReceiver_ID(res.getString("receiver_ID"));
+              ob.setItem_code(res.getString("item_code"));
+              ob.setItem(res.getString("item"));
+              ob.setItem_price(res.getFloat("item_price"));
+              ob.setItem_weight(res.getFloat("item_weight"));
+              ob.setReceiver_first_name(res.getString("receiver_first_name"));
+              ob.setReceiver_last_name(res.getString("receiver_last_name"));
+              ob.setReceiver_address(res.getString("receiver_address"));
+              ob.setReceiver_contact_number(res.getLong("receiver_contact_number"));
+              ob.setCustomer_first_name(res.getString("customer_first_name"));
+              ob.setCustomer_last_name(res.getString("customer_last_name"));
+              ob.setCustomer_contact_number(res.getLong("customer_contact_number"));
+              ob.setShipping_address(res.getString("shipping_address"));
+              ob.setPayment_method(res.getString("payment_method"));
+              ob.setOrder_date(res.getDate("order_date"));
+              ob.setDelivery_date(res.getDate("delivery_date"));
+              ob.setStatus(res.getString("status"));
 
               ConsignmentData.listForConsignment.add(ob); 
              
@@ -65,6 +96,47 @@ public class DatabaseOperations
              
        }
        return row;
+    }
+    public static ArrayList getOngoingDeliveryConsignmentDetils(String delivery_id)
+    {
+        ArrayList ongoing = new ArrayList();        
+        try
+        {
+            Statement st = getConnection().createStatement();
+            ResultSet rs =  st.executeQuery("select * from Consignment where delivery_ID ='"+delivery_id+"'");
+            if(rs.next())
+            {
+                ongoing.add(rs.getString("consignment_id"));
+                ongoing.add(rs.getString("customer_id"));
+                ongoing.add(rs.getString("receiver_id"));
+                ongoing.add(rs.getString("item"));
+                ongoing.add(rs.getString("delivery_id"));        
+                ongoing.add(rs.getString("payment_method"));                
+                ongoing.add(rs.getString("order_date"));
+                ongoing.add(rs.getString("status"));
+                
+                /*ongoing.add(rs.getString("consignment_id"));
+                ongoing.add(rs.getString("consignment_id"));
+                ongoing.add(rs.getString("consignment_id"));
+                ongoing.add(rs.getString("consignment_id"));
+                ongoing.add(rs.getString("consignment_id"));
+                ongoing.add(rs.getString("consignment_id"));
+                ongoing.add(rs.getString("consignment_id"));
+                ongoing.add(rs.getString("consignment_id"));
+                ongoing.add(rs.getString("consignment_id"));
+                ongoing.add(rs.getString("consignment_id"));
+                ongoing.add(rs.getString("consignment_id"));
+                ongoing.add(rs.getString("consignment_id"));*/
+                
+                
+            }
+        }
+        catch(Exception e)
+        {
+            
+        }
+        
+        return ongoing;
     }
     
    public static String getConsignmentIdGenerator() {
