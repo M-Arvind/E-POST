@@ -226,7 +226,7 @@ public class register extends JPanel implements ActionListener {
     
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == registerButton){
-            main.switchPage("customerPanel");
+            main.switchPage("AdminPanel");
         }
         else if(e.getSource() == registerLoginButton || e.getSource() == backButton){
             main.switchPage("login");
