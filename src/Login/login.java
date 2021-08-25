@@ -99,7 +99,8 @@ public class login extends JPanel implements ActionListener
             public void actionPerformed(ActionEvent e) 
             {
                 {
-                    getLoginCredentials();
+                    //getLoginCredentials(usernameTextField, passwordField);
+                    main.switchPage("register");
                 }
             }
     	});
@@ -147,67 +148,6 @@ public class login extends JPanel implements ActionListener
             }
         }
         return hashtext;
-    }
-
-
-    //Database
-    public List getLoginCredentials()
-    {
-          List loginCredentials = new List();
-          
-          try
-            {                
-                String userName = usernameTextField.getText();
-                String userPassword = passwordField.getText();                
-
-                Class.forName("oracle.jdbc.driver.OracleDriver");
-                Connection con=DriverManager.getConnection("jdbc:oracle:thin:@127.0.0.1:1521:XE","E_Post","123");
-                Statement st = con.createStatement();
-                ResultSet rs = st.executeQuery("select user_ID from Login where user_ID like '"+'%'+userName+'%'+"'");
-                boolean next = rs.next();
-                
-                if(next)
-                {
-                    ResultSet rspass = st.executeQuery("select password,salt,login_type from Login where user_ID like '"+'%'+userName+'%'+"'");
-                    if(rspass.next())
-                    {         
-                        String pass = rspass.getString("password");
-                        String salt = rspass.getString("salt");
-                        String type = rspass.getString("login_type");
-                        String hash_pass = createHash(userPassword, salt);
-                        
-                        System.out.println(pass);
-                        System.out.println(salt);
-                        System.out.println(type);
-                        System.out.println(hash_pass);
-                        
-                        loginCredentials.add(pass);
-                        loginCredentials.add(salt);
-                        loginCredentials.add(type);
-                        loginCredentials.add(hash_pass);                        
-                        
-                        if(pass.equals(hash_pass))
-                        {
-                            JOptionPane.showMessageDialog(null,"Login Successful");                            
-                        }
-                        else
-                        {
-                            JOptionPane.showMessageDialog(this, "Wrong E-mail/Password");
-                        }   
-                    }                    
-                }
-                else
-                {
-                    JOptionPane.showMessageDialog(this, "This account is not yet Registered");
-                }
-                  
-            }
-            catch(Exception ex)
-            {
-                JOptionPane.showMessageDialog(this, ex.toString());
-            }
-          
-          return loginCredentials;
     }
     
     public void actionPerformed(ActionEvent e) 
