@@ -1,9 +1,5 @@
-
 package Login;
-
 import main.main;
-
-
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -16,11 +12,21 @@ import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+
 import javax.swing.*;
 import javax.swing.plaf.basic.BasicButtonUI;
 
 
-public class login extends JPanel implements ActionListener {
+public class login extends JPanel implements ActionListener 
+{
     JPanel loginPanel;
     JPanel registerPanel;
     private JLabel loginLabel,usernameLabel, passwordLabel, forgotPasswordLabel, messageLabel;
@@ -28,8 +34,13 @@ public class login extends JPanel implements ActionListener {
     private JTextField usernameTextField;
     private JPasswordField passwordField;
     private JButton loginButton, createOneButton;
+    private String pass;
+    private String salt;
+    private String hash_pass;
+    private ArrayList list;
     
-    public login(){
+    public login()
+    {
         loginPanel = new JPanel(null);
         loginPanel.setPreferredSize(new Dimension(1350, 890));
         loginPanel.setBackground(new Color(34, 34, 45));
@@ -88,7 +99,20 @@ public class login extends JPanel implements ActionListener {
         loginButton.setForeground(Color.WHITE);
         loginButton.setBorder(null);
         loginButton.setUI(new BasicButtonUI());
-        loginButton.addActionListener(this);
+        //loginButton.addActionListener(this);
+        loginButton.addActionListener(new ActionListener() 
+    	{
+    		public void actionPerformed(ActionEvent e) 
+    		{
+    			
+    			{
+    				login();
+    			}
+    			
+    		} 			
+    		
+    	});
+        
         
         loginPanel.add(loginLabel);
         loginPanel.add(usernameLabel);
@@ -102,8 +126,81 @@ public class login extends JPanel implements ActionListener {
         
         this.add(loginPanel);
     }
-    
-    public void actionPerformed(ActionEvent e) {
+    String createHash(String input,String salt)//create hash
+    {
+    		String hashtext = new String();
+            for(int i=0;i<5;i++){
+            try 
+            {
+                
+                input += salt;               
+                MessageDigest md = MessageDigest.getInstance("MD5");                   
+                byte[] messageDigest = md.digest(input.getBytes());                 
+                BigInteger no = new BigInteger(1, messageDigest);                      
+                hashtext = no.toString(16);
+                while (hashtext.length() < 32) 
+                {
+                    hashtext = "0" + hashtext;
+                }
+                input = hashtext;
+                
+            } 
+      
+           
+            catch (NoSuchAlgorithmException e) 
+            {
+                throw new RuntimeException(e);
+            }
+        }
+            return hashtext;
+    }
+    String getlogincredentials()
+    {
+    	try
+		{
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+            Connection conec = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE","E_post","123");
+            String query="select salt from Login where user_id='"+usernameTextField.getText()+"'";
+            PreparedStatement smt = conec.prepareStatement(query);
+            ResultSet rs = smt.executeQuery();
+            if(rs.next())
+            {
+            	salt = rs.getString("salt")	;
+            	System.out.println(salt);
+            	pass = passwordField.getText();
+            	hash_pass = createHash(pass,salt);
+            	System.out.println(hash_pass);
+            	String query2="select user_ID,password from Login	 where user_id='"+usernameTextField.getText()+"' and password='"+hash_pass+"'";
+	            PreparedStatement smt2 = conec.prepareStatement(query2);
+	            ResultSet rs2 = smt2.executeQuery();            	            
+	            if(rs2.next())
+	            {
+	            	JOptionPane.showMessageDialog(null, "LOGIN SUCESSFULL");		            	
+	            	
+	            }
+	            else
+	            {
+	            	JOptionPane.showMessageDialog(null, "INVALID USER NAME AND PASSWORD");
+	            }
+            	
+            }
+            else
+            {
+            	JOptionPane.showMessageDialog(null, "wrong-salt");
+            }
+		}
+		catch(Exception e1)
+		{
+			JOptionPane.showMessageDialog(null, "CATCH"+e1.toString());
+		}    	
+		
+	} 
+    public void login()
+    {
+    	getlogincredentials();
+    }
+    public void actionPerformed(ActionEvent e) 
+    {
         main.switchPage("register");
     }
 }
