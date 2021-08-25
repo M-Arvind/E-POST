@@ -1,5 +1,6 @@
 package Login;
 
+import static Database.DatabaseOperations.loginUpdate;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -15,7 +16,9 @@ import javax.swing.JTextField;
  *
  * @author kesha
  */
-public class ForgetPassword{
+public class ForgetPassword
+{
+    
     JDialog newdialog = new JDialog();
     
     Color background_Color = new Color(34,34,45);
@@ -77,6 +80,10 @@ public class ForgetPassword{
         fPass_Password.setFont(new Font("Segoe UI", Font.PLAIN, 22));
         fPass_RePassword.setFont(new Font("Segoe UI", Font.PLAIN, 22));
         
+        fPass_User_info.setFont(new Font("Segoe UI", Font.PLAIN, 22));
+        fPass_Password_info.setFont(new Font("Segoe UI", Font.PLAIN, 22));
+        fPass_Repassword_info.setFont(new Font("Segoe UI", Font.PLAIN, 22));
+        
         newdialog.add(fPass_User);
         newdialog.add(fPass_Password);
         newdialog.add(fPass_RePassword);
@@ -95,24 +102,46 @@ public class ForgetPassword{
             @Override
             public void actionPerformed(ActionEvent e) 
             {
-                JOptionPane.showMessageDialog(null, "This goes to Back to Wallet");                
+                forgetPassword();            
             }
                         
         });
 
         newdialog.getContentPane().setBackground(background_Color);
         newdialog.setVisible(true);
-
-    }
-    
-    public static void main(String ss[]){
-        ForgetPassword s = new ForgetPassword();
     }
     
     
-    
-    
-    
+    public void forgetPassword()
+    {
+        int min = 200;  
+        int max = 400;  
+        int salt = (int)(Math.random()*(max-min+1)+min);
         
+        String userName = fPass_User_info.getText();
+        String password = fPass_Password_info.getText();
+        String confirmPassword = fPass_Repassword_info.getText();
+        
+        String hash_pass = Login.login.createHash(password, salt);
+        String hash_confirm_pass = Login.login.createHash(confirmPassword, salt);
+        
+        if(hash_pass.isEmpty() || hash_confirm_pass.isEmpty())
+        {
+            JOptionPane.showMessageDialog(null, "Please Enter the New Password");
+        }
+        
+        System.out.println("Password" + hash_pass);
+        System.out.println("Confirm Password" + hash_confirm_pass);
+        System.out.println("Salt" + salt);
+        
+        if(hash_pass.equals(hash_confirm_pass) || hash_pass != null || hash_confirm_pass != null)
+        {
+            loginUpdate(userName, hash_pass, hash_confirm_pass, salt);
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(null, "Please make sure that Password and Confirm Password are same");
+        }        
+    }
 }
 
