@@ -23,6 +23,9 @@ import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import warehouse.*;
+import profile.*;
+
 public class DatabaseOperations 
 {
    private static Connection connection;
@@ -391,5 +394,148 @@ public class DatabaseOperations
             JOptionPane.showMessageDialog(null,"Wallet  Updated Failed ID:"+e.toString());
         }
     }
+    public static ArrayList getStocks(){
+        ArrayList<Warehouse> stocks = new ArrayList<Warehouse>();
+        try{
+        Statement st = getConnection().createStatement();
+        String query = "SELECT * from warehouse";
+        ResultSet rs = st.executeQuery(query);
+        while(rs.next()){
+            Warehouse temp = new Warehouse();
+            temp.setItemCode(rs.getString("S_ITEM_CODE"));
+            temp.setItem(rs.getString("S_ITEM"));
+            temp.setItemPrice(rs.getString("S_ITEM_PRICE"));
+            temp.setItemQuantity(rs.getString("S_ITEM_QUANTITY"));
+            stocks.add(temp);
+        }
+        }
+        catch(Exception e){
+            System.out.print(e);
+        }
+        return stocks;
+    }
+
+    public static void updateStocks(ArrayList<Warehouse> stock){
+        for(int i=0;i<stock.size();i++){
+            Warehouse temp = stock.get(i);
+            try{
+                Connection con = getConnection();
+                Statement st = con.createStatement();
+                String query = "update warehouse set S_Item_Quantity = ? where s_item_Code = ?";
+                PreparedStatement pst = con.prepareStatement(query);
+                pst.setString(1, temp.getItemQuantity());
+                pst.setString(2, temp.getitemCode());
+                pst.executeQuery();
+                con.setAutoCommit(true);
+            }
+            catch(Exception e){
+                System.out.println(e);
+            }
+
+        }
+        JOptionPane.showMessageDialog(null, "Updated Successfully");
+    }
+
+    public static AdminProfile getAdminProfile(String id){
+        AdminProfile details = new AdminProfile();
+        try{
+            Connection con = getConnection();
+            Statement st = con.createStatement();
+            String query = "select * from Admin where Admin_id = ?";
+            PreparedStatement pst = con.prepareStatement(query);
+            pst.setString(1, id);
+            ResultSet rst = pst.executeQuery();
+            while(rst.next()){
+                details.setId(rst.getString("ADMIN_ID"));
+                details.setFirstName(rst.getString("FIRST_NAME"));
+                details.setLastName(rst.getString("LAST_NAME"));
+                details.setDob(rst.getDate("DOB"));
+                details.setJoinDate(rst.getDate("JOIN_DATE"));
+                details.setExperience(rst.getInt("EXPERIANCE"));
+                details.setAge(rst.getInt("AGE"));
+                details.setMartialStatus(rst.getString("MARTIAL_STATUS"));
+                details.setContactNumber(rst.getString("CONTACT_NUMBER"));
+                details.setGender(rst.getString("GENDER"));
+                details.setPermanentAddress(rst.getString("PERMANENT_ADDRESS"));
+                details.setTemporaryAddress(rst.getString("TEMPORARY_ADDRESS"));
+                details.setSalary(rst.getInt("SALARY"));
+                details.setState(rst.getString("STATE"));
+                details.setDistrict(rst.getString("DISTRICT"));
+                details.setDesignation(rst.getString("DESIGNATION"));
+            }
+        }
+        catch(Exception e){
+            System.out.println(e);
+        }
+        return details;
+    }
+    
+    public static ArrayList<CustomerProfile> getCustomerDetails(){
+        ArrayList<CustomerProfile> customerDetails = new ArrayList<CustomerProfile>();
+        try{
+            Connection con = getConnection();
+            Statement st = con.createStatement();
+            String query = "select * from Customer";
+            PreparedStatement pst = con.prepareStatement(query);
+            ResultSet rst = pst.executeQuery();
+            while(rst.next()){
+                CustomerProfile details = new CustomerProfile();
+                details.setId(rst.getString("CUSTOMER_ID"));
+                details.setFirstName(rst.getString("FIRST_NAME"));
+                details.setLastName(rst.getString("LAST_NAME"));
+                details.setDob(rst.getDate("DOB"));
+                details.setAge(rst.getInt("AGE"));
+                details.setContactNumber(rst.getString("CONTACT_NUMBER"));
+                details.setGender(rst.getString("GENDER"));
+                details.setAddress(rst.getString("ADDRESS"));
+                details.setState(rst.getString("STATE"));
+                details.setDistrict(rst.getString("DISTRICT"));
+                details.setPinCode(rst.getString("PIN_CODE"));
+                details.setBankBalance(rst.getString("BANK_BALANCE"));
+                details.setAccountNumber(rst.getString("ACCOUNT_NUMBER"));
+                customerDetails.add(details);
+            }
+        }
+        catch(Exception e){
+            System.out.println(e);
+        }
+        return customerDetails;
+    }
+    
+    public static ArrayList<DeliveryProfile> getDeliveryDetails(){
+        ArrayList<DeliveryProfile> deliveryDetails = new ArrayList<DeliveryProfile>();
+        try{
+            Connection con = getConnection();
+            Statement st = con.createStatement();
+            String query = "select * from Delivery";
+            PreparedStatement pst = con.prepareStatement(query);
+            ResultSet rst = pst.executeQuery();
+            while(rst.next()){
+                DeliveryProfile details = new DeliveryProfile();
+                details.setId(rst.getString("DELIVERY_ID"));
+                details.setFirstName(rst.getString("FIRST_NAME"));
+                details.setLastName(rst.getString("LAST_NAME"));
+                details.setDob(rst.getDate("DOB"));
+                details.setJoinDate(rst.getDate("JOIN_DATE"));
+                details.setAge(rst.getInt("AGE"));
+                details.setMartialStatus(rst.getString("MARTIAL_STATUS"));
+                details.setContactNumber(rst.getString("CONTACT_NUMBER"));
+                details.setGender(rst.getString("GENDER"));
+                details.setPermanentAddress(rst.getString("PERMANENT_ADDRESS"));
+                details.setTemporaryAddress(rst.getString("TEMPORARY_ADDRESS"));
+                details.setSalary(rst.getInt("SALARY"));
+                details.setState(rst.getString("STATE"));
+                details.setDistrict(rst.getString("DISTRICT"));
+                deliveryDetails.add(details);
+            }
+        }
+        catch(Exception e){
+            System.out.println(e);
+        }
+        return deliveryDetails;
+    }
+
+
 }
 
+    

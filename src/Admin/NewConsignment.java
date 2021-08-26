@@ -54,7 +54,7 @@ public class NewConsignment extends JPanel implements ActionListener{
 //
 //    });
         
-       TableColumn testColumn = table.getColumnModel().getColumn(4);
+        TableColumn testColumn = table.getColumnModel().getColumn(4);
         JComboBox<String> comboBox = new JComboBox<>();
         comboBox.addItem("Barath.B");
         comboBox.addItem("Abhijith");
