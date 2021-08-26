@@ -1,6 +1,4 @@
 package Database;
-import customer.Authentication;
-
 import java.awt.List;
 import java.awt.TextField;
 import java.sql.Connection;
