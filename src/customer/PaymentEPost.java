@@ -1,4 +1,6 @@
 package customer;
+import Database.DatabaseOperations;
+import customer.DatasForCustomer.EPostData;
 import main.*;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -85,7 +87,23 @@ public class PaymentEPost extends JPanel implements MouseListener
         
         e_payment_btn_confirm = new JButton();
         e_payment_btn_confirm.addActionListener((a)->{
-            new Authentication();
+            new AuthenticationForE_Post();
+           /*if(EPostData.isIsPasswordCorrect()){
+              if(EPostData.isHardCopy()==true && EPostData.isSoftCopy()==true){
+                  
+              }
+              if(EPostData.isHardCopy()==true){
+                 
+              }
+              if(EPostData.isSoftCopy()==true){
+                   Database.DatabaseOperations.inboxUpdate();
+              }
+            }
+                else{
+                JOptionPane.showMessageDialog(null,"Failed ID:"+DatabaseOperations.getMessageIdGenerator());
+            
+            }*/
+           
         });
         e_payment_btn_back = new JLabel(new ImageIcon(getClass().getResource("/Images/arrow_back_button.png")));
          e_payment_btn_back.addMouseListener(this);

@@ -1,5 +1,11 @@
 package customer;
+import Database.DatabaseOperations;
+import customer.DatasForCustomer.ConsignmentData;
 import main.*;
+import customer.DatasForCustomer.EPostData;
+import customer.DatasForCustomer.ParcelData;
+import customer.DatasForCustomer.WalletDataG;
+import static customer.DatasForCustomer.WalletDataG.setBalence;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -14,7 +20,7 @@ import javax.swing.JTextField;
  *
  * @author htara
  */
-public class Authentication
+public class AuthenticationForParcel
 {
     JDialog newdialog = new JDialog();
     
@@ -25,8 +31,9 @@ public class Authentication
     JLabel auth_password;
     JTextField auth_password_info;
     JButton auth_btn_confirm;
+    private static boolean flag;
 
-    public Authentication() 
+    public AuthenticationForParcel() 
     {
         newdialog.setSize(600, 450);
         newdialog.setLayout(null);
@@ -65,9 +72,31 @@ public class Authentication
             @Override
             public void actionPerformed(ActionEvent e) 
             {
-                CustomerPanel.customerCard.show(CustomerPanel.contentForCustomer,"E-Post");
-                main.switchPage("customerPanel");
-                newdialog.dispose();
+                ParcelData.setIsPasswordCorrect(getAuthentication());
+                
+              if(ParcelData.isIsPasswordCorrect()){
+              WalletDataG.setBalence(5000.25F);//
+              WalletDataG.setTransationType("Parcel");
+              WalletDataG.setAmount(5F);//fees for Parcel 1kg
+             
+
+                  Database.DatabaseOperations.updateInbox();
+                  Database.DatabaseOperations.updateConsignment();
+                  Database.DatabaseOperations.updateWalletTransaction();
+      
+              ConsignmentData.listForConsignment.clear();
+              ConsignmentData.setIsUpdate(true);
+              CustomerPanel.contentForCustomer.add(new ConsignmentPanel(),"1");
+              main.switchPage("customerPanel");
+              CustomerPanel.BConsignment.setBounds(55+120,120,160,30);
+              CustomerPanel.customerCard.show(CustomerPanel.contentForCustomer,"1");
+              newdialog.dispose();
+
+                }
+             else{
+                JOptionPane.showMessageDialog(null,"Incorrect Password"+DatabaseOperations.getMessageIdGenerator());
+            
+             }     
                                
             }
                         
@@ -76,6 +105,9 @@ public class Authentication
         newdialog.getContentPane().setBackground(background_Color);
         newdialog.setVisible(true);
 
+    }
+    private  boolean getAuthentication(){
+        return true;
     }
 }
 

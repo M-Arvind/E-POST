@@ -17,17 +17,28 @@ public class ConsignmentData {
      private Long receiver_contact_number;
      private String customer_first_name;
      private String customer_last_name;
+
+   
      private Long customer_contact_number;
      private String shipping_address;
      private String payment_method;
      private Date order_date;
      private Date delivery_date;
      private String status;
+     private static boolean isUpdate;
 
     static{
        listForConsignment=new ArrayList<ConsignmentData>(); 
     }
-     
+
+    public static boolean isIsUpdate() {
+        return isUpdate;
+    }
+
+    public static void setIsUpdate(boolean isUpdate) {
+        ConsignmentData.isUpdate = isUpdate;
+    }
+   
     public static ArrayList getListForConsignment() {
         return listForConsignment;
     }

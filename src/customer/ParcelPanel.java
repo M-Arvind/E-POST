@@ -1,4 +1,6 @@
 package customer;
+import customer.DatasForCustomer.ParcelData;
+import customer.DatasForCustomer.WalletDataG;
 import main.*;
 import java.awt.Color;
 import java.awt.Font;
@@ -6,6 +8,8 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.geom.Line2D;
 import java.util.Vector;
 import javax.swing.BorderFactory;
@@ -21,7 +25,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
 
-public class ParcelPanel extends JPanel implements ActionListener{
+public class ParcelPanel extends JPanel implements ActionListener,KeyListener{
 private JButton BSend;
      private JLabel LPrice_Description,LItem_Price,LItem_Weight,LTo,LHardCopy,LSoftCopy,LFirstName,LLastName,LAddress,LState,LDistrict,LPincode,LPhoneNumber;
      private JTextField TItem_Price,TItem_Weight,TTo,TFirstname,TLastName,TPincode,TPhoneNumber;
@@ -136,12 +140,14 @@ private JButton BSend;
           TItem_Weight=new JTextField();
           TItem_Weight.setBounds(680,65,200,28);
           TItem_Weight.setFont(fontForText);
+          TItem_Weight.addKeyListener(this);
           add(TItem_Weight);
           
           LItem_Price=new JLabel("Item Price");
           LItem_Price.setBounds(680+270, 25,130,40);
           LItem_Price.setFont(font);
           add(LItem_Price);
+          WalletDataG.setAmount(5F);//fees for E-post
           
           TItem_Price=new JTextField();
           TItem_Price.setBounds(680+270,65,200,28);
@@ -275,9 +281,40 @@ private JButton BSend;
          infoCity.add("Nagapattinam");
         return infoCity;
     }
-     @Override
+    @Override
     public void actionPerformed(ActionEvent e) {
-        main.switchPage("paymentParcel");
+        main.switchPage("paymentEPost");
+        ParcelData.setTo(TTo.getText());
+        ParcelData.setFirstName(TFirstname.getText());
+        ParcelData.setLastName(TLastName.getText());
+        ParcelData.setPincode(TPincode.getText());
+        ParcelData.setPhoneNumber(new Long(TPhoneNumber.getText()));
+        ParcelData.setAddress(TAddress.getText());
+        ParcelData.setState(CState.getSelectedItem().toString());
+        ParcelData.setDistrict(CDistrict.getSelectedItem().toString());
+  
     }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+         if(!TItem_Weight.getText().isEmpty()){
+             Float temp=Float.valueOf(TItem_Weight.getText());
+             WalletDataG.setItemPrice(temp*WalletDataG.getAmount());
+            TItem_Price.setText(String.valueOf(WalletDataG.getItemPrice()));
+        }
+        }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        
+        
+            }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+        
+          
+       
+      }
     
 }
