@@ -22,7 +22,7 @@ public class DatabaseOperations
         try
         {
             Class.forName("oracle.jdbc.driver.OracleDriver");
-            connection = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE","system","Kavya**2001"); //E_Post
+            connection = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE","epost","123"); //E_Post
           
         }
 
@@ -89,88 +89,9 @@ public class DatabaseOperations
        }
        return row;
     }
-    public static void getInboxDetails(){
-        
-        try{
-            Connection con=DatabaseOperations.getConnection();
-            String cId="Kishore P";
-            String query="select * from Inbox where sender_name='"+cId+"'";
-            PreparedStatement  st1=con.prepareStatement(query);
-            ResultSet res=st1.executeQuery(query);
-            while(res.next()){
-                InboxData obj=new InboxData();
-                obj.setMessage_ID(res.getString("messaage_ID"));
-                obj.setMessage(res.getString("message"));
-                obj.setSender_name(res.getString("sender_name"));
-                obj.setReceiver_name(res.getString("receiver_ID"));
-                obj.setSent_Date(res.getString("sent_Date"));
-                obj.setTime(res.getString("time"));
-                obj.setCustomer_Id(res.getString("customer_Id"));
-                obj.setReceiver_Id(res.getString("receiver_Id"));
-                obj.setSubject(res.getString("subject"));
-                InboxData.ListForInbox.add(obj);
-            }
-        }catch(SQLException e){
-            System.out.println("Error in getInboxDetails  "+e.toString());
-        }
-        
-    }
-    public static String getConsignmentIdGenerator() {
-       try{
-          Connection con=DatabaseOperations.getConnection();
-				Statement st=con.createStatement();
-				String stsql="select count(*) from CONSIGNMENT";
-				ResultSet rs=st.executeQuery(stsql);
-				rs.next();
-				int c=rs.getInt(1);
-				con.setAutoCommit(true);
-				
-				String s="CONID";
-                                System.out.println(s+Integer.toString(c+1));
-				return s+Integer.toString(c+1); 
-       }
-       catch(Exception ex1){
-            System.out.println("Error in getconsignmentIdGenerator---->"+ex1.toString());
-       }
-				
-	return "";			
-     }
-    public static String getTransactionIdGenerator()  {
-       try{
-          Connection con=DatabaseOperations.getConnection();
-		Statement st=con.createStatement();
-		String stsql="select count(*) from WALLET";
-		ResultSet rs=st.executeQuery(stsql);
-		rs.next();
-		int c=rs.getInt(1);
-		con.setAutoCommit(true);
-		String s="TRANSID";
-		return s+Integer.toString(c+1); 
-       }
-       catch(Exception ex1){
-            System.out.println("Error in getTransactionIdGenerator---->"+ex1.toString());
-       }
-       
-      return "";
-   }
-    public static String getMessageIdGenerator() {
-      try{
-          Connection con=DatabaseOperations.getConnection();
-		Statement st=con.createStatement();
-		String stsql="select count(*) from INBOX";
-		ResultSet rs=st.executeQuery(stsql);
-		rs.next();
-		int c=rs.getInt(1);
-		con.setAutoCommit(true);
-		String s="MSGID";
-		return s+Integer.toString(c+1);
-          
-      }
-      catch(Exception ex1){
-            System.out.println("Error in getTransactionIdGenerator---->"+ex1.toString());
-       }
-	return "";	
-  }
+    
+    
+    
     
     public static boolean CheckIdPresentOrNot(String UserId){
         try{
