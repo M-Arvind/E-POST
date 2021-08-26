@@ -1,5 +1,5 @@
 package customer.DatasForCustomer;
-public class EPostData {
+public class ParcelData {
     private static String To;
     private static String FirstName;
     private static String LastName;
@@ -8,8 +8,6 @@ public class EPostData {
     private static String District;
     private static String Pincode;
     private static Long PhoneNumber;
-    private static String Subject;
-    private static String Message;
     private static boolean SoftCopy=false;
     private static boolean HardCopy=false;
     private static boolean isPasswordCorrect=false;
@@ -78,22 +76,6 @@ public class EPostData {
         PhoneNumber = aPhoneNumber;
     }
 
-    public static String getSubject() {
-        return Subject;
-    }
-
-    public static void setSubject(String aSubject) {
-        Subject = aSubject;
-    }
-
-    public static String getMessage() {
-        return Message;
-    }
-
-    public static void setMessage(String aMessage) {
-        Message = aMessage;
-    }
-
     public static boolean isSoftCopy() {
         return SoftCopy;
     }
@@ -117,7 +99,6 @@ public class EPostData {
     public static void setIsPasswordCorrect(boolean aIsPasswordCorrect) {
         isPasswordCorrect = aIsPasswordCorrect;
     }
-
-  
+ 
 
 }

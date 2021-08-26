@@ -17,7 +17,11 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import customer.DatasForCustomer.*;
+import java.sql.Date;
 import java.sql.Statement;
+import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 public class DatabaseOperations 
 {
@@ -29,7 +33,7 @@ public class DatabaseOperations
         try
         {
             Class.forName("oracle.jdbc.driver.OracleDriver");
-            connection = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE","E_Post","123");
+            connection = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE","E-Post","123");
         }
   
         
@@ -298,63 +302,94 @@ public class DatabaseOperations
             JOptionPane.showMessageDialog(null, ex.toString());
         }
     }
+    public static void updateInbox(){
+        try{
+            
+            String query="INSERT INTO Inbox VALUES(?,?,?,?,?,?,?,?,?)";
+            Connection con=DatabaseOperations.getConnection();
+            PreparedStatement pst=con.prepareStatement(query);
+            pst.setString(1,DatabaseOperations.getMessageIdGenerator());
+            pst.setString(2,EPostData.getMessage());
+            pst.setString(3,"Gowtham");//userName
+            pst.setString(4, EPostData.getFirstName());
+            pst.setDate(5,java.sql.Date.valueOf(java.time.LocalDate.now()));//new java.sql.Date(System.currentTimeMillis())
+            pst.setTimestamp(6,Timestamp.valueOf(LocalDateTime.now()));//new java.sql.Timestamp(9000)
+            pst.setString(7, "Kishore P");//Login.login.user_ID)
+            pst.setString(8, EPostData.getTo());
+            pst.setString(9,EPostData.getSubject());
+            pst.executeUpdate();
+            con.setAutoCommit(true);
+            con.close();
+            JOptionPane.showMessageDialog(null,"Inbox Updated Succesfully ID:"+DatabaseOperations.getMessageIdGenerator());
+            
+            
+        }
+        catch(Exception e){
+            JOptionPane.showMessageDialog(null,"Inbox Updated Failed ID:"+e.toString());
+        }
+    }
+    public static void updateConsignment(){
+         try{ 
+            String query="INSERT INTO Consignment VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+            Connection con=DatabaseOperations.getConnection();
+            PreparedStatement pst=con.prepareStatement(query);
+            pst.setString(1,DatabaseOperations.getConsignmentIdGenerator());//consignment_ID
+            pst.setString(2,"Kishore P");//customer_ID
+            pst.setString(3, "");//delivery_ID
+            pst.setString(4,EPostData.getTo());//receiver_ID
+            pst.setString(5,"WH0001");//item_code
+            pst.setString(6,"E-Post");//item
+            pst.setString(7,"5");//item_price
+            pst.setString(8,"");//item_weight
+            pst.setString(9,EPostData.getFirstName());//receiver_first_name                                             
+            pst.setString(10, EPostData.getLastName()); //receiver_last_name             
+            pst.setString(11, EPostData.getAddress()); //receiver_address                                                      
+            pst.setLong(12, EPostData.getPhoneNumber()); //receiver_contact_number                                                       
+            pst.setString(13,"Kishore");      //customer_first_name 
+            pst.setString(14, "P");           //customer_last_name 
+            pst.setLong(15,9095305385L);   //customer_contact_number
+            pst.setString(16, "No.24 Second street, Yelankahana New Town, Karanataka, Bangalore");//shipping_address
+            pst.setString(17,"E-Pay");  //payment_method 
+            pst.setDate(18,java.sql.Date.valueOf(java.time.LocalDate.now()));//order_date DATE
+            pst.setDate(19,java.sql.Date.valueOf(java.time.LocalDate.now()));  //delivery_date DATE                                                    
+            pst.setString(20,"In-Order");//status 
+            pst.executeUpdate();
+            con.setAutoCommit(true);
+            con.close();
+            JOptionPane.showMessageDialog(null,"Consignment Updated Succesfully ID:"+DatabaseOperations.getConsignmentIdGenerator());
     
-//    public static Object[][] getCustomerConsignmentDetails(){
-//       try {
-//           Connection con=DatabaseOperations.getConnection();
-//           String Customer_ID="Asif M";
-//           String query="select *from Consignment where customer_ID='"+Customer_ID+"'";
-//           PreparedStatement  st1=con.prepareStatement(query);
-//           ResultSet res=st1.executeQuery(query);
-//           
-//           while(res.next()){
-//              ConsignmentData ob=new ConsignmentData();
-//            
-//              ob.setConsignment_ID(res.getString("consignment_ID"));
-//              ob.setCustomer_ID(res.getString("customer_ID"));
-//              ob.setDelivery_ID(res.getString("delivery_ID"));
-//              ob.setReceiver_ID(res.getString("receiver_ID"));
-//              ob.setItem_code(res.getString("item_code"));
-//              ob.setItem(res.getString("item"));
-//              ob.setItem_price(res.getFloat("item_price"));
-//              ob.setItem_weight(res.getFloat("item_weight"));
-//              ob.setReceiver_first_name(res.getString("receiver_first_name"));
-//              ob.setReceiver_last_name(res.getString("receiver_last_name"));
-//              ob.setReceiver_address(res.getString("receiver_address"));
-//              ob.setReceiver_contact_number(res.getLong("receiver_contact_number"));
-//              ob.setCustomer_first_name(res.getString("customer_first_name"));
-//              ob.setCustomer_last_name(res.getString("customer_last_name"));
-//              ob.setCustomer_contact_number(res.getLong("customer_contact_number"));
-//              ob.setShipping_address(res.getString("shipping_address"));
-//              ob.setPayment_method(res.getString("payment_method"));
-//              ob.setOrder_date(res.getDate("order_date"));
-//              ob.setDelivery_date(res.getDate("delivery_date"));
-//              ob.setStatus(res.getString("status"));
-//
-//              ConsignmentData.listForConsignment.add(ob); 
-//             
-//              
-//           }
-//           System.out.println("Success in Consignment--->"+ConsignmentData.listForConsignment.size());
-//       } catch (SQLException ex) {
-//           System.out.println("Error in getCustomerConsignmentDetails---->"+ex.toString());
-//       }
-//       Object[][] row=new Object[ConsignmentData.listForConsignment.size()][8];
-//       int i=0;
-//       for(ConsignmentData Data:ConsignmentData.listForConsignment){
-//           row[i][0]=Data.getConsignment_ID();
-//           row[i][1]=Data.getCustomer_first_name();
-//           row[i][2]=Data.getReceiver_first_name();
-//           row[i][3]=Data.getItem();
-//           row[i][4]=Data.getDelivery_ID();
-//           row[i][5]=Data.getPayment_method();
-//           row[i][6]=Data.getOrder_date();
-//           row[i][7]=Data.getStatus();
-//         
-//         i++;
-//             
-//       }
-//       return row;
-//    }
+        }
+        catch(Exception e){
+            JOptionPane.showMessageDialog(null,"Consignment Updated Failed ID:"+e.toString());
+        }
+    }
+    public static void updateWalletTransaction(){
+        try{ 
+            String query="INSERT INTO Wallet VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
+            Connection con=DatabaseOperations.getConnection();
+            PreparedStatement pst=con.prepareStatement(query);
+            pst.setString(1,DatabaseOperations.getTransactionIdGenerator());
+            pst.setString(2,"Kishore P");//Customer ID
+            pst.setString(3,"Admin001");//Reciver Id
+            pst.setString(4, EPostData.getFirstName());
+            pst.setString(5, EPostData.getLastName());
+            pst.setString(6, WalletDataG.getTransationType());
+            pst.setDate(7,java.sql.Date.valueOf(java.time.LocalDate.now()));//new java.sql.Date(System.currentTimeMillis())
+            pst.setLong(8,350700001);//current logged in customer's wallet account number
+            pst.setLong(9,350700000);//Admin Account Number
+            pst.setFloat(10,WalletDataG.getAmount());//amount
+            pst.setString(11,"Admin");
+            pst.setFloat(12,WalletDataG.getBalence());//balence
+            pst.executeUpdate();
+            con.setAutoCommit(true);
+            con.close();
+            JOptionPane.showMessageDialog(null,"Wallet Updated Succesfully ID:"+DatabaseOperations.getMessageIdGenerator());
+            
+            
+        }
+        catch(Exception e){
+            JOptionPane.showMessageDialog(null,"Wallet  Updated Failed ID:"+e.toString());
+        }
+    }
 }
 

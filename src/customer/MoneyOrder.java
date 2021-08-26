@@ -97,7 +97,7 @@ public class MoneyOrder extends JPanel
         moneyOrder_btn_confirm.setForeground(on_background_Color);
         moneyOrder_btn_confirm.setBorder(null);
         moneyOrder_btn_confirm.addActionListener((l)->{
-            new Authentication();
+            new AuthenticationForE_Post();
         });
         
         //Label Bounds

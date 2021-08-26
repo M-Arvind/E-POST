@@ -271,8 +271,7 @@ public class PaymentParcel extends JPanel implements MouseListener
             @Override
             public void actionPerformed(ActionEvent e) 
             {
-               
-                new Authentication();
+                new AuthenticationForParcel();
             }
             
         });  
