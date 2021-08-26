@@ -1,11 +1,18 @@
 package customer;
+import Database.DatabaseOperations;
+import customer.DatasForCustomer.WalletData;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -48,9 +55,9 @@ public class MoneyOrder extends JPanel
     
     public MoneyOrder()
     { 
-        JFrame frame= new JFrame("Money Order");    
+          
       
-        
+        setLayout(null);
         moneyOrder_btn_confirm = new JButton();
         
         //Label
@@ -79,7 +86,8 @@ public class MoneyOrder extends JPanel
         moneyOrder_address_info.setLineWrap(true);
         
         //Content Label Text
-        moneyOrder_toUsername_info.setText("Admin");
+        /**
+        moneyOrder_toUsername_info.setText("Asif M");
         moneyOrder_amount_info.setText("12345");
         moneyOrder_firstName_info.setText("Hello");
         moneyOrder_lastName_info.setText("World");
@@ -88,7 +96,7 @@ public class MoneyOrder extends JPanel
         moneyOrder_state_info.setText("Tamil Nadu");
         moneyOrder_district_info.setText("Salem");
         moneyOrder_pincode_info.setText("123456");
-        
+        **/
         //Button and title
         moneyOrder_title.setBounds(555,20, 200, 50);
         moneyOrder_btn_confirm.setBounds(570,675,150,40);
@@ -97,8 +105,26 @@ public class MoneyOrder extends JPanel
         moneyOrder_btn_confirm.setForeground(on_background_Color);
         moneyOrder_btn_confirm.setBorder(null);
         moneyOrder_btn_confirm.addActionListener((l)->{
-            new Authentication();
-        });
+            
+           if( DatabaseOperations.CheckIdPresentOrNot(moneyOrder_toUsername_info.getText())){
+               WalletData.MoneyOrderValues.add(moneyOrder_toUsername_info.getText()); //0
+               WalletData.MoneyOrderValues.add(moneyOrder_amount_info.getText()); //1
+               WalletData.MoneyOrderValues.add(moneyOrder_firstName_info.getText()); //2
+               WalletData.MoneyOrderValues.add(moneyOrder_lastName_info.getText()); //3
+               WalletData.MoneyOrderValues.add(moneyOrder_type_info.getText()); //4
+               WalletData.MoneyOrderValues.add(moneyOrder_address_info.getText());
+               WalletData.MoneyOrderValues.add(moneyOrder_state_info.getText());
+               WalletData.MoneyOrderValues.add(moneyOrder_district_info.getText());
+               WalletData.MoneyOrderValues.add(moneyOrder_pincode_info.getText());
+               new WalletAuthentication();
+               
+            
+            //new Authentication();
+            }
+           else{
+               JOptionPane.showMessageDialog(null,"Invalid userId");
+           }
+         });
         
         //Label Bounds
         moneyOrder_toUsername.setBounds(120, 100, 150, 50);
@@ -197,18 +223,12 @@ public class MoneyOrder extends JPanel
         
         
         //Panel
-        setLayout(null);
+        
         setBackground(background_Color);
-        
-        
-        //Frame
-        frame.add(this);
-    
-        
-        frame.setSize(1350,925);
-        frame.getContentPane().setBackground(background_Color);
-        frame.setLayout(null);
-        frame.setVisible(true);    
+        setSize(1350,925);
+       
+        setVisible(true); 
+            
     }
     
     
