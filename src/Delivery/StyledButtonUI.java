@@ -1,4 +1,4 @@
-package customer;
+package Delivery;
 
 import java.awt.Dimension;
 import java.awt.Graphics;

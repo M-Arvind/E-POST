@@ -3,34 +3,30 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-<<<<<<< Updated upstream
-            <file>file:/C:/Users/kesha/OneDrive/Documents/NetBeansProjects/E-POST/src/Login/register.java</file>
-            <file>file:/C:/Users/kesha/OneDrive/Documents/NetBeansProjects/E-POST/src/main/main.java</file>
-=======
-            <file>file:/G:/java%20programs/E-POST/src/Admin/customerDetails.java</file>
-            <file>file:/G:/java%20programs/E-POST/src/Login/register.java</file>
-            <file>file:/G:/java%20programs/E-POST/src/customer/E_PostPanel.java</file>
-            <file>file:/G:/java%20programs/E-POST/src/customer/ParcelPanel.java</file>
-            <file>file:/G:/java%20programs/E-POST/src/customer/ProductsPanel.java</file>
-            <file>file:/G:/java%20programs/E-POST/src/Login/login.java</file>
-            <file>file:/G:/java%20programs/E-POST/test/customer/sample.java</file>
-            <file>file:/G:/java%20programs/E-POST/src/customer/AddMoney.java</file>
-            <file>file:/G:/java%20programs/E-POST/src/customer/ConsignmentPanel.java</file>
-            <file>file:/G:/java%20programs/E-POST/src/customer/MoneyOrder.java</file>
-            <file>file:/G:/java%20programs/E-POST/src/customer/WalletPanel.java</file>
-            <file>file:/G:/java%20programs/E-POST/src/main/main.java</file>
-            <file>file:/G:/java%20programs/E-POST/src/customer/Profile_View.java</file>
-            <file>file:/G:/java%20programs/E-POST/src/Admin/deliveryDetails.java</file>
-            <file>file:/G:/java%20programs/E-POST/src/customer/PaymentEPost.java</file>
-            <file>file:/G:/java%20programs/E-POST/src/customer/InboxPanel.java</file>
-            <file>file:/G:/java%20programs/E-POST/src/customer/Profile_Update.java</file>
-            <file>file:/G:/java%20programs/E-POST/src/customer/ConsignmentDetails.java</file>
-            <file>file:/G:/java%20programs/E-POST/src/customer/PaymentParcel.java</file>
-            <file>file:/G:/java%20programs/E-POST/src/customer/StyledButtonUI.java</file>
-            <file>file:/G:/java%20programs/E-POST/src/customer/Authentication.java</file>
-            <file>file:/G:/java%20programs/E-POST/src/customer/EPay.java</file>
-            <file>file:/G:/java%20programs/E-POST/src/customer/CustomerPanel.java</file>
->>>>>>> Stashed changes
+            <file>file:/G:/BootCamp-Projects/E-POST/src/customer/ConsignmentPanel.java</file>
+            <file>file:/G:/BootCamp-Projects/E-POST/src/Database/DatabaseOperations.java</file>
+            <file>file:/G:/BootCamp-Projects/E-POST/src/Login/ForgetPassword.java</file>
+            <file>file:/G:/BootCamp-Projects/E-POST/src/customer/PaymentParcel.java</file>
+            <file>file:/G:/BootCamp-Projects/E-POST/src/customer/EPay.java</file>
+            <file>file:/G:/BootCamp-Projects/E-POST/src/customer/MoneyOrder.java</file>
+            <file>file:/G:/BootCamp-Projects/E-POST/src/customer/WalletPanel.java</file>
+            <file>file:/G:/BootCamp-Projects/E-POST/src/customer/PaymentEPost.java</file>
+            <file>file:/G:/BootCamp-Projects/E-POST/src/Login/login.java</file>
+            <file>file:/G:/BootCamp-Projects/E-POST/src/customer/Profile_Update.java</file>
+            <file>file:/G:/BootCamp-Projects/E-POST/src/customer/E_PostPanel.java</file>
+            <file>file:/G:/BootCamp-Projects/E-POST/src/customer/Authentication.java</file>
+            <file>file:/G:/BootCamp-Projects/E-POST/src/customer/ParcelPanel.java</file>
+            <file>file:/G:/BootCamp-Projects/E-POST/src/customer/Profile_View.java</file>
+            <file>file:/G:/BootCamp-Projects/E-POST/src/customer/DatasForCustomer/ConsignmentData.java</file>
+            <file>file:/G:/BootCamp-Projects/E-POST/src/customer/InboxPanel.java</file>
+            <file>file:/G:/BootCamp-Projects/E-POST/src/customer/AddMoney.java</file>
+            <file>file:/G:/BootCamp-Projects/E-POST/src/customer/ProductsPanel.java</file>
+            <file>file:/G:/BootCamp-Projects/E-POST/src/Login/register.java</file>
+            <file>file:/G:/BootCamp-Projects/E-POST/src/main/main.java</file>
+            <file>file:/G:/BootCamp-Projects/E-POST/src/customer/ConsignmentDetails.java</file>
+            <file>file:/G:/BootCamp-Projects/E-POST/src/customer/DatasForCustomer/EPostData.java</file>
+            <file>file:/G:/BootCamp-Projects/E-POST/src/customer/DatasForCustomer/CustomerData.java</file>
+            <file>file:/G:/BootCamp-Projects/E-POST/src/customer/CustomerPanel.java</file>
         </group>
     </open-files>
 </project-private>

@@ -9,9 +9,9 @@ public class Profile_View extends JPanel implements ActionListener, MouseListene
 	Icon ProfIcon,EditIcon,BackIcon;
 	Border emptyBorder = BorderFactory.createEmptyBorder();
 	JLabel UserNameTop;
-	JLabel UserNameLabel,ContactNoLabel,DOBLabel,AgeLabel,JoinDateLabel,PAddressLabel,TAddressLabel,MaritalStatusLabel,DesignationLabel;
-	JLabel UserNameValue,ContactNoValue,DOBValue,AgeValue,JoinDateValue,PAddressValue,TAddressValue,MaritalValue,DesignationValue;
-	JLabel Collon1,Collon2,Collon3,Collon4,Collon5,Collon6,Collon7,Collon8,Collon9;
+	JLabel CustomerIDLabel,FirstNameLabel,LastNameLabel,DOBLabel,AgeLabel,ContactNumberLabel,GenderLabel,AddressLabel,BankBalanceLabel,AccountNumberLabel;
+	JLabel CustomerIDValue,FirstNameValue,LastNameValue,DOBValue,AgeValue,ContactNumberValue,GenderValue,AddressValue,BankBalanceValue,AccountNumberValue;
+	JLabel Collon1,Collon2,Collon3,Collon4,Collon5,Collon6,Collon7,Collon8,Collon9,Collon10;
 	JButton ProfIconLabel,BackIconLabel,EditIconLabel;
 	JButton SaveButton;
 	
@@ -73,210 +73,232 @@ public class Profile_View extends JPanel implements ActionListener, MouseListene
 		add(UserNameTop);
 		
 		
-		// usernamelabel 
+		// costumer id label 
 		
-		UserNameLabel=new JLabel("Username");
-		UserNameLabel.setBounds(X,Y,200,150);
-		UserNameLabel.setFont(new Font("Bold",Font.BOLD,labelFontSize));
-		UserNameLabel.setForeground(Color.WHITE);
+		CustomerIDLabel=new JLabel("Costumer ID");
+		CustomerIDLabel.setBounds(X,Y,200,150);
+		CustomerIDLabel.setFont(new Font("Bold",Font.BOLD,labelFontSize));
+		CustomerIDLabel.setForeground(Color.WHITE);
 		Collon1=new JLabel(":");
 		Collon1.setBounds(X+200,Y,20,150);
 		Collon1.setFont(new Font("Bold",Font.BOLD,labelFontSize));
 		Collon1.setForeground(Color.WHITE);
 		
-		//usernamevalue label
+		//costumer id value label
 		
-		UserNameValue=new JLabel("Username");
-		UserNameValue.setBounds(X+240,Y,800,150);
-		UserNameValue.setFont(new Font("Bold",Font.BOLD,labelFontSize));
+		CustomerIDValue=new JLabel("Costumer ID");
+		CustomerIDValue.setBounds(X+240,Y,800,150);
+		CustomerIDValue.setFont(new Font("Bold",Font.BOLD,labelFontSize));
 		
-		UserNameValue.setForeground(Color.WHITE);
+		CustomerIDValue.setForeground(Color.WHITE);
 		
-		add(UserNameLabel);
+		add(CustomerIDLabel);
 		add(Collon1);
-		add(UserNameValue);
+		add(CustomerIDValue);
 		
 		
-		//contactno label
+		//first name label
 		
-		ContactNoLabel=new JLabel("Contact Number");
-		ContactNoLabel.setBounds(X,Y+60,200,150);
-		ContactNoLabel.setFont(new Font("Bold",Font.BOLD,labelFontSize));
-		ContactNoLabel.setForeground(Color.WHITE);
+		FirstNameLabel=new JLabel("First Name");
+		FirstNameLabel.setBounds(X,Y+60,200,150);
+		FirstNameLabel.setFont(new Font("Bold",Font.BOLD,labelFontSize));
+		FirstNameLabel.setForeground(Color.WHITE);
 		Collon2=new JLabel(":");
 		Collon2.setBounds(X+200,Y+60,20,150);
 		Collon2.setFont(new Font("Bold",Font.BOLD,labelFontSize));
 		Collon2.setForeground(Color.WHITE);
 		
-		//contactno value label
+		//fisrt name  value label
 		
-		ContactNoValue=new JLabel("Contact Number");
-		ContactNoValue.setBounds(X+240,Y+60,800,150);
-		ContactNoValue.setFont(new Font("Bold",Font.BOLD,labelFontSize));
-		ContactNoValue.setForeground(Color.WHITE);
+		FirstNameValue=new JLabel("First Name");
+		FirstNameValue.setBounds(X+240,Y+60,800,150);
+		FirstNameValue.setFont(new Font("Bold",Font.BOLD,labelFontSize));
+		FirstNameValue.setForeground(Color.WHITE);
 		
-		add(ContactNoLabel);
+		add(FirstNameLabel);
 		add(Collon2);
-		add(ContactNoValue);
+		add(FirstNameValue);
 		
 		
-		//doblabel
+		//last name label
 		
-		DOBLabel=new JLabel("DOB");
-		DOBLabel.setBounds(X,Y+120,200,150);
-		DOBLabel.setFont(new Font("Bold",Font.BOLD,labelFontSize));
-		DOBLabel.setForeground(Color.WHITE);
+		LastNameLabel=new JLabel("Last Name");
+		LastNameLabel.setBounds(X,Y+120,200,150);
+		LastNameLabel.setFont(new Font("Bold",Font.BOLD,labelFontSize));
+		LastNameLabel.setForeground(Color.WHITE);
 		Collon3=new JLabel(":");
 		Collon3.setBounds(X+200,Y+120,20,150);
 		Collon3.setFont(new Font("Bold",Font.BOLD,labelFontSize));
 		Collon3.setForeground(Color.WHITE);
 		
-		//dob value label
+		//last name value label
 		
-		DOBValue=new JLabel("DOB");
-		DOBValue.setBounds(X+240,Y+120,800,150);
-		DOBValue.setFont(new Font("Bold",Font.BOLD,labelFontSize));
-		DOBValue.setForeground(Color.WHITE);
+		LastNameValue=new JLabel("Last Name");
+		LastNameValue.setBounds(X+240,Y+120,800,150);
+		LastNameValue.setFont(new Font("Bold",Font.BOLD,labelFontSize));
+		LastNameValue.setForeground(Color.WHITE);
 		
-		add(DOBLabel);
+		add(LastNameLabel);
 		add(Collon3);
-		add(DOBValue);
+		add(LastNameValue);
 		
 		
-		//agelabel
+		//dob label
 		
-		AgeLabel=new JLabel("Age");
-		AgeLabel.setBounds(X,Y+180,200,150);
-		AgeLabel.setFont(new Font("Bold",Font.BOLD,labelFontSize));
-		AgeLabel.setForeground(Color.WHITE);
+		DOBLabel=new JLabel("DOB");
+		DOBLabel.setBounds(X,Y+180,200,150);
+		DOBLabel.setFont(new Font("Bold",Font.BOLD,labelFontSize));
+		DOBLabel.setForeground(Color.WHITE);
 		Collon4=new JLabel(":");
 		Collon4.setBounds(X+200,Y+180,20,150);
 		Collon4.setFont(new Font("Bold",Font.BOLD,labelFontSize));
 		Collon4.setForeground(Color.WHITE);
 		
-		//age value label
+		//DOB  value label
 		
-		AgeValue=new JLabel("Age");
-		AgeValue.setBounds(X+240,Y+180,800,150);
-		AgeValue.setFont(new Font("Bold",Font.BOLD,labelFontSize));
-		AgeValue.setForeground(Color.WHITE);
+		DOBValue=new JLabel("DOB");
+		DOBValue.setBounds(X+240,Y+180,800,150);
+		DOBValue.setFont(new Font("Bold",Font.BOLD,labelFontSize));
+		DOBValue.setForeground(Color.WHITE);
 		
-		add(AgeLabel);
+		add(DOBLabel);
 		add(Collon4);
-		add(AgeValue);
+		add(DOBValue);
 		
-		//joindatelabel
+		// AGE label
 		
-		JoinDateLabel=new JLabel("Join Date");
-		JoinDateLabel.setBounds(X,Y+240,200,150);
-		JoinDateLabel.setFont(new Font("Bold",Font.BOLD,labelFontSize));
-		JoinDateLabel.setForeground(Color.WHITE);
+		AgeLabel=new JLabel("Age");
+		AgeLabel.setBounds(X,Y+240,200,150);
+		AgeLabel.setFont(new Font("Bold",Font.BOLD,labelFontSize));
+		AgeLabel.setForeground(Color.WHITE);
 		Collon5=new JLabel(":");
 		Collon5.setBounds(X+200,Y+240,20,150);
 		Collon5.setFont(new Font("Bold",Font.BOLD,labelFontSize));
 		Collon5.setForeground(Color.WHITE);
 		
-		//joindate value label
+		//age value label
 		
-		JoinDateValue=new JLabel("Join Date ");
-		JoinDateValue.setBounds(X+240,Y+240,800,150);
-		JoinDateValue.setFont(new Font("Bold",Font.BOLD,labelFontSize));
-		JoinDateValue.setForeground(Color.WHITE);
+		AgeValue=new JLabel("Age");
+		AgeValue.setBounds(X+240,Y+240,800,150);
+		AgeValue.setFont(new Font("Bold",Font.BOLD,labelFontSize));
+		AgeValue.setForeground(Color.WHITE);
 		
-		add(JoinDateLabel);
+		add(AgeLabel);
 		add(Collon5);
-		add(JoinDateValue);
+		add(AgeValue);
 		
-		//permanent address label
+		//contact number label
 		
-		PAddressLabel=new JLabel("Permanent Address");
-		PAddressLabel.setBounds(X,Y+300,200,150);
-		PAddressLabel.setFont(new Font("Bold",Font.BOLD,labelFontSize));
-		PAddressLabel.setForeground(Color.WHITE);
+		ContactNumberLabel=new JLabel("Contact Number");
+		ContactNumberLabel.setBounds(X,Y+300,200,150);
+		ContactNumberLabel.setFont(new Font("Bold",Font.BOLD,labelFontSize));
+		ContactNumberLabel.setForeground(Color.WHITE);
 		Collon6=new JLabel(":");
 		Collon6.setBounds(X+200,Y+300,20,150);
 		Collon6.setFont(new Font("Bold",Font.BOLD,labelFontSize));
 		Collon6.setForeground(Color.WHITE);
 		
-		//permanent address value label
+		//contact number  value label
 		
-		PAddressValue=new JLabel("Address");
-		PAddressValue.setBounds(X+240,Y+300,800,150);
-		PAddressValue.setFont(new Font("Bold",Font.BOLD,labelFontSize));
-		PAddressValue.setForeground(Color.WHITE);
+		ContactNumberValue=new JLabel("Contact Number");
+		ContactNumberValue.setBounds(X+240,Y+300,800,150);
+		ContactNumberValue.setFont(new Font("Bold",Font.BOLD,labelFontSize));
+		ContactNumberValue.setForeground(Color.WHITE);
 		
 		
-		add(PAddressLabel);
+		add(ContactNumberLabel);
 		add(Collon6);
-		add(PAddressValue);
+		add(ContactNumberValue);
 		
-		//temperory address label
+		//gender label
 		
-		TAddressLabel=new JLabel("Temperory Address");
-		TAddressLabel.setBounds(X,Y+390,200,150);
-		TAddressLabel.setFont(new Font("Bold",Font.BOLD,labelFontSize));
-		TAddressLabel.setForeground(Color.WHITE);
+		GenderLabel=new JLabel("Gender");
+		GenderLabel.setBounds(X,Y+360,200,150);
+		GenderLabel.setFont(new Font("Bold",Font.BOLD,labelFontSize));
+		GenderLabel.setForeground(Color.WHITE);
 		Collon7=new JLabel(":");
-		Collon7.setBounds(X+200,Y+390,20,150);
+		Collon7.setBounds(X+200,Y+360,20,150);
 		Collon7.setFont(new Font("Bold",Font.BOLD,labelFontSize));
 		Collon7.setForeground(Color.WHITE);
 		
-		//temperory address value label
+		//Gender value label
 		
-		TAddressValue=new JLabel("Address");
-		TAddressValue.setBounds(X+240,Y+390,800,150);
-		TAddressValue.setFont(new Font("Bold",Font.BOLD,labelFontSize));
-		TAddressValue.setForeground(Color.WHITE);
+		GenderValue=new JLabel("Gender");
+		GenderValue.setBounds(X+240,Y+360,800,150);
+		GenderValue.setFont(new Font("Bold",Font.BOLD,labelFontSize));
+		GenderValue.setForeground(Color.WHITE);
 		
-		add(TAddressLabel);
+		add(GenderLabel);
 		add(Collon7);
-		add(TAddressValue);
+		add(GenderValue);
 		
 		
-		//marital status label
+		//address label
 		
-		MaritalStatusLabel=new JLabel("Marital Status");
-		MaritalStatusLabel.setBounds(X,Y+470,200,150);
-		MaritalStatusLabel.setFont(new Font("Bold",Font.BOLD,labelFontSize));
-		MaritalStatusLabel.setForeground(Color.WHITE);
+		AddressLabel=new JLabel("Address");
+		AddressLabel.setBounds(X,Y+420,200,150);
+		AddressLabel.setFont(new Font("Bold",Font.BOLD,labelFontSize));
+		AddressLabel.setForeground(Color.WHITE);
 		Collon8=new JLabel(":");
-		Collon8.setBounds(X+200,Y+470,20,150);
+		Collon8.setBounds(X+200,Y+420,20,150);
 		Collon8.setFont(new Font("Bold",Font.BOLD,labelFontSize));
 		Collon8.setForeground(Color.WHITE);
 		
-		//marital status value label
+		//address value label
 		
-		MaritalValue=new JLabel("Marital Status");
-		MaritalValue.setBounds(X+240,Y+470,800,150);
-		MaritalValue.setFont(new Font("Bold",Font.BOLD,labelFontSize));
-		MaritalValue.setForeground(Color.WHITE);
+		AddressValue=new JLabel("Address");
+		AddressValue.setBounds(X+240,Y+420,800,150);
+		AddressValue.setFont(new Font("Bold",Font.BOLD,labelFontSize));
+		AddressValue.setForeground(Color.WHITE);
 		
-		add(MaritalStatusLabel);
+		add(AddressLabel);
 		add(Collon8);
-		add(MaritalValue);
+		add(AddressValue);
 		
-		//designation label
+		//bank balance label
 		
-		DesignationLabel=new JLabel("Designation");
-		DesignationLabel.setBounds(X,Y+530,200,150);
-		DesignationLabel.setFont(new Font("Bold",Font.BOLD,labelFontSize));
-		DesignationLabel.setForeground(Color.WHITE);
+		BankBalanceLabel=new JLabel("Bank Balance");
+		BankBalanceLabel.setBounds(X,Y+510,200,150);
+		BankBalanceLabel.setFont(new Font("Bold",Font.BOLD,labelFontSize));
+		BankBalanceLabel.setForeground(Color.WHITE);
 		Collon9=new JLabel(":");
-		Collon9.setBounds(X+200,Y+530,20,150);
+		Collon9.setBounds(X+200,Y+510,20,150);
 		Collon9.setFont(new Font("Bold",Font.BOLD,labelFontSize));
 		Collon9.setForeground(Color.WHITE);
 		
-		//designation value label
+		//bank balance value label
 		
-		DesignationValue=new JLabel("Designation");
-		DesignationValue.setBounds(X+240,Y+530,800,150);
-		DesignationValue.setFont(new Font("Bold",Font.BOLD,labelFontSize));
-		DesignationValue.setForeground(Color.WHITE);
+		BankBalanceValue=new JLabel("Bank Balance");
+		BankBalanceValue.setBounds(X+240,Y+510,800,150);
+		BankBalanceValue.setFont(new Font("Bold",Font.BOLD,labelFontSize));
+		BankBalanceValue.setForeground(Color.WHITE);
 		
-		add(DesignationLabel);
+		add(BankBalanceValue);
 		add(Collon9);
-		add(DesignationValue);
+		add(BankBalanceLabel);
 		
+                //AccountNumber label
+		
+		AccountNumberLabel=new JLabel("Account Number");
+		AccountNumberLabel.setBounds(X,Y+570,200,150);
+		AccountNumberLabel.setFont(new Font("Bold",Font.BOLD,labelFontSize));
+		AccountNumberLabel.setForeground(Color.WHITE);
+		Collon10=new JLabel(":");
+		Collon10.setBounds(X+200,Y+570,20,150);
+		Collon10.setFont(new Font("Bold",Font.BOLD,labelFontSize));
+		Collon10.setForeground(Color.WHITE);
+		
+		//AccountNumber value label
+		
+		AccountNumberValue=new JLabel("Account Number");
+		AccountNumberValue.setBounds(X+240,Y+570,800,150);
+		AccountNumberValue.setFont(new Font("Bold",Font.BOLD,labelFontSize));
+		AccountNumberValue.setForeground(Color.WHITE);
+		
+		add(AccountNumberValue);
+		add(Collon10);
+		add(AccountNumberLabel);
+                
 		setBounds(0,0,1350,890);
 		setBackground(new Color(R,G,B));
 		setLayout(null);

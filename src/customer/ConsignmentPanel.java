@@ -1,4 +1,5 @@
 package customer;
+import Database.*;
 import javax.swing.JLabel;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
@@ -20,11 +21,11 @@ class ConsignmentPanel extends JPanel implements ActionListener{
     JPanel PConTable;
     JTable table;
     JScrollPane scroll;
-    public ConsignmentPanel() {
+    public ConsignmentPanel(){
 
         this.setLayout(null);
         this.setBackground(Color.white);
-        Object[][] rows = {{"12345", "Keshav", "Arvind", "E Post", "12345", "E PAY", "29.09.2001", "Order Placed"}, {"2345", "Keshav", "Arvind", "E Post", "12345", "E PAY", "29.09.2001", "Order Placed"}};
+        Object[][] rows =DatabaseOperations.getCustomerConsignmentDetails();
         String[] columns = {"Consignment ID", "From","To", "Item", "Delivery ID", "Payment Method", "Date", "Status"};
         
         Border border = new LineBorder(new Color(71, 63, 145), 1, true);
@@ -36,36 +37,30 @@ class ConsignmentPanel extends JPanel implements ActionListener{
             return false;
          }
         };
-    
+        
         table.setRowHeight(30);
         table.setBorder(border);
         table.setRowSelectionAllowed(true);
- 
+        
         ListSelectionModel select = table.getSelectionModel();
         select.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         
         select.addListSelectionListener(new ListSelectionListener() {
        public void valueChanged(ListSelectionEvent e) {
-        String selectedData = null;
-
-        int[] selectedRow = table.getSelectedRows();
-
-        selectedData = (String) table.getValueAt(selectedRow[0], 0);
-   
+       
+        
+        //int[] selectedRow = table.getSelectedRows();
+        int selectedRow=table.getSelectedRow();
+        //selectedData = (String) table.getValueAt(selectedRow[0], 0);
+        System.out.println(selectedRow);
+        ConsignmentDetails ob=(ConsignmentDetails)CustomerPanel.PConsignmentDetails;
+        ob.setConignmentDetails(new Integer(selectedRow));
         CustomerPanel.customerCard.show(CustomerPanel.contentForCustomer,"ConsignmentDetails");
-        System.out.println("Selected: " + selectedData);
+        
       }
 
     });
-        
-       /* TableColumn testColumn = table.getColumnModel().getColumn(7);
-        JComboBox<String> comboBox = new JComboBox<>();
-        comboBox.addItem("Picked Up");
-        comboBox.addItem("In Transit");
-        comboBox.addItem("Delivered");
 
-        testColumn.setCellEditor(new DefaultCellEditor(comboBox));*/
-        
         JTableHeader tab = table.getTableHeader();
         JTableHeader tableHeader = table.getTableHeader();
         tab.setBackground(new Color(71, 63, 145));

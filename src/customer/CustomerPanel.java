@@ -1,4 +1,5 @@
 package customer;
+import customer.DatasForCustomer.ConsignmentData;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -19,6 +20,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import main.main;
+import Admin.StyledButtonUi;
+import javax.swing.plaf.ButtonUI;
 public class CustomerPanel extends JPanel implements ActionListener, MouseListener{
     
     private JLabel LE_Post,IProfile;
@@ -26,9 +29,9 @@ public class CustomerPanel extends JPanel implements ActionListener, MouseListen
     private  JPanel customerPanel;
     public static JPanel contentForCustomer;
     public static CardLayout customerCard=null;
-    private  JButton BInbox,BConsignment,BE_Post,BParcel,BProducts,BWallet;
+    public  static JButton BInbox,BConsignment,BE_Post,BParcel,BProducts,BWallet;
     private  int xForInbox=0,xForConsignment=0,xForE_post=0,xForParcel=0,xForProducts=0,xForWallets=0;
-    private  JPanel PInbox,PConsignment,PE_Post,PParcel,PProducts,PWallet,PConsignmentDetails;
+    public  static JPanel PInbox,PConsignment,PE_Post,PParcel,PProducts,PWallet,PConsignmentDetails;
     int X_FORCUSTOMER=55,Y_FORCUSTOMER=150,WIDTHFORCUSTOMER=1260,HIGHTFORCUSTOMER=570;
     int R=34,G=34,B=45;
     private Color Buttoncolor=new Color(240,238,240);
@@ -36,6 +39,7 @@ public class CustomerPanel extends JPanel implements ActionListener, MouseListen
     private JLabel LCustomer;
     private Font font=new Font("Bold",Font.BOLD,20);
     private JLabel userLogo;
+    ButtonUI ui=new StyledButtonUi();
    public CustomerPanel() {
     
        setLayout(null);
@@ -48,6 +52,7 @@ public class CustomerPanel extends JPanel implements ActionListener, MouseListen
        PProducts=new ProductsPanel();
        PWallet=new WalletPanel();
        PConsignmentDetails=new ConsignmentDetails();
+      
        //InboxPanel inboxPanel=(InboxPanel)PInbox;
        contentForCustomer.add(PInbox,"Inbox");
        contentForCustomer.add(PConsignment,"Consignment");
@@ -96,7 +101,7 @@ public class CustomerPanel extends JPanel implements ActionListener, MouseListen
        BInbox=new JButton("Inbox");
        BInbox.setFont(font);
        BInbox.setBorder(null);
-       BInbox.setUI(new StyledButtonUI());
+       BInbox.setUI(ui);
        BInbox.setBounds(X_FORCUSTOMER,120,160,30);
        BInbox.setBackground(Buttoncolor);
        BInbox.addActionListener(this);
@@ -105,6 +110,7 @@ public class CustomerPanel extends JPanel implements ActionListener, MouseListen
        BConsignment=new JButton("Consignment");
        BConsignment.setFont(font);
        BConsignment.setBackground(Buttoncolor);
+       BConsignment.setUI(ui);
        BConsignment.setBounds(X_FORCUSTOMER+120+60,110,160,30);
        BConsignment.addActionListener(this);
        add(BConsignment);
@@ -112,6 +118,7 @@ public class CustomerPanel extends JPanel implements ActionListener, MouseListen
        BE_Post=new JButton("E-Post");
        BE_Post.setFont(font);
        BE_Post.setBackground(Buttoncolor);
+       BE_Post.setUI(ui);
        BE_Post.setBounds(X_FORCUSTOMER+180+180,110,160,30);
        BE_Post.addActionListener(this);
        add(BE_Post);
@@ -121,6 +128,7 @@ public class CustomerPanel extends JPanel implements ActionListener, MouseListen
        BParcel=new JButton("Parcel");
        BParcel.setFont(font);
        BParcel.setBackground(Buttoncolor);
+       BParcel.setUI(ui);
        BParcel.setBounds(X_FORCUSTOMER+180+180+180,110,160,30);
        BParcel.addActionListener(this);
        add(BParcel);
@@ -128,6 +136,7 @@ public class CustomerPanel extends JPanel implements ActionListener, MouseListen
        BProducts=new JButton("Products");
        BProducts.setFont(font);
        BProducts.setBackground(Buttoncolor);
+       BProducts.setUI(ui);
        BProducts.setBounds(X_FORCUSTOMER+180+180+180+180,110,160,30);
        BProducts.addActionListener(this);
        add(BProducts);
@@ -135,77 +144,87 @@ public class CustomerPanel extends JPanel implements ActionListener, MouseListen
        BWallet=new JButton("Wallet");
        BWallet.setBackground(Buttoncolor);
        BWallet.setFont(font);
+       BWallet.setUI(ui);
        BWallet.setBounds(X_FORCUSTOMER+180+180+180+180+180,110,160,30);
        BWallet.addActionListener(this);
        add(BWallet);
        
        
    }
-
+   
     @Override
     public void actionPerformed(ActionEvent e) {
         Object o=e.getSource();
         
         if(o==BInbox){
-            BInbox.setBounds(X_FORCUSTOMER,120,100,30);
+            BInbox.setBounds(X_FORCUSTOMER,120,160,30);
             customerCard.show(contentForCustomer,"Inbox");
              
-            BConsignment.setBounds(X_FORCUSTOMER+120,110,160,30);
-            BE_Post.setBounds(X_FORCUSTOMER+150+150,110,150,30);
-            BParcel.setBounds(X_FORCUSTOMER+150+150+170,110,150,30);
-            BProducts.setBounds(X_FORCUSTOMER+150+150+170+170,110,150,30);
-            BWallet.setBounds(X_FORCUSTOMER+150+150+170+170+170,110,150,30);
+            BConsignment.setBounds(X_FORCUSTOMER+120+60,110,160,30);
+            BE_Post.setBounds(X_FORCUSTOMER+180+180,110,160,30);
+            BParcel.setBounds(X_FORCUSTOMER+180+180+180,110,160,30);
+            BProducts.setBounds(X_FORCUSTOMER+180+180+180+180,110,160,30);
+            BWallet.setBounds(X_FORCUSTOMER+180+180+180+180+180,110,160,30);
            
         }
         else if(o==BConsignment){
-            BConsignment.setBounds(X_FORCUSTOMER+120,120,160,30);
-            customerCard.show(contentForCustomer,"Consignment");
-            
-             BInbox.setBounds(X_FORCUSTOMER,110,100,30);
-             BE_Post.setBounds(X_FORCUSTOMER+150+150,110,150,30);
-             BParcel.setBounds(X_FORCUSTOMER+150+150+170,110,150,30);
-             BProducts.setBounds(X_FORCUSTOMER+150+150+170+170,110,150,30);
-             BWallet.setBounds(X_FORCUSTOMER+150+150+170+170+170,110,150,30);
+            BConsignment.setBounds(X_FORCUSTOMER+120+60,120,160,30);
+             if(!ConsignmentData.isIsUpdate())
+                 customerCard.show(contentForCustomer,"Consignment");
+             else{
+               if(PConsignment!=null){
+                 PConsignment.removeAll();
+                 PConsignment=null;  
+                }
+                 customerCard.show(contentForCustomer,"1");
+             }
+             BInbox.setBounds(X_FORCUSTOMER,110,160,30);
+             BE_Post.setBounds(X_FORCUSTOMER+180+180,110,160,30);
+            BParcel.setBounds(X_FORCUSTOMER+180+180+180,110,160,30);
+            BProducts.setBounds(X_FORCUSTOMER+180+180+180+180,110,160,30);
+            BWallet.setBounds(X_FORCUSTOMER+180+180+180+180+180,110,160,30);
         }    
         else if(o==BE_Post) {
-            BE_Post.setBounds(X_FORCUSTOMER+150+150,120,150,30);
+            BE_Post.setBounds(X_FORCUSTOMER+180+180,120,160,30);
                 customerCard.show(contentForCustomer,"E-Post");
                 
-                 BInbox.setBounds(X_FORCUSTOMER,110,100,30);
-                 BConsignment.setBounds(X_FORCUSTOMER+120,110,160,30);
-                 BParcel.setBounds(X_FORCUSTOMER+150+150+170,110,150,30);
-                 BProducts.setBounds(X_FORCUSTOMER+150+150+170+170,110,150,30);
-                 BWallet.setBounds(X_FORCUSTOMER+150+150+170+170+170,110,150,30);
+                 BInbox.setBounds(X_FORCUSTOMER,110,160,30);
+                 BConsignment.setBounds(X_FORCUSTOMER+120+60,110,160,30);
+                 BParcel.setBounds(X_FORCUSTOMER+180+180+180,110,160,30);
+                 BProducts.setBounds(X_FORCUSTOMER+180+180+180+180,110,160,30);
+                BWallet.setBounds(X_FORCUSTOMER+180+180+180+180+180,110,160,30);
                 }
         else if(o==BParcel)  {
-             BParcel.setBounds(X_FORCUSTOMER+150+150+170,120,150,30);
+             BParcel.setBounds(X_FORCUSTOMER+180+180+180,120,160,30);
                 customerCard.show(contentForCustomer,"Parcel");
                 
-                 BInbox.setBounds(X_FORCUSTOMER,110,100,30);
-                 BConsignment.setBounds(X_FORCUSTOMER+120,110,160,30);
-                 BE_Post.setBounds(X_FORCUSTOMER+150+150,110,150,30);
-                 BProducts.setBounds(X_FORCUSTOMER+150+150+170+170,110,150,30);
-                 BWallet.setBounds(X_FORCUSTOMER+150+150+170+170+170,110,150,30);
+                 BInbox.setBounds(X_FORCUSTOMER,110,160,30);
+                 BConsignment.setBounds(X_FORCUSTOMER+120+60,110,160,30);
+                 BE_Post.setBounds(X_FORCUSTOMER+180+180,110,160,30);
+                 BProducts.setBounds(X_FORCUSTOMER+180+180+180+180,110,160,30);
+                 BWallet.setBounds(X_FORCUSTOMER+180+180+180+180+180,110,160,30);
                 }
         else if(o==BProducts){
-                BProducts.setBounds(X_FORCUSTOMER+150+150+170+170,120,150,30);
+                BProducts.setBounds(X_FORCUSTOMER+180+180+180+180,120,160,30);
                 customerCard.show(contentForCustomer,"Products");
-            
-                    BInbox.setBounds(X_FORCUSTOMER,110,100,30);
-                    BWallet.setBounds(X_FORCUSTOMER+150+150+170+170+170,110,150,30);
-                    BConsignment.setBounds(X_FORCUSTOMER+120,110,160,30);
-                    BE_Post.setBounds(X_FORCUSTOMER+150+150,110,150,30);
-                    BParcel.setBounds(X_FORCUSTOMER+150+150+170,110,150,30);
+                
+                BInbox.setBounds(X_FORCUSTOMER,110,160,30);
+                BConsignment.setBounds(X_FORCUSTOMER+120+60,110,160,30);
+                BE_Post.setBounds(X_FORCUSTOMER+180+180,110,160,30);
+                BParcel.setBounds(X_FORCUSTOMER+180+180+180,110,160,30);
+                BWallet.setBounds(X_FORCUSTOMER+180+180+180+180+180,110,160,30);
+               
         }
         else if(o==BWallet){
-            BWallet.setBounds(X_FORCUSTOMER+150+150+170+170+170,120,150,30);
+            BWallet.setBounds(X_FORCUSTOMER+180+180+180+180+180,120,160,30);
             customerCard.show(contentForCustomer,"Wallet");
             
-            BInbox.setBounds(X_FORCUSTOMER,110,100,30);
-         BConsignment.setBounds(X_FORCUSTOMER+120,110,160,30);
-         BE_Post.setBounds(X_FORCUSTOMER+150+150,110,150,30);
-         BParcel.setBounds(X_FORCUSTOMER+150+150+170,110,150,30);
-         BProducts.setBounds(X_FORCUSTOMER+150+150+170+170,110,150,30);
+            BInbox.setBounds(X_FORCUSTOMER,110,160,30);
+            BConsignment.setBounds(X_FORCUSTOMER+120+60,110,160,30);
+            BE_Post.setBounds(X_FORCUSTOMER+180+180,110,160,30);
+            BParcel.setBounds(X_FORCUSTOMER+180+180+180,110,160,30);
+            BProducts.setBounds(X_FORCUSTOMER+180+180+180+180,110,160,30);
+   
         }
     
     }  

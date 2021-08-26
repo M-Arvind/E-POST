@@ -1,9 +1,9 @@
 package Login;
+import Database.DatabaseOperations;
 import main.main;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.List;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -11,17 +11,12 @@ import java.awt.event.MouseListener;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
 import java.util.ArrayList;
-
 import javax.swing.*;
 import javax.swing.plaf.basic.BasicButtonUI;
 
 
-public class login extends JPanel implements ActionListener, MouseListener
+public class login extends JPanel implements ActionListener
 {
     JPanel loginPanel;
     JPanel registerPanel;
@@ -35,8 +30,11 @@ public class login extends JPanel implements ActionListener, MouseListener
     private String hash_pass;
     private ArrayList list;
     
+    public static String user_ID;
+    
     public login()
     {
+        
         loginPanel = new JPanel(null);
         loginPanel.setPreferredSize(new Dimension(1350, 890));
         loginPanel.setBackground(new Color(34, 34, 45));
@@ -72,7 +70,31 @@ public class login extends JPanel implements ActionListener, MouseListener
         forgotPasswordLabel.setBounds(723, 540, 300, 40);
         forgotPasswordLabel.setFont(new Font(Font.SANS_SERIF,  Font.BOLD, 15));
         forgotPasswordLabel.setForeground(Color.WHITE);
-        forgotPasswordLabel.addMouseListener(this);
+        forgotPasswordLabel.addMouseListener(new MouseListener(){
+            @Override
+            public void mouseClicked(MouseEvent e) 
+            {
+                new ForgetPassword();
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) { //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {//To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) { //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {//To change body of generated methods, choose Tools | Templates.
+            }
+        
+            
+        });
         
         messageLabel = new JLabel("New to E-Post?");
         messageLabel.setBounds(570, 700, 300, 40);
@@ -96,8 +118,15 @@ public class login extends JPanel implements ActionListener, MouseListener
         loginButton.setForeground(Color.WHITE);
         loginButton.setBorder(null);
         loginButton.setUI(new BasicButtonUI());
-        //loginButton.addActionListener(this);
-        loginButton.addActionListener(this);
+        loginButton.addActionListener(new ActionListener() 
+    	{
+            public void actionPerformed(ActionEvent e) 
+            {
+                {
+                    login();
+                }
+            }
+    	});
         
         
         loginPanel.add(loginLabel);
@@ -113,7 +142,52 @@ public class login extends JPanel implements ActionListener, MouseListener
         this.add(loginPanel);
     }
     
-    String createHash(String input, String salt)
+    public void login()
+    {
+        ArrayList list = DatabaseOperations.getLoginCredentials(usernameTextField, passwordField);
+        user_ID = usernameTextField.getText(); 
+        
+        try
+        {
+            int salt = Integer.parseInt(list.get(1).toString());
+            
+            String password = login.createHash(passwordField.getText(), salt);
+            System.out.println(list);
+            System.out.println(password);
+            System.out.println(list.get(1).toString());
+
+            if(password.equals(list.get(0).toString()))
+            {   
+                JOptionPane.showMessageDialog(null,"Login Successful");
+
+                if(list.get(2).toString().equals("ADMIN"))
+                {
+                    main.switchPage("AdminPanel");
+                }
+                else if(list.get(2).toString().equals("DELIVERY"))
+                {
+                    main.switchPage("register");
+                }
+                else if(list.get(2).toString().equals("Customer"))
+                {
+                    main.switchPage("customerPanel");
+                }
+
+                System.out.println(list.get(2).toString());
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(null, "Wrong E-mail/Password");
+            }     
+        }
+        catch(Exception ex)
+        {
+            JOptionPane.showMessageDialog(null, "Wrong E-mail/Password");
+        } 
+    }
+    
+    
+    public static String createHash(String input, int salt)
     {
 	String hashtext = new String();
         for(int i=0;i<5;i++)
@@ -143,67 +217,6 @@ public class login extends JPanel implements ActionListener, MouseListener
         }
         return hashtext;
     }
-
-
-    //Database
-    public List getLoginCredentials()
-    {
-          List loginCredentials = new List();
-          
-          try
-            {                
-                String userName = usernameTextField.getText();
-                String userPassword = passwordField.getText();                
-
-                Class.forName("oracle.jdbc.driver.OracleDriver");
-                Connection con=DriverManager.getConnection("jdbc:oracle:thin:@127.0.0.1:1521:XE","E_Post","123");
-                Statement st = con.createStatement();
-                ResultSet rs = st.executeQuery("select user_ID from Login where user_ID like '"+'%'+userName+'%'+"'");
-                boolean next = rs.next();
-                
-                if(next)
-                {
-                    ResultSet rspass = st.executeQuery("select password,salt,login_type from Login where user_ID like '"+'%'+userName+'%'+"'");
-                    if(rspass.next())
-                    {         
-                        String pass = rspass.getString("password");
-                        String salt = rspass.getString("salt");
-                        String type = rspass.getString("login_type");
-                        String hash_pass = createHash(userPassword, salt);
-                        
-                        System.out.println(pass);
-                        System.out.println(salt);
-                        System.out.println(type);
-                        System.out.println(hash_pass);
-                        
-                        loginCredentials.add(pass);
-                        loginCredentials.add(salt);
-                        loginCredentials.add(type);
-                        loginCredentials.add(hash_pass);                        
-                        
-                        if(pass.equals(hash_pass))
-                        {
-                            JOptionPane.showMessageDialog(null,"Login Successful");                            
-                        }
-                        else
-                        {
-                            JOptionPane.showMessageDialog(this, "Wrong E-mail/Password");
-                        }   
-                    }                    
-                }
-                else
-                {
-                    JOptionPane.showMessageDialog(this, "This account is not yet Registered");
-                }
-                  
-            }
-            catch(Exception ex)
-            {
-                JOptionPane.showMessageDialog(this, ex.toString());
-            }
-          
-          return loginCredentials;
-    }
     
     public void actionPerformed(ActionEvent e) 
     {
@@ -211,35 +224,5 @@ public class login extends JPanel implements ActionListener, MouseListener
         
         if(source == createOneButton)
             main.switchPage("register");
-        else if(source == loginButton)
-            main.switchPage("AdminPanel");
-    }
-
-    @Override
-    public void mouseClicked(MouseEvent e) {
-        Object source = e.getSource();
-        
-        if(source == forgotPasswordLabel)
-            new ForgetPassword();
-    }
-
-    @Override
-    public void mousePressed(MouseEvent e) {
-        
-    }
-
-    @Override
-    public void mouseReleased(MouseEvent e) {
-        
-    }
-
-    @Override
-    public void mouseEntered(MouseEvent e) {
-        
-    }
-
-    @Override
-    public void mouseExited(MouseEvent e) {
-        
     }
 }
