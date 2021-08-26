@@ -11,13 +11,16 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import java.awt.Image;
+import java.awt.List;
+import java.util.ArrayList;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 import javax.swing.ScrollPaneConstants;
 import static javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER;
-
+import warehouse.*;
+import Database.DatabaseOperations;
 
 public class Stocks extends JPanel implements ActionListener{
     
@@ -26,7 +29,7 @@ public class Stocks extends JPanel implements ActionListener{
     JLabel revenueStampName, postageStampName, postageStamp1Name, collectorStampName, inlandLetterName, postCardName, envelopeName;
     JLabel revenueStampPrice, postageStampPrice, postageStamp1Price, collectorStampPrice, inlandLetterPrice, postCardPrice, envelopePrice;
     JLabel revenueStampQuantity, postageStampQuantity, postageStamp1Quantity, collectorStampQuantity, inlandLetterQuantity, postCardQuantity, envelopeQuantity;
-    JTextField revenueStampQuantity_Info, postageStampQuantity_Info, postageStamp1Quantity_Info, collectorStampQuantity_Info, inlandLetterQuantity_Info, postCardQuantity_Info, envelopeQuantity_Info;
+    public static JTextField revenueStampQuantity_Info, postageStampQuantity_Info, postageStamp1Quantity_Info, collectorStampQuantity_Info, inlandLetterQuantity_Info, postCardQuantity_Info, envelopeQuantity_Info;
     ImageIcon revenueStampImage, postageStampImage, postageStamp1Image, collectorStampImage, inlandLetterImage, postCardImage, envelopeImage;
     Image image,newimg;
     public Stocks() {
@@ -53,7 +56,7 @@ public class Stocks extends JPanel implements ActionListener{
         
         revenueStampName = new JLabel("Item Name  : Revenue Stamp");
         revenueStampName.setBounds(50, 250, 240, 40);
-        revenueStampPrice = new JLabel("Item Price : Rs.5");
+        revenueStampPrice = new JLabel("Item Price : Rs.1");
         revenueStampPrice.setBounds(50, 290, 240, 40);
         revenueStampQuantity = new JLabel("Item Quantity :");
         revenueStampQuantity.setBounds(50, 330, 240, 40);
@@ -82,7 +85,7 @@ public class Stocks extends JPanel implements ActionListener{
         
         postageStampName = new JLabel("Item Name  : Postage Stamp");
         postageStampName.setBounds(350, 250, 240, 40);
-        postageStampPrice = new JLabel("Item Price : Rs.5");
+        postageStampPrice = new JLabel("Item Price : Rs.1");
         postageStampPrice.setBounds(350, 290, 240, 40);
         postageStampQuantity = new JLabel("Item Quantity :");
         postageStampQuantity.setBounds(350, 330, 240, 40);
@@ -112,7 +115,7 @@ public class Stocks extends JPanel implements ActionListener{
         
         postageStamp1Name = new JLabel("Item Name  : Postage Stamp");
         postageStamp1Name.setBounds(650, 250, 240, 40);
-        postageStamp1Price = new JLabel("Item Price : Rs.5");
+        postageStamp1Price = new JLabel("Item Price : Rs.3");
         postageStamp1Price.setBounds(650, 290, 240, 40);
         postageStamp1Quantity = new JLabel("Item Quantity :");
         postageStamp1Quantity.setBounds(650, 330, 240, 40);
@@ -141,7 +144,7 @@ public class Stocks extends JPanel implements ActionListener{
         
         collectorStampName = new JLabel("Item Name  : Collector Stamp");
         collectorStampName.setBounds(950, 250, 240, 40);
-        collectorStampPrice = new JLabel("Item Price : Rs.5");
+        collectorStampPrice = new JLabel("Item Price : Rs.10");
         collectorStampPrice.setBounds(950, 290, 240, 40);
         collectorStampQuantity = new JLabel("Item Quantity :");
         collectorStampQuantity.setBounds(950, 330, 240, 40);
@@ -170,7 +173,7 @@ public class Stocks extends JPanel implements ActionListener{
         
         inlandLetterName = new JLabel("Item Name  : Inland Letter");
         inlandLetterName.setBounds(50, 600, 240, 40);
-        inlandLetterPrice = new JLabel("Item Price : Rs.5");
+        inlandLetterPrice = new JLabel("Item Price : Rs.7");
         inlandLetterPrice.setBounds(50, 640, 240, 40);
         inlandLetterQuantity = new JLabel("Item Quantity :");
         inlandLetterQuantity.setBounds(50, 680, 240, 40);
@@ -230,7 +233,7 @@ public class Stocks extends JPanel implements ActionListener{
         
         postCardName = new JLabel("Item Name  : Postal Card");
         postCardName.setBounds(650, 600, 240, 40);
-        postCardPrice = new JLabel("Item Price : Rs.5");
+        postCardPrice = new JLabel("Item Price : Rs.3");
         postCardPrice.setBounds(650, 640, 240, 40);
         postCardQuantity = new JLabel("Item Quantity :");
         postCardQuantity.setBounds(650, 680, 240, 40);
@@ -267,16 +270,20 @@ public class Stocks extends JPanel implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         Object oe = e.getSource();
         if(oe == confirm){
-            System.out.println("RevenueStamp : "+revenueStampQuantity_Info.getText());
-            System.out.println("RevenueStamp : "+postageStampQuantity_Info.getText());
-            System.out.println("RevenueStamp : "+postageStamp1Quantity_Info.getText());
-            System.out.println("RevenueStamp : "+collectorStampQuantity_Info.getText());
-            System.out.println("RevenueStamp : "+inlandLetterQuantity_Info.getText());
-            System.out.println("RevenueStamp : "+postCardQuantity_Info.getText());
-            System.out.println("RevenueStamp : "+envelopeQuantity_Info.getText());
+            ArrayList<Warehouse> stock = new ArrayList<Warehouse>();
+            
+            stock.add(new Warehouse("WH0004", envelopeQuantity_Info.getText()));
+            stock.add(new Warehouse("WH0005", postCardQuantity_Info.getText()));
+            stock.add(new Warehouse("WH0006", inlandLetterQuantity_Info.getText()));
+            stock.add(new Warehouse("WH0007", postageStampQuantity_Info.getText()));
+            stock.add(new Warehouse("WH0008", postageStamp1Quantity_Info.getText()));
+            stock.add(new Warehouse("WH0009", collectorStampQuantity_Info.getText()));
+            stock.add(new Warehouse("WH0010", revenueStampQuantity_Info.getText()));
+            DatabaseOperations.updateStocks(stock);
+            Warehouse.setStocks();
         }
-    }
-    
+    } 
+
     
 }
 

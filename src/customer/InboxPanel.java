@@ -58,11 +58,10 @@ public class InboxPanel extends JPanel implements MouseListener{
            i++;
        } 
       scroll=new JScrollPane(MyPanel,ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-      scroll.setPreferredSize(new Dimension(1230,540));
       add(scroll,"MessagePanel");
       card.show(this,"MessagePanel");
       //CustomerPanel.customerCard.show(CustomerPanel.contentForCustomer,"MessagePanel");
-      setPreferredSize(new Dimension(1260,750));
+     
   
     }
      public JPanel getPanel(Integer i,Integer y){

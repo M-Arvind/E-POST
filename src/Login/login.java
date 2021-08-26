@@ -16,7 +16,7 @@ import javax.swing.*;
 import javax.swing.plaf.basic.BasicButtonUI;
 
 
-public class login extends JPanel implements ActionListener 
+public class login extends JPanel implements ActionListener
 {
     JPanel loginPanel;
     JPanel registerPanel;
@@ -118,7 +118,6 @@ public class login extends JPanel implements ActionListener
         loginButton.setForeground(Color.WHITE);
         loginButton.setBorder(null);
         loginButton.setUI(new BasicButtonUI());
-        //loginButton.addActionListener(this);
         loginButton.addActionListener(new ActionListener() 
     	{
             public void actionPerformed(ActionEvent e) 
@@ -221,6 +220,9 @@ public class login extends JPanel implements ActionListener
     
     public void actionPerformed(ActionEvent e) 
     {
-        main.switchPage("register");
+        Object source = e.getSource();
+        
+        if(source == createOneButton)
+            main.switchPage("register");
     }
 }

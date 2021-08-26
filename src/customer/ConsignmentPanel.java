@@ -21,7 +21,7 @@ class ConsignmentPanel extends JPanel implements ActionListener{
     JPanel PConTable;
     JTable table;
     JScrollPane scroll;
-    public ConsignmentPanel() {
+    public ConsignmentPanel(){
 
         this.setLayout(null);
         this.setBackground(Color.white);
@@ -37,11 +37,11 @@ class ConsignmentPanel extends JPanel implements ActionListener{
             return false;
          }
         };
-    
+        
         table.setRowHeight(30);
         table.setBorder(border);
         table.setRowSelectionAllowed(true);
- 
+        
         ListSelectionModel select = table.getSelectionModel();
         select.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         
@@ -56,12 +56,11 @@ class ConsignmentPanel extends JPanel implements ActionListener{
         ConsignmentDetails ob=(ConsignmentDetails)CustomerPanel.PConsignmentDetails;
         ob.setConignmentDetails(new Integer(selectedRow));
         CustomerPanel.customerCard.show(CustomerPanel.contentForCustomer,"ConsignmentDetails");
-     
+        
       }
 
     });
-    
-        
+
         JTableHeader tab = table.getTableHeader();
         JTableHeader tableHeader = table.getTableHeader();
         tab.setBackground(new Color(71, 63, 145));

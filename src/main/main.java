@@ -23,6 +23,7 @@ public class main extends JFrame {
         Profile_Update profileUpdate = new Profile_Update();
         AdminProfileView adminProfileVi = new AdminProfileView();
         AdminProfileUpdate adminprofileUp = new AdminProfileUpdate();
+
         PaymentEPost paymentEPost=new PaymentEPost();
         PaymentParcel paymentParcel=new PaymentParcel();
         MoneyOrder moneyOrder=new MoneyOrder();

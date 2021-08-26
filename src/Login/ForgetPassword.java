@@ -96,7 +96,7 @@ public class ForgetPassword
 
         fPass_btn_confirm.setBackground(primary_Color);
         fPass_btn_confirm.setBorder(null);
-        
+
         fPass_btn_confirm.addActionListener(new ActionListener()
         {
             @Override

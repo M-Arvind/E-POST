@@ -5,14 +5,19 @@ import customer.DatasForCustomer.*;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.ItemSelectable;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.awt.geom.Line2D;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.PrintStream;
 import java.util.Vector;
+import javax.swing.AbstractButton;
 import javax.swing.BorderFactory;
+import javax.swing.ButtonModel;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -23,13 +28,14 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
-public class E_PostPanel extends JPanel implements ActionListener {
+public class E_PostPanel extends JPanel implements ActionListener{
     private JButton BSend;
      private JLabel LTo,LHardCopy,LSoftCopy,LFirstName,LLastName,LAddress,LState,LDistrict,LPincode,LPhoneNumber,LMessage;
      private JTextField TTo,TFirstname,TLastName,TPincode,TPhoneNumber,TSubject;
      private JTextArea TAddress,Message;
      private JComboBox CState,CDistrict,CPincode;
      private JCheckBox SoftCopy,HardCopy;
+     private boolean isSoftCopySelected,isHardCopySelected;
      private Font font=new Font("Segoe UI",Font.PLAIN,22);
      private Font fontForText=new Font("Segoe UI",Font.PLAIN,17);
      private Border border;
@@ -152,11 +158,21 @@ public class E_PostPanel extends JPanel implements ActionListener {
           SoftCopy=new JCheckBox("Soft Copy");
           SoftCopy.setBounds(300,60,123,40);
           SoftCopy.setFont(font);
+          SoftCopy.addChangeListener((c)->{
+              AbstractButton absB=(AbstractButton)c.getSource();
+              ButtonModel bMod=absB.getModel();
+              isSoftCopySelected=bMod.isSelected();
+          });
           add(SoftCopy);
           
           HardCopy=new JCheckBox("HardCopy");
           HardCopy.setBounds(450,60,125,40);
           HardCopy.setFont(font);
+          HardCopy.addChangeListener((e)->{
+              AbstractButton absB=(AbstractButton)e.getSource();
+              ButtonModel bMod=absB.getModel();
+              isHardCopySelected=bMod.isSelected();
+          });
           add( HardCopy);
           //WIDTHFORCUSTOMER=1260,HIGHTFORCUSTOMER=570;
           BSend=new JButton("Send");
@@ -250,9 +266,19 @@ public class E_PostPanel extends JPanel implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         main.switchPage("paymentEPost");
-        TTo,TFirstname,TLastName,TPincode,TPhoneNumber,TSubject;
-        TAddress,Message
-      
+        EPostData.setTo(TTo.getText());
+        EPostData.setFirstName(TFirstname.getText());
+        EPostData.setLastName(TLastName.getText());
+        EPostData.setPincode(TPincode.getText());
+        EPostData.setPhoneNumber(new Long(TPhoneNumber.getText()));
+        EPostData.setSubject(TSubject.getText());
+        EPostData.setAddress(TAddress.getText());
+        EPostData.setMessage(Message.getText());
+        EPostData.setState(CState.getSelectedItem().toString());
+        EPostData.setDistrict(CDistrict.getSelectedItem().toString());
+        EPostData.setHardCopy(isHardCopySelected);
+        EPostData.setSoftCopy(isSoftCopySelected);
+        
     }
-    
+  
 }
