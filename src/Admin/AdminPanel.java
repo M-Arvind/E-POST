@@ -19,6 +19,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import main.main;
+import profile.*;
+import warehouse.Warehouse;
 
 public class AdminPanel extends JPanel implements ActionListener, MouseListener{
     
@@ -210,6 +212,7 @@ public class AdminPanel extends JPanel implements ActionListener, MouseListener{
         }
         else if(o == bStocks){
             adminCard.show(contentForAdmin,"Stocks");
+            Warehouse.setStocks();
             
             bNew.setBounds(X_FORCUSTOMER,110,160,30);
             bOnGoing.setBounds(X_FORCUSTOMER+180,110,160,30);
@@ -226,8 +229,10 @@ public class AdminPanel extends JPanel implements ActionListener, MouseListener{
         if(e.getSource()==search){
             search.setText("");
         }
-        else if(e.getSource() == IProfile)
+        else if(e.getSource() == IProfile){
+            profile.AdminProfile.setAdminProfile(Login.login.user_ID);
             main.switchPage("AdminProfileView");
+        }
         }
 
     @Override
