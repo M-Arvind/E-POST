@@ -26,7 +26,7 @@ public class main extends JFrame {
 
         PaymentEPost paymentEPost=new PaymentEPost();
         PaymentParcel paymentParcel=new PaymentParcel();
-        
+        MoneyOrder moneyOrder=new MoneyOrder();
         mainPanel.add(login, "login");
         mainPanel.add(register, "register");
         mainPanel.add(customerPanel, "customerPanel");
@@ -37,6 +37,9 @@ public class main extends JFrame {
         mainPanel.add(adminprofileUp, "AdminProfileUpdate");
         mainPanel.add(paymentEPost,"paymentEPost");
         mainPanel.add(paymentParcel,"paymentParcel");
+        //me
+        mainPanel.add(moneyOrder,"money order");
+        //me
         card.first(mainPanel);
         JScrollPane scroll=new JScrollPane(mainPanel,ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         scroll.setBounds(0,0,2000, 1000);

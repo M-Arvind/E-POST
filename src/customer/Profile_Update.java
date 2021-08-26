@@ -52,7 +52,7 @@ public class Profile_Update extends JPanel implements MouseListener{
 		
 		//Usernametop
 		
-		UserNameTop=new JLabel("Hello world");
+		UserNameTop=new JLabel("Kishore P");
 		UserNameTop.setBounds(X,Y-80,1000,150);
 		UserNameTop.setFont(new Font("Bold",Font.BOLD,labelFontSize+20));
 		UserNameTop.setForeground(Color.WHITE);
@@ -96,7 +96,7 @@ public class Profile_Update extends JPanel implements MouseListener{
 		
 		//firstname value label
 		
-		FirstNameValue=new JTextArea("First Name");
+		FirstNameValue=new JTextArea();
 		FirstNameValue.setBounds(X+240,Y+94,800,35);
 		FirstNameValue.setFont(new Font("Bold",Font.BOLD,labelFontSize));
 		FirstNameValue.setForeground(Color.BLACK);
@@ -120,7 +120,7 @@ public class Profile_Update extends JPanel implements MouseListener{
 		
 		//last name value label
 		
-		LastNameValue=new JTextArea("Last Name");
+		LastNameValue=new JTextArea();
 		LastNameValue.setBounds(X+240,Y+164,800,35);
 		LastNameValue.setFont(new Font("Bold",Font.BOLD,labelFontSize));
 		//DOBValue.setBackground(new Color(R,G,B));
@@ -144,7 +144,7 @@ public class Profile_Update extends JPanel implements MouseListener{
 		
 		//dob value label
 		
-		DOBValue=new JTextArea("DOB");
+		DOBValue=new JTextArea();
 		DOBValue.setBounds(X+240,Y+244,800,35);
 		DOBValue.setFont(new Font("Bold",Font.BOLD,labelFontSize));
 		//AgeValue.setBackground(new Color(R,G,B));
@@ -167,7 +167,7 @@ public class Profile_Update extends JPanel implements MouseListener{
 		
 		//age value label
 		
-		AgeValue=new JTextArea("Age");
+		AgeValue=new JTextArea();
 		AgeValue.setBounds(X+240,Y+324,800,35);
 		AgeValue.setFont(new Font("Bold",Font.BOLD,labelFontSize));
 		AgeValue.setForeground(Color.BLACK);
@@ -179,7 +179,7 @@ public class Profile_Update extends JPanel implements MouseListener{
 		
 		//ContactNumber Label
 		
-		ContactNumberLabel=new JLabel("Contact Number");
+		ContactNumberLabel=new JLabel();
 		ContactNumberLabel.setBounds(X,Y+340,200,150);
 		ContactNumberLabel.setFont(new Font("Bold",Font.BOLD,labelFontSize));
 		ContactNumberLabel.setForeground(Color.WHITE);
@@ -190,7 +190,7 @@ public class Profile_Update extends JPanel implements MouseListener{
 		
 		//ContactNumber value label
 		
-		ContactNumberValue=new JTextArea("Contact Number");
+		ContactNumberValue=new JTextArea();
 		ContactNumberValue.setBounds(X+240,Y+404,800,35);
 		ContactNumberValue.setFont(new Font("Bold",Font.BOLD,labelFontSize));
 		//PAddressValue.setBackground(new Color(R,G,B));
@@ -250,7 +250,7 @@ public class Profile_Update extends JPanel implements MouseListener{
 		
 		//address value label
 		
-		AddressValue=new JTextArea("Address");
+		AddressValue=new JTextArea();
 		AddressValue.setBounds(X+240,Y+535,800,55);
 		AddressValue.setFont(new Font("Bold",Font.BOLD,labelFontSize));
 		//MaritalValue.setBackground(new Color(R,G,B));
@@ -273,7 +273,7 @@ public class Profile_Update extends JPanel implements MouseListener{
 		
 		//account number value label
 		
-		AccountNumberValue=new JTextArea("Account Number");
+		AccountNumberValue=new JTextArea();
 		AccountNumberValue.setBounds(X+240,Y+625,800,25);
 		AccountNumberValue.setFont(new Font("Bold",Font.BOLD,labelFontSize));
 		//DesignationValue.setBackground(new Color(R,G,B));

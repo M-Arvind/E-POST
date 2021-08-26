@@ -1,4 +1,5 @@
 package customer;
+import Database.DatabaseOperations;
 import java.awt.BasicStroke;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
@@ -24,8 +25,10 @@ import javax.swing.ScrollPaneConstants;
 import javax.swing.border.Border;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-
+import customer.DatasForCustomer.*;
+import java.sql.*;
 public class InboxPanel extends JPanel implements MouseListener{
+    
    private Integer index;
    private JLabel icon,Sender_Name,Subject,Date,Time;
    JList Jlist=new JList();
@@ -43,7 +46,10 @@ public class InboxPanel extends JPanel implements MouseListener{
        MyPanel=new JPanel();
        MyPanel.setLayout(null);
        MyPanel.setPreferredSize(new Dimension(1260,3000));
-       while(i<=20){
+       // my insertion
+       DatabaseOperations.getInboxDetails();
+       // my insertion
+       while(i<InboxData.ListForInbox.size()){
            JPanel temp=this.getPanel(i, y);
            temp.addMouseListener(this);
            MyPanel.add(temp); 
@@ -62,16 +68,16 @@ public class InboxPanel extends JPanel implements MouseListener{
         JPanel panel1=new JPanel(null);
         icon=new JLabel(image);
         icon.setBounds(10,10,50,50);
-        Sender_Name=new JLabel();
+        Sender_Name=new JLabel(InboxData.ListForInbox.get(i).getSender_name());
         Sender_Name.setBounds(70,-20,100,100);
         Sender_Name.setFont(font);
-        Subject=new JLabel("Thanks For Your Dinner!..");
+        Subject=new JLabel(InboxData.ListForInbox.get(i).getSubject());
         Subject.setBounds(90,5,300,100);
         Subject.setFont(font);
-        Date=new JLabel("08/18/2021");
+        Date=new JLabel(InboxData.ListForInbox.get(i).getSent_Date().substring(0,10));
         Date.setBounds(900,15,100,28);
         Date.setFont(font);
-        Time=new JLabel("12:01:22");
+        Time=new JLabel(InboxData.ListForInbox.get(i).getTime().substring(10));
         Time.setBounds(900,40,100,28);
         Time.setFont(font);
         panel1.add(Time);
@@ -125,18 +131,18 @@ public class InboxPanel extends JPanel implements MouseListener{
         JLabel ProfileIcon=new JLabel(image);
         ProfileIcon.setBounds(50,65,50,50);
         
-        Sender_Name=new JLabel("Gowtham");
+        Sender_Name=new JLabel(InboxData.ListForInbox.get(i).getSender_name());
         Sender_Name.setBounds(120,50,200,28);
         Sender_Name.setFont(font);
-        Subject=new JLabel("Thanks For Your Dinner!..");
+        Subject=new JLabel(InboxData.ListForInbox.get(i).getSubject());
         Subject.setBounds(120,90,500,100);
         Subject.setFont(font);
         
-        Date=new JLabel("08/18/2021");
+        Date=new JLabel(InboxData.ListForInbox.get(i).getSent_Date().substring(0,10));
         Date.setBounds(900,15,100,28);
         Date.setFont(font);
         
-        Time=new JLabel("12:01:22");
+        Time=new JLabel(InboxData.ListForInbox.get(i).getTime().substring(10));
         Time.setBounds(900,40,100,28);
         Time.setFont(font);
         
@@ -144,7 +150,7 @@ public class InboxPanel extends JPanel implements MouseListener{
         message.setWrapStyleWord(true);
         message.setLineWrap(true);
         message.setEditable(false);
-        String m="POST OFFICE walks in every walk of our life. The world has had so many evolutions but still there are some people who couldn’t handle the emailing system especially in rural areas. To make things simpler and make the postal service available for anyone from anywhere E POST OFFICE SYSTEM is introduced. With the E Post system, we can send messages as soft copy and it will be delivered to the destination as a hard copy. The vision lies in focusing on those rural areas of India which face problems of accessing internet facilities";
+        String m=InboxData.ListForInbox.get(i).getMessage();
         message.setText(m);
         message.setFont(font);
         message.setBounds(120,190,990,370);

@@ -12,6 +12,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.JTableHeader;
+import main.main;
 public class WalletPanel extends JPanel 
 {
 	private JLabel icon;	
@@ -83,7 +84,7 @@ public class WalletPanel extends JPanel
 		bMoney_Order.setBackground(button);
 		bMoney_Order.setForeground(Color.white);
                 bMoney_Order.addActionListener((l)->{//outer Panel switching
-                    
+                    main.switchPage("money order");
                 });
                 
 		bMoney_Order.setFont(new Font("arial", Font.BOLD,font));	
