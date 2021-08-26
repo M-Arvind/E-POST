@@ -15,7 +15,7 @@ import javax.swing.JTextField;
  *
  * @author kesha
  */
-public class ForgetPassword{
+public class ForgetPassword implements ActionListener{
         JDialog newdialog = new JDialog();
     
     Color background_Color = new Color(34,34,45);
@@ -90,29 +90,17 @@ public class ForgetPassword{
         fPass_btn_confirm.setBackground(primary_Color);
         fPass_btn_confirm.setBorder(null);
         
-        fPass_btn_confirm.addActionListener(new ActionListener()
-        {
-            @Override
-            public void actionPerformed(ActionEvent e) 
-            {
-                JOptionPane.showMessageDialog(null, "This goes to Back to Wallet");                
-            }
-                        
-        });
+        fPass_btn_confirm.addActionListener(this);
 
         newdialog.getContentPane().setBackground(background_Color);
         newdialog.setVisible(true);
 
+    } 
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        JOptionPane.showMessageDialog(null, "This goes to Back to Wallet");
     }
-    
-    public static void main(String ss[]){
-        ForgetPassword s = new ForgetPassword();
-    }
-    
-    
-    
-    
-    
         
 }
 

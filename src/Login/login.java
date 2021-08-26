@@ -6,6 +6,8 @@ import java.awt.Font;
 import java.awt.List;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -19,7 +21,7 @@ import javax.swing.*;
 import javax.swing.plaf.basic.BasicButtonUI;
 
 
-public class login extends JPanel implements ActionListener 
+public class login extends JPanel implements ActionListener, MouseListener
 {
     JPanel loginPanel;
     JPanel registerPanel;
@@ -70,6 +72,7 @@ public class login extends JPanel implements ActionListener
         forgotPasswordLabel.setBounds(723, 540, 300, 40);
         forgotPasswordLabel.setFont(new Font(Font.SANS_SERIF,  Font.BOLD, 15));
         forgotPasswordLabel.setForeground(Color.WHITE);
+        forgotPasswordLabel.addMouseListener(this);
         
         messageLabel = new JLabel("New to E-Post?");
         messageLabel.setBounds(570, 700, 300, 40);
@@ -94,15 +97,7 @@ public class login extends JPanel implements ActionListener
         loginButton.setBorder(null);
         loginButton.setUI(new BasicButtonUI());
         //loginButton.addActionListener(this);
-        loginButton.addActionListener(new ActionListener() 
-    	{
-            public void actionPerformed(ActionEvent e) 
-            {
-                {
-                    getLoginCredentials();
-                }
-            }
-    	});
+        loginButton.addActionListener(this);
         
         
         loginPanel.add(loginLabel);
@@ -212,6 +207,39 @@ public class login extends JPanel implements ActionListener
     
     public void actionPerformed(ActionEvent e) 
     {
-        main.switchPage("register");
+        Object source = e.getSource();
+        
+        if(source == createOneButton)
+            main.switchPage("register");
+        else if(source == loginButton)
+            main.switchPage("AdminPanel");
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        Object source = e.getSource();
+        
+        if(source == forgotPasswordLabel)
+            new ForgetPassword();
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+        
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+        
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+        
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+        
     }
 }

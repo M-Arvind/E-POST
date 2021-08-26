@@ -23,8 +23,8 @@ public class main extends JFrame {
         Profile_Update profileUpdate = new Profile_Update();
         AdminProfileView adminProfileVi = new AdminProfileView();
         AdminProfileUpdate adminprofileUp = new AdminProfileUpdate();
-        
-        mainPanel.add(login, "login");
+         
+        mainPanel.add(login, "login");  
         mainPanel.add(register, "register");
         mainPanel.add(customerPanel, "customerPanel");
         mainPanel.add(adminPanel, "AdminPanel");
