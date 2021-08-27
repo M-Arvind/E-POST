@@ -1,5 +1,6 @@
 package Database;
 import Login.ForgetPassword;
+import Consignment.*;
 import java.awt.List;
 import java.awt.TextField;
 import java.sql.Connection;
@@ -58,7 +59,7 @@ public class DatabaseOperations
     public static Object[][] getCustomerConsignmentDetails(){
        try {
            Connection con=DatabaseOperations.getConnection();
-           String Customer_ID="Kishore P";
+           String Customer_ID=Login.login.user_ID;
            String query="select *from Consignment where customer_ID='"+Customer_ID+"'";
            PreparedStatement  st1=con.prepareStatement(query);
            ResultSet res=st1.executeQuery(query);
@@ -95,17 +96,19 @@ public class DatabaseOperations
        } catch (Exception ex) {
            System.out.println("Error in getCustomerConsignmentDetails---->"+ex.toString());
        }
-       Object[][] row=new Object[ConsignmentData.listForConsignment.size()][8];
+       Object[][] row=new Object[ConsignmentData.listForConsignment.size()][9];
        int i=0;
        for(ConsignmentData Data:ConsignmentData.listForConsignment){
-           row[i][0]=Data.getConsignment_ID();
-           row[i][1]=Data.getCustomer_first_name();
-           row[i][2]=Data.getReceiver_first_name();
-           row[i][3]=Data.getItem();
-           row[i][4]=Data.getDelivery_ID();
-           row[i][5]=Data.getPayment_method();
-           row[i][6]=Data.getOrder_date();
-           row[i][7]=Data.getStatus();
+           row[i][0]=i+1;
+           row[i][1]=Data.getConsignment_ID();
+           row[i][2]=Data.getCustomer_first_name();
+           row[i][3]=Data.getReceiver_first_name();
+           row[i][4]=Data.getItem();
+           row[i][5]=Data.getDelivery_ID();
+           row[i][6]=Data.getPayment_method();
+           row[i][7]=Data.getOrder_date();
+           row[i][8]=Data.getStatus();
+
           
           
          i++;
@@ -113,7 +116,122 @@ public class DatabaseOperations
        }
        return row;
     }
-    
+    public static ArrayList getOnGoingDeliveryConsignmentDetails()
+    {
+        ArrayList<consignment> list = new ArrayList<consignment>(); 
+       try {
+           Connection con=DatabaseOperations.getConnection();
+           String Delivery_Id=Login.login.user_ID;
+           System.out.println(Delivery_Id);
+           String query="select *from Consignment where delivery_ID='"+Delivery_Id+"'";
+           PreparedStatement  st1=con.prepareStatement(query);
+           ResultSet res=st1.executeQuery(query);
+           
+           while(res.next())
+           {
+               String Status = res.getString("status");               
+               if(!Status.equals("Completed"))
+               {
+                   consignment od=new consignment();
+            
+              od.setConsignment_ID(res.getString("consignment_ID"));
+              od.setCustomer_ID(res.getString("customer_ID"));
+              od.setDelivery_ID(res.getString("delivery_ID"));
+              od.setReceiver_ID(res.getString("receiver_ID"));
+              od.setItem_code(res.getString("item_code"));
+              od.setItem(res.getString("item"));
+              od.setItem_price(res.getFloat("item_price"));
+              od.setItem_weight(res.getFloat("item_weight"));
+              od.setReceiver_first_name(res.getString("receiver_first_name"));
+              od.setReceiver_last_name(res.getString("receiver_last_name"));
+              od.setReceiver_address(res.getString("receiver_address"));
+              od.setReceiver_contact_number(res.getLong("receiver_contact_number"));
+              od.setCustomer_first_name(res.getString("customer_first_name"));
+              od.setCustomer_last_name(res.getString("customer_last_name"));
+              od.setCustomer_contact_number(res.getLong("customer_contact_number"));
+              od.setShipping_address(res.getString("shipping_address"));
+              od.setPayment_method(res.getString("payment_method"));
+              od.setOrder_date(res.getDate("order_date"));
+              od.setDelivery_date(res.getDate("delivery_date"));
+              od.setStatus(res.getString("status"));
+
+              list.add(od);
+               }
+               
+              
+             
+              
+           }
+           
+       } catch (Exception ex) {
+           System.out.println("Error in OngoingConsignmentDetails---->"+ex.toString());
+       }
+      
+       return list;
+    }
+    public static ArrayList getCompletedDeliveryConsignmentDetails()
+    {
+        ArrayList<consignment> list = new ArrayList<consignment>(); 
+       try {
+           Connection con=DatabaseOperations.getConnection();
+           String Delivery_Id=Login.login.user_ID;
+           
+           String Status = "Completed";
+           String query="select *from Consignment where delivery_ID='"+Delivery_Id+"'and status = '"+Status+"'";
+           PreparedStatement  st1=con.prepareStatement(query);
+           ResultSet res=st1.executeQuery(query);           
+           while(res.next())
+           {
+              consignment od=new consignment();
+            
+              od.setConsignment_ID(res.getString("consignment_ID"));
+              od.setCustomer_ID(res.getString("customer_ID"));
+              od.setDelivery_ID(res.getString("delivery_ID"));
+              od.setReceiver_ID(res.getString("receiver_ID"));
+              od.setItem_code(res.getString("item_code"));
+              od.setItem(res.getString("item"));
+              od.setItem_price(res.getFloat("item_price"));
+              od.setItem_weight(res.getFloat("item_weight"));
+              od.setReceiver_first_name(res.getString("receiver_first_name"));
+              od.setReceiver_last_name(res.getString("receiver_last_name"));
+              od.setReceiver_address(res.getString("receiver_address"));
+              od.setReceiver_contact_number(res.getLong("receiver_contact_number"));
+              od.setCustomer_first_name(res.getString("customer_first_name"));
+              od.setCustomer_last_name(res.getString("customer_last_name"));
+              od.setCustomer_contact_number(res.getLong("customer_contact_number"));
+              od.setShipping_address(res.getString("shipping_address"));
+              od.setPayment_method(res.getString("payment_method"));
+              od.setOrder_date(res.getDate("order_date"));
+              od.setDelivery_date(res.getDate("delivery_date"));
+              od.setStatus(res.getString("status"));
+
+              list.add(od);
+             
+              
+           }
+           
+       } catch (Exception ex) {
+           System.out.println("Error in CompletedConsignmentDetails---->"+ex.toString());
+       }
+      
+       return list;
+    }
+    public static void UpdateDeliveryDeatils(String conid,String Status)
+    {
+        Connection con=DatabaseOperations.getConnection();
+        try
+        {
+            String query="update Consignment set status='"+Status+"'where consignment_Id ='"+conid+"'";
+            PreparedStatement smt = con.prepareStatement(query);
+            smt.execute(query);
+            getConnection().setAutoCommit(true);
+            JOptionPane.showMessageDialog(null, "Successful");
+        }
+        catch(Exception e1)
+        {
+            System.out.println("Update---->"+e1.toString());
+        }
+    }
     
     
     
@@ -220,47 +338,7 @@ public class DatabaseOperations
         }
     }
     
-    public static ArrayList getOngoingDeliveryConsignmentDetils(String delivery_id)
-    {
-        ArrayList ongoing = new ArrayList();        
-        try
-        {
-            Statement st = getConnection().createStatement();
-            ResultSet rs =  st.executeQuery("select * from Consignment where delivery_ID ='"+delivery_id+"'");
-            if(rs.next())
-            {
-                ongoing.add(rs.getString("consignment_id"));
-                ongoing.add(rs.getString("customer_id"));
-                ongoing.add(rs.getString("receiver_id"));
-                ongoing.add(rs.getString("item"));
-                ongoing.add(rs.getString("delivery_id"));        
-                ongoing.add(rs.getString("payment_method"));                
-                ongoing.add(rs.getString("order_date"));
-                ongoing.add(rs.getString("status"));
-                
-                /*ongoing.add(rs.getString("consignment_id"));
-                ongoing.add(rs.getString("consignment_id"));
-                ongoing.add(rs.getString("consignment_id"));
-                ongoing.add(rs.getString("consignment_id"));
-                ongoing.add(rs.getString("consignment_id"));
-                ongoing.add(rs.getString("consignment_id"));
-                ongoing.add(rs.getString("consignment_id"));
-                ongoing.add(rs.getString("consignment_id"));
-                ongoing.add(rs.getString("consignment_id"));
-                ongoing.add(rs.getString("consignment_id"));
-                ongoing.add(rs.getString("consignment_id"));
-                ongoing.add(rs.getString("consignment_id"));*/
-                
-                
-            }
-        }
-        catch(Exception e)
-        {
-            
-        }
-        
-        return ongoing;
-    }
+   
     
    public static String getConsignmentIdGenerator() {
        try{
@@ -634,21 +712,44 @@ public class DatabaseOperations
     }
     public static void updateConsignment(){
          try{ 
+            System.out.println("ConsignmentUpdate Start");
             String query="INSERT INTO Consignment VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
             Connection con=DatabaseOperations.getConnection();
             PreparedStatement pst=con.prepareStatement(query);
             pst.setString(1,DatabaseOperations.getConsignmentIdGenerator());//consignment_ID
-            pst.setString(2,"Kishore P");//customer_ID
+            pst.setString(2,Login.login.user_ID);//customer_ID
             pst.setString(3, "");//delivery_ID
-            pst.setString(4,EPostData.getTo());//receiver_ID
-            pst.setString(5,"WH0001");//item_code
-            pst.setString(6,"E-Post");//item
-            pst.setString(7,"5");//item_price
-            pst.setString(8,"");//item_weight
-            pst.setString(9,EPostData.getFirstName());//receiver_first_name                                             
-            pst.setString(10, EPostData.getLastName()); //receiver_last_name             
-            pst.setString(11, EPostData.getAddress()); //receiver_address                                                      
-            pst.setLong(12, EPostData.getPhoneNumber()); //receiver_contact_number                                                       
+            if(WalletDataG.getTransationType().equals("E-Post"))
+                 pst.setString(4,EPostData.getTo());//receiver_ID
+            if(WalletDataG.getTransationType().equals("Parcel"))
+                 pst.setString(4,ParcelData.getTo());//receiver_ID 
+            if(WalletDataG.getTransationType().equals("Products"))
+                 pst.setString(4,Login.login.user_ID);//receiver_ID
+            System.out.println(WalletDataG.getTransationType());
+            System.out.println(WalletDataG.getItemPrice());
+            System.out.println(WalletDataG.getItemWeight()+"money this weight-->"+WalletDataG.getBalence());
+            pst.setString(5,WalletDataG.getItemCode());//item_code
+            pst.setString(6,WalletDataG.getTransationType());//item
+            pst.setFloat(7,WalletDataG.getItemPrice());//item_price+
+            pst.setFloat(8,WalletDataG.getItemWeight());//item_weight
+            if(WalletDataG.getTransationType().equals("E-Post")){
+                pst.setString(9,  EPostData.getFirstName());//receiver_first_name  
+                pst.setString(10, EPostData.getLastName()); //receiver_last_name  
+                pst.setString(11, EPostData.getAddress()); //receiver_address 
+                pst.setLong(12, EPostData.getPhoneNumber()); //receiver_contact_number   
+            }
+            else if(WalletDataG.getTransationType().equals("Parcel")){
+                pst.setString(9, ParcelData.getFirstName());//receiver_first_name                                             
+                pst.setString(10, ParcelData.getLastName()); //receiver_last_name             
+                pst.setString(11, ParcelData.getAddress()); //receiver_address 
+                pst.setLong(12, ParcelData.getPhoneNumber()); //receiver_contact_number    
+               }  
+            else if(WalletDataG.getTransationType().equals("Products")){
+                pst.setString(9,"FirstName");//current log in customer first_name                                             
+                pst.setString(10,"LastName"); //current log in customer Last_name  
+                pst.setString(11,""); //current log in customer receiver_address 
+                pst.setLong(12,90L); //receiver_contact_number      
+            }
             pst.setString(13,"Kishore");      //customer_first_name 
             pst.setString(14, "P");           //customer_last_name 
             pst.setLong(15,9095305385L);   //customer_contact_number
@@ -660,45 +761,72 @@ public class DatabaseOperations
             pst.executeUpdate();
             con.setAutoCommit(true);
             con.close();
+            System.out.println("ConsignmentUpdate end");
             JOptionPane.showMessageDialog(null,"Consignment Updated Succesfully ID:"+DatabaseOperations.getConsignmentIdGenerator());
     
         }
         catch(Exception e){
-            JOptionPane.showMessageDialog(null,"Consignment Updated Failed ID:"+e.toString());
+            JOptionPane.showMessageDialog(null,"Consignment Update Failed ID:"+e.toString());
         }
+    }
+    public static void updateCustomerBalence(){
+       try{
+           String query = "update customer set bank_balance=? where customer_ID=?";
+            Connection con=DatabaseOperations.getConnection();
+            PreparedStatement pst=con.prepareStatement(query);
+            pst.setFloat(1, WalletDataG.getBalence());
+            pst.setString(2,Login.login.user_ID);
+            JOptionPane.showMessageDialog(null,"Your Balence Updated Succesfully in Your AccountNumber and Remaining Balence is:"+WalletDataG.getBalence());
+       } 
+       catch(Exception e){
+           JOptionPane.showMessageDialog(null,"CustomerBalence Update Failed ID:"+e.toString());
+       }
     }
     public static void updateWalletTransaction(){
         try{ 
+             System.out.println("WalletTransaction Start");
             String query="INSERT INTO Wallet VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
             Connection con=DatabaseOperations.getConnection();
             PreparedStatement pst=con.prepareStatement(query);
             pst.setString(1,DatabaseOperations.getTransactionIdGenerator());
-            pst.setString(2,"Kishore P");//Customer ID
+            pst.setString(2,Login.login.user_ID);//Customer ID
             pst.setString(3,"Admin001");//Reciver Id
-            pst.setString(4, EPostData.getFirstName());
-            pst.setString(5, EPostData.getLastName());
+            if(WalletDataG.getTransationType().equals("E-Post")){
+                pst.setString(4, EPostData.getFirstName());
+                pst.setString(5, EPostData.getLastName());  
+            }
+            if(WalletDataG.getTransationType().equals("Parcel")){
+                pst.setString(4, ParcelData.getFirstName());
+                pst.setString(5,  ParcelData.getLastName());  
+            }
+            if(WalletDataG.getTransationType().equals("Products")){
+                pst.setString(4,"Kishore");//current log in user first name
+                pst.setString(5, "P"); //current log in user Last name    
+            }
             pst.setString(6, WalletDataG.getTransationType());
             pst.setDate(7,java.sql.Date.valueOf(java.time.LocalDate.now()));//new java.sql.Date(System.currentTimeMillis())
             pst.setLong(8,350700001);//current logged in customer's wallet account number
             pst.setLong(9,350700000);//Admin Account Number
             pst.setFloat(10,WalletDataG.getAmount());//amount
-            pst.setString(11,"Admin");
+            pst.setString(11,"Admin");//money reciever name
             pst.setFloat(12,WalletDataG.getBalence());//balence
             pst.executeUpdate();
             con.setAutoCommit(true);
             con.close();
-            JOptionPane.showMessageDialog(null,"Wallet Updated Succesfully ID:"+DatabaseOperations.getMessageIdGenerator());
-            
+            System.out.println("WalletTransaction end");
+            JOptionPane.showMessageDialog(null,"Wallet Updated Succesfully for ID:"+DatabaseOperations.getMessageIdGenerator());
+            updateCustomerBalence();
             
         }
         catch(Exception e){
             JOptionPane.showMessageDialog(null,"Wallet  Updated Failed ID:"+e.toString());
         }
     }
-    public static ArrayList getStocks(){
+    public static ArrayList<Warehouse> getStocks(){
         ArrayList<Warehouse> stocks = new ArrayList<Warehouse>();
         try{
-        Statement st = getConnection().createStatement();
+         Connection con=getConnection();
+        Statement st = con.createStatement();
         String query = "SELECT * from warehouse";
         ResultSet rs = st.executeQuery(query);
         while(rs.next()){
@@ -709,6 +837,7 @@ public class DatabaseOperations
             temp.setItemQuantity(rs.getString("S_ITEM_QUANTITY"));
             stocks.add(temp);
         }
+        con.close();
         }
         catch(Exception e){
             System.out.print(e);

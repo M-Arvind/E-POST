@@ -22,6 +22,13 @@ import javax.swing.JTextArea;
 import main.main;
 import Admin.StyledButtonUi;
 import javax.swing.plaf.ButtonUI;
+import Database.DatabaseOperations;
+import javax.swing.JTextField;
+import javax.swing.RowFilter;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import javax.swing.table.TableRowSorter;
+
 public class CustomerPanel extends JPanel implements ActionListener, MouseListener{
     
     private JLabel LE_Post,IProfile;
@@ -35,7 +42,7 @@ public class CustomerPanel extends JPanel implements ActionListener, MouseListen
     int X_FORCUSTOMER=55,Y_FORCUSTOMER=150,WIDTHFORCUSTOMER=1260,HIGHTFORCUSTOMER=570;
     int R=34,G=34,B=45;
     private Color Buttoncolor=new Color(240,238,240);
-    private JTextArea search;
+    private JTextField search;
     private JLabel LCustomer;
     private Font font=new Font("Bold",Font.BOLD,20);
     private JLabel userLogo;
@@ -46,7 +53,8 @@ public class CustomerPanel extends JPanel implements ActionListener, MouseListen
        customerCard=new CardLayout();
        contentForCustomer=new JPanel(customerCard);
        PInbox=new InboxPanel();
-       PConsignment=new ConsignmentPanel();
+       //PInbox=new InboxPanel();
+       //PConsignment=new ConsignmentPanel();
        PE_Post=new E_PostPanel();
        PParcel=new ParcelPanel();
        PProducts=new ProductsPanel();
@@ -55,14 +63,15 @@ public class CustomerPanel extends JPanel implements ActionListener, MouseListen
       
        //InboxPanel inboxPanel=(InboxPanel)PInbox;
        contentForCustomer.add(PInbox,"Inbox");
-       contentForCustomer.add(PConsignment,"Consignment");
+       //contentForCustomer.add(PInbox,"Inbox");
+       //contentForCustomer.add(PConsignment,"Consignment");
        contentForCustomer.add(PE_Post,"E-Post");
        contentForCustomer.add(PParcel,"Parcel");
        contentForCustomer.add(PProducts,"Products");
        contentForCustomer.add(PWallet,"Wallet");
        contentForCustomer.add(PConsignmentDetails,"ConsignmentDetails");
        //contentForCustomer.add(inboxPanel.scroll,"MessagePanel");
-       customerCard.first(contentForCustomer);
+        
        contentForCustomer.setBounds(X_FORCUSTOMER,Y_FORCUSTOMER,WIDTHFORCUSTOMER,HIGHTFORCUSTOMER);
        add(contentForCustomer);
        setPreferredSize(new Dimension(1350,890));
@@ -80,10 +89,52 @@ public class CustomerPanel extends JPanel implements ActionListener, MouseListen
        LCustomer.setForeground(Color.WHITE);
        add(LCustomer);
        
-       search=new JTextArea("Search ID...");
+       search=new JTextField("Search ID...");
        search.setFont(new Font("Segoe UI",Font.PLAIN,18));
        search.setBounds(1000,32,200,30);
        search.addMouseListener(this);
+       search.getDocument().addDocumentListener(new DocumentListener() {
+        
+           @Override
+           public void insertUpdate(DocumentEvent e) {
+                BConsignment.setBounds(X_FORCUSTOMER+120+60,120,160,30);
+             ConsignmentData.listForConsignment.clear();
+             CustomerPanel.contentForCustomer.add(new ConsignmentPanel(),"Consignment");
+             CustomerPanel.customerCard.show(CustomerPanel.contentForCustomer,"Consignment");
+             search(search.getText());
+             
+                 customerCard.show(contentForCustomer,"Consignment");
+             System.out.println("--------->TextField Consign");
+            
+             BInbox.setBounds(X_FORCUSTOMER,110,160,30);
+             BE_Post.setBounds(X_FORCUSTOMER+180+180,110,160,30);
+            BParcel.setBounds(X_FORCUSTOMER+180+180+180,110,160,30);
+            BProducts.setBounds(X_FORCUSTOMER+180+180+180+180,110,160,30);
+            BWallet.setBounds(X_FORCUSTOMER+180+180+180+180+180,110,160,30);
+
+                 }
+
+           @Override
+           public void removeUpdate(DocumentEvent e) {
+              search(search.getText());
+           }
+           @Override
+           public void changedUpdate(DocumentEvent e) {
+              search(search.getText());
+                 }
+           public void search(String str){
+              try{
+                if((str.length()==0)) ConsignmentPanel.sorter.setRowFilter(null);
+                else ConsignmentPanel.sorter.setRowFilter(RowFilter.regexFilter(str));  
+              }
+              catch(Exception e){
+                  
+              }
+              
+           }
+       });
+       search.setBorder(BorderFactory.createEmptyBorder(2,5,0,5));
+       add(search);
        search.setBorder(BorderFactory.createEmptyBorder(2,5,0,5));
        add(search);
        
@@ -169,14 +220,18 @@ public class CustomerPanel extends JPanel implements ActionListener, MouseListen
         }
         else if(o==BConsignment){
             BConsignment.setBounds(X_FORCUSTOMER+120+60,120,160,30);
-             if(!ConsignmentData.isIsUpdate())
-                 customerCard.show(contentForCustomer,"Consignment");
+           ConsignmentData.listForConsignment.clear();
+      
+              CustomerPanel.contentForCustomer.add(new ConsignmentPanel(),"Consignment");
+              //CustomerPanel.customerCard.show(CustomerPanel.contentForCustomer,"Consignment");
+            if(!ConsignmentData.isIsUpdate()){
+                 System.out.println("--------->BuutonConsign");
+                 customerCard.show(contentForCustomer,"Consignment");}
+               
+             
              else{
-               if(PConsignment!=null){
-                 PConsignment.removeAll();
-                 PConsignment=null;  
-                }
-                 customerCard.show(contentForCustomer,"1");
+            System.out.println("--------->Button1");
+                 customerCard.show(contentForCustomer,"update");
              }
              BInbox.setBounds(X_FORCUSTOMER,110,160,30);
              BE_Post.setBounds(X_FORCUSTOMER+180+180,110,160,30);

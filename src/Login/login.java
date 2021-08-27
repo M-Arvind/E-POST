@@ -165,7 +165,7 @@ public class login extends JPanel implements ActionListener
                 }
                 else if(list.get(2).toString().equals("DELIVERY"))
                 {
-                    main.switchPage("register");
+                    main.switchPage("deliveryPanel");
                 }
                 else if(list.get(2).toString().equals("Customer"))
                 {

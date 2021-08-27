@@ -11,6 +11,25 @@ public class ParcelData {
     private static boolean SoftCopy=false;
     private static boolean HardCopy=false;
     private static boolean isPasswordCorrect=false;
+    private static Float itemWeight;
+    private static Float itemPrice;
+    
+    public static Float getItemWeight() {
+        return itemWeight;
+    }
+
+    public static void setItemWeight(Float aItemWeight) {
+        itemWeight = aItemWeight;
+    }
+
+    public static Float getItemPrice() {
+        return itemPrice;
+    }
+
+    public static void setItemPrice(Float aItemPrice) {
+        itemPrice = aItemPrice;
+    }
+
  
     public static String getTo() {
         return To;

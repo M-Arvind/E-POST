@@ -15,29 +15,35 @@ import javax.swing.border.LineBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.JTableHeader;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
 class ConsignmentPanel extends JPanel implements ActionListener{
     JPanel PConTable;
-    JTable table;
+    public JTable table;
     JScrollPane scroll;
+    public static TableRowSorter sorter; 
+    private  TableModel model;
     public ConsignmentPanel(){
 
         this.setLayout(null);
         this.setBackground(Color.white);
         Object[][] rows =DatabaseOperations.getCustomerConsignmentDetails();
-        String[] columns = {"Consignment ID", "From","To", "Item", "Delivery ID", "Payment Method", "Date", "Status"};
-        
+        String[] columns = {"S.NO","Consignment ID", "From","To", "Item", "Delivery ID", "Payment Method", "Date", "Status"};     
         Border border = new LineBorder(new Color(71, 63, 145), 1, true);
         
         
-        table =new JTable(rows, columns){
+        model=new DefaultTableModel(rows, columns);
+        sorter=new TableRowSorter(model);
+        table =new JTable(model){
           @Override
          public boolean editCellAt(int row, int column, java.util.EventObject e) {
             return false;
          }
         };
-        
+        table.setRowSorter(sorter);
         table.setRowHeight(30);
         table.setBorder(border);
         table.setRowSelectionAllowed(true);
@@ -49,12 +55,12 @@ class ConsignmentPanel extends JPanel implements ActionListener{
        public void valueChanged(ListSelectionEvent e) {
        
         
-        //int[] selectedRow = table.getSelectedRows();
-        int selectedRow=table.getSelectedRow();
-        //selectedData = (String) table.getValueAt(selectedRow[0], 0);
-        System.out.println(selectedRow);
+        int[] selectedRow = table.getSelectedRows();
+        Integer data= (Integer)table.getValueAt(selectedRow[0], 0);
+        int temp=data-1;
+        System.out.println(temp);
         ConsignmentDetails ob=(ConsignmentDetails)CustomerPanel.PConsignmentDetails;
-        ob.setConignmentDetails(new Integer(selectedRow));
+        ob.setConignmentDetails(temp);
         CustomerPanel.customerCard.show(CustomerPanel.contentForCustomer,"ConsignmentDetails");
         
       }

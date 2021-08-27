@@ -1,30 +1,25 @@
-package Admin;
+package Delivery;
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.util.regex.Pattern;
 import main.main;
-public class AdminProfileUpdate extends JPanel implements MouseListener, ActionListener{
+public class DeliveryProfileUpdate extends JPanel implements MouseListener{
 	//JPanel ViewPanel;
-	private Icon ProfIcon,EditIcon,BackIcon;
-	private Border emptyBorder = BorderFactory.createEmptyBorder();
-	private JLabel UserNameTop;
-	private JLabel firstNameLabel,lastNameLabel, contactNoLabel,DOBLabel,ageLabel,JoinDateLabel,pAddressLabel,tAddressLabel,martialLabel,designationLabel, salaryLabel, stateLabel, districtLabel;
-	private JTextField firstNameValue,lastNameValue,contactNoValue,DOBValue,ageValue,JoinDateValue,designationValue, salaryValue, stateValue, districtValue;
-	private JLabel Collon1,Collon2,Collon3,Collon4,Collon5,Collon6,Collon7,Collon8,Collon9, Collon10, Collon11, Collon12;
-	private JButton ProfIconLabel,BackIconLabel,EditIconLabel;
-	private JButton SaveButton;
-        private JTextArea pAddressValue, tAddressValue;
-        private JComboBox martialValue;
-        private String[] martialStatusValues = {"Single", "Married", "Divorced"};
+	Icon ProfIcon,EditIcon,BackIcon;
+	Border emptyBorder = BorderFactory.createEmptyBorder();
+	JLabel UserNameTop;
+	JLabel firstNameLabel,lastNameLabel, contactNoLabel,DOBLabel,ageLabel,JoinDateLabel,pAddressLabel,tAddressLabel,martialLabel,designationLabel, salaryLabel, stateLabel, districtLabel;
+	JTextField firstNameValue,lastNameValue,contactNoValue,DOBValue,ageValue,JoinDateValue,martialValue,designationValue, salaryValue, stateValue, districtValue;
+	JLabel Collon1,Collon2,Collon3,Collon4,Collon5,Collon6,Collon7,Collon8,Collon9, Collon10, Collon11, Collon12;
+	JButton ProfIconLabel,BackIconLabel,EditIconLabel;
+	JButton SaveButton;
+        JTextArea pAddressValue, tAddressValue;
 	int X=230,Y=90;
 	int R=34,G=34,B=45;
 	int labelFontSize=20;
-	public AdminProfileUpdate() {
+	public DeliveryProfileUpdate() {
 		// TODO Auto-generated constructor stub
 		
 		
@@ -189,9 +184,13 @@ public class AdminProfileUpdate extends JPanel implements MouseListener, ActionL
 		
 		//usernamevalue label
 		
-		martialValue=new JComboBox(martialStatusValues);
+		martialValue=new JTextField("Martial Status");
 		martialValue.setBounds(X+240+300+100+60+10,Y+60+70+70,300,35);
 		martialValue.setFont(new Font("Segoe UI",Font.PLAIN,labelFontSize));
+                martialValue.setBorder(BorderFactory.createEmptyBorder(0, 10, 0, 10));
+		martialValue.setBackground(Color.WHITE);
+		martialValue.setForeground(Color.GRAY);
+                martialValue.addMouseListener(this);
 		
 		add(martialLabel);
 		add(Collon6);
@@ -336,13 +335,12 @@ public class AdminProfileUpdate extends JPanel implements MouseListener, ActionL
 		
 		add(tAddressLabel);
 		add(Collon12);
-		add(tAddressValue);
-                
+		add(tAddressValue);                
+		
 		SaveButton=new JButton("Save");
 		SaveButton.setBounds(X+400,Y+600,100,30);
 		SaveButton.setForeground(Color.WHITE);
 		SaveButton.setBackground(new Color(71,63,145));
-                SaveButton.addActionListener(this);
 		add(SaveButton);
 		
 		setBounds(0,0,1350,890);
@@ -357,7 +355,7 @@ public class AdminProfileUpdate extends JPanel implements MouseListener, ActionL
     @Override
     public void mouseClicked(MouseEvent e) {
         if(e.getSource() == BackIconLabel){
-            main.switchPage("AdminProfileView");
+            main.switchPage("deliveryProfileView");
         }
         else if(e.getSource() == firstNameValue){
             firstNameValue.setText("");
@@ -373,6 +371,9 @@ public class AdminProfileUpdate extends JPanel implements MouseListener, ActionL
         }
         else if(e.getSource() == contactNoValue){
             contactNoValue.setText("");
+        }
+        else if(e.getSource() == martialValue){
+            martialValue.setText("");
         }
         else if(e.getSource() == salaryValue){
             salaryValue.setText("");
@@ -411,47 +412,6 @@ public class AdminProfileUpdate extends JPanel implements MouseListener, ActionL
 
     @Override
     public void mouseExited(MouseEvent e) {
-        
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        String firstName = firstNameValue.getText();
-        String lastName = lastNameValue.getText();
-        String DOB = DOBValue.getText();
-        String age = ageValue.getText();
-        String contactNumber = contactNoValue.getText();
-        String designation = designationValue.getText();
-        String state = stateValue.getText();
-        String district = districtValue.getText();
-        
-        if(!Pattern.matches("^([A-Za-z])+$", firstName)){
-            JOptionPane.showMessageDialog(this, "First Name should contain only Characters");
-        }
-        else if(firstName.length() < 3){
-            JOptionPane.showMessageDialog(this, "First Name should contain atleast 4 Characters");
-        }
-        else if(lastName.length() < 1){
-            JOptionPane.showMessageDialog(this, "Enter last Name");
-        }
-        else if(!Pattern.matches("^([0-9]{2})/([0-9]{2})/([0-9]{4})$", DOB)){
-            JOptionPane.showMessageDialog(this, "Enter date in dd/mm/yyyy format");
-        }
-        else if(!Pattern.matches("^[0-9]+$", age)){
-            JOptionPane.showMessageDialog(this, "Enter valid age");
-        }
-        else if(!Pattern.matches("^[0-9]*$", contactNumber)||contactNumber.length()!=10){
-            JOptionPane.showMessageDialog(this, "Enter valid Phone Number");
-        }
-        else if(!Pattern.matches("^([A-Za-z])+$", designation)){
-            JOptionPane.showMessageDialog(this, "Designation should contain only characters");
-        }
-        else if(!Pattern.matches("^([A-Za-z])+$", state)){
-            JOptionPane.showMessageDialog(this, "state should contain only characters");
-        }
-        else if(!Pattern.matches("^([A-Za-z])+$", district)){
-            JOptionPane.showMessageDialog(this, "district should contain only characters");
-        }
         
     }
 

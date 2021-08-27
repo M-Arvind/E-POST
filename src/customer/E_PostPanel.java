@@ -265,7 +265,7 @@ public class E_PostPanel extends JPanel implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        main.switchPage("paymentEPost");
+        
         EPostData.setTo(TTo.getText());
         EPostData.setFirstName(TFirstname.getText());
         EPostData.setLastName(TLastName.getText());
@@ -278,6 +278,9 @@ public class E_PostPanel extends JPanel implements ActionListener{
         EPostData.setDistrict(CDistrict.getSelectedItem().toString());
         EPostData.setHardCopy(isHardCopySelected);
         EPostData.setSoftCopy(isSoftCopySelected);
+        WalletDataG.setItemWeight(1F);
+        PaymentEPost.setDataForEPostPayment();
+        main.switchPage("paymentEPost");
         
     }
   
