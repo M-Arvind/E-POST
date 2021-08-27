@@ -272,13 +272,17 @@ class ConsignmentDetails extends JPanel implements ActionListener{
     
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(!ConsignmentData.isIsUpdate())
-            CustomerPanel.customerCard.show(CustomerPanel.contentForCustomer,"Consignment");
-        else{
-           
-            CustomerPanel.customerCard.show(CustomerPanel.contentForCustomer,"1");
+         if(!ConsignmentData.isIsUpdate()){
+            System.out.println("--------->Details Consign Card");
+             CustomerPanel.customerCard.show(CustomerPanel.contentForCustomer,"Consignment");
+        } 
+         else {
+             System.out.println("--------->Details Update Card");
+            CustomerPanel.customerCard.show(CustomerPanel.contentForCustomer,"update");
         }
-     }
+         }
+  
+}
    
 
-}
+

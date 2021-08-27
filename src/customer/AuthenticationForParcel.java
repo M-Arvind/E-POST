@@ -72,24 +72,25 @@ public class AuthenticationForParcel
             @Override
             public void actionPerformed(ActionEvent e) 
             {
-                ParcelData.setIsPasswordCorrect(getAuthentication());
-                
+             ParcelData.setIsPasswordCorrect(getAuthentication());
+             System.out.println("I am out .....");  
               if(ParcelData.isIsPasswordCorrect()){
+              System.out.println("I am in .....");
               WalletDataG.setBalence(5000.25F);//
               WalletDataG.setTransationType("Parcel");
-              WalletDataG.setAmount(5F);//fees for Parcel 1kg
-             
+              WalletDataG.setAmount(Float.valueOf(DatabaseOperations.getStocks().get(1).getItemPrice()));//fees for Parcel 1kg
+          
 
-                  Database.DatabaseOperations.updateInbox();
-                  Database.DatabaseOperations.updateConsignment();
-                  Database.DatabaseOperations.updateWalletTransaction();
+              Database.DatabaseOperations.updateConsignment();
+              Database.DatabaseOperations.updateWalletTransaction();
       
               ConsignmentData.listForConsignment.clear();
               ConsignmentData.setIsUpdate(true);
-              CustomerPanel.contentForCustomer.add(new ConsignmentPanel(),"1");
+              CustomerPanel.contentForCustomer.add(new ConsignmentPanel(),"update");
               main.switchPage("customerPanel");
-              CustomerPanel.BConsignment.setBounds(55+120,120,160,30);
-              CustomerPanel.customerCard.show(CustomerPanel.contentForCustomer,"1");
+              CustomerPanel.BParcel.setBounds(55+180+180+180,110,160,30);
+              CustomerPanel.BConsignment.setBounds(55+120+60,120,160,30);
+              CustomerPanel.customerCard.show(CustomerPanel.contentForCustomer,"update");
               newdialog.dispose();
 
                 }

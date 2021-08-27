@@ -283,7 +283,7 @@ private JButton BSend;
     }
     @Override
     public void actionPerformed(ActionEvent e) {
-        main.switchPage("paymentEPost");
+        
         ParcelData.setTo(TTo.getText());
         ParcelData.setFirstName(TFirstname.getText());
         ParcelData.setLastName(TLastName.getText());
@@ -292,9 +292,14 @@ private JButton BSend;
         ParcelData.setAddress(TAddress.getText());
         ParcelData.setState(CState.getSelectedItem().toString());
         ParcelData.setDistrict(CDistrict.getSelectedItem().toString());
-  
+        ParcelData.setItemWeight(Float.valueOf(TItem_Weight.getText()));
+        ParcelData.setItemPrice(WalletDataG.getItemPrice());
+        WalletDataG.setItemWeight(Float.valueOf(TItem_Weight.getText()));
+        PaymentParcel.setDataForParcelPanel();
+        main.switchPage("paymentParcel");
+    
     }
-
+ 
     @Override
     public void keyTyped(KeyEvent e) {
          if(!TItem_Weight.getText().isEmpty()){
