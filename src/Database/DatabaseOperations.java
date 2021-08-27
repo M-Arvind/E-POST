@@ -1,4 +1,5 @@
 package Database;
+import Consignment.*;
 import java.awt.List;
 import java.awt.TextField;
 import java.sql.Connection;
@@ -39,7 +40,7 @@ public class DatabaseOperations
         try
         {
             Class.forName("oracle.jdbc.driver.OracleDriver");
-            connection = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE","E-Post","123");
+            connection = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE","E_Post","123");
         }
   
         
@@ -106,6 +107,104 @@ public class DatabaseOperations
              
        }
        return row;
+    }
+    public static ArrayList getOnGoingDeliveryConsignmentDetails()
+    {
+        ArrayList<consignment> list = new ArrayList<consignment>(); 
+       try {
+           Connection con=DatabaseOperations.getConnection();
+           String Delivery_Id="Barath.B";
+           String query="select *from Consignment where delivery_ID='"+Delivery_Id+"'";
+           PreparedStatement  st1=con.prepareStatement(query);
+           ResultSet res=st1.executeQuery(query);
+           
+           while(res.next())
+           {
+               String Status = res.getString("status");               
+               if(!Status.equals("Completed"))
+               {
+                   consignment od=new consignment();
+            
+              od.setConsignment_ID(res.getString("consignment_ID"));
+              od.setCustomer_ID(res.getString("customer_ID"));
+              od.setDelivery_ID(res.getString("delivery_ID"));
+              od.setReceiver_ID(res.getString("receiver_ID"));
+              od.setItem_code(res.getString("item_code"));
+              od.setItem(res.getString("item"));
+              od.setItem_price(res.getFloat("item_price"));
+              od.setItem_weight(res.getFloat("item_weight"));
+              od.setReceiver_first_name(res.getString("receiver_first_name"));
+              od.setReceiver_last_name(res.getString("receiver_last_name"));
+              od.setReceiver_address(res.getString("receiver_address"));
+              od.setReceiver_contact_number(res.getLong("receiver_contact_number"));
+              od.setCustomer_first_name(res.getString("customer_first_name"));
+              od.setCustomer_last_name(res.getString("customer_last_name"));
+              od.setCustomer_contact_number(res.getLong("customer_contact_number"));
+              od.setShipping_address(res.getString("shipping_address"));
+              od.setPayment_method(res.getString("payment_method"));
+              od.setOrder_date(res.getDate("order_date"));
+              od.setDelivery_date(res.getDate("delivery_date"));
+              od.setStatus(res.getString("status"));
+
+              list.add(od);
+               }
+               
+              
+             
+              
+           }
+           
+       } catch (Exception ex) {
+           System.out.println("Error in OngoingConsignmentDetails---->"+ex.toString());
+       }
+      
+       return list;
+    }
+    public static ArrayList getCompletedDeliveryConsignmentDetails()
+    {
+        ArrayList<consignment> list = new ArrayList<consignment>(); 
+       try {
+           Connection con=DatabaseOperations.getConnection();
+           String Delivery_Id="Barath.B";
+           String Status = "Order Placed";
+           String query="select *from Consignment where delivery_ID='"+Delivery_Id+"'and status = '"+Status+"'";
+           PreparedStatement  st1=con.prepareStatement(query);
+           ResultSet res=st1.executeQuery(query);           
+           while(res.next())
+           {
+              consignment od=new consignment();
+            
+              od.setConsignment_ID(res.getString("consignment_ID"));
+              od.setCustomer_ID(res.getString("customer_ID"));
+              od.setDelivery_ID(res.getString("delivery_ID"));
+              od.setReceiver_ID(res.getString("receiver_ID"));
+              od.setItem_code(res.getString("item_code"));
+              od.setItem(res.getString("item"));
+              od.setItem_price(res.getFloat("item_price"));
+              od.setItem_weight(res.getFloat("item_weight"));
+              od.setReceiver_first_name(res.getString("receiver_first_name"));
+              od.setReceiver_last_name(res.getString("receiver_last_name"));
+              od.setReceiver_address(res.getString("receiver_address"));
+              od.setReceiver_contact_number(res.getLong("receiver_contact_number"));
+              od.setCustomer_first_name(res.getString("customer_first_name"));
+              od.setCustomer_last_name(res.getString("customer_last_name"));
+              od.setCustomer_contact_number(res.getLong("customer_contact_number"));
+              od.setShipping_address(res.getString("shipping_address"));
+              od.setPayment_method(res.getString("payment_method"));
+              od.setOrder_date(res.getDate("order_date"));
+              od.setDelivery_date(res.getDate("delivery_date"));
+              od.setStatus(res.getString("status"));
+
+              list.add(od);
+             
+              
+           }
+           
+       } catch (Exception ex) {
+           System.out.println("Error in CompletedConsignmentDetails---->"+ex.toString());
+       }
+      
+       return list;
     }
     
     
