@@ -1,4 +1,7 @@
 package customer;
+import customer.DatasForCustomer.ParcelData;
+import customer.DatasForCustomer.WalletData;
+import customer.DatasForCustomer.WalletDataG;
 import main.*;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -48,18 +51,18 @@ public class PaymentParcel extends JPanel implements MouseListener
     JLabel p_payment_pincode;
     
     //Content Label
-    JLabel p_payment_beneficiary_info;
-    JLabel p_payment_amount_info;
-    JLabel p_payment_to_info;
-    JLabel p_payment_contact_info;
-    JLabel p_payment_type_info;
-    JLabel p_payment_weight_info;
-    JLabel p_payment_firstName_info;
-    JLabel p_payment_lastName_info;
-    JTextArea p_payment_address_info;
-    JLabel p_payment_state_info;
-    JLabel p_payment_district_info;
-    JLabel p_payment_pincode_info;
+    static JLabel p_payment_beneficiary_info;
+    static JLabel p_payment_amount_info;
+    static JLabel p_payment_to_info;
+    static JLabel p_payment_contact_info;
+    static JLabel p_payment_type_info;
+    static JLabel p_payment_weight_info;
+    static JLabel p_payment_firstName_info;
+    static JLabel p_payment_lastName_info;
+    static JTextArea p_payment_address_info;
+    static JLabel p_payment_state_info;
+    static JLabel p_payment_district_info;
+    static JLabel p_payment_pincode_info;
 
     
     int X_FORCUSTOMER=0,Y_FORCUSTOMER=100,WIDTHFORCUSTOMER=1260,HIGHTFORCUSTOMER=750;
@@ -109,19 +112,6 @@ public class PaymentParcel extends JPanel implements MouseListener
         p_payment_address_info.setHighlighter(null);
         p_payment_address_info.setLineWrap(true);
         
-        //Content Label Text
-        p_payment_beneficiary_info.setText("Admin");
-        p_payment_amount_info.setText("12345");
-        p_payment_to_info.setText("User_369");
-        p_payment_contact_info.setText("1234567890");
-        p_payment_type_info.setText("Parcel");
-        p_payment_weight_info.setText("99");
-        p_payment_firstName_info.setText("Hello");
-        p_payment_lastName_info.setText("World");
-        p_payment_address_info.setText("Sai Leo Nagar,West Tambaram Poonthandalam, Village, Chennai Tamil Nadu 602109.");
-        p_payment_state_info.setText("Tamil Name");
-        p_payment_district_info.setText("Salem");
-        p_payment_pincode_info.setText("123456");
         
         //Button and title
         p_payment_title.setBounds(585, 25, 200, 50);
@@ -159,9 +149,9 @@ public class PaymentParcel extends JPanel implements MouseListener
         p_payment_pincode.setBounds(120,600 + 80,150,50);
         
         //Content Label Bounds
-        p_payment_beneficiary_info.setBounds(400, 0 + 80, 150, 50);
-        p_payment_amount_info.setBounds(400, 50 + 80, 150, 50);
-        p_payment_to_info.setBounds(400,100 + 80,150, 50);
+        p_payment_beneficiary_info.setBounds(400, 0 + 80, 250, 50);
+        p_payment_amount_info.setBounds(400, 50 + 80,150, 50);
+        p_payment_to_info.setBounds(400,100 + 80,200, 50);
         p_payment_contact_info.setBounds(400,150 + 80,150, 50);
         p_payment_type_info.setBounds(400,200 + 80,150, 50);
         p_payment_weight_info.setBounds(400,250 + 80,150, 50);
@@ -266,15 +256,8 @@ public class PaymentParcel extends JPanel implements MouseListener
         
         
       
-        p_payment_btn_confirm.addActionListener(new ActionListener()
-        {
-            @Override
-            public void actionPerformed(ActionEvent e) 
-            {
-                new AuthenticationForParcel();
-            }
-            
-        });  
+        p_payment_btn_confirm.addActionListener((o)->{ new AuthenticationForParcel();});
+
         
         //Panel
         setLayout(null);
@@ -282,6 +265,20 @@ public class PaymentParcel extends JPanel implements MouseListener
         setPreferredSize(new Dimension(1350,850));
         setVisible(true);
         
+    }
+    public static void setDataForParcelPanel(){
+        p_payment_beneficiary_info.setText(ParcelData.getFirstName()+" "+ParcelData.getLastName());
+        p_payment_amount_info.setText(WalletDataG.getItemPrice().toString());
+        p_payment_to_info.setText(ParcelData.getTo());
+        p_payment_contact_info.setText(ParcelData.getPhoneNumber().toString());
+        p_payment_type_info.setText(WalletDataG.getTransationType());
+        p_payment_weight_info.setText(WalletDataG.getItemWeight().toString());
+        p_payment_firstName_info.setText(ParcelData.getFirstName());
+        p_payment_lastName_info.setText(ParcelData.getLastName());
+        p_payment_address_info.setText(ParcelData.getAddress());
+        p_payment_state_info.setText(ParcelData.getState());
+        p_payment_district_info.setText(ParcelData.getDistrict());
+        p_payment_pincode_info.setText(ParcelData.getPincode());
     }
 
     @Override

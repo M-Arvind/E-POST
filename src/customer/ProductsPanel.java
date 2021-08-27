@@ -19,7 +19,7 @@ import static javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER;
 
 public class ProductsPanel extends JPanel implements ActionListener{
     
-    JButton revenueStamp, postageStamp, postageStamp1, collectorStamp, inlandLetter, postCard, envelope;
+    JButton revenueStamp, postageStamp, postageStamp1, collectorStamp, inlandLetter, envelope, postCard;
     JLabel revenueStampName, postageStampName, postageStamp1Name, collectorStampName, inlandLetterName, postCardName, envelopeName;
     JLabel revenueStampPrice, postageStampPrice, postageStamp1Price, collectorStampPrice, inlandLetterPrice, postCardPrice, envelopePrice;
     JLabel revenueStampQuantity, postageStampQuantity, postageStamp1Quantity, collectorStampQuantity, inlandLetterQuantity, postCardQuantity, envelopeQuantity;

@@ -1,6 +1,7 @@
 package customer;
 import Database.DatabaseOperations;
 import customer.DatasForCustomer.EPostData;
+import customer.DatasForCustomer.WalletDataG;
 import main.*;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -63,18 +64,18 @@ public class PaymentEPost extends JPanel implements MouseListener
     JLabel e_payment_message;
     
     //Content Label
-    JLabel e_payment_beneficiary_info;
-    JLabel e_payment_amount_info;
-    JLabel e_payment_to_info;
-    JLabel e_payment_contact_info;
-    JLabel e_payment_type_info;
-    JLabel e_payment_firstName_info;
-    JLabel e_payment_lastName_info;
-    JTextArea e_payment_address_info;
-    JLabel e_payment_state_info;
-    JLabel e_payment_district_info;
-    JLabel e_payment_pincode_info;
-    JTextArea e_payment_message_info;
+    static JLabel e_payment_beneficiary_info;
+    static JLabel e_payment_amount_info;
+    static JLabel e_payment_to_info;
+    static JLabel e_payment_contact_info;
+    static JLabel e_payment_type_info;
+    static JLabel e_payment_firstName_info;
+    static JLabel e_payment_lastName_info;
+    static JTextArea e_payment_address_info;
+    static JLabel e_payment_state_info;
+    static JLabel e_payment_district_info;
+    static JLabel e_payment_pincode_info;
+    static JTextArea e_payment_message_info;
 
     
     int X_FORCUSTOMER=0,Y_FORCUSTOMER=100,WIDTHFORCUSTOMER=1260,HIGHTFORCUSTOMER=750;
@@ -149,19 +150,6 @@ public class PaymentEPost extends JPanel implements MouseListener
         e_payment_message_info.setHighlighter(null);
         e_payment_message_info.setLineWrap(true);
         
-        //Content Label Text
-        e_payment_beneficiary_info.setText("Admin");
-        e_payment_amount_info.setText("12345");
-        e_payment_to_info.setText("User_369");
-        e_payment_contact_info.setText("1234567890");
-        e_payment_type_info.setText("Hard Copy");
-        e_payment_firstName_info.setText("Hello");
-        e_payment_lastName_info.setText("World");
-        e_payment_address_info.setText("Sai Leo Nagar,West Tambaram Poonthandalam, Village, Chennai Tamil Nadu 602109.");
-        e_payment_state_info.setText("Tamil Name");
-        e_payment_district_info.setText("Salem");
-        e_payment_pincode_info.setText("123456");
-        e_payment_message_info.setText("Hello!!!  Sai Leo Nagar,West Tambaram Poonthandalam, Village");
         
         //Button and title
         e_payment_title.setBounds(585, 25, 200, 50);
@@ -311,7 +299,24 @@ public class PaymentEPost extends JPanel implements MouseListener
         
          
     }
-   
+     public static void setDataForEPostPayment(){
+        e_payment_beneficiary_info.setText(EPostData.getFirstName()+" "+EPostData.getLastName());
+        e_payment_amount_info.setText(WalletDataG.getAmount().toString());
+        e_payment_to_info.setText(EPostData.getTo());
+        e_payment_contact_info.setText(EPostData.getPhoneNumber().toString());
+        if(EPostData.isHardCopy()&&EPostData.isHardCopy()) e_payment_type_info.setText("Hard Copy And Soft Copy");
+        else if(EPostData.isHardCopy())  e_payment_type_info.setText("Hard Copy");
+        else if(EPostData.isSoftCopy())  e_payment_type_info.setText("Soft Copy");
+        e_payment_firstName_info.setText(EPostData.getFirstName());
+        e_payment_lastName_info.setText(EPostData.getLastName());
+        e_payment_address_info.setText(EPostData.getAddress());
+        e_payment_state_info.setText(EPostData.getState());
+        e_payment_district_info.setText(EPostData.getDistrict());
+        e_payment_pincode_info.setText(EPostData.getPincode());
+        e_payment_message_info.setText(EPostData.getSubject());
+     
+    }
+    
 
     @Override
     public void mouseClicked(MouseEvent e) {
@@ -335,5 +340,5 @@ public class PaymentEPost extends JPanel implements MouseListener
     @Override
     public void mouseExited(MouseEvent e) {
             }
-    
+   
 }
