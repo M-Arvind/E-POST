@@ -21,6 +21,9 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import main.main;
 import Admin.StyledButtonUi;
+import customer.DatasForCustomer.InboxData;
+import static customer.WalletPanel.removeWalletCurrentDetails;
+import static customer.WalletPanel.setWalletCurrentDetails;
 import javax.swing.plaf.ButtonUI;
 public class CustomerPanel extends JPanel implements ActionListener, MouseListener{
     
@@ -44,25 +47,24 @@ public class CustomerPanel extends JPanel implements ActionListener, MouseListen
     
        setLayout(null);
        customerCard=new CardLayout();
+       PWallet=new WalletPanel();
        contentForCustomer=new JPanel(customerCard);
-       PInbox=new InboxPanel();
        PConsignment=new ConsignmentPanel();
        PE_Post=new E_PostPanel();
        PParcel=new ParcelPanel();
        PProducts=new ProductsPanel();
-       PWallet=new WalletPanel();
+       
        PConsignmentDetails=new ConsignmentDetails();
       
        //InboxPanel inboxPanel=(InboxPanel)PInbox;
-       contentForCustomer.add(PInbox,"Inbox");
-       contentForCustomer.add(PConsignment,"Consignment");
+       
+       contentForCustomer.add(PConsignment,"consignment");
        contentForCustomer.add(PE_Post,"E-Post");
        contentForCustomer.add(PParcel,"Parcel");
        contentForCustomer.add(PProducts,"Products");
        contentForCustomer.add(PWallet,"Wallet");
        contentForCustomer.add(PConsignmentDetails,"ConsignmentDetails");
-       //contentForCustomer.add(inboxPanel.scroll,"MessagePanel");
-       customerCard.first(contentForCustomer);
+       
        contentForCustomer.setBounds(X_FORCUSTOMER,Y_FORCUSTOMER,WIDTHFORCUSTOMER,HIGHTFORCUSTOMER);
        add(contentForCustomer);
        setPreferredSize(new Dimension(1350,890));
@@ -102,7 +104,7 @@ public class CustomerPanel extends JPanel implements ActionListener, MouseListen
        BInbox.setFont(font);
        BInbox.setBorder(null);
        BInbox.setUI(ui);
-       BInbox.setBounds(X_FORCUSTOMER,120,160,30);
+       BInbox.setBounds(X_FORCUSTOMER,110,160,30);
        BInbox.setBackground(Buttoncolor);
        BInbox.addActionListener(this);
        add(BInbox); 
@@ -157,6 +159,9 @@ public class CustomerPanel extends JPanel implements ActionListener, MouseListen
         Object o=e.getSource();
         
         if(o==BInbox){
+            InboxData.ListForInbox.clear();
+            PInbox=new InboxPanel();
+            contentForCustomer.add(PInbox,"Inbox");
             BInbox.setBounds(X_FORCUSTOMER,120,160,30);
             customerCard.show(contentForCustomer,"Inbox");
              
@@ -171,6 +176,7 @@ public class CustomerPanel extends JPanel implements ActionListener, MouseListen
             BConsignment.setBounds(X_FORCUSTOMER+120+60,120,160,30);
              if(!ConsignmentData.isIsUpdate())
                  customerCard.show(contentForCustomer,"Consignment");
+             /**
              else{
                if(PConsignment!=null){
                  PConsignment.removeAll();
@@ -178,6 +184,7 @@ public class CustomerPanel extends JPanel implements ActionListener, MouseListen
                 }
                  customerCard.show(contentForCustomer,"1");
              }
+             * */
              BInbox.setBounds(X_FORCUSTOMER,110,160,30);
              BE_Post.setBounds(X_FORCUSTOMER+180+180,110,160,30);
             BParcel.setBounds(X_FORCUSTOMER+180+180+180,110,160,30);
@@ -216,7 +223,11 @@ public class CustomerPanel extends JPanel implements ActionListener, MouseListen
                
         }
         else if(o==BWallet){
+            
+            
             BWallet.setBounds(X_FORCUSTOMER+180+180+180+180+180,120,160,30);
+            removeWalletCurrentDetails();
+            setWalletCurrentDetails();
             customerCard.show(contentForCustomer,"Wallet");
             
             BInbox.setBounds(X_FORCUSTOMER,110,160,30);
@@ -224,6 +235,8 @@ public class CustomerPanel extends JPanel implements ActionListener, MouseListen
             BE_Post.setBounds(X_FORCUSTOMER+180+180,110,160,30);
             BParcel.setBounds(X_FORCUSTOMER+180+180+180,110,160,30);
             BProducts.setBounds(X_FORCUSTOMER+180+180+180+180,110,160,30);
+            
+            
    
         }
     

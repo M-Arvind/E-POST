@@ -16,7 +16,9 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Date;
 import customer.DatasForCustomer.*;
+import static customer.DatasForCustomer.ProfileUpdateData.*;
 import customer.WalletAuthentication;
 import java.sql.*;
 import java.util.ArrayList;
@@ -40,7 +42,7 @@ public class DatabaseOperations
         try
         {
             Class.forName("oracle.jdbc.driver.OracleDriver");
-            connection = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE","E_Post","123");
+            connection = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE","E_post","123"); //-->E_post  123
         }
   
         
@@ -242,7 +244,7 @@ public class DatabaseOperations
     public static void WalletUpdatationOnMoneyOrder(){
         
         try{
-        String senderid="",recieverid="",recieverName="",balanceS="",balanceR="";
+        String senderid="",recieverid="",recieverName="",balanceS="",balanceR="",rcontact="",firstnamesender="",lastnamesender="",contactnumbersender="";
         Connection con=DatabaseOperations.getConnection();
         String saccountnoquery="select account_number from Customer where customer_id='Kishore P'";
         PreparedStatement  stSAccNo=con.prepareStatement(saccountnoquery);
@@ -304,6 +306,47 @@ public class DatabaseOperations
         String q2="update customer set BANK_BALANCE='"+Integer.toString(Integer.parseInt(balanceR)+Integer.parseInt(WalletData.MoneyOrderValues.get(1)))+"' where customer_id='"+WalletData.MoneyOrderValues.get(0)+"'";
         PreparedStatement stq2=con.prepareStatement(q2);
         stq2.executeQuery();
+        
+        
+        String q3="select contact_number from customer where customer_id='"+recieverid+"'";
+        PreparedStatement  rcontactnumber=con.prepareStatement(q3);
+        ResultSet rs6=rcontactnumber.executeQuery(q3);
+        if(rs6.next()){
+            rcontact=rs6.getString(1);
+        }
+        String q4="select first_name,last_name,contact_number from customer where customer_id='"+Login.login.user_ID+"'";
+        PreparedStatement  flnamesender=con.prepareStatement(q4);
+        ResultSet rs7=flnamesender.executeQuery(q4);
+        if(rs7.next()){
+            firstnamesender=rs7.getString("first_name");
+            lastnamesender=rs7.getString("last_name");
+            contactnumbersender=rs7.getString("contact_number");
+            
+        }
+        
+        
+        String consignmentQuery="insert into consignment (consignment_id,CUSTOMER_ID,RECEIVER_ID,ITEM,RECEIVER_FIRST_NAME,RECEIVER_LAST_NAME,RECEIVER_ADDRESS,RECEIVER_CONTACT_NUMBER,CUSTOMER_FIRST_NAME,CUSTOMER_LAST_NAME, CUSTOMER_CONTACT_NUMBER,SHIPPING_ADDRESS,PAYMENT_METHOD,ORDER_DATE,DELIVERY_DATE, STATUS) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        PreparedStatement  st1=con.prepareStatement(consignmentQuery);
+        st1.setString(1,getConsignmentIdGenerator());
+        st1.setString(2,Login.login.user_ID);
+        
+        st1.setString(3,WalletData.MoneyOrderValues.get(0));
+        st1.setString(4,"MoneyOrder");
+        st1.setString(5,WalletData.MoneyOrderValues.get(2));
+        st1.setString(6,WalletData.MoneyOrderValues.get(3));
+        st1.setString(7,WalletData.MoneyOrderValues.get(5));
+        st1.setString(8,rcontact);
+        st1.setString(9,firstnamesender);
+        st1.setString(10,lastnamesender);
+        st1.setString(11,contactnumbersender);
+        st1.setString(12,WalletData.MoneyOrderValues.get(5) );
+        st1.setString(13, "E-Pay");
+        st1.setDate(14,java.sql.Date.valueOf(java.time.LocalDate.now()));
+        st1.setDate(15,java.sql.Date.valueOf(java.time.LocalDate.now()));
+        st1.setString(16,"completed");
+        st1.executeUpdate();
+        
+        
         
         con.setAutoCommit(true);
         con.close(); 
@@ -742,6 +785,107 @@ public class DatabaseOperations
             System.out.println(e);
         }
         return deliveryDetails;
+    }
+    public static void getInboxDetails(){
+       
+        try{
+            Connection con=DatabaseOperations.getConnection();
+            String cId=Login.login.user_ID;
+            String query="select * from Inbox where sender_name='"+cId+"'";
+            PreparedStatement  st1=con.prepareStatement(query);
+            ResultSet res=st1.executeQuery(query);
+            while(res.next()){
+                InboxData obj=new InboxData();
+                obj.setMessage_ID(res.getString("messaage_ID"));
+                obj.setMessage(res.getString("message"));
+                obj.setSender_name(res.getString("sender_name"));
+                obj.setReceiver_name(res.getString("receiver_ID"));
+                obj.setSent_Date(res.getString("sent_Date"));
+                obj.setTime(res.getString("time"));
+                obj.setCustomer_Id(res.getString("customer_Id"));
+                obj.setReceiver_Id(res.getString("receiver_Id"));
+                obj.setSubject(res.getString("subject"));
+                InboxData.ListForInbox.add(obj);
+            }
+        }catch(SQLException e){
+            System.out.println("Error in getInboxDetails  "+e.toString());
+        }
+        
+    }
+    public static void profileUpdationOnSave(){
+        try{
+            Connection con=DatabaseOperations.getConnection();
+            String cId=Login.login.user_ID;
+            
+            String query="update customer set first_name=?,last_name=?,DOB=?,AGE=?,CONTACT_NUMBER=?,GENDER=?, ADDRESS=?,ACCOUNT_NUMBER=? where customer_id=?";
+            PreparedStatement profileUpdateQuery=con.prepareStatement(query);
+            profileUpdateQuery.setString(1,ProfileUpdateData.getFIRST_NAME());
+            
+            profileUpdateQuery.setString(2,ProfileUpdateData.getLAST_NAME());
+            
+            profileUpdateQuery.setDate(3,java.sql.Date.valueOf(ProfileUpdateData.getDOB()));
+            
+            profileUpdateQuery.setString(4,ProfileUpdateData.getAGE());
+           
+            profileUpdateQuery.setString(5,ProfileUpdateData.getCONTACT_NUMBER());
+            
+            profileUpdateQuery.setString(6,ProfileUpdateData.getGENDER());
+            
+            profileUpdateQuery.setString(7,ProfileUpdateData.getADDRESS());
+            
+            profileUpdateQuery.setString(8,ProfileUpdateData.getACCOUNT_NUMBER());
+            
+            profileUpdateQuery.setString(9,Login.login.user_ID);
+            
+            profileUpdateQuery.executeQuery();
+           
+            JOptionPane.showMessageDialog(null,"Updation Successful!");
+            con.setAutoCommit(true);
+            con.close();
+            
+        }catch(Exception e){
+            System.out.println("Exception in profileUpdationOnSave() : DatabaseOperations----->"+e.getStackTrace().toString());
+        }
+    }
+    public static ArrayList<WalletData> getCurrentWalletDetails(){
+        ArrayList<WalletData>  list=new ArrayList<WalletData>();
+        try{
+            Connection con=DatabaseOperations.getConnection();
+            String Cid=Login.login.user_ID;
+            String query="select * from wallet where customer_id='"+Cid+"'";
+            PreparedStatement st1=con.prepareStatement(query);
+            ResultSet res=st1.executeQuery(query);
+            while(res.next()){
+                WalletData ob=new WalletData();
+                ob.setTransactionid(res.getString("transaction_id"));
+                ob.setTransactiontype(res.getString("TRANSACTION_TYPE"));
+                ob.setTransactiondate(res.getString("TRANSACTION_DATE"));
+                ob.setRecieverid(res.getString("RECEIVER_ID"));
+                ob.setBeneficiary(res.getString("first_name")+" "+res.getString("last_name"));
+                ob.setAmount(res.getString("Amount"));
+                ob.setBalance(res.getString("balance"));
+                list.add(ob);
+            }
+            int i=0;
+            System.out.println(list.size());
+            /**
+            while(i<list.size()){
+                System.out.println(list.get(i).getTransactionid());
+                System.out.println(list.get(i).getTransactiontype());
+                System.out.println(list.get(i).getTransactiondate());
+                System.out.println(list.get(i).getRecieverid());
+                System.out.println(list.get(i).getBeneficiary());
+                System.out.println(list.get(i).getAmount());
+                System.out.println(list.get(i).getBalance());
+                i++;
+                
+            }
+            *  **/
+        }catch(Exception e){
+            System.out.println("Exception in getCurrentWalletDetails() : databaseoperations---->"+e.toString());
+            
+        }
+        return list;
     }
 
 

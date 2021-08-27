@@ -112,10 +112,10 @@ public class MoneyOrder extends JPanel
                WalletData.MoneyOrderValues.add(moneyOrder_firstName_info.getText()); //2
                WalletData.MoneyOrderValues.add(moneyOrder_lastName_info.getText()); //3
                WalletData.MoneyOrderValues.add(moneyOrder_type_info.getText()); //4
-               WalletData.MoneyOrderValues.add(moneyOrder_address_info.getText());
-               WalletData.MoneyOrderValues.add(moneyOrder_state_info.getText());
-               WalletData.MoneyOrderValues.add(moneyOrder_district_info.getText());
-               WalletData.MoneyOrderValues.add(moneyOrder_pincode_info.getText());
+               WalletData.MoneyOrderValues.add(moneyOrder_address_info.getText());//5
+               WalletData.MoneyOrderValues.add(moneyOrder_state_info.getText());//6
+               WalletData.MoneyOrderValues.add(moneyOrder_district_info.getText());//7
+               WalletData.MoneyOrderValues.add(moneyOrder_pincode_info.getText());//8
                new WalletAuthentication();
                
             
