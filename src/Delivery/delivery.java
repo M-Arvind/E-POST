@@ -154,13 +154,13 @@ public class delivery extends JPanel implements ActionListener,MouseListener
            completed.model1.addRow(new Object[]{temp1.getConsignment_ID(),temp1.getCustomer_ID(),temp1.getReceiver_ID(),temp1.getItem(),temp1.getDelivery_ID(),temp1.getPayment_method(),temp1.getDelivery_date(),temp1.getStatus()});
         } 
     }
-    public static void main(String [] args)
+    /*public static void main(String [] args)
     {
         JFrame frame = new JFrame();
         frame.add(new delivery());
         frame.pack();
         frame.setVisible(true);
-    }
+    }*/
 
     @Override
     public void actionPerformed(ActionEvent e) 
@@ -190,7 +190,7 @@ public class delivery extends JPanel implements ActionListener,MouseListener
             //search.setText("");
         //}
             if(e.getSource() == IProfile)
-            main.switchPage("DeliveryProfile");
+            main.switchPage("deliveryProfileView");
         }
 
     @Override

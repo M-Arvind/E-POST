@@ -115,7 +115,8 @@ public class DatabaseOperations
         ArrayList<consignment> list = new ArrayList<consignment>(); 
        try {
            Connection con=DatabaseOperations.getConnection();
-           String Delivery_Id="Barath.B";
+           String Delivery_Id=Login.login.user_ID;
+           System.out.println(Delivery_Id);
            String query="select *from Consignment where delivery_ID='"+Delivery_Id+"'";
            PreparedStatement  st1=con.prepareStatement(query);
            ResultSet res=st1.executeQuery(query);
@@ -167,8 +168,9 @@ public class DatabaseOperations
         ArrayList<consignment> list = new ArrayList<consignment>(); 
        try {
            Connection con=DatabaseOperations.getConnection();
-           String Delivery_Id="Barath.B";
-           String Status = "Order Placed";
+           String Delivery_Id=Login.login.user_ID;
+           
+           String Status = "Completed";
            String query="select *from Consignment where delivery_ID='"+Delivery_Id+"'and status = '"+Status+"'";
            PreparedStatement  st1=con.prepareStatement(query);
            ResultSet res=st1.executeQuery(query);           
@@ -208,7 +210,22 @@ public class DatabaseOperations
       
        return list;
     }
-    
+    public static void UpdateDeliveryDeatils(String conid,String Status)
+    {
+        Connection con=DatabaseOperations.getConnection();
+        try
+        {
+            String query="update Consignment set status='"+Status+"'where consignment_Id ='"+conid+"'";
+            PreparedStatement smt = con.prepareStatement(query);
+            smt.execute(query);
+            getConnection().setAutoCommit(true);
+            JOptionPane.showMessageDialog(null, "Successful");
+        }
+        catch(Exception e1)
+        {
+            System.out.println("Update---->"+e1.toString());
+        }
+    }
     
     
     
@@ -315,47 +332,7 @@ public class DatabaseOperations
         }
     }
     
-    public static ArrayList getOngoingDeliveryConsignmentDetils(String delivery_id)
-    {
-        ArrayList ongoing = new ArrayList();        
-        try
-        {
-            Statement st = getConnection().createStatement();
-            ResultSet rs =  st.executeQuery("select * from Consignment where delivery_ID ='"+delivery_id+"'");
-            if(rs.next())
-            {
-                ongoing.add(rs.getString("consignment_id"));
-                ongoing.add(rs.getString("customer_id"));
-                ongoing.add(rs.getString("receiver_id"));
-                ongoing.add(rs.getString("item"));
-                ongoing.add(rs.getString("delivery_id"));        
-                ongoing.add(rs.getString("payment_method"));                
-                ongoing.add(rs.getString("order_date"));
-                ongoing.add(rs.getString("status"));
-                
-                /*ongoing.add(rs.getString("consignment_id"));
-                ongoing.add(rs.getString("consignment_id"));
-                ongoing.add(rs.getString("consignment_id"));
-                ongoing.add(rs.getString("consignment_id"));
-                ongoing.add(rs.getString("consignment_id"));
-                ongoing.add(rs.getString("consignment_id"));
-                ongoing.add(rs.getString("consignment_id"));
-                ongoing.add(rs.getString("consignment_id"));
-                ongoing.add(rs.getString("consignment_id"));
-                ongoing.add(rs.getString("consignment_id"));
-                ongoing.add(rs.getString("consignment_id"));
-                ongoing.add(rs.getString("consignment_id"));*/
-                
-                
-            }
-        }
-        catch(Exception e)
-        {
-            
-        }
-        
-        return ongoing;
-    }
+   
     
    public static String getConsignmentIdGenerator() {
        try{
