@@ -1,4 +1,5 @@
 package Admin;
+import Consignment.consignment;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -39,6 +40,7 @@ public class AdminPanel extends JPanel implements ActionListener, MouseListener{
     private JLabel LAdmin;
     private Font font=new Font("Bold",Font.BOLD,20);
     private JLabel userLogo;
+    public static String card;
     
     public AdminPanel(){
     
@@ -162,15 +164,16 @@ public class AdminPanel extends JPanel implements ActionListener, MouseListener{
         
         if(o == bNew){
             adminCard.show(contentForAdmin,"NewConsignment");
-                bNew.setBounds(X_FORCUSTOMER,120,160,30);
-                bOnGoing.setBounds(X_FORCUSTOMER+180,110,160,30);
-                bCompleted.setBounds(X_FORCUSTOMER+180+180,110,160,30);
-                bCustomer.setBounds(X_FORCUSTOMER+180+180+180,110,160,30);
-                bDelivery.setBounds(X_FORCUSTOMER+180+180+180+180,110,160,30);
-                bStocks.setBounds(X_FORCUSTOMER+180+180+180+180+180,110,160,30);
+            bNew.setBounds(X_FORCUSTOMER,120,160,30);
+            bOnGoing.setBounds(X_FORCUSTOMER+180,110,160,30);
+            bCompleted.setBounds(X_FORCUSTOMER+180+180,110,160,30);
+            bCustomer.setBounds(X_FORCUSTOMER+180+180+180,110,160,30);
+            bDelivery.setBounds(X_FORCUSTOMER+180+180+180+180,110,160,30);
+            bStocks.setBounds(X_FORCUSTOMER+180+180+180+180+180,110,160,30);
            
         }
         else if(o == bOnGoing){
+
             adminCard.show(contentForAdmin,"OnGoingConsignment");
             
             bNew.setBounds(X_FORCUSTOMER,110,160,30);
@@ -179,8 +182,10 @@ public class AdminPanel extends JPanel implements ActionListener, MouseListener{
             bCustomer.setBounds(X_FORCUSTOMER+180+180+180,110,160,30);
             bDelivery.setBounds(X_FORCUSTOMER+180+180+180+180,110,160,30);
             bStocks.setBounds(X_FORCUSTOMER+180+180+180+180+180,110,160,30);
+            consignment.setOngoingAdminConsignmentDetails();
         }    
         else if(o == bCompleted) {
+            consignment.setCompletedAdminConsignmentDetails();
             adminCard.show(contentForAdmin,"CompletedConsignment");
 
             bNew.setBounds(X_FORCUSTOMER,110,160,30);
@@ -189,8 +194,9 @@ public class AdminPanel extends JPanel implements ActionListener, MouseListener{
             bCustomer.setBounds(X_FORCUSTOMER+180+180+180,110,160,30);
             bDelivery.setBounds(X_FORCUSTOMER+180+180+180+180,110,160,30);
             bStocks.setBounds(X_FORCUSTOMER+180+180+180+180+180,110,160,30);
-                }
+        }
         else if(o == bCustomer)  {
+            profile.CustomerProfile.setCustomerDetails();
             adminCard.show(contentForAdmin,"CustomerDetails");
                 
             bNew.setBounds(X_FORCUSTOMER,110,160,30);
@@ -201,6 +207,7 @@ public class AdminPanel extends JPanel implements ActionListener, MouseListener{
             bStocks.setBounds(X_FORCUSTOMER+180+180+180+180+180,110,160,30);
                 }
         else if(o == bDelivery){
+                profile.DeliveryProfile.setDeliveryDetails();
                 adminCard.show(contentForAdmin,"DeliveryDetails");
             
                 bNew.setBounds(X_FORCUSTOMER,110,160,30);

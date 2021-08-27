@@ -28,6 +28,9 @@ public class main extends JFrame {
         delivery deliveryPanel = new delivery();
         DeliveryProfileView deliveryProfileView =  new DeliveryProfileView();
         DeliveryProfileUpdate deliveryProfileUpdate = new DeliveryProfileUpdate();
+        AdminDeliveryProfile ADeliveryProfile = new AdminDeliveryProfile();
+        AdminCustomerProfile ACustomerProfile = new AdminCustomerProfile();
+
         
 
         PaymentEPost paymentEPost=new PaymentEPost();
@@ -49,6 +52,8 @@ public class main extends JFrame {
         mainPanel.add(deliveryPanel,"deliveryPanel");
         mainPanel.add(deliveryProfileView,"deliveryProfileView");
         mainPanel.add(deliveryProfileUpdate,"deliveryProfileUpdate");
+        mainPanel.add(ADeliveryProfile, "AdminDeliveryprofile");
+        mainPanel.add(ACustomerProfile, "ACustomerProfile");
         card.first(mainPanel);
         JScrollPane scroll=new JScrollPane(mainPanel,ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         scroll.setBounds(0,0,2000, 1000);

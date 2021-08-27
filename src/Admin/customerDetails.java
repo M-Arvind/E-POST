@@ -7,18 +7,21 @@ import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import main.main;
 
 public class customerDetails extends JPanel implements ListSelectionListener {
     private JScrollPane tableScroll;
-    private JTable customerDetailsTable;
+    public static JTable customerDetailsTable;
+    public static DefaultTableModel customermodel;
     public customerDetails() {
         
-        Object[][] rows = {{"12345", "Keshav", "Arvind", "E Post", "12345", "E PAY", "29.09.2001", "Order Placed"}, {"2345", "Keshav", "Arvind", "E Post", "12345", "E PAY", "29.09.2001", "Order Placed"}};
         String[] columns = {"Customer ID", "First Name","Last Name", "DOB", "Age" ,"Contact Number", "Gender", "Bank Balance"};
         
-        customerDetailsTable = new JTable(rows, columns);
+        customermodel = new DefaultTableModel();
+        customermodel.setColumnIdentifiers(columns);
+        customerDetailsTable = new JTable(customermodel);
         Border border = new LineBorder(new Color(71, 63, 145), 1, true);
         
         customerDetailsTable.setRowHeight(30);
@@ -47,8 +50,15 @@ public class customerDetails extends JPanel implements ListSelectionListener {
 
     @Override
     public void valueChanged(ListSelectionEvent e) {
-            int SelectedRow = customerDetailsTable.getSelectedRow();
-            System.out.println(customerDetailsTable.getValueAt(SelectedRow, 1));
-            main.switchPage("AdminProfileView");
+            int selectRow = customerDetailsTable.getSelectedRow();
+            if(selectRow != -1){
+            String selectedData = (String) customerDetailsTable.getValueAt(selectRow, 0);
+            profile.CustomerProfile.setCustomerProfile(selectedData);
+            main.switchPage("ACustomerProfile");
+            System.out.println("Selected: " + selectedData);
+            customerDetailsTable.clearSelection();
+        }
+
     }
+    
 }

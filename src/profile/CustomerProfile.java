@@ -1,6 +1,10 @@
 package profile;
 
+import Admin.AdminCustomerProfile;
+import Admin.customerDetails;
+import Database.DatabaseOperations;
 import java.sql.Date;
+import java.util.ArrayList;
 
 public class CustomerProfile {
     
@@ -67,8 +71,8 @@ public class CustomerProfile {
         this.contactNumber = contactNumber;
     }
 
-    public void getGender(String gender) {
-        this.gender = gender;
+    public String getGender() {
+        return gender;
     }
 
     public void setGender(String gender) {
@@ -123,5 +127,40 @@ public class CustomerProfile {
         this.accountNumber = accountNumber;
     }
      
+    public static void setCustomerDetails(){
+        
+            customerDetails.customerDetailsTable.getSelectionModel().clearSelection();
+
+            while(customerDetails.customermodel.getRowCount()>0){
+                customerDetails.customermodel.removeRow(0);
+                System.out.println("deleted row");
+            }
+ 
+            ArrayList<CustomerProfile> listForDeliveryConsignment = DatabaseOperations.getCustomerDetails();         
+            for(int i=0;i<listForDeliveryConsignment.size();i++)
+            {
+                CustomerProfile temp = listForDeliveryConsignment.get(i);
+                customerDetails.customermodel.addRow(new Object[]{temp.getId(), temp.getFirstName(), temp.getLastName(), temp.getDob(), temp.getAge(),temp.getContactNumber(),temp.getGender(),temp.getBankBalance()});
+            }
+    }
+    
+    public static void setCustomerProfile(String id){
+        CustomerProfile details = DatabaseOperations.getCustomerProfile(id);
+        
+        AdminCustomerProfile.CustomerIDValue.setText(details.getId());
+        AdminCustomerProfile.FirstNameValue.setText(details.getFirstName());
+        AdminCustomerProfile.LastNameValue.setText(details.getLastName());
+        AdminCustomerProfile.DOBValue.setText(details.getDob().toString());
+        AdminCustomerProfile.AgeValue.setText(Integer.toString(details.getAge()));
+        AdminCustomerProfile.ContactNumberValue.setText(details.getContactNumber());
+        AdminCustomerProfile.GenderValue.setText(details.getGender());
+        AdminCustomerProfile.AddressValue.setText(details.getAddress());
+        AdminCustomerProfile.BankBalanceValue.setText(details.getBankBalance());
+        AdminCustomerProfile.AccountNumberValue.setText(details.getAccountNumber());
+        AdminCustomerProfile.UserNameTop.setText(details.getFirstName()+" "+details.getLastName());
+        System.out.println(details.getFirstName());
+        
+    }
     
 }
+//JLabel CustomerIDValue,FirstNameValue,LastNameValue,DOBValue,AgeValue,ContactNumberValue,GenderValue,AddressValue,BankBalanceValue,AccountNumberValue;

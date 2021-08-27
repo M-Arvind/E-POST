@@ -10,18 +10,22 @@ import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import main.main;
 
 public class deliveryDetails extends JPanel implements ListSelectionListener {
     private JScrollPane tableScroll;
-    private JTable deliveryDetailsTable;
+    public static JTable deliveryDetailsTable;
+    public static DefaultTableModel deliveryModel;
+    
     public deliveryDetails() {
         
-        Object[][] rows = {{"12345", "Keshav", "Arvind", "E Post", "12345", "E PAY", "29.09.2001", "Order Placed"}, {"2345", "Keshav", "Arvind", "E Post", "12345", "E PAY", "29.09.2001", "Order Placed"}};
-        String[] columns = {"Customer ID", "First Name","Last Name", "DOB", "Join Date" ,"Contact Number", "Gender", "Salary"};
-        
-        deliveryDetailsTable = new JTable(rows, columns);
+      
+        String[] columns = {"Delivery ID", "First Name","Last Name", "DOB", "Join Date" ,"Contact Number", "Gender", "Salary"};
+        deliveryModel = new DefaultTableModel();
+        deliveryModel.setColumnIdentifiers(columns);
+        deliveryDetailsTable = new JTable(deliveryModel);
         Border border = new LineBorder(new Color(71, 63, 145), 1, true);
         
         deliveryDetailsTable.setRowHeight(30);
@@ -49,8 +53,15 @@ public class deliveryDetails extends JPanel implements ListSelectionListener {
 
     @Override
     public void valueChanged(ListSelectionEvent e) {
-        int selectedRow = deliveryDetailsTable.getSelectedRow();
-        System.out.println(deliveryDetailsTable.getValueAt(selectedRow, 1));
-        main.switchPage("AdminProfileView");
+        int selectRow = deliveryDetailsTable.getSelectedRow();
+            if(selectRow != -1){
+            String selectedData = (String) deliveryDetailsTable.getValueAt(selectRow, 0);
+            profile.DeliveryProfile.setDeliveryProfile(selectedData);
+            main.switchPage("AdminDeliveryprofile");
+            System.out.println("Selected: " + selectedData);
+            deliveryDetailsTable.clearSelection();
+            }
+
+      }
+
     }
-}

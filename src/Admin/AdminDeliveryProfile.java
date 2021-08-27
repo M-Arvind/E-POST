@@ -4,38 +4,31 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.border.Border;
 import main.main;
-public class AdminProfileView extends JPanel implements ActionListener, MouseListener  {
+public class AdminDeliveryProfile extends JPanel implements ActionListener, MouseListener  {
 	//JPanel ViewPanel;
 	Icon ProfIcon,EditIcon,BackIcon;
 	Border emptyBorder = BorderFactory.createEmptyBorder();
 	public static JLabel UserNameTop;
-	JLabel UserNameLabel,ContactNoLabel,DOBLabel,AgeLabel,JoinDateLabel,PAddressLabel,TAddressLabel,MaritalStatusLabel,DesignationLabel, ExperienceLabel, GenderLabel, SalaryLabel;
+	JLabel UserNameLabel,ContactNoLabel,DOBLabel,AgeLabel,JoinDateLabel,PAddressLabel,TAddressLabel,MaritalStatusLabel,DesignationLabel, GenderLabel, SalaryLabel;
 	public static JLabel UserNameValue,ContactNoValue,DOBValue,AgeValue,JoinDateValue,PAddressValue,TAddressValue,MaritalValue,DesignationValue, ExperienceValue, GenderValue, SalaryValue;
 	JLabel Collon1,Collon2,Collon3,Collon4,Collon5,Collon6,Collon7,Collon8,Collon9, Collon10, Collon11, Collon12;
 	JButton ProfIconLabel,BackIconLabel,EditIconLabel;
 	JButton SaveButton, logoutButton;
 	
-	int X=230,Y=60;
+	int X=230,Y=90;
 	int R=34,G=34,B=45;
 	int labelFontSize=20;
-	public AdminProfileView() {
-		// TODO Auto-generated constructor stub
+	public AdminDeliveryProfile() 
+        {
 		
-		/**
-		setBounds(0,0,1350,890);
-		setBackground(new Color(R,G,B));
-		setLayout(null);
-		setVisible(true);
-		**/
 		
-		//profile image
-		
-                ProfIcon=new ImageIcon(getClass().getResource("/Images/ProfileImage.png"));
+		ProfIcon=new ImageIcon(getClass().getResource("/Images/ProfileImage.png"));
                 ProfIconLabel=new JButton(ProfIcon);
                 ProfIconLabel.setBounds(X-130,Y-88,120,120);
                 ProfIconLabel.setVisible(true);
                 ProfIconLabel.setBackground(new Color(R,G,B));
                 ProfIconLabel.setBorder(emptyBorder);
+                ProfIconLabel.addActionListener(this);
                 ProfIconLabel.setContentAreaFilled(false);
                 add(ProfIconLabel);
 
@@ -53,15 +46,15 @@ public class AdminProfileView extends JPanel implements ActionListener, MouseLis
 
                 //Edit icon
 
-                EditIcon=new ImageIcon(getClass().getResource("/Images/edit_white.png"));
-                EditIconLabel=new JButton(EditIcon);
-                EditIconLabel.setBounds(X+1000,Y-50,40,40);
-                EditIconLabel.setBackground(new Color(R,G,B));
-                EditIconLabel.setBorder(emptyBorder);
-                EditIconLabel.setVisible(true);
-                EditIconLabel.addMouseListener(this);
-                EditIconLabel.setContentAreaFilled(false);
-                add(EditIconLabel);
+//                EditIcon=new ImageIcon(getClass().getResource("/Images/edit_white.png"));
+//                EditIconLabel=new JButton(EditIcon);
+//                EditIconLabel.setBounds(X+1000,Y-50,40,40);
+//                EditIconLabel.setBackground(new Color(R,G,B));
+//                EditIconLabel.setBorder(emptyBorder);
+//                EditIconLabel.setVisible(true);
+//                EditIconLabel.addMouseListener(this);
+//                EditIconLabel.setContentAreaFilled(false);
+//                add(EditIconLabel);
 		
 		//Usernametop
 		
@@ -295,26 +288,7 @@ public class AdminProfileView extends JPanel implements ActionListener, MouseLis
 		add(GenderLabel);
 		add(Collon10);
 		add(GenderValue);
-                
-                ExperienceLabel=new JLabel("Experience");
-		ExperienceLabel.setBounds(X,Y+650-30,200,150);
-		ExperienceLabel.setFont(new Font("Bold",Font.BOLD,labelFontSize));
-		ExperienceLabel.setForeground(Color.WHITE);
-		Collon11=new JLabel(":");
-		Collon11.setBounds(X+200,Y+650-30,20,150);
-		Collon11.setFont(new Font("Bold",Font.BOLD,labelFontSize));
-		Collon11.setForeground(Color.WHITE);
-		
-		//designation value label
-		
-		ExperienceValue=new JLabel("Experience");
-		ExperienceValue.setBounds(X+240,Y+650-30,800,150);
-		ExperienceValue.setFont(new Font("Bold",Font.BOLD,labelFontSize));
-		ExperienceValue.setForeground(Color.WHITE);
-		
-		add(ExperienceLabel);
-		add(Collon11);
-		add(ExperienceValue);
+                               
                 
                 SalaryLabel=new JLabel("Salary");
 		SalaryLabel.setBounds(X,Y+710-30,200,150);
@@ -336,13 +310,17 @@ public class AdminProfileView extends JPanel implements ActionListener, MouseLis
 		add(Collon12);
 		add(SalaryValue);
                 
-                logoutButton=new JButton("Logout");
-		logoutButton.setBounds(X+400,Y+780,100,30);
-		logoutButton.setForeground(Color.WHITE);
-		logoutButton.setBackground(new Color(71,63,145));
-                logoutButton.addActionListener(this);
-		add(logoutButton);
+//                logoutButton=new JButton("Logout");
+//		logoutButton.setBounds(X+400,Y+780,100,30);
+//		logoutButton.setForeground(Color.WHITE);
+//		logoutButton.setBackground(new Color(71,63,145));
+//                logoutButton.addActionListener((e1)->{
+                
+//                  main.switchPage("login");
+//                });
+//		add(logoutButton);
 		
+				
 		setBounds(0,0,1350,890);
 		setBackground(new Color(R,G,B));
 		setLayout(null);
@@ -351,24 +329,24 @@ public class AdminProfileView extends JPanel implements ActionListener, MouseLis
 		
 		
 	}
+        
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        main.switchPage("login");
-    }
-
+    
     @Override
     public void mouseClicked(MouseEvent e) {
-        if(e.getSource() == BackIconLabel){
+        if(e.getSource() == BackIconLabel)
+        {
             main.switchPage("AdminPanel");
         }
-        else if(e.getSource() == EditIconLabel){
-            main.switchPage("AdminProfileUpdate");
+        else if(e.getSource()== EditIconLabel)
+        {
+             main.switchPage("deliveryProfileUpdate");
         }
     }
 
     @Override
-    public void mousePressed(MouseEvent e) {
+    public void mousePressed(MouseEvent e) 
+    {
         
     }
 
@@ -384,6 +362,11 @@ public class AdminProfileView extends JPanel implements ActionListener, MouseLis
 
     @Override
     public void mouseExited(MouseEvent e) {
+        
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
         
     }
 

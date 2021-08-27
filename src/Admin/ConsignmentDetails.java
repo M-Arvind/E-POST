@@ -15,14 +15,16 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-class ConsignmentDetails extends JPanel implements ActionListener{
+import javax.swing.JTextArea;
+public class ConsignmentDetails extends JPanel implements ActionListener{
     private JLabel consignDetail, item, itemPrice, itemWeight, itemCode, agentId, orderDate, deliverDate, payment, status;
     private JLabel billingDetail, senderId, seFirstName, seLastName, seConstact, seAddress;
     private JLabel shipDetails, receId, receFirstName, receLastName, receContact, receAdress;
     
-    private JLabel vConsignDetail, vItem, vItemPrice, vItemWeight, vItemCode, vAgentId, vOrderDate, vDeliverDate, vPayment, vStatus;
-    private JLabel vSenderId, vSeFirstName, vSeLastName, vSeConstact, vSeAddress;
-    private JLabel vReceId, vReceFirstName, vReceLastName, vReceContact, vReceAdress;
+    public static JLabel vConsignDetail, vItem, vItemPrice, vItemWeight, vItemCode, vAgentId, vOrderDate, vDeliverDate, vPayment, vStatus;
+    public static JLabel vSenderId, vSeFirstName, vSeLastName, vSeConstact;
+    public static JLabel vReceId, vReceFirstName, vReceLastName, vReceContact;
+    public static JTextArea vSeAddress, vReceAdress;
     
     Icon icon;
     private JButton back;
@@ -58,6 +60,8 @@ class ConsignmentDetails extends JPanel implements ActionListener{
         
         consignDetail = new JLabel("Consignment Details");
         consignDetail.setFont(font);
+        vConsignDetail = new JLabel();
+        vConsignDetail.setFont(new Font("Segoe UI", Font.BOLD, 20));
         item = new JLabel("Item             :");
         item.setFont(fon);
         itemPrice = new JLabel("ItemPrice      :");
@@ -118,8 +122,11 @@ class ConsignmentDetails extends JPanel implements ActionListener{
         vSeLastName.setFont(fon);
         vSeConstact = new JLabel("8754275064");
         vSeConstact.setFont(fon);
-        vSeAddress = new JLabel("<html>"+"48/18c, Lakshmi nagar Convent Road Mittapudhur Salem asfjcbakvbcadljvhbcadjdsvc ksdhvhbc jhskdhvckjsdvcjshdvkjcsdzkjvc jhjv v vjk v"+"</html>");
+        vSeAddress = new JTextArea();
         vSeAddress.setFont(fon);
+        vSeAddress.setLineWrap(true);
+        vSeAddress.setWrapStyleWord(true);
+        vSeAddress.setEditable(false);
         
         shipDetails = new JLabel("Shipping Details");
         shipDetails.setFont(font);
@@ -142,10 +149,14 @@ class ConsignmentDetails extends JPanel implements ActionListener{
         vReceLastName.setFont(fon);
         vReceContact = new JLabel("123456789");
         vReceContact.setFont(fon);
-        vReceAdress = new JLabel("<html>"+"48/18c, Lakshmi nagar Convent Road Mittapudhur Salem asfjcbakvbcadljvhbcadjdsvc ksdhvhbc jhskdhvckjsdvcjshdvkjcsdzkjvc jhjv v vjk v"+"</html>");       
+        vReceAdress = new JTextArea();       
         vReceAdress.setFont(fon);
+        vReceAdress.setLineWrap(true);
+        vReceAdress.setWrapStyleWord(true);
+        vReceAdress.setEditable(false);
         
         consignDetail.setBounds(80, 40, 240, 40);
+        vConsignDetail.setBounds(1070, 40, 240, 40);
         item.setBounds(100, 80, 200, 40);
         itemPrice.setBounds(100, 120, 240, 40);
         itemWeight.setBounds(100, 160, 240, 40);
@@ -177,7 +188,7 @@ class ConsignmentDetails extends JPanel implements ActionListener{
         vSeFirstName.setBounds(270, 290, 240, 40);
         vSeLastName.setBounds(270, 330, 240, 40);
         vSeConstact.setBounds(270, 370, 240, 40);
-        vSeAddress.setBounds(270, 410, 350, 120);
+        vSeAddress.setBounds(270, 420, 350, 80);
         
         shipDetails.setBounds(660, 210, 240, 40);
         receId.setBounds(680, 250, 240, 40);
@@ -190,9 +201,10 @@ class ConsignmentDetails extends JPanel implements ActionListener{
         vReceFirstName.setBounds(840, 290, 240, 40);
         vReceLastName.setBounds(840, 330, 240, 40);
         vReceContact.setBounds(840, 370, 240, 40);
-        vReceAdress.setBounds(840, 410, 350, 120);
+        vReceAdress.setBounds(840, 420, 350, 120);
         
         details.add(vItem);
+        details.add(vConsignDetail);
         details.add(vItemCode);
         details.add(vItemPrice);
         details.add(vItemWeight);
@@ -249,13 +261,15 @@ class ConsignmentDetails extends JPanel implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         Object o = e.getSource();
         if(o == back){
-            AdminPanel.bNew.setBounds(55,120,160,30);
-            AdminPanel.bOnGoing.setBounds(55+180,110,160,30);
-            AdminPanel.bCompleted.setBounds(55+180+180,110,160,30);
-            AdminPanel.bCustomer.setBounds(55+180+180+180,110,160,30);
-            AdminPanel.bDelivery.setBounds(55+180+180+180+180,110,160,30);
-            AdminPanel.bStocks.setBounds(55+180+180+180+180+180,110,160,30);
-            AdminPanel.adminCard.show(AdminPanel.contentForAdmin, "NewConsignment");
+
+//            
+//            AdminPanel.bNew.setBounds(55,120,160,30);
+//            AdminPanel.bOnGoing.setBounds(55+180,110,160,30);
+//            AdminPanel.bCompleted.setBounds(55+180+180,110,160,30);
+//            AdminPanel.bCustomer.setBounds(55+180+180+180,110,160,30);
+//            AdminPanel.bDelivery.setBounds(55+180+180+180+180,110,160,30);
+//            AdminPanel.bStocks.setBounds(55+180+180+180+180+180,110,160,30);
+            AdminPanel.adminCard.show(AdminPanel.contentForAdmin, AdminPanel.card);
         }
     }
 
