@@ -14,47 +14,51 @@ import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumn;
 
 public class OnGoingConsignment extends JPanel implements ActionListener{
     JPanel PConTable;
-    JTable table;
+    public static JTable table;
     JScrollPane scroll;
+    public static String selectedData;
+    public static DefaultTableModel model;
+    private ListSelectionModel select;
+    public static String[] columns = {"Consignment ID", "From","To", "Item", "Delivery ID", "Payment Method", "Date", "Status"};
     OnGoingConsignment() {
 
         this.setLayout(null);
         this.setBackground(Color.white);
-        Object[][] rows = {{"12345", "Keshav", "Arvind", "E Post", "12345", "E PAY", "29.09.2001", "Order Placed"}, {"2345", "Keshav", "Arvind", "E Post", "12345", "E PAY", "29.09.2001", "Order Placed"}};
-        String[] columns = {"Consignment ID", "From","To", "Item", "Delivery ID", "Payment Method", "Date", "Status"};
+        
         
         Border border = new LineBorder(new Color(71, 63, 145), 1, true);
         
-        
-        table =new JTable(rows, columns){
-          @Override
-         public boolean editCellAt(int row, int column, java.util.EventObject e) {
-            return false;
-         }
-        };
+        model = new DefaultTableModel();
+        model.setColumnIdentifiers(columns);
+        table =new JTable(model);
+
     
         table.setRowHeight(30);
         table.setBorder(border);
-        table.setRowSelectionAllowed(true);
+        table.setSelectionBackground(new Color(255, 255, 200));
+
  
-        ListSelectionModel select = table.getSelectionModel();
+        select = table.getSelectionModel();
         select.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         
         select.addListSelectionListener(new ListSelectionListener() {
-       public void valueChanged(ListSelectionEvent e) {
-        String selectedData = null;
+        public void valueChanged(ListSelectionEvent e) {
+            int selectRow = table.getSelectedRow();
+            if(selectRow != -1){
+            selectedData = (String) table.getValueAt(selectRow, 0);
+            Consignment.consignment.setConsignmentDetails(selectedData);
+            AdminPanel.card = "OnGoingConsignment";
+            AdminPanel.adminCard.show(AdminPanel.contentForAdmin,"ConsignmentDetails");
+            System.out.println("Selected: " + selectedData);
+            table.clearSelection();
+            }
 
-        int[] selectedRow = table.getSelectedRows();
-
-        selectedData = (String) table.getValueAt(selectedRow[0], 0);
-   
-        AdminPanel.adminCard.show(AdminPanel.contentForAdmin,"ConsignmentDetails");
-        System.out.println("Selected: " + selectedData);
       }
 
     });

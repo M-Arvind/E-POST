@@ -1,5 +1,7 @@
 package Admin;
 
+import static Admin.OnGoingConsignment.selectedData;
+import static Admin.OnGoingConsignment.table;
 import javax.swing.JLabel;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
@@ -14,13 +16,15 @@ import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumn;
 
-class CompletedConsignment extends JPanel implements ActionListener{
+public class CompletedConsignment extends JPanel implements ActionListener{
     JPanel PConTable;
-    JTable table;
+    public static JTable table;
     JScrollPane scroll;
+    public static DefaultTableModel model;
     CompletedConsignment() {
 
         this.setLayout(null);
@@ -30,31 +34,33 @@ class CompletedConsignment extends JPanel implements ActionListener{
         
         Border border = new LineBorder(new Color(71, 63, 145), 1, true);
         
-        
-        table =new JTable(rows, columns){
-          @Override
-         public boolean editCellAt(int row, int column, java.util.EventObject e) {
-            return false;
-         }
-        };
+        model = new DefaultTableModel();
+        model.setColumnIdentifiers(columns);
+        table =new JTable(model);
+//          @Override
+//         public boolean editCellAt(int row, int column, java.util.EventObject e) {
+//            return false;
+//         }
+//        };
     
         table.setRowHeight(30);
         table.setBorder(border);
-        table.setRowSelectionAllowed(true);
+        table.setSelectionBackground(new Color(255, 255, 200));
  
         ListSelectionModel select = table.getSelectionModel();
         select.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         
         select.addListSelectionListener(new ListSelectionListener() {
        public void valueChanged(ListSelectionEvent e) {
-        String selectedData = null;
-
-        int[] selectedRow = table.getSelectedRows();
-
-        selectedData = (String) table.getValueAt(selectedRow[0], 0);
-   
-        AdminPanel.adminCard.show(AdminPanel.contentForAdmin,"ConsignmentDetails");
-        System.out.println("Selected: " + selectedData);
+        int selectRow = table.getSelectedRow();
+            if(selectRow != -1){
+            selectedData = (String) table.getValueAt(selectRow, 0);
+            Consignment.consignment.setConsignmentDetails(selectedData);
+            AdminPanel.card = "CompletedConsignment";
+            AdminPanel.adminCard.show(AdminPanel.contentForAdmin,"ConsignmentDetails");
+            System.out.println("Selected: " + selectedData);
+            table.clearSelection();
+            }
       }
 
     });
