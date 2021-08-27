@@ -5,6 +5,7 @@ import javax.swing.*;
 import java.awt.*;
 import Login.*;
 import customer.*;
+import Delivery.*;
 
 public class main extends JFrame {
     static JPanel mainPanel;
@@ -23,6 +24,10 @@ public class main extends JFrame {
         Profile_Update profileUpdate = new Profile_Update();
         AdminProfileView adminProfileVi = new AdminProfileView();
         AdminProfileUpdate adminprofileUp = new AdminProfileUpdate();
+        delivery deliveryPanel = new delivery();
+        DeliveryProfileView deliveryProfileView =  new DeliveryProfileView();
+        DeliveryProfileUpdate deliveryProfileUpdate = new DeliveryProfileUpdate();
+        
 
         PaymentEPost paymentEPost=new PaymentEPost();
         PaymentParcel paymentParcel=new PaymentParcel();
@@ -40,6 +45,9 @@ public class main extends JFrame {
         //me
         mainPanel.add(moneyOrder,"money order");
         //me
+        mainPanel.add(deliveryPanel,"deliveryPanel");
+        mainPanel.add(deliveryProfileView,"deliveryProfileView");
+        mainPanel.add(deliveryProfileUpdate,"deliveryProfileUpdate");
         card.first(mainPanel);
         JScrollPane scroll=new JScrollPane(mainPanel,ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         scroll.setBounds(0,0,2000, 1000);

@@ -7,6 +7,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JComboBox;
@@ -21,7 +23,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumn;
 
-public class ongoing extends JPanel implements ItemListener
+public class ongoing extends JPanel implements ItemListener,MouseListener
 {
     
     String delivery_ID = "Barath.B";
@@ -41,6 +43,8 @@ public class ongoing extends JPanel implements ItemListener
     private Font text = new Font("Verdana", Font.BOLD, font);
     private Font text1 = new Font("arial", Font.BOLD, font1);
     JComboBox comboBox;
+    String value="";
+     int Selected_row=0;
     public ongoing()
     {
         this.setLayout(null);
@@ -58,10 +62,14 @@ public class ongoing extends JPanel implements ItemListener
 	tableHeader.setForeground(Color.white);
 	tableHeader.setFont(text1);
         TableColumn Statusdelivery = table.getColumnModel().getColumn(7);
+        
+        
+       
         table.setFont(text1);
 	table.setRowHeight(30);	       
         table.setBackground(Color.white);
 	table.setForeground(back); 
+        
         
         //COMBOBOX
         String[] Status = {"Order Placed","In-Transit","Completed"};
@@ -99,9 +107,42 @@ public class ongoing extends JPanel implements ItemListener
     {
         if(e.getStateChange()== 2)
         {
+            int column = 0;
             String newStatus = comboBox.getSelectedItem().toString();
-            System.out.println(newStatus);            
+            Selected_row = table.getSelectedRow();            
+            value = table.getModel().getValueAt(Selected_row, column).toString();
+            System.out.println(value);
+            System.out.println(newStatus);   
+            DatabaseOperations.UpdateDeliveryDeatils(value,newStatus);
+            
+            
+            
         }
+        
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+        
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+        
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+        
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
         
     }
     
