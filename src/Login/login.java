@@ -57,13 +57,11 @@ public class login extends JPanel implements ActionListener
         usernameTextField = new JTextField(20);
         usernameTextField.setBounds(500, 370, 350, 40);
         usernameTextField.setFont(new Font(Font.SANS_SERIF,  Font.BOLD, 20));
-        usernameTextField.setBorder(BorderFactory.createEmptyBorder(10,10, 10, 10));
         usernameTextField.setForeground(Color.BLACK);
         
         passwordField = new JPasswordField(20);
         passwordField.setBounds(500, 500, 350, 40);
         passwordField.setFont(new Font(Font.SANS_SERIF,  Font.BOLD, 20));
-        passwordField.setBorder(BorderFactory.createEmptyBorder(10,10, 10, 10));
         passwordField.setForeground(Color.BLACK);
         
         forgotPasswordLabel = new JLabel("Forgot Password?");
@@ -105,7 +103,7 @@ public class login extends JPanel implements ActionListener
         createOneButton.setBounds(690, 700, 100, 40);
         createOneButton.setFont(new Font(Font.SANS_SERIF,  Font.BOLD, 15));
         createOneButton.setBackground(new Color(34, 34, 45));
-        createOneButton.setForeground(Color.WHITE);
+        createOneButton.setForeground(new Color(71,63,145));
         createOneButton.setBorder(null);
         createOneButton.setRequestFocusEnabled(false);
         createOneButton.setContentAreaFilled(false);
@@ -117,13 +115,14 @@ public class login extends JPanel implements ActionListener
         loginButton.setBackground(new Color(71, 63, 145));
         loginButton.setForeground(Color.WHITE);
         loginButton.setBorder(null);
-        loginButton.setUI(new BasicButtonUI());
+        loginButton.setUI(new StyledButtonUi());
         loginButton.addActionListener(new ActionListener() 
     	{
             public void actionPerformed(ActionEvent e) 
             {
                 {
                     login();
+                    passwordField.setText("");
                 }
             }
     	});
@@ -158,7 +157,7 @@ public class login extends JPanel implements ActionListener
 
             if(password.equals(list.get(0).toString()))
             {   
-                JOptionPane.showMessageDialog(null,"Login Successful");
+                JOptionPane.showMessageDialog(this,"Login Successful");
 
                 if(list.get(2).toString().equals("ADMIN"))
                 {
@@ -177,12 +176,12 @@ public class login extends JPanel implements ActionListener
             }
             else
             {
-                JOptionPane.showMessageDialog(null, "Wrong E-mail/Password");
+                JOptionPane.showMessageDialog(this, "Wrong E-mail/Password");
             }     
         }
         catch(Exception ex)
         {
-            JOptionPane.showMessageDialog(null, "Wrong E-mail/Password");
+            JOptionPane.showMessageDialog(this, "Wrong E-mail/Password");
         } 
     }
     

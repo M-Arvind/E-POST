@@ -1,4 +1,5 @@
 package Database;
+import Login.ForgetPassword;
 import Consignment.*;
 import java.awt.List;
 import java.awt.TextField;
@@ -24,9 +25,14 @@ import javax.swing.JOptionPane;
 import java.sql.Date;
 import java.sql.Statement;
 import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
+import main.main;
 import warehouse.*;
 import profile.*;
 
@@ -437,6 +443,80 @@ public class DatabaseOperations
           return loginCredentials;
     }
     
+    public static void loginCreate(ArrayList list)
+    {
+        String userName = list.get(0).toString();
+        
+        int min = 200;  
+        int max = 400;  
+        int salt = (int)(Math.random()*(max-min+1)+min);
+        
+        String hash_pass = Login.login.createHash(list.get(13).toString(), salt);
+        String hash_confirm_pass = Login.login.createHash(list.get(14).toString(), salt);
+        
+        try
+        {                
+            Statement st = getConnection().createStatement();
+            ResultSet rs = st.executeQuery("select user_ID  from Login where user_ID  like '"+userName+"'");
+            boolean next = rs.next();   
+
+            if(next)
+            {
+               JOptionPane.showMessageDialog(null, "You have Already Registered to E-Post"); 
+            }
+            else
+            {
+//               String query="INSERT INTO Customer VALUES ('"+list.get(0).toString()+"','"+list.get(1).toString()+"','"+list.get(2).toString()+"',"+TO_DATE(list.get(3).toString(),'YYYY-MM-DD')+",'"+list.get(4).toString()+"','"+list.get(5).toString()+"',"
+//                       + "'"+list.get(6).toString()+"','"+list.get(7).toString()+"','"+list.get(8).toString()+"','"+list.get(9).toString()+"','"+list.get(10).toString()+"','"+list.get(11).toString()+"','"+list.get(12).toString()+"')";
+//
+//               st.executeUpdate(query);
+//               getConnection().setAutoCommit(true);
+//               JOptionPane.showMessageDialog(null, "Registration Success!"); 
+               String sql = "INSERT INTO Login VALUES (?, ?, ?, ?, ?)";
+                try (PreparedStatement stmt = getConnection().prepareStatement(sql)) 
+                {
+                    stmt.setString  (1, list.get(0).toString());
+                    stmt.setString  (2, list.get(5).toString());
+                    stmt.setString  (3, "Customer");
+                    stmt.setInt   (4, salt);
+                    stmt.setString  (5, hash_pass);
+                    
+                    stmt.executeUpdate();
+                    getConnection().setAutoCommit(true);
+                    
+                    //st.executeUpdate(sql);
+                    //getConnection().setAutoCommit(true);
+                    JOptionPane.showMessageDialog(null, "Login Create SuccessFul!"); 
+                    customerCreate(list);
+                }
+            }
+        }
+        catch(Exception ex)
+        {
+            JOptionPane.showMessageDialog(null, ex.toString());
+        }
+    }
+    
+    public static int accountNumberIncrement()
+    {
+        try
+        {                
+            Statement st = getConnection().createStatement();
+            ResultSet rs = st.executeQuery("select COUNT(*) from Customer");
+            rs.next();
+            
+            int count = rs.getInt(1);
+            System.out.println(count);
+            
+            return count;            
+        }
+        catch(Exception ex)
+        {
+            JOptionPane.showMessageDialog(null, ex.toString());
+            return 1;
+        }
+    }
+    
     public static void customerCreate(ArrayList list)
     {
         
@@ -454,18 +534,128 @@ public class DatabaseOperations
             }
             else
             {
-               String query="INSERT INTO Customer VALUES ('"+list.get(0).toString()+"','"+list.get(1).toString()+"','"+list.get(2).toString()+"','"+list.get(3).toString()+"','"+list.get(4).toString()+"','"+list.get(5).toString()+"',"
-                       + "'"+list.get(6).toString()+"','"+list.get(7).toString()+"','"+list.get(8).toString()+"','"+list.get(9).toString()+"','"+list.get(10).toString()+"','"+list.get(11).toString()+"','"+list.get(12).toString()+"')";
-
-               st.executeUpdate(query);
-               getConnection().setAutoCommit(true);
-               JOptionPane.showMessageDialog(null, "Registration Success!"); 
+                DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+            
+                java.util.Date date = (java.util.Date) format.parse(list.get(3).toString());
+                java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+                
+                String sql = "INSERT INTO Customer VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                try (PreparedStatement stmt = getConnection().prepareStatement(sql)) 
+                {
+                    stmt.setString  (1, list.get(0).toString());
+                    stmt.setString  (2, list.get(1).toString());
+                    stmt.setString  (3, list.get(2).toString());
+                    stmt.setDate    (4, sqlDate);
+                    stmt.setString  (5, list.get(4).toString());
+                    stmt.setString  (6, list.get(5).toString());
+                    stmt.setString  (7, list.get(6).toString());
+                    stmt.setString  (8, list.get(7).toString());
+                    stmt.setString  (9, list.get(8).toString());
+                    stmt.setString  (10, list.get(9).toString());
+                    stmt.setString  (11, list.get(10).toString());
+                    stmt.setString  (12, list.get(11).toString());    
+                    stmt.setString  (13, list.get(12).toString()); 
+                    
+                    stmt.executeUpdate();
+                    getConnection().setAutoCommit(true);
+                    JOptionPane.showMessageDialog(null, "Registration Success!"); 
+                }
             }
         }
         catch(Exception ex)
         {
             JOptionPane.showMessageDialog(null, ex.toString());
         }
+    }
+    
+    public static void checkCredentials(ArrayList list) throws ParseException
+    {   
+        DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+            
+        java.util.Date date = (java.util.Date) format.parse(list.get(3).toString());
+        java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+        LocalDate today = LocalDate.now(ZoneId.of("Asia/Dushanbe"));
+        java.util.Date todayDate = Date.valueOf(today);
+        
+        long ageInMillis = System.currentTimeMillis() - date.getTime();
+        long years = (ageInMillis /(365 * 24*60*60*1000l));
+        long leftover = ageInMillis %(365 * 24*60*60*1000l);
+        long days = leftover/(24*60*60*1000l);
+
+        int actualAge = (int) years;
+        
+        if(!list.get(1).toString().equals("") && list.get(1).toString().chars().allMatch(Character::isLetter) && !list.get(2).toString().equals("") && list.get(2).toString().chars().allMatch(Character::isLetter))
+        {
+            if(list.get(0).toString().chars().count() > 3)
+            {
+                if (list.get(5).toString().matches("\\d{10}")) 
+                {
+                    if(list.get(13).toString().equals(list.get(14).toString()))
+                    {
+                        if(!date.after(todayDate))
+                        {
+                            if(Integer.parseInt(list.get(4).toString()) == actualAge)
+                            {
+                                if(!list.get(8).toString().equals("") && !list.get(9).toString().equals("") && list.get(8).toString().matches("^[a-zA-Z\\s]*$") && list.get(9).toString().matches("^[a-zA-Z\\s]*$"))
+                                {
+                                    if(!list.get(7).toString().equals(""))
+                                    {
+                                        if(list.get(10).toString().matches("\\d{6}"))
+                                        {
+                                            if(!list.get(6).toString().equals(""))
+                                            {
+                                                Database.DatabaseOperations.loginCreate(list);
+                                            }
+                                            else
+                                            {
+                                                JOptionPane.showMessageDialog(null, "Please Selete your Gender");
+                                            }
+                                        }
+                                        else
+                                        {
+                                            JOptionPane.showMessageDialog(null, "Invalid Pincode");
+                                        }
+                                    }
+                                    else
+                                    {
+                                        JOptionPane.showMessageDialog(null, "Please Enter your Address");
+                                    }
+                                }
+                                else
+                                {
+                                    JOptionPane.showMessageDialog(null, "Invalid State or District");
+                                }
+                            }
+                            else
+                            {
+                                JOptionPane.showMessageDialog(null, "Enter your Age ACTUAL Age!");
+                            }
+                        }
+                        else
+                        {
+                            JOptionPane.showMessageDialog(null, "You cannot be Born in the Future");
+                        }
+                    }
+                    else
+                    {
+                        JOptionPane.showMessageDialog(null, "Password and Confirm Password does not match");
+                    }
+                }
+                else
+                {
+                    JOptionPane.showMessageDialog(null, "Invalid Phone Number");
+                }
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(null, "Username should be a minimun of 4 Characters");
+            }
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(null, "Invalid FirstName Or LastName");
+        }
+        
     }
     
     public static void loginUpdate(String userName, String password, String confirmPassword, int salt)
@@ -482,6 +672,7 @@ public class DatabaseOperations
                 st.executeUpdate(query);
                 getConnection().setAutoCommit(true);
                 JOptionPane.showMessageDialog(null, "Successful");
+                ForgetPassword.newdialog.dispose();
             }
             else
             {
