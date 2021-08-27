@@ -19,6 +19,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
+import javax.swing.table.DefaultTableModel;
 import main.main;
 
 public class delivery extends JPanel implements ActionListener,MouseListener
@@ -42,12 +43,14 @@ public class delivery extends JPanel implements ActionListener,MouseListener
        
        deliveryCard = new CardLayout();
        ContentForDelivery=new JPanel(deliveryCard);
-       PCompleted=new completed();
        Pongoing = new ongoing();
+       PCompleted=new completed();
        
-       ContentForDelivery.add(PCompleted,"completed");
-       ContentForDelivery.add(Pongoing,"ongoing");
+       
+        ContentForDelivery.add(Pongoing,"ongoing");
+       ContentForDelivery.add(PCompleted,"completed");      
        ContentForDelivery.setBounds(X_FORCUSTOMER,Y_FORCUSTOMER,WIDTHFORCUSTOMER,HIGHTFORCUSTOMER);
+       deliveryCard.first(ContentForDelivery);
        
        add(ContentForDelivery);
        setPreferredSize(new Dimension(1350,890));
@@ -84,6 +87,23 @@ public class delivery extends JPanel implements ActionListener,MouseListener
        userLogo.setBounds(1000+90,30,200,30);
        add( userLogo);
        
+       BOngoing=new JButton("OnGoing");
+       BOngoing.setFont(font);
+       BOngoing.setBorder(null);
+       BOngoing.setUI(new StyledButtonUI());
+       BOngoing.setBackground(Buttoncolor);
+       BOngoing.setBounds(X_FORCUSTOMER+120+60,110,160,30);
+       
+       BOngoing.addActionListener((e2)->{       
+       
+       
+       setOngoingDeliveryConsignmentDetails();
+       BCompleted.setBounds(X_FORCUSTOMER,110,160,30); 
+       BOngoing.setBounds(X_FORCUSTOMER+120+60,120,160,30);
+       deliveryCard.show(ContentForDelivery,"ongoing");
+       });
+       add(BOngoing);
+       
        BCompleted=new JButton("Completed");
        BCompleted.setFont(font);
        BCompleted.setBorder(null);
@@ -101,32 +121,20 @@ public class delivery extends JPanel implements ActionListener,MouseListener
        });
        add(BCompleted); 
        
-       BOngoing=new JButton("OnGoing");
-       BOngoing.setFont(font);
-       BOngoing.setBorder(null);
-       BOngoing.setUI(new StyledButtonUI());
-       BOngoing.setBackground(Buttoncolor);
-       BOngoing.setBounds(X_FORCUSTOMER+120+60,110,160,30);
        
-       BOngoing.addActionListener((e2)->{       
-       
-       ongoingremoverow();
-       setOngoingDeliveryConsignmentDetails();
-       BCompleted.setBounds(X_FORCUSTOMER,110,160,30); 
-       BOngoing.setBounds(X_FORCUSTOMER+120+60,120,160,30);
-       deliveryCard.show(ContentForDelivery,"ongoing");
-       });
-       add(BOngoing);
        
        
     }
     public void ongoingremoverow()
     {
       
-       while(ongoing.model.getRowCount() > 0)
-       {
-         ongoing.model.removeRow(0);
-       }
+//       while(ongoing.model.getRowCount() > 0)
+//       {
+//         ongoing.model.removeRow(0);
+//       }
+        DefaultTableModel dm = (DefaultTableModel)ongoing.table.getModel();
+        dm.getDataVector().removeAllElements();
+        dm.fireTableDataChanged();
     }
     public void completedremoverow()
     {
@@ -138,6 +146,8 @@ public class delivery extends JPanel implements ActionListener,MouseListener
     }
     void setOngoingDeliveryConsignmentDetails()
     {
+        ongoing.table.getSelectionModel().clearSelection();
+        ongoingremoverow();        
         ArrayList<consignment> listForDeliveryConsignment = DatabaseOperations.getOnGoingDeliveryConsignmentDetails();         
         for(int i=0;i<listForDeliveryConsignment.size();i++)
         {

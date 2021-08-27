@@ -23,7 +23,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumn;
 
-public class ongoing extends JPanel implements ItemListener,MouseListener
+public class ongoing extends JPanel implements ItemListener
 {
     
     String delivery_ID = "Barath.B";
@@ -32,7 +32,7 @@ public class ongoing extends JPanel implements ItemListener,MouseListener
     //Object row[][] = DatabaseOperations.getOnGoingDeliveryConsignmentDetails();
   
     
-    private JTable table;
+    public static JTable table;
     private JScrollPane sp;
     public static DefaultTableModel model;
     private Color panel = new Color(240,238,240);
@@ -83,7 +83,7 @@ public class ongoing extends JPanel implements ItemListener,MouseListener
         {
             public void valueChanged(ListSelectionEvent e) 
             {
-            int selectedRow=table.getSelectedRow();
+                Selected_row=table.getSelectedRow();
             }
         });     
         
@@ -107,45 +107,30 @@ public class ongoing extends JPanel implements ItemListener,MouseListener
     {
         if(e.getStateChange()== 2)
         {
-            int column = 0;
-            String newStatus = comboBox.getSelectedItem().toString();
-            Selected_row = table.getSelectedRow();            
-            value = table.getModel().getValueAt(Selected_row, column).toString();
-            System.out.println(value);
-            System.out.println(newStatus);   
-            DatabaseOperations.UpdateDeliveryDeatils(value,newStatus);
+               
+            if(Selected_row!=-1)
+            {
+                int column = 0;
+                String newStatus = comboBox.getSelectedItem().toString();
+                //Selected_row = table.getSelectedRow(); 
+                System.out.println(Selected_row);
+                value = table.getModel().getValueAt(Selected_row, column).toString();
+                System.out.println(value);
+                System.out.println(newStatus);   
+                DatabaseOperations.UpdateDeliveryDeatils(value,newStatus); 
+                //model.removeRow(Selected_row);
+                //model.setRowCount(model.getRowCount()-1);
+                //System.out.println(model.getRowCount());
+            }
             
-            
+            }           
+                    
             
         }
         
     }
 
-    @Override
-    public void mouseClicked(MouseEvent e) {
-        
-    }
-
-    @Override
-    public void mousePressed(MouseEvent e) {
-        
-    }
-
-    @Override
-    public void mouseReleased(MouseEvent e) {
-        
-    }
-
-    @Override
-    public void mouseEntered(MouseEvent e) {
-        
-    }
-
-    @Override
-    public void mouseExited(MouseEvent e) {
-        
-    }
+   
     
-    
-}
+
        
