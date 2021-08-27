@@ -2,20 +2,25 @@ package Admin;
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.regex.Pattern;
 import main.main;
-public class AdminProfileUpdate extends JPanel implements MouseListener{
+public class AdminProfileUpdate extends JPanel implements MouseListener, ActionListener{
 	//JPanel ViewPanel;
-	Icon ProfIcon,EditIcon,BackIcon;
-	Border emptyBorder = BorderFactory.createEmptyBorder();
-	JLabel UserNameTop;
-	JLabel firstNameLabel,lastNameLabel, contactNoLabel,DOBLabel,ageLabel,JoinDateLabel,pAddressLabel,tAddressLabel,martialLabel,designationLabel, salaryLabel, stateLabel, districtLabel;
-	JTextField firstNameValue,lastNameValue,contactNoValue,DOBValue,ageValue,JoinDateValue,martialValue,designationValue, salaryValue, stateValue, districtValue;
-	JLabel Collon1,Collon2,Collon3,Collon4,Collon5,Collon6,Collon7,Collon8,Collon9, Collon10, Collon11, Collon12;
-	JButton ProfIconLabel,BackIconLabel,EditIconLabel;
-	JButton SaveButton;
-        JTextArea pAddressValue, tAddressValue;
+	private Icon ProfIcon,EditIcon,BackIcon;
+	private Border emptyBorder = BorderFactory.createEmptyBorder();
+	private JLabel UserNameTop;
+	private JLabel firstNameLabel,lastNameLabel, contactNoLabel,DOBLabel,ageLabel,JoinDateLabel,pAddressLabel,tAddressLabel,martialLabel,designationLabel, salaryLabel, stateLabel, districtLabel;
+	private JTextField firstNameValue,lastNameValue,contactNoValue,DOBValue,ageValue,JoinDateValue,designationValue, salaryValue, stateValue, districtValue;
+	private JLabel Collon1,Collon2,Collon3,Collon4,Collon5,Collon6,Collon7,Collon8,Collon9, Collon10, Collon11, Collon12;
+	private JButton ProfIconLabel,BackIconLabel,EditIconLabel;
+	private JButton SaveButton;
+        private JTextArea pAddressValue, tAddressValue;
+        private JComboBox martialValue;
+        private String[] martialStatusValues = {"Single", "Married", "Divorced"};
 	int X=230,Y=90;
 	int R=34,G=34,B=45;
 	int labelFontSize=20;
@@ -184,13 +189,9 @@ public class AdminProfileUpdate extends JPanel implements MouseListener{
 		
 		//usernamevalue label
 		
-		martialValue=new JTextField("Martial Status");
+		martialValue=new JComboBox(martialStatusValues);
 		martialValue.setBounds(X+240+300+100+60+10,Y+60+70+70,300,35);
 		martialValue.setFont(new Font("Segoe UI",Font.PLAIN,labelFontSize));
-                martialValue.setBorder(BorderFactory.createEmptyBorder(0, 10, 0, 10));
-		martialValue.setBackground(Color.WHITE);
-		martialValue.setForeground(Color.GRAY);
-                martialValue.addMouseListener(this);
 		
 		add(martialLabel);
 		add(Collon6);
@@ -337,204 +338,11 @@ public class AdminProfileUpdate extends JPanel implements MouseListener{
 		add(Collon12);
 		add(tAddressValue);
                 
-		//contactno label
-		
-//		ContactNoLabel=new JLabel("Contact Number");
-//		ContactNoLabel.setBounds(X,Y+60,200,150);
-//		ContactNoLabel.setFont(new Font("Bold",Font.BOLD,labelFontSize));
-//		ContactNoLabel.setForeground(Color.WHITE);
-//		Collon2=new JLabel(":");
-//		Collon2.setBounds(X+200,Y+60,20,150);
-//		Collon2.setFont(new Font("Bold",Font.BOLD,labelFontSize));
-//		Collon2.setForeground(Color.WHITE);
-//		
-//		//contactno value label
-//		
-//		ContactNoValue=new JTextArea("Contact Number");
-//		ContactNoValue.setBounds(X+240,Y+124,800,25);
-//		ContactNoValue.setFont(new Font("Bold",Font.BOLD,labelFontSize));
-//		ContactNoValue.setForeground(Color.WHITE);
-//		ContactNoValue.setBackground(new Color(R,G,B));
-//		
-//		add(ContactNoLabel);
-//		add(Collon2);
-//		add(ContactNoValue);
-//		
-//		
-//		//doblabel
-//		
-//		DOBLabel=new JLabel("DOB");
-//		DOBLabel.setBounds(X,Y+120,200,150);
-//		DOBLabel.setFont(new Font("Bold",Font.BOLD,labelFontSize));
-//		DOBLabel.setForeground(Color.WHITE);
-//		Collon3=new JLabel(":");
-//		Collon3.setBounds(X+200,Y+120,20,150);
-//		Collon3.setFont(new Font("Bold",Font.BOLD,labelFontSize));
-//		Collon3.setForeground(Color.WHITE);
-//		
-//		//dob value label
-//		
-//		DOBValue=new JTextArea("DOB");
-//		DOBValue.setBounds(X+240,Y+184,800,25);
-//		DOBValue.setFont(new Font("Bold",Font.BOLD,labelFontSize));
-//		DOBValue.setBackground(new Color(R,G,B));
-//		DOBValue.setForeground(Color.WHITE);
-//		
-//		add(DOBLabel);
-//		add(Collon3);
-//		add(DOBValue);
-//		
-//		
-//		//agelabel
-//		
-//		AgeLabel=new JLabel("Age");
-//		AgeLabel.setBounds(X,Y+180,200,150);
-//		AgeLabel.setFont(new Font("Bold",Font.BOLD,labelFontSize));
-//		AgeLabel.setForeground(Color.WHITE);
-//		Collon4=new JLabel(":");
-//		Collon4.setBounds(X+200,Y+180,20,150);
-//		Collon4.setFont(new Font("Bold",Font.BOLD,labelFontSize));
-//		Collon4.setForeground(Color.WHITE);
-//		
-//		//age value label
-//		
-//		AgeValue=new JTextArea("Age");
-//		AgeValue.setBounds(X+240,Y+244,800,25);
-//		AgeValue.setFont(new Font("Bold",Font.BOLD,labelFontSize));
-//		AgeValue.setBackground(new Color(R,G,B));
-//		AgeValue.setForeground(Color.WHITE);
-//		
-//		add(AgeLabel);
-//		add(Collon4);
-//		add(AgeValue);
-//		
-//		//joindatelabel
-//		
-//		JoinDateLabel=new JLabel("Join Date");
-//		JoinDateLabel.setBounds(X,Y+240,200,150);
-//		JoinDateLabel.setFont(new Font("Bold",Font.BOLD,labelFontSize));
-//		JoinDateLabel.setForeground(Color.WHITE);
-//		Collon5=new JLabel(":");
-//		Collon5.setBounds(X+200,Y+240,20,150);
-//		Collon5.setFont(new Font("Bold",Font.BOLD,labelFontSize));
-//		Collon5.setForeground(Color.WHITE);
-//		
-//		//joindate value label
-//		
-//		JoinDateValue=new JTextArea("Join Date ");
-//		JoinDateValue.setBounds(X+240,Y+304,800,25);
-//		JoinDateValue.setFont(new Font("Bold",Font.BOLD,labelFontSize));
-//		JoinDateValue.setForeground(Color.WHITE);
-//		JoinDateValue.setBackground(new Color(R,G,B));
-//		
-//		add(JoinDateLabel);
-//		add(Collon5);
-//		add(JoinDateValue);
-//		
-//		//permanent address label
-//		
-//		PAddressLabel=new JLabel("Permanent Address");
-//		PAddressLabel.setBounds(X,Y+300,200,150);
-//		PAddressLabel.setFont(new Font("Bold",Font.BOLD,labelFontSize));
-//		PAddressLabel.setForeground(Color.WHITE);
-//		Collon6=new JLabel(":");
-//		Collon6.setBounds(X+200,Y+300,20,150);
-//		Collon6.setFont(new Font("Bold",Font.BOLD,labelFontSize));
-//		Collon6.setForeground(Color.WHITE);
-//		
-//		//permanent address value label
-//		
-//		PAddressValue=new JTextArea("Address");
-//		PAddressValue.setBounds(X+240,Y+364,800,50);
-//		PAddressValue.setFont(new Font("Bold",Font.BOLD,labelFontSize));
-//		PAddressValue.setBackground(new Color(R,G,B));
-//		PAddressValue.setForeground(Color.WHITE);
-//		PAddressValue.setLineWrap(true);
-//		
-//		
-//		add(PAddressLabel);
-//		add(Collon6);
-//		add(PAddressValue);
-//		
-//		//temperory address label
-//		
-//		TAddressLabel=new JLabel("Temporary Address");
-//		TAddressLabel.setBounds(X,Y+390,200,150);
-//		TAddressLabel.setFont(new Font("Bold",Font.BOLD,labelFontSize));
-//		TAddressLabel.setForeground(Color.WHITE);
-//		Collon7=new JLabel(":");
-//		Collon7.setBounds(X+200,Y+390,20,150);
-//		Collon7.setFont(new Font("Bold",Font.BOLD,labelFontSize));
-//		Collon7.setForeground(Color.WHITE);
-//		
-//		//temperory address value label
-//		
-//		TAddressValue=new JTextArea("Address");
-//		TAddressValue.setBounds(X+240,Y+454,800,50);
-//		TAddressValue.setFont(new Font("Bold",Font.BOLD,labelFontSize));
-//		TAddressValue.setBackground(new Color(R,G,B));
-//		TAddressValue.setForeground(Color.WHITE);
-//		TAddressValue.setLineWrap(true);
-//		
-//		add(TAddressLabel);
-//		add(Collon7);
-//		add(TAddressValue);
-//		
-//		
-//		//marital status label
-//		
-//		MaritalStatusLabel=new JLabel("Marital Status");
-//		MaritalStatusLabel.setBounds(X,Y+470,200,150);
-//		MaritalStatusLabel.setFont(new Font("Bold",Font.BOLD,labelFontSize));
-//		MaritalStatusLabel.setForeground(Color.WHITE);
-//		Collon8=new JLabel(":");
-//		Collon8.setBounds(X+200,Y+470,20,150);
-//		Collon8.setFont(new Font("Bold",Font.BOLD,labelFontSize));
-//		Collon8.setForeground(Color.WHITE);
-//		
-//		//marital status value label
-//		
-//		MaritalValue=new JTextArea("Marital Status");
-//		MaritalValue.setBounds(X+240,Y+530,800,25);
-//		MaritalValue.setFont(new Font("Bold",Font.BOLD,labelFontSize));
-//		MaritalValue.setBackground(new Color(R,G,B));
-//		MaritalValue.setForeground(Color.WHITE);
-//		
-//		add(MaritalStatusLabel);
-//		add(Collon8);
-//		add(MaritalValue);
-//		
-//		//designation label
-//		
-//		DesignationLabel=new JLabel("Designation");
-//		DesignationLabel.setBounds(X,Y+530,200,150);
-//		DesignationLabel.setFont(new Font("Bold",Font.BOLD,labelFontSize));
-//		DesignationLabel.setForeground(Color.WHITE);
-//		Collon9=new JLabel(":");
-//		Collon9.setBounds(X+200,Y+530,20,150);
-//		Collon9.setFont(new Font("Bold",Font.BOLD,labelFontSize));
-//		Collon9.setForeground(Color.WHITE);
-//		
-//		//designation value label
-//		
-//		DesignationValue=new JTextArea("Designation");
-//		DesignationValue.setBounds(X+240,Y+590,800,25);
-//		DesignationValue.setFont(new Font("Bold",Font.BOLD,labelFontSize));
-//		DesignationValue.setBackground(new Color(R,G,B));
-//		DesignationValue.setForeground(Color.WHITE);
-//		
-//		add(DesignationLabel);
-//		add(Collon9);
-//		add(DesignationValue);
-//		
-//		//button
-//		
-//		
-//		
 		SaveButton=new JButton("Save");
 		SaveButton.setBounds(X+400,Y+600,100,30);
 		SaveButton.setForeground(Color.WHITE);
 		SaveButton.setBackground(new Color(71,63,145));
+                SaveButton.addActionListener(this);
 		add(SaveButton);
 		
 		setBounds(0,0,1350,890);
@@ -565,9 +373,6 @@ public class AdminProfileUpdate extends JPanel implements MouseListener{
         }
         else if(e.getSource() == contactNoValue){
             contactNoValue.setText("");
-        }
-        else if(e.getSource() == martialValue){
-            martialValue.setText("");
         }
         else if(e.getSource() == salaryValue){
             salaryValue.setText("");
@@ -606,6 +411,47 @@ public class AdminProfileUpdate extends JPanel implements MouseListener{
 
     @Override
     public void mouseExited(MouseEvent e) {
+        
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        String firstName = firstNameValue.getText();
+        String lastName = lastNameValue.getText();
+        String DOB = DOBValue.getText();
+        String age = ageValue.getText();
+        String contactNumber = contactNoValue.getText();
+        String designation = designationValue.getText();
+        String state = stateValue.getText();
+        String district = districtValue.getText();
+        
+        if(!Pattern.matches("^([A-Za-z])+$", firstName)){
+            JOptionPane.showMessageDialog(this, "First Name should contain only Characters");
+        }
+        else if(firstName.length() < 3){
+            JOptionPane.showMessageDialog(this, "First Name should contain atleast 4 Characters");
+        }
+        else if(lastName.length() < 1){
+            JOptionPane.showMessageDialog(this, "Enter last Name");
+        }
+        else if(!Pattern.matches("^([0-9]{2})/([0-9]{2})/([0-9]{4})$", DOB)){
+            JOptionPane.showMessageDialog(this, "Enter date in dd/mm/yyyy format");
+        }
+        else if(!Pattern.matches("^[0-9]+$", age)){
+            JOptionPane.showMessageDialog(this, "Enter valid age");
+        }
+        else if(!Pattern.matches("^[0-9]*$", contactNumber)||contactNumber.length()!=10){
+            JOptionPane.showMessageDialog(this, "Enter valid Phone Number");
+        }
+        else if(!Pattern.matches("^([A-Za-z])+$", designation)){
+            JOptionPane.showMessageDialog(this, "Designation should contain only characters");
+        }
+        else if(!Pattern.matches("^([A-Za-z])+$", state)){
+            JOptionPane.showMessageDialog(this, "state should contain only characters");
+        }
+        else if(!Pattern.matches("^([A-Za-z])+$", district)){
+            JOptionPane.showMessageDialog(this, "district should contain only characters");
+        }
         
     }
 
