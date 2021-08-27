@@ -9,22 +9,44 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Insets;
+import java.awt.ItemSelectable;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.sql.Date;
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.util.ArrayList;
 import javax.swing.*;
 import javax.swing.plaf.basic.BasicButtonUI;
+import javax.swing.text.MaskFormatter;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Locale;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
-public class register extends JPanel implements ActionListener {
+public class register extends JPanel implements ActionListener,ItemListener 
+{
     JPanel registerPanel;
     private JLabel registerLabel,  firstNameLabel, lastNameLabel, usernameLabel, phoneNumberLabel, passwordLabel, 
             confirmPasswordLabel, DOBLabel, ageLabel, stateLabel, districtLabel, addressLabel, pincodeLabel, registerMessageLabel,genderLabel;
-    private JTextField firstNameText, lastNameText, usernameText, phoneNumberText, passwordText, confirmPasswordText, DOBText, ageText, stateText, districtText, pincodeText;
+    private JTextField firstNameText, lastNameText, usernameText, phoneNumberText, passwordText, confirmPasswordText, ageText, stateText, districtText, pincodeText;
+    private JFormattedTextField DOBText;
+    MaskFormatter mask;
     private JTextArea addressTextArea;
     private JButton registerButton, backButton, registerLoginButton;
     private ButtonGroup gender;
     private JRadioButton gMale,gFemale,gOther;
-    public register() {
+    
+    String userGender = "";
+    
+    public register() 
+    {
         Color fg = new Color(35, 34, 45);
         Color bg = new Color(254, 254, 254);
         Font font = new Font(Font.SANS_SERIF,  Font.BOLD, 20);
@@ -97,12 +119,24 @@ public class register extends JPanel implements ActionListener {
         confirmPasswordText.setFont(new Font(Font.SANS_SERIF,  Font.PLAIN, 22));
         confirmPasswordText.setForeground(Color.BLACK);
         
-        DOBLabel = new JLabel("DOB");
-        DOBLabel.setBounds(330, 360, 150, 40);
+        DOBLabel = new JLabel("DOB (yyyy-mm-dd)");
+        DOBLabel.setBounds(330, 360, 200, 40);
         DOBLabel.setFont(new Font(Font.SANS_SERIF,  Font.BOLD, 20));
         DOBLabel.setForeground(Color.WHITE);
         
-        DOBText = new JTextField(20);
+        try 
+        {
+            mask = new MaskFormatter("##/##/####");
+            
+            DOBText = new JFormattedTextField(mask);
+            DOBText.setToolTipText("dd-mm-yyyy");
+            DOBText.setColumns(12);
+            
+         } 
+        catch(Exception e) 
+        {
+            e.printStackTrace();
+        }
         DOBText.setBounds(330, 410, 300, 40);
         DOBText.setFont(new Font(Font.SANS_SERIF,  Font.PLAIN, 22));
         DOBText.setForeground(Color.BLACK);
@@ -181,6 +215,10 @@ public class register extends JPanel implements ActionListener {
         gender.add(gFemale);
         gender.add(gOther);
         
+        gMale.addItemListener(this);
+        gFemale.addItemListener(this);
+        gOther.addItemListener(this);
+        
         registerButton = new JButton("Register");
         registerButton.setBounds(615, 800, 130, 40);
         registerButton.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 17));
@@ -191,7 +229,7 @@ public class register extends JPanel implements ActionListener {
         
         registerButton.addActionListener(this);
         
-        
+     
         registerMessageLabel = new JLabel("Already have an Account?");
         registerMessageLabel.setBounds(550, 840, 300, 40);
         registerMessageLabel.setFont(new Font(Font.SANS_SERIF,  Font.BOLD, 15));
@@ -252,13 +290,105 @@ public class register extends JPanel implements ActionListener {
         this.add(registerPanel);
     }
     
+    public void register()
+    {
+        //SimpleDateFormat formatter1 = new SimpleDateFormat("dd/MM/yyyy");
+//            String dateString = DOBText.getText();
+//            
+//            //DOB Format
+//            DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+//            
+//            java.util.Date date = (java.util.Date) format.parse(dateString);
+//            java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+//            LocalDate today = LocalDate.now(ZoneId.of("Asia/Dushanbe"));
+//            java.util.Date todayDate = Date.valueOf(today);
+
+        //Calculating Age
+//        long ageInMillis = System.currentTimeMillis() - date.getTime();
+//        long years = (ageInMillis /(365 * 24*60*60*1000l));
+//        long leftover = ageInMillis %(365 * 24*60*60*1000l);
+//        long days = leftover/(24*60*60*1000l);
+//
+//        int actualAge = (int) years;
+
+//        System.out.println(years);
+        //System.out.println(sqlDate);
+
+        long count = Database.DatabaseOperations.accountNumberIncrement();
+
+        String firstName = firstNameText.getText();
+        String lastName = lastNameText.getText();
+        String userName = usernameText.getText();
+        String phoneNumber = phoneNumberText.getText();
+        String password = passwordText.getText();
+        String confirmPassword = confirmPasswordText.getText();
+        String DOB = DOBText.getText();
+        String age = ageText.getText();
+        String state = stateText.getText();
+        String district = districtText.getText();
+        String address = addressTextArea.getText();
+        String pincode = pincodeText.getText();
+        long accountNumber = 3350700000l + count + 1;
+        System.out.println("Count " + accountNumber);
+
+        ArrayList list = new ArrayList();
+
+        list.add(userName);
+        list.add(firstName);
+        list.add(lastName);
+        list.add(DOB);
+        list.add(age);
+        list.add(phoneNumber);
+        list.add(userGender);
+        list.add(address);
+        list.add(state);
+        list.add(district);
+        list.add(pincode);
+        list.add("0");
+        list.add(accountNumber);
+        list.add(password);
+        list.add(confirmPassword);
+        //list.add(actualAge);
+        try 
+        {
+            Database.DatabaseOperations.checkCredentials(list);
+        } 
+        catch (ParseException ex) 
+        {
+            JOptionPane.showMessageDialog(this, "Enter All the Details");
+        }
+            
+        
+    }
+    
+    @Override
+    public void itemStateChanged(ItemEvent e) 
+    {
+        ItemSelectable itemselected = e.getItemSelectable();
+
+        if(itemselected == gMale)
+        {
+            userGender = "Male";
+        }
+        else if(itemselected == gFemale)
+        {
+            userGender = "Female";
+        } 
+        else if(itemselected == gOther)
+        {
+            userGender = "Other";
+        } 
+    }
+    
     public void actionPerformed(ActionEvent e) 
     {
         if(e.getSource() == registerButton)
         {
-            main.switchPage("AdminPanel");
+            register();
+            //main.switchPage("AdminPanel");
         }
-        else if(e.getSource() == registerLoginButton || e.getSource() == backButton){
+        else if(e.getSource() == registerLoginButton || e.getSource() == backButton)
+        {
             main.switchPage("login");
         }
         

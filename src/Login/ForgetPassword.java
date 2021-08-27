@@ -11,6 +11,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 /**
  *
@@ -19,7 +20,7 @@ import javax.swing.JTextField;
 public class ForgetPassword
 {
     
-    JDialog newdialog = new JDialog();
+    public static JDialog newdialog = new JDialog();
     
     Color background_Color = new Color(34,34,45);
     Color on_background_Color = new Color(254,254,254);
@@ -51,8 +52,8 @@ public class ForgetPassword
         fPass_RePassword = new JLabel("Re-Enter Password");
         
         fPass_User_info = new JTextField();
-        fPass_Password_info = new JTextField();
-        fPass_Repassword_info = new JTextField();
+        fPass_Password_info = new JPasswordField();
+        fPass_Repassword_info = new JPasswordField();
         
         fPass_btn_confirm = new JButton("Confirm");
         
@@ -137,6 +138,7 @@ public class ForgetPassword
         if(hash_pass.equals(hash_confirm_pass) || hash_pass != null || hash_confirm_pass != null)
         {
             loginUpdate(userName, hash_pass, hash_confirm_pass, salt);
+            
         }
         else
         {

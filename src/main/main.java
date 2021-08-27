@@ -9,6 +9,7 @@ import customer.*;
 public class main extends JFrame {
     static JPanel mainPanel;
     static CardLayout card;
+    public static Component main;
     main() {
         card = new CardLayout();
         mainPanel = new JPanel(card);
