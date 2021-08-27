@@ -129,7 +129,6 @@ public class DeliveryProfile {
 
     public void setDistrict(String district) {
         this.district = district;
-    }
-    
+    }    
     
 }

@@ -45,8 +45,8 @@ public class CustomerPanel extends JPanel implements ActionListener, MouseListen
        setLayout(null);
        customerCard=new CardLayout();
        contentForCustomer=new JPanel(customerCard);
-       PInbox=new InboxPanel();
-       PConsignment=new ConsignmentPanel();
+       //PInbox=new InboxPanel();
+       //PConsignment=new ConsignmentPanel();
        PE_Post=new E_PostPanel();
        PParcel=new ParcelPanel();
        PProducts=new ProductsPanel();
@@ -54,8 +54,8 @@ public class CustomerPanel extends JPanel implements ActionListener, MouseListen
        PConsignmentDetails=new ConsignmentDetails();
       
        //InboxPanel inboxPanel=(InboxPanel)PInbox;
-       contentForCustomer.add(PInbox,"Inbox");
-       contentForCustomer.add(PConsignment,"Consignment");
+       //contentForCustomer.add(PInbox,"Inbox");
+       //contentForCustomer.add(PConsignment,"Consignment");
        contentForCustomer.add(PE_Post,"E-Post");
        contentForCustomer.add(PParcel,"Parcel");
        contentForCustomer.add(PProducts,"Products");
