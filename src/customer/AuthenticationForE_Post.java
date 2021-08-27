@@ -1,5 +1,6 @@
 package customer;
 import Database.DatabaseOperations;
+import static customer.CustomerPanel.BE_Post;
 import static customer.CustomerPanel.contentForCustomer;
 import main.*;
 import customer.DatasForCustomer.*;
@@ -69,8 +70,11 @@ public class AuthenticationForE_Post
               EPostData.setIsPasswordCorrect(getAuthentication());
                 
               if(EPostData.isIsPasswordCorrect()){
+              WalletDataG.setBalence(5000.25F);//customer Balence
+              WalletDataG.setItemCode(DatabaseOperations.getStocks().get(0).getitemCode());
+              WalletDataG.setItemPrice(Float.valueOf(DatabaseOperations.getStocks().get(0).getItemPrice()));
+              WalletDataG.setAmount(Float.valueOf(DatabaseOperations.getStocks().get(0).getItemPrice()));//fees for Parcel 1kg
               WalletDataG.setTransationType("E-Post");
-             
               if(EPostData.isHardCopy()==true && EPostData.isSoftCopy()==true){
                   Database.DatabaseOperations.updateInbox();
                   Database.DatabaseOperations.updateConsignment();
@@ -88,10 +92,11 @@ public class AuthenticationForE_Post
               }
               ConsignmentData.listForConsignment.clear();
               ConsignmentData.setIsUpdate(true);
-              CustomerPanel.contentForCustomer.add(new ConsignmentPanel(),"1");
+              CustomerPanel.contentForCustomer.add(new ConsignmentPanel(),"update");
               main.switchPage("customerPanel");
-              CustomerPanel.BConsignment.setBounds(55+120,120,160,30);
-              CustomerPanel.customerCard.show(CustomerPanel.contentForCustomer,"1");
+              CustomerPanel.BConsignment.setBounds(55+120+60,120,160,30);
+              CustomerPanel.BE_Post.setBounds(55+180+180,110,160,30);
+              CustomerPanel.customerCard.show(CustomerPanel.contentForCustomer,"update");
               newdialog.dispose();
 
                 }

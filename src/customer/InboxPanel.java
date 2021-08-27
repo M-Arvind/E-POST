@@ -49,14 +49,15 @@ public class InboxPanel extends JPanel implements MouseListener{
        // my insertion
        DatabaseOperations.getInboxDetails();
        // my insertion
-       while(i<InboxData.ListForInbox.size()){
+      /*while(i<InboxData.ListForInbox.size()){
            JPanel temp=this.getPanel(i, y);
            temp.addMouseListener(this);
            MyPanel.add(temp); 
            y=y+130;
            
            i++;
-       } 
+       }*/ 
+
       scroll=new JScrollPane(MyPanel,ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
       add(scroll,"MessagePanel");
       card.show(this,"MessagePanel");

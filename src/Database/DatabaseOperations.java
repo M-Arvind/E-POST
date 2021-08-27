@@ -1,4 +1,5 @@
 package Database;
+import Login.ForgetPassword;
 import Consignment.*;
 import java.awt.List;
 import java.awt.TextField;
@@ -26,9 +27,14 @@ import javax.swing.JOptionPane;
 import java.sql.Date;
 import java.sql.Statement;
 import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
+import main.main;
 import warehouse.*;
 import profile.*;
 
@@ -55,7 +61,7 @@ public class DatabaseOperations
     public static Object[][] getCustomerConsignmentDetails(){
        try {
            Connection con=DatabaseOperations.getConnection();
-           String Customer_ID="Kishore P";
+           String Customer_ID=Login.login.user_ID;
            String query="select *from Consignment where customer_ID='"+Customer_ID+"'";
            PreparedStatement  st1=con.prepareStatement(query);
            ResultSet res=st1.executeQuery(query);
@@ -92,17 +98,19 @@ public class DatabaseOperations
        } catch (Exception ex) {
            System.out.println("Error in getCustomerConsignmentDetails---->"+ex.toString());
        }
-       Object[][] row=new Object[ConsignmentData.listForConsignment.size()][8];
+       Object[][] row=new Object[ConsignmentData.listForConsignment.size()][9];
        int i=0;
        for(ConsignmentData Data:ConsignmentData.listForConsignment){
-           row[i][0]=Data.getConsignment_ID();
-           row[i][1]=Data.getCustomer_first_name();
-           row[i][2]=Data.getReceiver_first_name();
-           row[i][3]=Data.getItem();
-           row[i][4]=Data.getDelivery_ID();
-           row[i][5]=Data.getPayment_method();
-           row[i][6]=Data.getOrder_date();
-           row[i][7]=Data.getStatus();
+           row[i][0]=i+1;
+           row[i][1]=Data.getConsignment_ID();
+           row[i][2]=Data.getCustomer_first_name();
+           row[i][3]=Data.getReceiver_first_name();
+           row[i][4]=Data.getItem();
+           row[i][5]=Data.getDelivery_ID();
+           row[i][6]=Data.getPayment_method();
+           row[i][7]=Data.getOrder_date();
+           row[i][8]=Data.getStatus();
+
           
           
          i++;
@@ -115,7 +123,8 @@ public class DatabaseOperations
         ArrayList<consignment> list = new ArrayList<consignment>(); 
        try {
            Connection con=DatabaseOperations.getConnection();
-           String Delivery_Id="Barath.B";
+           String Delivery_Id=Login.login.user_ID;
+           System.out.println(Delivery_Id);
            String query="select *from Consignment where delivery_ID='"+Delivery_Id+"'";
            PreparedStatement  st1=con.prepareStatement(query);
            ResultSet res=st1.executeQuery(query);
@@ -167,8 +176,9 @@ public class DatabaseOperations
         ArrayList<consignment> list = new ArrayList<consignment>(); 
        try {
            Connection con=DatabaseOperations.getConnection();
-           String Delivery_Id="Barath.B";
-           String Status = "Order Placed";
+           String Delivery_Id=Login.login.user_ID;
+           
+           String Status = "Completed";
            String query="select *from Consignment where delivery_ID='"+Delivery_Id+"'and status = '"+Status+"'";
            PreparedStatement  st1=con.prepareStatement(query);
            ResultSet res=st1.executeQuery(query);           
@@ -208,7 +218,22 @@ public class DatabaseOperations
       
        return list;
     }
-    
+    public static void UpdateDeliveryDeatils(String conid,String Status)
+    {
+        Connection con=DatabaseOperations.getConnection();
+        try
+        {
+            String query="update Consignment set status='"+Status+"'where consignment_Id ='"+conid+"'";
+            PreparedStatement smt = con.prepareStatement(query);
+            smt.execute(query);
+            getConnection().setAutoCommit(true);
+            JOptionPane.showMessageDialog(null, "Successful");
+        }
+        catch(Exception e1)
+        {
+            System.out.println("Update---->"+e1.toString());
+        }
+    }
     
     
     
@@ -356,47 +381,7 @@ public class DatabaseOperations
         }
     }
     
-    public static ArrayList getOngoingDeliveryConsignmentDetils(String delivery_id)
-    {
-        ArrayList ongoing = new ArrayList();        
-        try
-        {
-            Statement st = getConnection().createStatement();
-            ResultSet rs =  st.executeQuery("select * from Consignment where delivery_ID ='"+delivery_id+"'");
-            if(rs.next())
-            {
-                ongoing.add(rs.getString("consignment_id"));
-                ongoing.add(rs.getString("customer_id"));
-                ongoing.add(rs.getString("receiver_id"));
-                ongoing.add(rs.getString("item"));
-                ongoing.add(rs.getString("delivery_id"));        
-                ongoing.add(rs.getString("payment_method"));                
-                ongoing.add(rs.getString("order_date"));
-                ongoing.add(rs.getString("status"));
-                
-                /*ongoing.add(rs.getString("consignment_id"));
-                ongoing.add(rs.getString("consignment_id"));
-                ongoing.add(rs.getString("consignment_id"));
-                ongoing.add(rs.getString("consignment_id"));
-                ongoing.add(rs.getString("consignment_id"));
-                ongoing.add(rs.getString("consignment_id"));
-                ongoing.add(rs.getString("consignment_id"));
-                ongoing.add(rs.getString("consignment_id"));
-                ongoing.add(rs.getString("consignment_id"));
-                ongoing.add(rs.getString("consignment_id"));
-                ongoing.add(rs.getString("consignment_id"));
-                ongoing.add(rs.getString("consignment_id"));*/
-                
-                
-            }
-        }
-        catch(Exception e)
-        {
-            
-        }
-        
-        return ongoing;
-    }
+   
     
    public static String getConsignmentIdGenerator() {
        try{
@@ -501,6 +486,80 @@ public class DatabaseOperations
           return loginCredentials;
     }
     
+    public static void loginCreate(ArrayList list)
+    {
+        String userName = list.get(0).toString();
+        
+        int min = 200;  
+        int max = 400;  
+        int salt = (int)(Math.random()*(max-min+1)+min);
+        
+        String hash_pass = Login.login.createHash(list.get(13).toString(), salt);
+        String hash_confirm_pass = Login.login.createHash(list.get(14).toString(), salt);
+        
+        try
+        {                
+            Statement st = getConnection().createStatement();
+            ResultSet rs = st.executeQuery("select user_ID  from Login where user_ID  like '"+userName+"'");
+            boolean next = rs.next();   
+
+            if(next)
+            {
+               JOptionPane.showMessageDialog(null, "You have Already Registered to E-Post"); 
+            }
+            else
+            {
+//               String query="INSERT INTO Customer VALUES ('"+list.get(0).toString()+"','"+list.get(1).toString()+"','"+list.get(2).toString()+"',"+TO_DATE(list.get(3).toString(),'YYYY-MM-DD')+",'"+list.get(4).toString()+"','"+list.get(5).toString()+"',"
+//                       + "'"+list.get(6).toString()+"','"+list.get(7).toString()+"','"+list.get(8).toString()+"','"+list.get(9).toString()+"','"+list.get(10).toString()+"','"+list.get(11).toString()+"','"+list.get(12).toString()+"')";
+//
+//               st.executeUpdate(query);
+//               getConnection().setAutoCommit(true);
+//               JOptionPane.showMessageDialog(null, "Registration Success!"); 
+               String sql = "INSERT INTO Login VALUES (?, ?, ?, ?, ?)";
+                try (PreparedStatement stmt = getConnection().prepareStatement(sql)) 
+                {
+                    stmt.setString  (1, list.get(0).toString());
+                    stmt.setString  (2, list.get(5).toString());
+                    stmt.setString  (3, "Customer");
+                    stmt.setInt   (4, salt);
+                    stmt.setString  (5, hash_pass);
+                    
+                    stmt.executeUpdate();
+                    getConnection().setAutoCommit(true);
+                    
+                    //st.executeUpdate(sql);
+                    //getConnection().setAutoCommit(true);
+                    JOptionPane.showMessageDialog(null, "Login Create SuccessFul!"); 
+                    customerCreate(list);
+                }
+            }
+        }
+        catch(Exception ex)
+        {
+            JOptionPane.showMessageDialog(null, ex.toString());
+        }
+    }
+    
+    public static int accountNumberIncrement()
+    {
+        try
+        {                
+            Statement st = getConnection().createStatement();
+            ResultSet rs = st.executeQuery("select COUNT(*) from Customer");
+            rs.next();
+            
+            int count = rs.getInt(1);
+            System.out.println(count);
+            
+            return count;            
+        }
+        catch(Exception ex)
+        {
+            JOptionPane.showMessageDialog(null, ex.toString());
+            return 1;
+        }
+    }
+    
     public static void customerCreate(ArrayList list)
     {
         
@@ -518,18 +577,128 @@ public class DatabaseOperations
             }
             else
             {
-               String query="INSERT INTO Customer VALUES ('"+list.get(0).toString()+"','"+list.get(1).toString()+"','"+list.get(2).toString()+"','"+list.get(3).toString()+"','"+list.get(4).toString()+"','"+list.get(5).toString()+"',"
-                       + "'"+list.get(6).toString()+"','"+list.get(7).toString()+"','"+list.get(8).toString()+"','"+list.get(9).toString()+"','"+list.get(10).toString()+"','"+list.get(11).toString()+"','"+list.get(12).toString()+"')";
-
-               st.executeUpdate(query);
-               getConnection().setAutoCommit(true);
-               JOptionPane.showMessageDialog(null, "Registration Success!"); 
+                DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+            
+                java.util.Date date = (java.util.Date) format.parse(list.get(3).toString());
+                java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+                
+                String sql = "INSERT INTO Customer VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                try (PreparedStatement stmt = getConnection().prepareStatement(sql)) 
+                {
+                    stmt.setString  (1, list.get(0).toString());
+                    stmt.setString  (2, list.get(1).toString());
+                    stmt.setString  (3, list.get(2).toString());
+                    stmt.setDate    (4, sqlDate);
+                    stmt.setString  (5, list.get(4).toString());
+                    stmt.setString  (6, list.get(5).toString());
+                    stmt.setString  (7, list.get(6).toString());
+                    stmt.setString  (8, list.get(7).toString());
+                    stmt.setString  (9, list.get(8).toString());
+                    stmt.setString  (10, list.get(9).toString());
+                    stmt.setString  (11, list.get(10).toString());
+                    stmt.setString  (12, list.get(11).toString());    
+                    stmt.setString  (13, list.get(12).toString()); 
+                    
+                    stmt.executeUpdate();
+                    getConnection().setAutoCommit(true);
+                    JOptionPane.showMessageDialog(null, "Registration Success!"); 
+                }
             }
         }
         catch(Exception ex)
         {
             JOptionPane.showMessageDialog(null, ex.toString());
         }
+    }
+    
+    public static void checkCredentials(ArrayList list) throws ParseException
+    {   
+        DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+            
+        java.util.Date date = (java.util.Date) format.parse(list.get(3).toString());
+        java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+        LocalDate today = LocalDate.now(ZoneId.of("Asia/Dushanbe"));
+        java.util.Date todayDate = Date.valueOf(today);
+        
+        long ageInMillis = System.currentTimeMillis() - date.getTime();
+        long years = (ageInMillis /(365 * 24*60*60*1000l));
+        long leftover = ageInMillis %(365 * 24*60*60*1000l);
+        long days = leftover/(24*60*60*1000l);
+
+        int actualAge = (int) years;
+        
+        if(!list.get(1).toString().equals("") && list.get(1).toString().chars().allMatch(Character::isLetter) && !list.get(2).toString().equals("") && list.get(2).toString().chars().allMatch(Character::isLetter))
+        {
+            if(list.get(0).toString().chars().count() > 3)
+            {
+                if (list.get(5).toString().matches("\\d{10}")) 
+                {
+                    if(list.get(13).toString().equals(list.get(14).toString()))
+                    {
+                        if(!date.after(todayDate))
+                        {
+                            if(Integer.parseInt(list.get(4).toString()) == actualAge)
+                            {
+                                if(!list.get(8).toString().equals("") && !list.get(9).toString().equals("") && list.get(8).toString().matches("^[a-zA-Z\\s]*$") && list.get(9).toString().matches("^[a-zA-Z\\s]*$"))
+                                {
+                                    if(!list.get(7).toString().equals(""))
+                                    {
+                                        if(list.get(10).toString().matches("\\d{6}"))
+                                        {
+                                            if(!list.get(6).toString().equals(""))
+                                            {
+                                                Database.DatabaseOperations.loginCreate(list);
+                                            }
+                                            else
+                                            {
+                                                JOptionPane.showMessageDialog(null, "Please Selete your Gender");
+                                            }
+                                        }
+                                        else
+                                        {
+                                            JOptionPane.showMessageDialog(null, "Invalid Pincode");
+                                        }
+                                    }
+                                    else
+                                    {
+                                        JOptionPane.showMessageDialog(null, "Please Enter your Address");
+                                    }
+                                }
+                                else
+                                {
+                                    JOptionPane.showMessageDialog(null, "Invalid State or District");
+                                }
+                            }
+                            else
+                            {
+                                JOptionPane.showMessageDialog(null, "Enter your Age ACTUAL Age!");
+                            }
+                        }
+                        else
+                        {
+                            JOptionPane.showMessageDialog(null, "You cannot be Born in the Future");
+                        }
+                    }
+                    else
+                    {
+                        JOptionPane.showMessageDialog(null, "Password and Confirm Password does not match");
+                    }
+                }
+                else
+                {
+                    JOptionPane.showMessageDialog(null, "Invalid Phone Number");
+                }
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(null, "Username should be a minimun of 4 Characters");
+            }
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(null, "Invalid FirstName Or LastName");
+        }
+        
     }
     
     public static void loginUpdate(String userName, String password, String confirmPassword, int salt)
@@ -546,6 +715,7 @@ public class DatabaseOperations
                 st.executeUpdate(query);
                 getConnection().setAutoCommit(true);
                 JOptionPane.showMessageDialog(null, "Successful");
+                ForgetPassword.newdialog.dispose();
             }
             else
             {
@@ -585,21 +755,44 @@ public class DatabaseOperations
     }
     public static void updateConsignment(){
          try{ 
+            System.out.println("ConsignmentUpdate Start");
             String query="INSERT INTO Consignment VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
             Connection con=DatabaseOperations.getConnection();
             PreparedStatement pst=con.prepareStatement(query);
             pst.setString(1,DatabaseOperations.getConsignmentIdGenerator());//consignment_ID
-            pst.setString(2,"Kishore P");//customer_ID
+            pst.setString(2,Login.login.user_ID);//customer_ID
             pst.setString(3, "");//delivery_ID
-            pst.setString(4,EPostData.getTo());//receiver_ID
-            pst.setString(5,"WH0001");//item_code
-            pst.setString(6,"E-Post");//item
-            pst.setString(7,"5");//item_price
-            pst.setString(8,"");//item_weight
-            pst.setString(9,EPostData.getFirstName());//receiver_first_name                                             
-            pst.setString(10, EPostData.getLastName()); //receiver_last_name             
-            pst.setString(11, EPostData.getAddress()); //receiver_address                                                      
-            pst.setLong(12, EPostData.getPhoneNumber()); //receiver_contact_number                                                       
+            if(WalletDataG.getTransationType().equals("E-Post"))
+                 pst.setString(4,EPostData.getTo());//receiver_ID
+            if(WalletDataG.getTransationType().equals("Parcel"))
+                 pst.setString(4,ParcelData.getTo());//receiver_ID 
+            if(WalletDataG.getTransationType().equals("Products"))
+                 pst.setString(4,Login.login.user_ID);//receiver_ID
+            System.out.println(WalletDataG.getTransationType());
+            System.out.println(WalletDataG.getItemPrice());
+            System.out.println(WalletDataG.getItemWeight()+"money this weight-->"+WalletDataG.getBalence());
+            pst.setString(5,WalletDataG.getItemCode());//item_code
+            pst.setString(6,WalletDataG.getTransationType());//item
+            pst.setFloat(7,WalletDataG.getItemPrice());//item_price+
+            pst.setFloat(8,WalletDataG.getItemWeight());//item_weight
+            if(WalletDataG.getTransationType().equals("E-Post")){
+                pst.setString(9,  EPostData.getFirstName());//receiver_first_name  
+                pst.setString(10, EPostData.getLastName()); //receiver_last_name  
+                pst.setString(11, EPostData.getAddress()); //receiver_address 
+                pst.setLong(12, EPostData.getPhoneNumber()); //receiver_contact_number   
+            }
+            else if(WalletDataG.getTransationType().equals("Parcel")){
+                pst.setString(9, ParcelData.getFirstName());//receiver_first_name                                             
+                pst.setString(10, ParcelData.getLastName()); //receiver_last_name             
+                pst.setString(11, ParcelData.getAddress()); //receiver_address 
+                pst.setLong(12, ParcelData.getPhoneNumber()); //receiver_contact_number    
+               }  
+            else if(WalletDataG.getTransationType().equals("Products")){
+                pst.setString(9,"FirstName");//current log in customer first_name                                             
+                pst.setString(10,"LastName"); //current log in customer Last_name  
+                pst.setString(11,""); //current log in customer receiver_address 
+                pst.setLong(12,90L); //receiver_contact_number      
+            }
             pst.setString(13,"Kishore");      //customer_first_name 
             pst.setString(14, "P");           //customer_last_name 
             pst.setLong(15,9095305385L);   //customer_contact_number
@@ -611,45 +804,72 @@ public class DatabaseOperations
             pst.executeUpdate();
             con.setAutoCommit(true);
             con.close();
+            System.out.println("ConsignmentUpdate end");
             JOptionPane.showMessageDialog(null,"Consignment Updated Succesfully ID:"+DatabaseOperations.getConsignmentIdGenerator());
     
         }
         catch(Exception e){
-            JOptionPane.showMessageDialog(null,"Consignment Updated Failed ID:"+e.toString());
+            JOptionPane.showMessageDialog(null,"Consignment Update Failed ID:"+e.toString());
         }
+    }
+    public static void updateCustomerBalence(){
+       try{
+           String query = "update customer set bank_balance=? where customer_ID=?";
+            Connection con=DatabaseOperations.getConnection();
+            PreparedStatement pst=con.prepareStatement(query);
+            pst.setFloat(1, WalletDataG.getBalence());
+            pst.setString(2,Login.login.user_ID);
+            JOptionPane.showMessageDialog(null,"Your Balence Updated Succesfully in Your AccountNumber and Remaining Balence is:"+WalletDataG.getBalence());
+       } 
+       catch(Exception e){
+           JOptionPane.showMessageDialog(null,"CustomerBalence Update Failed ID:"+e.toString());
+       }
     }
     public static void updateWalletTransaction(){
         try{ 
+             System.out.println("WalletTransaction Start");
             String query="INSERT INTO Wallet VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
             Connection con=DatabaseOperations.getConnection();
             PreparedStatement pst=con.prepareStatement(query);
             pst.setString(1,DatabaseOperations.getTransactionIdGenerator());
-            pst.setString(2,"Kishore P");//Customer ID
+            pst.setString(2,Login.login.user_ID);//Customer ID
             pst.setString(3,"Admin001");//Reciver Id
-            pst.setString(4, EPostData.getFirstName());
-            pst.setString(5, EPostData.getLastName());
+            if(WalletDataG.getTransationType().equals("E-Post")){
+                pst.setString(4, EPostData.getFirstName());
+                pst.setString(5, EPostData.getLastName());  
+            }
+            if(WalletDataG.getTransationType().equals("Parcel")){
+                pst.setString(4, ParcelData.getFirstName());
+                pst.setString(5,  ParcelData.getLastName());  
+            }
+            if(WalletDataG.getTransationType().equals("Products")){
+                pst.setString(4,"Kishore");//current log in user first name
+                pst.setString(5, "P"); //current log in user Last name    
+            }
             pst.setString(6, WalletDataG.getTransationType());
             pst.setDate(7,java.sql.Date.valueOf(java.time.LocalDate.now()));//new java.sql.Date(System.currentTimeMillis())
             pst.setLong(8,350700001);//current logged in customer's wallet account number
             pst.setLong(9,350700000);//Admin Account Number
             pst.setFloat(10,WalletDataG.getAmount());//amount
-            pst.setString(11,"Admin");
+            pst.setString(11,"Admin");//money reciever name
             pst.setFloat(12,WalletDataG.getBalence());//balence
             pst.executeUpdate();
             con.setAutoCommit(true);
             con.close();
-            JOptionPane.showMessageDialog(null,"Wallet Updated Succesfully ID:"+DatabaseOperations.getMessageIdGenerator());
-            
+            System.out.println("WalletTransaction end");
+            JOptionPane.showMessageDialog(null,"Wallet Updated Succesfully for ID:"+DatabaseOperations.getMessageIdGenerator());
+            updateCustomerBalence();
             
         }
         catch(Exception e){
             JOptionPane.showMessageDialog(null,"Wallet  Updated Failed ID:"+e.toString());
         }
     }
-    public static ArrayList getStocks(){
+    public static ArrayList<Warehouse> getStocks(){
         ArrayList<Warehouse> stocks = new ArrayList<Warehouse>();
         try{
-        Statement st = getConnection().createStatement();
+         Connection con=getConnection();
+        Statement st = con.createStatement();
         String query = "SELECT * from warehouse";
         ResultSet rs = st.executeQuery(query);
         while(rs.next()){
@@ -660,6 +880,7 @@ public class DatabaseOperations
             temp.setItemQuantity(rs.getString("S_ITEM_QUANTITY"));
             stocks.add(temp);
         }
+        con.close();
         }
         catch(Exception e){
             System.out.print(e);

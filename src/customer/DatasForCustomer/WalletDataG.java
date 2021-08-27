@@ -7,6 +7,7 @@ public class WalletDataG {
     private static String transationType;
     private static Float itemWeight;
     private static Float itemPrice;
+    private static String itemCode;
 
     public static String getTransationType() {
         return transationType;
@@ -46,5 +47,13 @@ public class WalletDataG {
 
     public static void setItemPrice(Float aItemPrice) {
         itemPrice = aItemPrice;
+    }
+
+    public static String getItemCode() {
+        return itemCode;
+    }
+
+    public static void setItemCode(String aItemCode) {
+        itemCode = aItemCode;
     }
 }
