@@ -1,5 +1,6 @@
 package customer;
 
+import static Database.DatabaseOperations.*;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
@@ -10,16 +11,20 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import java.awt.Image;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import javax.swing.JScrollPane;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 import javax.swing.ScrollPaneConstants;
+import java.util.*;
 import static javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER;
+import warehouse.Warehouse;
 
 
-public class ProductsPanel extends JPanel implements ActionListener{
+public class ProductsPanel extends JPanel implements MouseListener{
     
-    JButton revenueStamp, postageStamp, postageStamp1, collectorStamp, inlandLetter, envelope, postCard;
+    JLabel revenueStamp, postageStamp, postageStamp1, collectorStamp, inlandLetter, envelope, postCard;
     JLabel revenueStampName, postageStampName, postageStamp1Name, collectorStampName, inlandLetterName, postCardName, envelopeName;
     JLabel revenueStampPrice, postageStampPrice, postageStamp1Price, collectorStampPrice, inlandLetterPrice, postCardPrice, envelopePrice;
     JLabel revenueStampQuantity, postageStampQuantity, postageStamp1Quantity, collectorStampQuantity, inlandLetterQuantity, postCardQuantity, envelopeQuantity;
@@ -40,10 +45,11 @@ public class ProductsPanel extends JPanel implements ActionListener{
         newimg = image.getScaledInstance(200, 200,  java.awt.Image.SCALE_SMOOTH);
         revenueStampImage = new ImageIcon(newimg);
         
-        revenueStamp = new JButton(revenueStampImage);
+        revenueStamp = new JLabel(revenueStampImage);
         revenueStamp.setBorder(border);
         revenueStamp.setBounds(50, 50, 180, 180);
-        revenueStamp.addActionListener(this);
+        revenueStamp.addMouseListener(this);
+        
         
         revenueStampName = new JLabel("Item Name  : Revenue Stamp");
         revenueStampName.setBounds(50, 250, 240, 40);
@@ -63,10 +69,10 @@ public class ProductsPanel extends JPanel implements ActionListener{
         newimg = image.getScaledInstance(200, 200, java.awt.Image.SCALE_SMOOTH);
         postageStampImage = new ImageIcon(newimg);
         
-        postageStamp = new JButton(postageStampImage);
+        postageStamp = new JLabel(postageStampImage);
         postageStamp.setBorder(border);
         postageStamp.setBounds(350, 50, 180, 180);
-        postageStamp.addActionListener(this);
+        postageStamp.addMouseListener(this);
         
         postageStampName = new JLabel("Item Name  : Postage Stamp");
         postageStampName.setBounds(350, 250, 240, 40);
@@ -86,10 +92,10 @@ public class ProductsPanel extends JPanel implements ActionListener{
         newimg = image.getScaledInstance(200, 200, java.awt.Image.SCALE_SMOOTH);
         postageStamp1Image = new ImageIcon(newimg);
         
-        postageStamp1 = new JButton(postageStamp1Image);
+        postageStamp1 = new JLabel(postageStamp1Image);
         postageStamp1.setBorder(border);
         postageStamp1.setBounds(650, 50, 180, 180);
-        postageStamp1.addActionListener(this);
+        postageStamp1.addMouseListener(this);
         
         postageStamp1Name = new JLabel("Item Name  : Postage Stamp");
         postageStamp1Name.setBounds(650, 250, 240, 40);
@@ -109,10 +115,10 @@ public class ProductsPanel extends JPanel implements ActionListener{
         newimg = image.getScaledInstance(200, 200, java.awt.Image.SCALE_SMOOTH);
         collectorStampImage = new ImageIcon(newimg);
         
-        collectorStamp = new JButton(collectorStampImage);
+        collectorStamp = new JLabel(collectorStampImage);
         collectorStamp.setBorder(border);
         collectorStamp.setBounds(950, 50, 180, 180);
-        collectorStamp.addActionListener(this);
+        collectorStamp.addMouseListener(this);
         
         collectorStampName = new JLabel("Item Name  : Collector Stamp");
         collectorStampName.setBounds(950, 250, 240, 40);
@@ -132,10 +138,10 @@ public class ProductsPanel extends JPanel implements ActionListener{
         newimg = image.getScaledInstance(200, 200, java.awt.Image.SCALE_SMOOTH);
         inlandLetterImage = new ImageIcon(newimg);
         
-        inlandLetter = new JButton(inlandLetterImage);
+        inlandLetter = new JLabel(inlandLetterImage);
         inlandLetter.setBorder(border);
         inlandLetter.setBounds(50, 400, 180, 180);
-        inlandLetter.addActionListener(this);
+        inlandLetter.addMouseListener(this);
         
         inlandLetterName = new JLabel("Item Name  : Inland Letter");
         inlandLetterName.setBounds(50, 600, 240, 40);
@@ -155,10 +161,10 @@ public class ProductsPanel extends JPanel implements ActionListener{
         newimg = image.getScaledInstance(300, 100, java.awt.Image.SCALE_SMOOTH);
         envelopeImage = new ImageIcon(newimg);
         
-        envelope = new JButton(envelopeImage);
+        envelope = new JLabel(envelopeImage);
         envelope.setBorder(border);
         envelope.setBounds(350, 400, 180, 180);
-        envelope.addActionListener(this);
+        envelope.addMouseListener(this);
         envelope.setBackground(fg);
         
         envelopeName = new JLabel("Item Name  : Envelope");
@@ -179,10 +185,10 @@ public class ProductsPanel extends JPanel implements ActionListener{
         newimg = image.getScaledInstance(300, 100, java.awt.Image.SCALE_SMOOTH);
         postCardImage = new ImageIcon(newimg);
         
-        postCard = new JButton(postCardImage);
+        postCard = new JLabel(postCardImage);
         postCard.setBorder(border);
         postCard.setBounds(650, 400, 180, 180);
-        postCard.addActionListener(this);
+        postCard.addMouseListener(this);
         postCard.setBackground(fg);
         
         postCardName = new JLabel("Item Name  : Postal Card");
@@ -206,18 +212,52 @@ public class ProductsPanel extends JPanel implements ActionListener{
     }
 
     @Override
-    public void actionPerformed(ActionEvent e) {
-        Object oe = e.getSource();
-        if(oe == revenueStamp){
-            System.out.print("Revenue Stamp");
+    public void mouseClicked(MouseEvent me) {
+        ArrayList<Warehouse> stock=getStocks();
+        //,, , , , , postCard
+        if(me.getSource()==revenueStamp){
+            new PaymentProducts(0);
+        }
+        if(me.getSource()== postageStamp){
+            new PaymentProducts(1);
+        }
+        if(me.getSource()== postageStamp1){
+            new PaymentProducts(2);
+        }
+        if(me.getSource()== collectorStamp){
+            new PaymentProducts(3);
+        }
+        if(me.getSource()== inlandLetter){
+            new PaymentProducts(4);
+        }
+        if(me.getSource()== envelope){
+            new PaymentProducts(5);
+        }
+        if(me.getSource()== postCard){
+            new PaymentProducts(6);
         }
         
-        else if(oe == postageStamp){
-            System.out.print("Postage Stamp");
-        }
-        else if(oe == postageStamp1){
-            
-        }
+        
+    }
+
+    @Override
+    public void mousePressed(MouseEvent me) {
+        
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent me) {
+        
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent me) {
+        
+    }
+
+    @Override
+    public void mouseExited(MouseEvent me) {
+        
     }
     
     

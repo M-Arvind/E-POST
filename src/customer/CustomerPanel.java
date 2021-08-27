@@ -21,6 +21,9 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import main.main;
 import Admin.StyledButtonUi;
+import customer.DatasForCustomer.InboxData;
+import static customer.WalletPanel.removeWalletCurrentDetails;
+import static customer.WalletPanel.setWalletCurrentDetails;
 import javax.swing.plaf.ButtonUI;
 import Database.DatabaseOperations;
 import javax.swing.JTextField;
@@ -51,6 +54,7 @@ public class CustomerPanel extends JPanel implements ActionListener, MouseListen
     
        setLayout(null);
        customerCard=new CardLayout();
+       PWallet=new WalletPanel();
        contentForCustomer=new JPanel(customerCard);
        PInbox=new InboxPanel();
        //PInbox=new InboxPanel();
@@ -58,7 +62,7 @@ public class CustomerPanel extends JPanel implements ActionListener, MouseListen
        PE_Post=new E_PostPanel();
        PParcel=new ParcelPanel();
        PProducts=new ProductsPanel();
-       PWallet=new WalletPanel();
+       
        PConsignmentDetails=new ConsignmentDetails();
       
        //InboxPanel inboxPanel=(InboxPanel)PInbox;
@@ -153,7 +157,7 @@ public class CustomerPanel extends JPanel implements ActionListener, MouseListen
        BInbox.setFont(font);
        BInbox.setBorder(null);
        BInbox.setUI(ui);
-       BInbox.setBounds(X_FORCUSTOMER,120,160,30);
+       BInbox.setBounds(X_FORCUSTOMER,110,160,30);
        BInbox.setBackground(Buttoncolor);
        BInbox.addActionListener(this);
        add(BInbox); 
@@ -208,6 +212,9 @@ public class CustomerPanel extends JPanel implements ActionListener, MouseListen
         Object o=e.getSource();
         
         if(o==BInbox){
+            InboxData.ListForInbox.clear();
+            PInbox=new InboxPanel();
+            contentForCustomer.add(PInbox,"Inbox");
             BInbox.setBounds(X_FORCUSTOMER,120,160,30);
             customerCard.show(contentForCustomer,"Inbox");
              
@@ -227,8 +234,7 @@ public class CustomerPanel extends JPanel implements ActionListener, MouseListen
             if(!ConsignmentData.isIsUpdate()){
                  System.out.println("--------->BuutonConsign");
                  customerCard.show(contentForCustomer,"Consignment");}
-               
-             
+
              else{
             System.out.println("--------->Button1");
                  customerCard.show(contentForCustomer,"update");
@@ -271,7 +277,11 @@ public class CustomerPanel extends JPanel implements ActionListener, MouseListen
                
         }
         else if(o==BWallet){
+            
+            
             BWallet.setBounds(X_FORCUSTOMER+180+180+180+180+180,120,160,30);
+            removeWalletCurrentDetails();
+            setWalletCurrentDetails();
             customerCard.show(contentForCustomer,"Wallet");
             
             BInbox.setBounds(X_FORCUSTOMER,110,160,30);
@@ -279,6 +289,8 @@ public class CustomerPanel extends JPanel implements ActionListener, MouseListen
             BE_Post.setBounds(X_FORCUSTOMER+180+180,110,160,30);
             BParcel.setBounds(X_FORCUSTOMER+180+180+180,110,160,30);
             BProducts.setBounds(X_FORCUSTOMER+180+180+180+180,110,160,30);
+            
+            
    
         }
     

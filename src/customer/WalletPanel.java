@@ -1,8 +1,11 @@
 package customer;
+import Database.DatabaseOperations;
+import customer.DatasForCustomer.WalletData;
 import javax.swing.JPanel;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Font;
+import java.util.ArrayList;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -11,14 +14,16 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import main.main;
 public class WalletPanel extends JPanel 
 {
+        public static DefaultTableModel model;
 	private JLabel icon;	
 	private JButton bE_pay,bMoney_Order,bAdd_Money;	
 	private JLabel UserName,Account_no,WalletBalance;	
-	private JTable table;
+	private static  JTable table;
 	private JScrollPane sp;	
 	private Color panel = new Color(254,254,254);
 	private Color back = new Color(34,34,44);
@@ -26,8 +31,8 @@ public class WalletPanel extends JPanel
 	private int font = 16;
 	private Font text = new Font("Verdana", Font.BOLD, font);
 	private int y = 120;	
-	private String column_name[] = {"ID","Type","Date","Beneficiary","Receivers Id","Amount","Balance"};
-	private Object row[][] = {};
+	private static Object column_name[] = {"ID","Type","Date","Beneficiary","Receivers Id","Amount","Balance"};
+	private Object row[] = {};
 	
 	WalletPanel()
 	{
@@ -36,14 +41,20 @@ public class WalletPanel extends JPanel
 		this.setLayout(null);
 		this.setBounds(55,150,1260,570);
 		this.setBackground(panel);
-		
-		table = new JTable(row,column_name);
+		model = new DefaultTableModel();
+                
+		table = new JTable(model);
+                for(Object c:column_name){
+                    model.addColumn(c);
+                }
+                
 		JTableHeader tableHeader = table.getTableHeader();
 		tableHeader.setBackground(button);
 		tableHeader.setForeground(Color.white);
 		tableHeader.setFont(text);
+                
 		
-		table.setBackground(button);
+		//table.setBackground(button);
 		sp = new JScrollPane(table);
 		sp.setBounds(160,150,950,300);	
 		sp.setBackground(back);
@@ -117,5 +128,43 @@ public class WalletPanel extends JPanel
     	
     	
 	}
+        static void setWalletCurrentDetails(){
+            ArrayList<WalletData> list= DatabaseOperations.getCurrentWalletDetails();
+            
+            
+            for(int i=0;i<list.size();i++){
+                WalletData temp=list.get(i);
+                
+                Object row[]=new Object[7];
+                row[0]=(temp.getTransactionid());
+                
+                row[1]=(temp.getTransactiontype());
+                
+                row[2]=(temp.getTransactiondate());
+                
+                row[3]=(temp.getBeneficiary());
+                
+                row[4]=(temp.getRecieverid());
+                
+                row[5]=(temp.getAmount());
+                
+                row[6]=(temp.getBalance());
+                
+                try{
+                model.addRow(row);
+                }catch(Exception e){
+                    System.out.println("addrow"+e.toString());
+                }
+                
+            } 
+            
+            
+        }
+        static void removeWalletCurrentDetails(){
+            while(model.getRowCount() > 0)
+            {
+                model.removeRow(0);
+            }
+        }
 
 }

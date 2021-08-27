@@ -1,13 +1,20 @@
 package customer;
+import static Database.DatabaseOperations.profileUpdationOnSave;
+import customer.DatasForCustomer.ProfileUpdateData;
+import static customer.DatasForCustomer.ProfileUpdateData.*;
 import javax.swing.*;
 import javax.swing.border.Border;
 
 import java.awt.*;
+import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import main.main;
 public class Profile_Update extends JPanel implements MouseListener{
 	//JPanel ViewPanel;
+        
 	Icon ProfIcon,EditIcon,BackIcon;
 	Border emptyBorder = BorderFactory.createEmptyBorder();
 	JLabel UserNameTop;
@@ -179,7 +186,7 @@ public class Profile_Update extends JPanel implements MouseListener{
 		
 		//ContactNumber Label
 		
-		ContactNumberLabel=new JLabel();
+		ContactNumberLabel=new JLabel("Contact Number");
 		ContactNumberLabel.setBounds(X,Y+340,200,150);
 		ContactNumberLabel.setFont(new Font("Bold",Font.BOLD,labelFontSize));
 		ContactNumberLabel.setForeground(Color.WHITE);
@@ -216,7 +223,9 @@ public class Profile_Update extends JPanel implements MouseListener{
 		//gender radio box
 		
                 rb1=new JRadioButton("Male");
+                rb1.setActionCommand("Male");
                 rb2=new JRadioButton("Female");
+                rb2.setActionCommand("Female");
                 rb1.setBounds(X+240,Y+470,80,35);
                 rb1.setFont(new Font("Bold",Font.BOLD,labelFontSize));
                 rb1.setForeground(Color.white);
@@ -230,6 +239,9 @@ public class Profile_Update extends JPanel implements MouseListener{
                 
                 bg.add(rb1);
                 bg.add(rb2);
+                
+                
+                
                
 		add(GenderLabel);
 		add(Collon7);
@@ -291,6 +303,28 @@ public class Profile_Update extends JPanel implements MouseListener{
 		SaveButton.setBounds(X+400,Y+690,100,30);
 		SaveButton.setForeground(Color.black);
 		SaveButton.setBackground(new Color(71,63,145));
+                SaveButton.addActionListener((c)->{
+                    
+                    ProfileUpdateData.setFIRST_NAME(FirstNameValue.getText());  
+                    ProfileUpdateData.setLAST_NAME(LastNameValue.getText());  
+                    ProfileUpdateData.setDOB(DOBValue.getText());
+                    ProfileUpdateData.setAGE(AgeValue.getText());
+                    ProfileUpdateData.setCONTACT_NUMBER(ContactNumberValue.getText());
+                    ProfileUpdateData.setGENDER( bg.getSelection().getActionCommand());
+                    ProfileUpdateData.setADDRESS(AddressValue.getText());
+                    ProfileUpdateData.setACCOUNT_NUMBER(AccountNumberValue.getText());
+                    if(phoneNumberValidation(ContactNumberValue.getText())){
+                        profileUpdationOnSave();
+                        
+                    }
+                    else{
+                        JOptionPane.showMessageDialog(null,"Enter Valid Number");  
+                    }
+                });
+                
+                
+
+
 		add(SaveButton);
 		
 		setBounds(0,0,1350,890);
@@ -302,11 +336,20 @@ public class Profile_Update extends JPanel implements MouseListener{
 		
 	}
 
+    
+    static boolean phoneNumberValidation(String number){
+        String regex = "(0/91)?[7-9][0-9]{9}";
+        return number.matches(regex);
+    }
+    
+        
     @Override
     public void mouseClicked(MouseEvent e) {
+        
         if(e.getSource() == BackIconLabel){
             main.switchPage("Profile");
         }
+        
     }
 
     @Override

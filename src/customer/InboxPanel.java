@@ -47,7 +47,7 @@ public class InboxPanel extends JPanel implements MouseListener{
        MyPanel.setLayout(null);
        MyPanel.setPreferredSize(new Dimension(1260,3000));
        // my insertion
-       //DatabaseOperations.getInboxDetails();
+       DatabaseOperations.getInboxDetails();
        // my insertion
       /*while(i<InboxData.ListForInbox.size()){
            JPanel temp=this.getPanel(i, y);

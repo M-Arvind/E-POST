@@ -9,7 +9,14 @@ package customer;
  *
  * @author kavya
  */
+
 import Database.DatabaseOperations;
+import static customer.CustomerPanel.BConsignment;
+import static customer.CustomerPanel.BWallet;
+import static customer.CustomerPanel.contentForCustomer;
+import static customer.CustomerPanel.customerCard;
+import customer.DatasForCustomer.ConsignmentData;
+import static customer.WalletPanel.*;
 import main.*;
 import java.awt.Color;
 import java.awt.Font;
@@ -69,8 +76,11 @@ public class WalletAuthentication {
             public void actionPerformed(ActionEvent e) 
             {
                 DatabaseOperations.WalletUpdatationOnMoneyOrder();
-                CustomerPanel.customerCard.show(CustomerPanel.contentForCustomer,"E-Post");
+                
                 main.switchPage("customerPanel");
+                removeWalletCurrentDetails();
+                setWalletCurrentDetails();
+                customerCard.show(contentForCustomer,"Wallet");
                 newdialog.dispose();
                                
             }
