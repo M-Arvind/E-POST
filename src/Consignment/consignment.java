@@ -1,12 +1,15 @@
 package Consignment;
+import Admin.AdminPanel;
 import Admin.OnGoingConsignment;
 import Admin.CompletedConsignment;
 import Admin.ConsignmentDetails;
+import Admin.NewConsignment;
 import Database.DatabaseOperations;
 import java.sql.Date;
 import java.util.*;
 import Delivery.ongoing.*;
 import customer.DatasForCustomer.ConsignmentData;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 public class consignment
 {
@@ -306,6 +309,7 @@ public class consignment
     }
     
     public static void setConsignmentDetails(String id){
+        try{
         consignment details = DatabaseOperations.getConsignmentDetails(id);
         ConsignmentDetails.vConsignDetail.setText(details.getConsignment_ID());
         ConsignmentDetails.vItem.setText(details.getItem());
@@ -327,6 +331,10 @@ public class consignment
         ConsignmentDetails.vReceLastName.setText(details.getReceiver_last_name());
         ConsignmentDetails.vReceContact.setText(details.getReceiver_contact_number().toString());
         ConsignmentDetails.vReceAdress.setText(details.getReceiver_address());
+        }
+        catch(Exception e){
+            JOptionPane.showMessageDialog(AdminPanel.contentForAdmin, "Consignent Id Not Found");
+        }
     }
     
     
@@ -347,7 +355,7 @@ public class consignment
 
             while(OnGoingConsignment.model.getRowCount()>0){
                 OnGoingConsignment.model.removeRow(0);
-                System.out.println("deleted row");
+
             }
  
             ArrayList<consignment> listForDeliveryConsignment = DatabaseOperations.getOngoingAdminConsignmentDetails();         
@@ -365,7 +373,7 @@ public class consignment
 
             while(CompletedConsignment.model.getRowCount()>0){
                 CompletedConsignment.model.removeRow(0);
-                System.out.println("deleted row");
+
             }
  
             ArrayList<consignment> listForDeliveryConsignment = DatabaseOperations.getCompletedAdminConsignmentDetails();         
@@ -373,6 +381,27 @@ public class consignment
             {
                 consignment temp = listForDeliveryConsignment.get(i);
                 CompletedConsignment.model.addRow(new Object[]{temp.getConsignment_ID(),temp.getCustomer_ID(),temp.getReceiver_ID(),temp.getItem(),temp.getDelivery_ID(),temp.getPayment_method(),temp.getDelivery_date(),temp.getStatus()});
+            }
+    }
+    
+    public static void setNewdAdminConsignmentDetails()
+    {
+            NewConsignment.table.getSelectionModel().clearSelection();
+
+            while(NewConsignment.newModel.getRowCount()>0){
+                NewConsignment.newModel.removeRow(0);
+
+            }
+ 
+            ArrayList<consignment> listForDeliveryConsignment = DatabaseOperations.getNewAdminConsignmentDetails();  
+//            System.out.println(listForDeliveryConsignment.size());
+            String nu = null;
+            for(int i=0;i<listForDeliveryConsignment.size();i++)
+            {
+                consignment temp = listForDeliveryConsignment.get(i);
+//                System.out.print(temp.getConsignment_ID());
+                    NewConsignment.newModel.addRow(new Object[]{temp.getConsignment_ID(),temp.getCustomer_ID(),temp.getReceiver_ID(),temp.getItem(),"",temp.getPayment_method(),temp.getDelivery_date(),temp.getStatus()});
+            
             }
     }
 }

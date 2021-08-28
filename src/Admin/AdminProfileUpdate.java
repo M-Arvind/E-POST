@@ -6,20 +6,22 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.Date;
 import java.util.regex.Pattern;
 import main.main;
+import profile.AdminProfile;
 public class AdminProfileUpdate extends JPanel implements MouseListener, ActionListener{
 	//JPanel ViewPanel;
 	private Icon ProfIcon,EditIcon,BackIcon;
 	private Border emptyBorder = BorderFactory.createEmptyBorder();
-	private JLabel UserNameTop;
+	public static JLabel UserNameTop;
 	private JLabel firstNameLabel,lastNameLabel, contactNoLabel,DOBLabel,ageLabel,JoinDateLabel,pAddressLabel,tAddressLabel,martialLabel,designationLabel, salaryLabel, stateLabel, districtLabel;
-	private JTextField firstNameValue,lastNameValue,contactNoValue,DOBValue,ageValue,JoinDateValue,designationValue, salaryValue, stateValue, districtValue;
+        public static JTextField firstNameValue,lastNameValue,contactNoValue,DOBValue,ageValue,JoinDateValue,designationValue, salaryValue, stateValue, districtValue;
 	private JLabel Collon1,Collon2,Collon3,Collon4,Collon5,Collon6,Collon7,Collon8,Collon9, Collon10, Collon11, Collon12;
 	private JButton ProfIconLabel,BackIconLabel,EditIconLabel;
 	private JButton SaveButton;
-        private JTextArea pAddressValue, tAddressValue;
-        private JComboBox martialValue;
+        public static JTextArea pAddressValue, tAddressValue;
+        public static JComboBox martialValue;
         private String[] martialStatusValues = {"Single", "Married", "Divorced"};
 	int X=230,Y=90;
 	int R=34,G=34,B=45;
@@ -357,6 +359,7 @@ public class AdminProfileUpdate extends JPanel implements MouseListener, ActionL
     @Override
     public void mouseClicked(MouseEvent e) {
         if(e.getSource() == BackIconLabel){
+            AdminProfile.setAdminProfile(Login.login.user_ID);
             main.switchPage("AdminProfileView");
         }
         else if(e.getSource() == firstNameValue){
@@ -434,8 +437,8 @@ public class AdminProfileUpdate extends JPanel implements MouseListener, ActionL
         else if(lastName.length() < 1){
             JOptionPane.showMessageDialog(this, "Enter last Name");
         }
-        else if(!Pattern.matches("^([0-9]{2})/([0-9]{2})/([0-9]{4})$", DOB)){
-            JOptionPane.showMessageDialog(this, "Enter date in dd/mm/yyyy format");
+        else if(!Pattern.matches("^([0-9]{4})-([0-9]{2})-([0-9]{2})$", DOB)){
+            JOptionPane.showMessageDialog(this, "Enter date in yyyy-mm-dd format");
         }
         else if(!Pattern.matches("^[0-9]+$", age)){
             JOptionPane.showMessageDialog(this, "Enter valid age");
@@ -452,6 +455,27 @@ public class AdminProfileUpdate extends JPanel implements MouseListener, ActionL
         else if(!Pattern.matches("^([A-Za-z])+$", district)){
             JOptionPane.showMessageDialog(this, "district should contain only characters");
         }
+        else{
+            AdminProfile details = new AdminProfile();
+            
+            details.setFirstName(firstName);
+            details.setLastName(lastName);
+            details.setAge(Integer.parseInt(age));
+            details.setContactNumber(contactNumber);
+            details.setMartialStatus(martialValue.getSelectedItem().toString());
+            details.setSalary(Integer.parseInt(salaryValue.getText()));
+            details.setDesignation(designation);
+            details.setState(state);
+            details.setDistrict(district);
+            details.setPermanentAddress(pAddressValue.getText());
+            details.setTemporaryAddress(tAddressValue.getText());
+            String[] da= DOB.split("-");
+            details.setDob(new java.sql.Date(Integer.parseInt(da[0]), Integer.parseInt(da[1]), Integer.parseInt(da[2])));
+            Database.DatabaseOperations.updateAdminProfile(details);
+            
+            AdminProfile.setAdminProfile(Login.login.user_ID);
+            main.switchPage("AdminProfileView");
+            }
         
     }
 

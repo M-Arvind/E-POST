@@ -1,5 +1,6 @@
 package Database;
-
+import Admin.AdminPanel;
+import Login.ForgetPassword;
 import Consignment.*;
 import java.awt.List;
 import java.awt.TextField;
@@ -906,7 +907,7 @@ public class DatabaseOperations
             }
 
         }
-        JOptionPane.showMessageDialog(null, "Updated Successfully");
+        JOptionPane.showMessageDialog(AdminPanel.contentForAdmin, "Updated Successfully");
     }
 
     public static AdminProfile getAdminProfile(String id){
@@ -1220,7 +1221,7 @@ public class DatabaseOperations
            while(res.next())
            {
                String Status = res.getString("status");               
-               if(!Status.equals("Completed"))
+               if(!Status.equals("Completed") && !res.getString("Delivery_id").equals("Keshav B"))
                {
                     consignment od=new consignment();
             
@@ -1311,10 +1312,12 @@ public class DatabaseOperations
            
            while(res.next())
            {
-               String Status = res.getString("delivery_ID");               
-               if(Status.isEmpty())
+               String Status = res.getString("delivery_ID");       
+//               System.out.println(Status);
+               if(Status.equals("Keshav B"))
                {
-                    consignment od = new consignment();
+//                    System.out.print(1);
+                    consignment od=new consignment();
             
                     od.setConsignment_ID(res.getString("consignment_ID"));
                     od.setCustomer_ID(res.getString("customer_ID"));
@@ -1342,20 +1345,50 @@ public class DatabaseOperations
             }   
         } 
         catch (Exception ex) {
-           System.out.println("Error in OngoingConsignmentDetails---->"+ex.toString());
+           System.out.println("Error in NewAdminConsignmentDetails---->"+ex.toString());
         }
         return newConsignment;
     }
 
+    public static void updateAdminProfile(AdminProfile details){
+        try {
+            Connection con = getConnection();
+            Statement st = con.createStatement();
+            String query = "update Admin set FIRST_NAME = ?, LAST_NAME = ?, DOB = ?, AGE = ?, CONTACT_NUMBER = ?, MARTIAL_STATUS = ?, SALARY = ?, DESIGNATION = ?, STATE = ?, DISTRICT = ?, PERMANENT_ADDRESS = ?, TEMPORARY_ADDRESS = ?";
+            PreparedStatement pst = con.prepareStatement(query);
+            pst.setString(1, details.getFirstName());
+            pst.setString(2, details.getLastName());
+            pst.setDate(3, details.getDob());
+            pst.setInt(4, details.getAge());
+            pst.setString(5, details.getContactNumber());
+            pst.setString(6, details.getMartialStatus());
+            pst.setInt(7, details.getSalary());
+            pst.setString(8, details.getDesignation());
+            pst.setString(9, details.getState());
+            pst.setString(10, details.getDistrict());
+            pst.setString(11, details.getPermanentAddress());
+            pst.setString(12, details.getTemporaryAddress());
+            pst.executeQuery();
+            con.setAutoCommit(true);
+            con.close();
+            JOptionPane.showMessageDialog(main.mainPanel, "Update Admin Successful");
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
 
-
-
-
-
-
-
-
-
+    public static void updateConsignmentDelivery(String delivery_id,String consignment_id ){
+        try {
+            Connection con = getConnection();
+            Statement st = con.createStatement();
+            String query = "update consignment set delivery_id = ? where consignment_id = ?";
+            PreparedStatement pst = con.prepareStatement(query);
+            pst.setString(1, delivery_id);
+            pst.setString(2, consignment_id);
+            pst.executeQuery();
+        } catch (Exception e) {
+        }
+    }
 }
 
     
