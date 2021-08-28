@@ -8,7 +8,7 @@ import customer.*;
 import Delivery.*;
 
 public class main extends JFrame {
-    static JPanel mainPanel;
+    public static JPanel mainPanel;
     static CardLayout card;
     public static Component main;
     main() {

@@ -1,5 +1,6 @@
 package profile;
 
+import Admin.AdminProfileUpdate;
 import Admin.AdminProfileView;
 import java.sql.Date;
 
@@ -166,7 +167,34 @@ public class AdminProfile {
         AdminProfileView.GenderValue.setText(details.getGender());
         AdminProfileView.SalaryValue.setText(Integer.toString(details.getSalary()));
         AdminProfileView.UserNameTop.setText(details.getFirstName()+" "+details.getLastName());
-        System.out.println(details.getPermanentAddress());
-        System.out.println(details.getDob());
+//        System.out.println(details.getPermanentAddress());
+//        System.out.println(details.getDob());
+    }
+    
+    public static void setAdminProfileUpdate(String id){
+        AdminProfile details = Database.DatabaseOperations.getAdminProfile(id);
+        int a=0;
+        if(details.getMartialStatus().equals("Single"))
+                a = 0;
+        else if(details.getMartialStatus().equals("Married"))
+                a = 1;
+        else if(details.getMartialStatus().equals("Divorced"))
+                a = 1;
+        AdminProfileUpdate.firstNameValue.setText(details.getFirstName());
+        AdminProfileUpdate.lastNameValue.setText(details.getLastName());
+        AdminProfileUpdate.DOBValue.setText(details.getDob().toString());
+        AdminProfileUpdate.ageValue.setText(Integer.toString(details.getAge()));
+        AdminProfileUpdate.contactNoValue.setText(details.getContactNumber());
+        AdminProfileUpdate.pAddressValue.setText(details.getPermanentAddress());
+        AdminProfileUpdate.tAddressValue.setText(details.getTemporaryAddress());
+        AdminProfileUpdate.martialValue.setSelectedIndex(a);
+        AdminProfileUpdate.salaryValue.setText(Integer.toString(details.getSalary()));
+        AdminProfileUpdate.stateValue.setText(details.getState());
+        AdminProfileUpdate.districtValue.setText(details.getDistrict());
+//        AdminProfileView.ExperienceValue.setText(Integer.toString(details.getExperience()));
+//        AdminProfileView.GenderValue.setText(details.getGender());
+        AdminProfileUpdate.designationValue.setText(details.getDesignation());
+        AdminProfileUpdate.UserNameTop.setText(details.getId());
     }
 }
+//firstNameValue,lastNameValue,contactNoValue,DOBValue,ageValue,JoinDateValue,designationValue, salaryValue, stateValue, districtValue;

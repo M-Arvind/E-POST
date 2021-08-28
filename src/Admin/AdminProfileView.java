@@ -4,6 +4,7 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.border.Border;
 import main.main;
+import profile.AdminProfile;
 public class AdminProfileView extends JPanel implements ActionListener, MouseListener  {
 	//JPanel ViewPanel;
 	Icon ProfIcon,EditIcon,BackIcon;
@@ -363,6 +364,7 @@ public class AdminProfileView extends JPanel implements ActionListener, MouseLis
             main.switchPage("AdminPanel");
         }
         else if(e.getSource() == EditIconLabel){
+            AdminProfile.setAdminProfileUpdate(Login.login.user_ID);
             main.switchPage("AdminProfileUpdate");
         }
     }

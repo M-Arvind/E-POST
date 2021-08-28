@@ -158,7 +158,7 @@ public class CustomerProfile {
         AdminCustomerProfile.BankBalanceValue.setText(details.getBankBalance());
         AdminCustomerProfile.AccountNumberValue.setText(details.getAccountNumber());
         AdminCustomerProfile.UserNameTop.setText(details.getFirstName()+" "+details.getLastName());
-        System.out.println(details.getFirstName());
+//        System.out.println(details.getFirstName());
         
     }
     

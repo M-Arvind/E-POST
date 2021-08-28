@@ -155,7 +155,7 @@ public class DeliveryProfile {
 
         AdminDeliveryProfile.UserNameValue.setText(details.getId());
         AdminDeliveryProfile.ContactNoValue.setText(details.getContactNumber());
-        System.out.println(details.getDob().toString());
+//        System.out.println(details.getDob().toString());
         AdminDeliveryProfile.DOBValue.setText(details.getDob().toString());
         AdminDeliveryProfile.AgeValue.setText(Integer.toString(details.getAge()));
         AdminDeliveryProfile.JoinDateValue.setText(details.getJoinDate().toString());
@@ -167,8 +167,8 @@ public class DeliveryProfile {
         AdminDeliveryProfile.GenderValue.setText(details.getGender());
         AdminDeliveryProfile.SalaryValue.setText(Integer.toString(details.getSalary()));
         AdminDeliveryProfile.UserNameTop.setText(details.getFirstName()+" "+details.getLastName());
-        System.out.println(details.getPermanentAddress());
-        System.out.println(details.getDob());
+//        System.out.println(details.getPermanentAddress());
+//        System.out.println(details.getDob());
     }
 }
 //JLabel UserNameValue,ContactNoValue,DOBValue,AgeValue,JoinDateValue,PAddressValue,TAddressValue,MaritalValue,DesignationValue, ExperienceValue, GenderValue, SalaryValue;

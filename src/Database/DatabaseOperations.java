@@ -1,4 +1,5 @@
 package Database;
+import Admin.AdminPanel;
 import Login.ForgetPassword;
 import Consignment.*;
 import java.awt.List;
@@ -906,7 +907,7 @@ public class DatabaseOperations
             }
 
         }
-        JOptionPane.showMessageDialog(null, "Updated Successfully");
+        JOptionPane.showMessageDialog(AdminPanel.contentForAdmin, "Updated Successfully");
     }
 
     public static AdminProfile getAdminProfile(String id){
@@ -1347,14 +1348,32 @@ public class DatabaseOperations
         return newConsignment;
     }
 
-
-
-
-
-
-
-
-
+    public static void updateAdminProfile(AdminProfile details){
+        try {
+            Connection con = getConnection();
+            Statement st = con.createStatement();
+            String query = "update Admin set FIRST_NAME = ?, LAST_NAME = ?, DOB = ?, AGE = ?, CONTACT_NUMBER = ?, MARTIAL_STATUS = ?, SALARY = ?, DESIGNATION = ?, STATE = ?, DISTRICT = ?, PERMANENT_ADDRESS = ?, TEMPORARY_ADDRESS = ?";
+            PreparedStatement pst = con.prepareStatement(query);
+            pst.setString(1, details.getFirstName());
+            pst.setString(2, details.getLastName());
+            pst.setDate(3, details.getDob());
+            pst.setInt(4, details.getAge());
+            pst.setString(5, details.getContactNumber());
+            pst.setString(6, details.getMartialStatus());
+            pst.setInt(7, details.getSalary());
+            pst.setString(8, details.getDesignation());
+            pst.setString(9, details.getState());
+            pst.setString(10, details.getDistrict());
+            pst.setString(11, details.getPermanentAddress());
+            pst.setString(12, details.getTemporaryAddress());
+            pst.executeQuery();
+            con.setAutoCommit(true);
+            con.close();
+            JOptionPane.showMessageDialog(main.mainPanel, "Update Admin Successful");
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
 
 }
 
