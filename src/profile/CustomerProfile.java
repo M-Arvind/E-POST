@@ -133,7 +133,7 @@ public class CustomerProfile {
 
             while(customerDetails.customermodel.getRowCount()>0){
                 customerDetails.customermodel.removeRow(0);
-                System.out.println("deleted row");
+//                System.out.println("deleted row");
             }
  
             ArrayList<CustomerProfile> listForDeliveryConsignment = DatabaseOperations.getCustomerDetails();         

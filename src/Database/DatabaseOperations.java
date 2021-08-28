@@ -1221,7 +1221,7 @@ public class DatabaseOperations
            while(res.next())
            {
                String Status = res.getString("status");               
-               if(!Status.equals("Completed"))
+               if(!Status.equals("Completed") && !res.getString("Delivery_id").equals("Keshav B"))
                {
                     consignment od=new consignment();
             
@@ -1312,10 +1312,12 @@ public class DatabaseOperations
            
            while(res.next())
            {
-               String Status = res.getString("delivery_ID");               
-               if(Status.isEmpty())
+               String Status = res.getString("delivery_ID");       
+//               System.out.println(Status);
+               if(Status.equals("Keshav B"))
                {
-                    consignment od = new consignment();
+//                    System.out.print(1);
+                    consignment od=new consignment();
             
                     od.setConsignment_ID(res.getString("consignment_ID"));
                     od.setCustomer_ID(res.getString("customer_ID"));
@@ -1343,7 +1345,7 @@ public class DatabaseOperations
             }   
         } 
         catch (Exception ex) {
-           System.out.println("Error in OngoingConsignmentDetails---->"+ex.toString());
+           System.out.println("Error in NewAdminConsignmentDetails---->"+ex.toString());
         }
         return newConsignment;
     }
@@ -1375,6 +1377,18 @@ public class DatabaseOperations
         }
     }
 
+    public static void updateConsignmentDelivery(String delivery_id,String consignment_id ){
+        try {
+            Connection con = getConnection();
+            Statement st = con.createStatement();
+            String query = "update consignment set delivery_id = ? where consignment_id = ?";
+            PreparedStatement pst = con.prepareStatement(query);
+            pst.setString(1, delivery_id);
+            pst.setString(2, consignment_id);
+            pst.executeQuery();
+        } catch (Exception e) {
+        }
+    }
 }
 
     

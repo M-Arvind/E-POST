@@ -58,7 +58,7 @@ public class CompletedConsignment extends JPanel implements ActionListener{
             Consignment.consignment.setConsignmentDetails(selectedData);
             AdminPanel.card = "CompletedConsignment";
             AdminPanel.adminCard.show(AdminPanel.contentForAdmin,"ConsignmentDetails");
-            System.out.println("Selected: " + selectedData);
+//            System.out.println("Selected: " + selectedData);
             table.clearSelection();
             }
       }

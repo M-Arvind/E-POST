@@ -140,7 +140,7 @@ public class DeliveryProfile {
 
             while(deliveryDetails.deliveryModel.getRowCount()>0){
                 deliveryDetails.deliveryModel.removeRow(0);
-                System.out.println("deleted row");
+//                System.out.println("deleted row");
             }
  
             ArrayList<DeliveryProfile> listForDeliveryConsignment = DatabaseOperations.getDeliveryDetails();         
