@@ -29,7 +29,7 @@ public class CompletedConsignment extends JPanel implements ActionListener{
 
         this.setLayout(null);
         this.setBackground(Color.white);
-        Object[][] rows = {{"12345", "Keshav", "Arvind", "E Post", "12345", "E PAY", "29.09.2001", "Order Placed"}, {"2345", "Keshav", "Arvind", "E Post", "12345", "E PAY", "29.09.2001", "Order Placed"}};
+        Object[][] rows = {};
         String[] columns = {"Consignment ID", "From","To", "Item", "Delivery ID", "Payment Method", "Date", "Status"};
         
         Border border = new LineBorder(new Color(71, 63, 145), 1, true);
@@ -58,7 +58,7 @@ public class CompletedConsignment extends JPanel implements ActionListener{
             Consignment.consignment.setConsignmentDetails(selectedData);
             AdminPanel.card = "CompletedConsignment";
             AdminPanel.adminCard.show(AdminPanel.contentForAdmin,"ConsignmentDetails");
-            System.out.println("Selected: " + selectedData);
+//            System.out.println("Selected: " + selectedData);
             table.clearSelection();
             }
       }

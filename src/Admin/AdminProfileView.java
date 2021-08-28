@@ -4,6 +4,7 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.border.Border;
 import main.main;
+import profile.AdminProfile;
 public class AdminProfileView extends JPanel implements ActionListener, MouseListener  {
 	//JPanel ViewPanel;
 	Icon ProfIcon,EditIcon,BackIcon;
@@ -19,14 +20,6 @@ public class AdminProfileView extends JPanel implements ActionListener, MouseLis
 	int R=34,G=34,B=45;
 	int labelFontSize=20;
 	public AdminProfileView() {
-		// TODO Auto-generated constructor stub
-		
-		/**
-		setBounds(0,0,1350,890);
-		setBackground(new Color(R,G,B));
-		setLayout(null);
-		setVisible(true);
-		**/
 		
 		//profile image
 		
@@ -341,6 +334,7 @@ public class AdminProfileView extends JPanel implements ActionListener, MouseLis
 		logoutButton.setForeground(Color.WHITE);
 		logoutButton.setBackground(new Color(71,63,145));
                 logoutButton.addActionListener(this);
+                logoutButton.setUI(new StyledButtonUi());
 		add(logoutButton);
 		
 		setBounds(0,0,1350,890);
@@ -354,7 +348,10 @@ public class AdminProfileView extends JPanel implements ActionListener, MouseLis
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        main.switchPage("login");
+        int choose = JOptionPane.showConfirmDialog(this, "Are you sure?", "Logout", JOptionPane.YES_NO_OPTION);
+        if(choose == JOptionPane.YES_OPTION){
+            main.switchPage("login");
+        }
     }
 
     @Override
@@ -363,6 +360,7 @@ public class AdminProfileView extends JPanel implements ActionListener, MouseLis
             main.switchPage("AdminPanel");
         }
         else if(e.getSource() == EditIconLabel){
+            AdminProfile.setAdminProfileUpdate(Login.login.user_ID);
             main.switchPage("AdminProfileUpdate");
         }
     }

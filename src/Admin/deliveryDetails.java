@@ -58,7 +58,7 @@ public class deliveryDetails extends JPanel implements ListSelectionListener {
             String selectedData = (String) deliveryDetailsTable.getValueAt(selectRow, 0);
             profile.DeliveryProfile.setDeliveryProfile(selectedData);
             main.switchPage("AdminDeliveryprofile");
-            System.out.println("Selected: " + selectedData);
+//            System.out.println("Selected: " + selectedData);
             deliveryDetailsTable.clearSelection();
             }
 

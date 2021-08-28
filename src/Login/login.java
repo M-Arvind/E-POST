@@ -19,7 +19,6 @@ import java.util.ArrayList;
 import javax.swing.*;
 import javax.swing.plaf.basic.BasicButtonUI;
 
-
 public class login extends JPanel implements ActionListener
 {
     JPanel loginPanel;
@@ -32,7 +31,7 @@ public class login extends JPanel implements ActionListener
     private String pass;
     private String salt;
     private String hash_pass;
-    private ArrayList list;
+    private ArrayList list;   
     
     public static String user_ID;
     
@@ -41,7 +40,8 @@ public class login extends JPanel implements ActionListener
         
         loginPanel = new JPanel(null);
         loginPanel.setPreferredSize(new Dimension(1350, 890));
-        loginPanel.setBackground(new Color(34, 34, 45));
+        loginPanel.setBackground(new Color(34, 34, 45));         
+        
         
         loginLabel = new JLabel("Login");
         loginLabel.setBounds(620, 220, 150, 45);
@@ -140,7 +140,7 @@ public class login extends JPanel implements ActionListener
         loginPanel.add(createOneButton);
         loginPanel.add(usernameTextField);
         loginPanel.add(passwordField);
-        loginPanel.add(loginButton);
+        loginPanel.add(loginButton);      
         
         this.add(loginPanel);
     }
@@ -155,9 +155,9 @@ public class login extends JPanel implements ActionListener
             int salt = Integer.parseInt(list.get(1).toString());
             
             String password = login.createHash(passwordField.getText(), salt);
-            System.out.println(list);
-            System.out.println(password);
-            System.out.println(list.get(1).toString());
+//            System.out.println(list);
+//            System.out.println(password);
+//            System.out.println(list.get(1).toString());
 
             if(password.equals(list.get(0).toString()))
             {   
@@ -179,7 +179,7 @@ public class login extends JPanel implements ActionListener
                     main.switchPage("customerPanel");
                 }
 
-                System.out.println(list.get(2).toString());
+//                System.out.println(list.get(2).toString());
             }
             else
             {

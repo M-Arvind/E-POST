@@ -20,14 +20,15 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.table.DefaultTableModel;
+import profile.*;
 import main.main;
 
 public class delivery extends JPanel implements ActionListener,MouseListener
 {    
     Icon image=new ImageIcon(getClass().getResource("/Images/ProfileImage.png"));
     public static CardLayout deliveryCard;
-    public JPanel PCompleted,Pongoing;
-    public JPanel ContentForDelivery;
+    public JPanel PCompleted,Pongoing,PDeliveryConsignment;
+    public static JPanel ContentForDelivery;
     private JLabel LCustomer;
     private JLabel LE_Post,IProfile;
     private JTextArea search;
@@ -37,6 +38,9 @@ public class delivery extends JPanel implements ActionListener,MouseListener
     private Font font=new Font("Bold",Font.BOLD,20);
     int R=34,G=34,B=45;
     private Color Buttoncolor=new Color(240,238,240);
+    Icon imag=new ImageIcon(getClass().getResource("/Images/search_white.png"));
+    private JLabel lSearch;
+    public static String card ;
     public delivery()
     {
        setLayout(null);
@@ -45,13 +49,15 @@ public class delivery extends JPanel implements ActionListener,MouseListener
        ContentForDelivery=new JPanel(deliveryCard);
        Pongoing = new ongoing();
        PCompleted=new completed();
+       PDeliveryConsignment = new DeliveryConsignment();
        
-       
-        ContentForDelivery.add(Pongoing,"ongoing");
-       ContentForDelivery.add(PCompleted,"completed");      
+       ContentForDelivery.add(Pongoing,"ongoing");
+       ContentForDelivery.add(PCompleted,"completed");
+       ContentForDelivery.add(PDeliveryConsignment,"PDeliveryConsignment");
        ContentForDelivery.setBounds(X_FORCUSTOMER,Y_FORCUSTOMER,WIDTHFORCUSTOMER,HIGHTFORCUSTOMER);
+       setCompletedDeliveryConsignmentDetails();
        deliveryCard.first(ContentForDelivery);
-       
+              
        add(ContentForDelivery);
        setPreferredSize(new Dimension(1350,890));
        setVisible(true);
@@ -71,10 +77,68 @@ public class delivery extends JPanel implements ActionListener,MouseListener
        
        search=new JTextArea("Search ID...");
        search.setFont(new Font("Segoe UI",Font.PLAIN,18));
-       search.setBounds(1000,32,200,30);
-       //search.addMouseListener(this);
+       search.setBounds(970, 32, 200, 30);    
        search.setBorder(BorderFactory.createEmptyBorder(2,5,0,5));
-       add(search);
+       search.addMouseListener(new MouseListener() {
+           @Override
+           public void mouseClicked(MouseEvent e) 
+           {
+               search.setText("");
+           }
+
+           @Override
+           public void mousePressed(MouseEvent e) {
+           }
+
+           @Override
+           public void mouseReleased(MouseEvent e) {
+           }
+
+           @Override
+           public void mouseEntered(MouseEvent e) {
+           }
+
+           @Override
+           public void mouseExited(MouseEvent e) {
+           }
+       });
+       add(search);    
+       
+       lSearch = new JLabel(imag);
+       lSearch.setBounds(1155, 26, 100, 40);
+       lSearch.addMouseListener(this);
+       lSearch.setBorder(null);
+       add(lSearch);
+       lSearch.addMouseListener(new MouseListener() 
+       {
+           @Override
+           public void mouseClicked(MouseEvent e) 
+           {
+            String con = search.getText();
+            consignment.setDeliveryConsignmentDetails(con);
+            deliveryCard.show(ContentForDelivery, "PDeliveryConsignment");
+           }
+
+           @Override
+           public void mousePressed(MouseEvent e) {
+               
+           }
+
+           @Override
+           public void mouseReleased(MouseEvent e) {
+               
+           }
+
+           @Override
+           public void mouseEntered(MouseEvent e) {
+               
+           }
+
+           @Override
+           public void mouseExited(MouseEvent e) {
+               
+           }
+       });
        
        IProfile=new JLabel(image);
        IProfile.addMouseListener(this);
@@ -96,7 +160,7 @@ public class delivery extends JPanel implements ActionListener,MouseListener
        
        BOngoing.addActionListener((e2)->{       
        
-       
+       card = "ongoing";
        setOngoingDeliveryConsignmentDetails();
        BCompleted.setBounds(X_FORCUSTOMER,110,160,30); 
        BOngoing.setBounds(X_FORCUSTOMER+120+60,120,160,30);
@@ -108,11 +172,12 @@ public class delivery extends JPanel implements ActionListener,MouseListener
        BCompleted.setFont(font);
        BCompleted.setBorder(null);
        BCompleted.setUI(new StyledButtonUI());
-       BCompleted.setBounds(X_FORCUSTOMER-2,110,160,30);
+       BCompleted.setBounds(X_FORCUSTOMER-2,120,160,30);
        BCompleted.setBackground(Buttoncolor);
        
        BCompleted.addActionListener((e1)->{
        
+       card = "completed";
        completedremoverow();  
        setCompletedDeliveryConsignmentDetails();                  
        BCompleted.setBounds(X_FORCUSTOMER-2,120,160,30); 
@@ -163,14 +228,7 @@ public class delivery extends JPanel implements ActionListener,MouseListener
            consignment temp1 = listForCompletedDeliveryConsignment.get(i);
            completed.model1.addRow(new Object[]{temp1.getConsignment_ID(),temp1.getCustomer_ID(),temp1.getReceiver_ID(),temp1.getItem(),temp1.getDelivery_ID(),temp1.getPayment_method(),temp1.getDelivery_date(),temp1.getStatus()});
         } 
-    }
-    /*public static void main(String [] args)
-    {
-        JFrame frame = new JFrame();
-        frame.add(new delivery());
-        frame.pack();
-        frame.setVisible(true);
-    }*/
+    }  
 
     @Override
     public void actionPerformed(ActionEvent e) 
@@ -200,13 +258,18 @@ public class delivery extends JPanel implements ActionListener,MouseListener
             //search.setText("");
         //}
             if(e.getSource() == IProfile)
-            main.switchPage("deliveryProfileView");
+            {
+                profile.DeliveryProfile.setDeliverydeliveryProfile(Login.login.user_ID);
+                main.switchPage("deliveryProfileView");
+            }
+            
+            
         }
 
     @Override
-    public void mousePressed(MouseEvent e) {
-        if(e.getSource() == IProfile)
-            main.switchPage("DeliveryProfile");
+    public void mousePressed(MouseEvent e) 
+    {
+        
     }
 
     @Override

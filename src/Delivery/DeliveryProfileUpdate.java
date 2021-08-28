@@ -2,23 +2,29 @@ package Delivery;
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.regex.Pattern;
 import main.main;
-public class DeliveryProfileUpdate extends JPanel implements MouseListener{
+import profile.DeliveryProfile;
+public class DeliveryProfileUpdate extends JPanel implements MouseListener,ActionListener{
 	//JPanel ViewPanel;
 	Icon ProfIcon,EditIcon,BackIcon;
 	Border emptyBorder = BorderFactory.createEmptyBorder();
-	JLabel UserNameTop;
-	JLabel firstNameLabel,lastNameLabel, contactNoLabel,DOBLabel,ageLabel,JoinDateLabel,pAddressLabel,tAddressLabel,martialLabel,designationLabel, salaryLabel, stateLabel, districtLabel;
-	JTextField firstNameValue,lastNameValue,contactNoValue,DOBValue,ageValue,JoinDateValue,martialValue,designationValue, salaryValue, stateValue, districtValue;
+	public static JLabel UserNameTop;
+	public static JLabel firstNameLabel,lastNameLabel, contactNoLabel,DOBLabel,ageLabel,JoinDateLabel,pAddressLabel,tAddressLabel,martialLabel,designationLabel, salaryLabel, stateLabel, districtLabel;
+	public static JTextField firstNameValue,lastNameValue,contactNoValue,DOBValue,ageValue,JoinDateValue,designationValue, salaryValue, stateValue, districtValue;
 	JLabel Collon1,Collon2,Collon3,Collon4,Collon5,Collon6,Collon7,Collon8,Collon9, Collon10, Collon11, Collon12;
 	JButton ProfIconLabel,BackIconLabel,EditIconLabel;
 	JButton SaveButton;
-        JTextArea pAddressValue, tAddressValue;
+        public static JTextArea pAddressValue, tAddressValue;
+        public static JComboBox martialValue;
 	int X=230,Y=90;
 	int R=34,G=34,B=45;
 	int labelFontSize=20;
+         private String[] martialStatusValues = {"Single", "Married", "Divorced"};
 	public DeliveryProfileUpdate() {
 		// TODO Auto-generated constructor stub
 		
@@ -181,16 +187,13 @@ public class DeliveryProfileUpdate extends JPanel implements MouseListener{
 		Collon6.setBounds(X+450+150+40+30+10,Y+70+70,20,150);
 		Collon6.setFont(new Font("Bold",Font.BOLD,labelFontSize));
 		Collon6.setForeground(Color.WHITE);
-		
-		//usernamevalue label
-		
-		martialValue=new JTextField("Martial Status");
+                
+                martialValue=new JComboBox(martialStatusValues);
 		martialValue.setBounds(X+240+300+100+60+10,Y+60+70+70,300,35);
 		martialValue.setFont(new Font("Segoe UI",Font.PLAIN,labelFontSize));
-                martialValue.setBorder(BorderFactory.createEmptyBorder(0, 10, 0, 10));
-		martialValue.setBackground(Color.WHITE);
-		martialValue.setForeground(Color.GRAY);
-                martialValue.addMouseListener(this);
+		
+		//usernamevalue label	
+		
 		
 		add(martialLabel);
 		add(Collon6);
@@ -231,7 +234,7 @@ public class DeliveryProfileUpdate extends JPanel implements MouseListener{
 		
 		//usernamevalue label
 		
-		designationValue=new JTextField("Designation");
+		designationValue=new JTextField("Delivery Member");
 		designationValue.setBounds(X+240+300+100+60+10,Y+60+70+70+70,300,35);
 		designationValue.setFont(new Font("Segoe UI",Font.PLAIN,labelFontSize));
                 designationValue.setBorder(BorderFactory.createEmptyBorder(0, 10, 0, 10));
@@ -341,6 +344,7 @@ public class DeliveryProfileUpdate extends JPanel implements MouseListener{
 		SaveButton.setBounds(X+400,Y+600,100,30);
 		SaveButton.setForeground(Color.WHITE);
 		SaveButton.setBackground(new Color(71,63,145));
+                SaveButton.addActionListener(this);
 		add(SaveButton);
 		
 		setBounds(0,0,1350,890);
@@ -355,6 +359,7 @@ public class DeliveryProfileUpdate extends JPanel implements MouseListener{
     @Override
     public void mouseClicked(MouseEvent e) {
         if(e.getSource() == BackIconLabel){
+            DeliveryProfile.setDeliveryProfile(Login.login.user_ID);
             main.switchPage("deliveryProfileView");
         }
         else if(e.getSource() == firstNameValue){
@@ -371,10 +376,7 @@ public class DeliveryProfileUpdate extends JPanel implements MouseListener{
         }
         else if(e.getSource() == contactNoValue){
             contactNoValue.setText("");
-        }
-        else if(e.getSource() == martialValue){
-            martialValue.setText("");
-        }
+        }        
         else if(e.getSource() == salaryValue){
             salaryValue.setText("");
         }
@@ -414,5 +416,69 @@ public class DeliveryProfileUpdate extends JPanel implements MouseListener{
     public void mouseExited(MouseEvent e) {
         
     }
+
+    @Override
+    public void actionPerformed(ActionEvent e) 
+    {
+        String firstName = firstNameValue.getText();
+        String lastName = lastNameValue.getText();
+        String DOB = DOBValue.getText();
+        String age = ageValue.getText();
+        String contactNumber = contactNoValue.getText();
+        String designation = designationValue.getText();
+        String state = stateValue.getText();
+        String district = districtValue.getText();
+        
+        if(!Pattern.matches("^([A-Za-z ])+$", firstName)){
+            JOptionPane.showMessageDialog(this, "First Name should contain only Characters");
+        }
+        else if(firstName.length() < 3){
+            JOptionPane.showMessageDialog(this, "First Name should contain atleast 4 Characters");
+        }
+        else if(lastName.length() < 1){
+            JOptionPane.showMessageDialog(this, "Enter last Name");
+        }
+        else if(!Pattern.matches("^([0-9]{4})-([0-9]{2})-([0-9]{2})$", DOB)){
+            JOptionPane.showMessageDialog(this, "Enter date in yyyy-mm-dd format");
+        }
+        else if(!Pattern.matches("^[0-9]+$", age)){
+            JOptionPane.showMessageDialog(this, "Enter valid age");
+        }
+        else if(!Pattern.matches("^[0-9]*$", contactNumber)||contactNumber.length()!=10){
+            JOptionPane.showMessageDialog(this, "Enter valid Phone Number");
+        }
+        else if(!Pattern.matches("^([A-Za-z ])+$", designation)){
+            JOptionPane.showMessageDialog(this, "Designation should contain only characters");
+        }
+        else if(!Pattern.matches("^([A-Za-z ])+$", state)){
+            JOptionPane.showMessageDialog(this, "state should contain only characters");
+        }
+        else if(!Pattern.matches("^([A-Za-z ])+$", district)){
+            JOptionPane.showMessageDialog(this, "district should contain only characters");
+        }
+        else{
+            DeliveryProfile details = new DeliveryProfile();
+            
+            details.setFirstName(firstName);
+            details.setLastName(lastName);
+            details.setAge(Integer.parseInt(age));
+            details.setContactNumber(contactNumber);
+            details.setMartialStatus(martialValue.getSelectedItem().toString());
+            details.setSalary(Integer.parseInt(salaryValue.getText()));
+            details.setdesignation(designation);
+            details.setState(state);
+            details.setDistrict(district);
+            details.setPermanentAddress(pAddressValue.getText());
+            details.setTemporaryAddress(tAddressValue.getText());
+            String[] da= DOB.split("-");
+            details.setDob(new java.sql.Date(Integer.parseInt(da[0]), Integer.parseInt(da[1]), Integer.parseInt(da[2])));
+            Database.DatabaseOperations.updateDeliveryProfile(details);
+            
+            DeliveryProfile.setDeliverydeliveryProfile(Login.login.user_ID);
+            main.switchPage("DeliveryProfileView");
+            }
+        
+    }    
+   
 
 }
