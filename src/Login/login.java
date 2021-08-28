@@ -33,6 +33,7 @@ public class login extends JPanel implements ActionListener
     
     public static String user_ID;
     
+    //Constructor
     public login()
     {
         //Login Panel

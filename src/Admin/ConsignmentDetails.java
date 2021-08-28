@@ -39,14 +39,6 @@ public class ConsignmentDetails extends JPanel implements ActionListener{
     
     
     
-    //Paint
-    public void paint(Graphics gp) { super.paint(gp); Graphics2D graphics = (Graphics2D) gp;
-        Line2D line = new Line2D.Float(100, 210, 1160, 210);
-        Line2D line1 = new Line2D.Float(620,210,620,480);
-        graphics.draw(line);
-        graphics.draw(line1);
-    }
-    
     //Constructer
     public ConsignmentDetails(){
         
