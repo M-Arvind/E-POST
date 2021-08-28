@@ -1,5 +1,5 @@
 package Database;
-import Login.ForgetPassword;
+
 import Consignment.*;
 import java.awt.List;
 import java.awt.TextField;
@@ -12,7 +12,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-import login.*;
+import Login.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;

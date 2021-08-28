@@ -291,18 +291,18 @@ public class DeliveryProfileView extends JPanel implements ActionListener, Mouse
                                
                 
                 SalaryLabel=new JLabel("Salary");
-		SalaryLabel.setBounds(X,Y+710-30,200,150);
+		SalaryLabel.setBounds(X,Y+650-30,200,150);
 		SalaryLabel.setFont(new Font("Bold",Font.BOLD,labelFontSize));
 		SalaryLabel.setForeground(Color.WHITE);
 		Collon12=new JLabel(":");
-		Collon12.setBounds(X+200,Y+710-30,20,150);
+		Collon12.setBounds(X+200,Y+650-30,20,150);
 		Collon12.setFont(new Font("Bold",Font.BOLD,labelFontSize));
 		Collon12.setForeground(Color.WHITE);
 		
 		//designation value label
 		
 		SalaryValue=new JLabel("Salary");
-		SalaryValue.setBounds(X+240,Y+710-30,800,150);
+		SalaryValue.setBounds(X+240,Y+650-30,800,150);
 		SalaryValue.setFont(new Font("Bold",Font.BOLD,labelFontSize));
 		SalaryValue.setForeground(Color.WHITE);
 		
@@ -311,7 +311,7 @@ public class DeliveryProfileView extends JPanel implements ActionListener, Mouse
 		add(SalaryValue);
                 
                 logoutButton=new JButton("Logout");
-		logoutButton.setBounds(X+400,Y+780,100,30);
+		logoutButton.setBounds(X+400,Y+750,100,30);
 		logoutButton.setForeground(Color.WHITE);
 		logoutButton.setBackground(new Color(71,63,145));
                 logoutButton.addActionListener((e1)->{
