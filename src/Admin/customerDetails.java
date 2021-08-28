@@ -55,9 +55,9 @@ public class customerDetails extends JPanel implements ListSelectionListener {
             String selectedData = (String) customerDetailsTable.getValueAt(selectRow, 0);
             profile.CustomerProfile.setCustomerProfile(selectedData);
             main.switchPage("ACustomerProfile");
-            System.out.println("Selected: " + selectedData);
+//            System.out.println("Selected: " + selectedData);
             customerDetailsTable.clearSelection();
-        }
+       }
 
     }
     
