@@ -33,7 +33,7 @@ public class register extends JPanel implements ActionListener,ItemListener
     
     String userGender = "";
     
-    
+    //Constructor
     public register() 
     {
         Color fg = new Color(35, 34, 45);
@@ -332,7 +332,6 @@ public class register extends JPanel implements ActionListener,ItemListener
         String address = addressTextArea.getText();
         String pincode = pincodeText.getText();
         long accountNumber = 3350700000l + count + 1;
-        //System.out.println("Count " + accountNumber);
 
         ArrayList list = new ArrayList();
 
@@ -352,7 +351,6 @@ public class register extends JPanel implements ActionListener,ItemListener
         list.add(accountNumber);
         list.add(password);
         list.add(confirmPassword);
-        //list.add(actualAge);
         
         try 
         {
@@ -391,7 +389,6 @@ public class register extends JPanel implements ActionListener,ItemListener
         if(e.getSource() == registerButton)
         {
             register();
-            //main.switchPage("AdminPanel");
         }
         else if(e.getSource() == registerLoginButton || e.getSource() == backButton)
         {

@@ -1,5 +1,4 @@
 package Consignment;
-import Admin.AdminPanel;
 import Admin.OnGoingConsignment;
 import Admin.CompletedConsignment;
 import Admin.ConsignmentDetails;
@@ -7,15 +6,11 @@ import Admin.NewConsignment;
 import Database.DatabaseOperations;
 import Delivery.DeliveryConsignment;
 import Delivery.*;
-import java.sql.Date;
 import java.util.*;
-import Delivery.ongoing.*;
-import customer.DatasForCustomer.ConsignmentData;
-import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 public class consignment
 {
-    
+    //Private Variables
     private String consignment_ID;
     private String customer_ID;
     private String delivery_ID;
@@ -37,29 +32,29 @@ public class consignment
     private java.sql.Date delivery_date;
     private String status;    
    
-    
+    //Set Consignment ID
     public void setConsignment_ID(String consignment_ID) 
     {
         this.consignment_ID = consignment_ID;
     } 
-
+    //get Consignment ID
     public String getConsignment_ID() 
     {
         return consignment_ID;
     }
    
-   
+   //get customer ID
     public String getCustomer_ID() 
     {
         return customer_ID;
     }
-
+    //Set Customer ID
     public void setCustomer_ID(String customer_ID) 
     {
         this.customer_ID =customer_ID;
     }
 
-    
+    //get Delivery ID
     public String getDelivery_ID() 
     {
         return delivery_ID;
@@ -310,6 +305,7 @@ public class consignment
         this.status = status;
     }
     
+    //function to set all the values for consignment in Consignment page for Admin
     public static void setConsignmentDetails(String id){
         consignment details = DatabaseOperations.getConsignmentDetails(id);
         ConsignmentDetails.vConsignDetail.setText(details.getConsignment_ID());
@@ -332,7 +328,9 @@ public class consignment
         ConsignmentDetails.vReceLastName.setText(details.getReceiver_last_name());
         ConsignmentDetails.vReceContact.setText(details.getReceiver_contact_number().toString());
         ConsignmentDetails.vReceAdress.setText(details.getReceiver_address());
+        ConsignmentDetails.setProgress(details.getStatus());
     }
+    //function to set all the values for consignment in Consignment page for Delivery
     public static void setDeliveryConsignmentDetails(String id){
         
         consignment details = DatabaseOperations.getConsignmentDetails(id);
@@ -357,17 +355,8 @@ public class consignment
         DeliveryConsignment.vReceContact.setText(details.getReceiver_contact_number().toString());
         DeliveryConsignment.vReceAdress.setText(details.getReceiver_address());        
     }
-    
-    
-//    public static JLabel vConsignDetail, vItem, vItemPrice, vItemWeight, vItemCode, vAgentId, vOrderDate, vDeliverDate, vPayment, vStatus;
-//    public static JLabel vSenderId, vSeFirstName, vSeLastName, vSeConstact, vSeAddress;
-//    public static JLabel vReceId, vReceFirstName, vReceLastName, vReceContact, vReceAdress;
-    
-//    DefaultTableModel dm = (DefaultTableModel)table.getModel();
-//dm.getDataVector().removeAllElements();
-//dm.fireTableDataChanged();
 
-
+    //Function to set the values for the table in Ongoing consignment page
     public static void setOngoingAdminConsignmentDetails()
     {
         
@@ -388,6 +377,7 @@ public class consignment
 
     }
      
+    //Function to set values for the table in  completed Consignment page
     public static void setCompletedAdminConsignmentDetails()
     {
             CompletedConsignment.table.getSelectionModel().clearSelection();
@@ -405,6 +395,7 @@ public class consignment
             }
     }
     
+    //Function to set values for the table in  new  Consignment page
     public static void setNewdAdminConsignmentDetails()
     {
             NewConsignment.table.getSelectionModel().clearSelection();
@@ -413,17 +404,17 @@ public class consignment
                 NewConsignment.newModel.removeRow(0);
 
             }
- 
-            ArrayList<consignment> listForDeliveryConsignment = DatabaseOperations.getNewAdminConsignmentDetails();  
-            String nu = null;
+
+            ArrayList<consignment> listForDeliveryConsignment = DatabaseOperations.getNewAdminConsignmentDetails();
             for(int i=0;i<listForDeliveryConsignment.size();i++)
             {
                 consignment temp = listForDeliveryConsignment.get(i);
-
-                    NewConsignment.newModel.addRow(new Object[]{temp.getConsignment_ID(),temp.getCustomer_ID(),temp.getReceiver_ID(),temp.getItem(),"",temp.getPayment_method(),temp.getDelivery_date(),temp.getStatus()});
+                NewConsignment.newModel.addRow(new Object[]{temp.getConsignment_ID(),temp.getCustomer_ID(),temp.getReceiver_ID(),temp.getItem(),"",temp.getPayment_method(),temp.getDelivery_date(),temp.getStatus()});
             
             }
     }
+    
+    //Function to set values for the table in delivery ongoing page 
     public static void setOngoingDeliveryConsignmentDetails()
     {
         ongoing.table.getSelectionModel().clearSelection();
@@ -437,6 +428,8 @@ public class consignment
             ongoing.model.addRow(new Object[]{temp.getConsignment_ID(),temp.getCustomer_ID(),temp.getReceiver_ID(),temp.getItem(),temp.getDelivery_ID(),temp.getPayment_method(),temp.getDelivery_date(),temp.getStatus()});
         } 
     }
+    
+    //Function to set Values for the table in delivery Completed page
     public static void setCompletedDeliveryConsignmentDetails()
     {
         while(completed.model1.getRowCount() > 0)

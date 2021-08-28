@@ -46,9 +46,7 @@ public class main extends JFrame {
         mainPanel.add(adminprofileUp, "AdminProfileUpdate");
         mainPanel.add(paymentEPost,"paymentEPost");
         mainPanel.add(paymentParcel,"paymentParcel");
-        //me
         mainPanel.add(moneyOrder,"money order");
-        //me
         mainPanel.add(deliveryPanel,"deliveryPanel");
         mainPanel.add(deliveryProfileView,"deliveryProfileView");
         mainPanel.add(deliveryProfileUpdate,"deliveryProfileUpdate");

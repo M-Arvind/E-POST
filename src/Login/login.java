@@ -17,11 +17,8 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import javax.swing.*;
-import Delivery.*;
 import static Delivery.delivery.ContentForDelivery;
-import static Delivery.delivery.PCompleted;
 import static Delivery.delivery.deliveryCard;
-import javax.swing.plaf.basic.BasicButtonUI;
 
 public class login extends JPanel implements ActionListener
 {
@@ -30,14 +27,9 @@ public class login extends JPanel implements ActionListener
     
     //Private Variables
     private JLabel loginLabel,usernameLabel, passwordLabel, forgotPasswordLabel, messageLabel;
-    private JLabel registerLabel;
     private JTextField usernameTextField;
     private JPasswordField passwordField;
     private JButton loginButton, createOneButton;
-    private String pass;
-    private String salt;
-    private String hash_pass;
-    private ArrayList list;
     
     public static String user_ID;
     
@@ -51,37 +43,37 @@ public class login extends JPanel implements ActionListener
         //Login Label
         loginLabel = new JLabel("Login");
         loginLabel.setBounds(620, 220, 150, 45);
-        loginLabel.setFont(new Font(Font.SANS_SERIF,  Font.BOLD, 40));
+        loginLabel.setFont(new Font("Segoe UI",  Font.BOLD, 40));
         loginLabel.setForeground(Color.WHITE);
         
         //Username Label
         usernameLabel = new JLabel("Username/Phone Number");
         usernameLabel.setBounds(500, 320, 300, 40);
-        usernameLabel.setFont(new Font(Font.SANS_SERIF,  Font.BOLD, 20));
+        usernameLabel.setFont(new Font("Segoe UI",  Font.BOLD, 20));
         usernameLabel.setForeground(Color.WHITE);
         
         //Password Label
         passwordLabel = new JLabel("Password");
         passwordLabel.setBounds(500, 450, 300, 40);
-        passwordLabel.setFont(new Font(Font.SANS_SERIF,  Font.BOLD, 20));
+        passwordLabel.setFont(new Font("Segoe UI",  Font.BOLD, 20));
         passwordLabel.setForeground(Color.WHITE);
         
         //Username TextField
         usernameTextField = new JTextField(20);
         usernameTextField.setBounds(500, 370, 350, 40);
-        usernameTextField.setFont(new Font(Font.SANS_SERIF,  Font.BOLD, 20));
+        usernameTextField.setFont(new Font("Segoe UI",  Font.BOLD, 20));
         usernameTextField.setForeground(Color.BLACK);
         
         //Password TextField
         passwordField = new JPasswordField(20);
         passwordField.setBounds(500, 500, 350, 40);
-        passwordField.setFont(new Font(Font.SANS_SERIF,  Font.BOLD, 20));
+        passwordField.setFont(new Font("Segoe UI",  Font.BOLD, 20));
         passwordField.setForeground(Color.BLACK);
         
         //Forget Password Label
         forgotPasswordLabel = new JLabel("Forgot Password?");
         forgotPasswordLabel.setBounds(723, 540, 300, 40);
-        forgotPasswordLabel.setFont(new Font(Font.SANS_SERIF,  Font.BOLD, 15));
+        forgotPasswordLabel.setFont(new Font("Segoe UI",  Font.BOLD, 15));
         forgotPasswordLabel.setForeground(Color.WHITE);
         
         //Mouse Listener for Forget Password 
@@ -113,13 +105,13 @@ public class login extends JPanel implements ActionListener
         //JLabel
         messageLabel = new JLabel("New to E-Post?");
         messageLabel.setBounds(570, 700, 300, 40);
-        messageLabel.setFont(new Font(Font.SANS_SERIF,  Font.BOLD, 15));
+        messageLabel.setFont(new Font("Segoe UI",  Font.BOLD, 15));
         messageLabel.setForeground(Color.WHITE);
         
         //Button to Create An Account Wihch leads to Register Panel
         createOneButton = new JButton("Create One!");
         createOneButton.setBounds(690, 700, 100, 40);
-        createOneButton.setFont(new Font(Font.SANS_SERIF,  Font.BOLD, 15));
+        createOneButton.setFont(new Font("Segoe UI",  Font.BOLD, 15));
         createOneButton.setBackground(new Color(34, 34, 45));
         createOneButton.setForeground(new Color(71,63,145));
         createOneButton.setBorder(null);
@@ -130,7 +122,7 @@ public class login extends JPanel implements ActionListener
         //Login Button
         loginButton = new JButton("Login");
         loginButton.setBounds(615, 630, 130, 40);
-        loginButton.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 17));
+        loginButton.setFont(new Font("Segoe UI", Font.BOLD, 17));
         loginButton.setBackground(new Color(71, 63, 145));
         loginButton.setForeground(Color.WHITE);
         loginButton.setBorder(null);
@@ -143,6 +135,7 @@ public class login extends JPanel implements ActionListener
             {
                 {
                     login();
+                    usernameTextField.setText("");
                     passwordField.setText("");
                 }
             }
@@ -175,9 +168,6 @@ public class login extends JPanel implements ActionListener
             int salt = Integer.parseInt(list.get(1).toString());
             
             String password = login.createHash(passwordField.getText(), salt);
-//            System.out.println(list);
-//            System.out.println(password);
-//            System.out.println(list.get(1).toString());
 
             if(password.equals(list.get(0).toString()))
             {   
@@ -206,7 +196,6 @@ public class login extends JPanel implements ActionListener
                     main.switchPage("customerPanel");
                 }
 
-                //System.out.println(list.get(2).toString());
             }
             else
             {

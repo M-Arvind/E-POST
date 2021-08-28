@@ -7,16 +7,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JDialog;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
-/**
- *
- * @author kesha
- */
+
+
 public class ForgetPassword
 {
     //Variables
@@ -36,6 +32,7 @@ public class ForgetPassword
     
     JButton fPass_btn_confirm;
 
+    //Constructor
     public ForgetPassword() 
     {
         newdialog.setSize(600, 600);
@@ -141,9 +138,6 @@ public class ForgetPassword
             JOptionPane.showMessageDialog(null, "Please Enter the New Password");
         }
         
-//        System.out.println("Password" + hash_pass);
-//        System.out.println("Confirm Password" + hash_confirm_pass);
-//        System.out.println("Salt" + salt);
         
         if(hash_pass.equals(hash_confirm_pass) || hash_pass != null || hash_confirm_pass != null)
         {
