@@ -6,7 +6,7 @@ import Delivery.*;
 import Database.DatabaseOperations;
 import java.sql.Date;
 import java.util.ArrayList;
-
+//Delivery Object Class
 public class DeliveryProfile {
     String id;
     String firstName;
@@ -145,6 +145,7 @@ public class DeliveryProfile {
     public void setDistrict(String district) {
         this.district = district;
     }    
+//    Function to set Delivery Details table in Admin
     public static void setDeliveryDetails(){
         
             deliveryDetails.deliveryDetailsTable.getSelectionModel().clearSelection();
@@ -161,6 +162,8 @@ public class DeliveryProfile {
                 deliveryDetails.deliveryModel.addRow(new Object[]{temp.getId(),temp.getFirstName(),temp.getLastName(),temp.getDob(),temp.getJoinDate(),temp.getContactNumber(),temp.getGender(),temp.getSalary()});
             }
     }
+    
+//    Function to set Delivery Profile in Admin
     public static void setDeliveryProfile(String id)
     {
         DeliveryProfile details = DatabaseOperations.getDeliveryProfile(id);
@@ -178,6 +181,8 @@ public class DeliveryProfile {
         AdminDeliveryProfile.SalaryValue.setText(Integer.toString(details.getSalary()));
         AdminDeliveryProfile.UserNameTop.setText(details.getFirstName()+" "+details.getLastName());
     }
+    
+//    Function to set Delivery Profile in Delivery
     public static void setDeliverydeliveryProfile(String id)
     {
         DeliveryProfile details = DatabaseOperations.getDeliveryProfile(id);
@@ -195,6 +200,8 @@ public class DeliveryProfile {
        DeliveryProfileView.SalaryValue.setText(Integer.toString(details.getSalary()));
        DeliveryProfileView.UserNameTop.setText(details.getFirstName()+" "+details.getLastName());
     }
+    
+//    Function to set DeliveryUpdate Page in Delivery
     public static void setDeliveryProfileUpdate(String id){
         DeliveryProfile details = Database.DatabaseOperations.getDeliveryProfile(id);
         int a=0;
