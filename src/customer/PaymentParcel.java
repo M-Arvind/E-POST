@@ -271,7 +271,7 @@ public class PaymentParcel extends JPanel implements MouseListener
         p_payment_amount_info.setText(WalletDataG.getItemPrice().toString());
         p_payment_to_info.setText(ParcelData.getTo());
         p_payment_contact_info.setText(ParcelData.getPhoneNumber().toString());
-        p_payment_type_info.setText(WalletDataG.getTransationType());
+        p_payment_type_info.setText("Parcel");
         p_payment_weight_info.setText(WalletDataG.getItemWeight().toString());
         p_payment_firstName_info.setText(ParcelData.getFirstName());
         p_payment_lastName_info.setText(ParcelData.getLastName());

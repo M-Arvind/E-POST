@@ -11,6 +11,7 @@ package customer;
  */
 import Database.DatabaseOperations;
 import Login.login;
+import customer.DatasForCustomer.CustomerProfileData;
 import customer.DatasForCustomer.WalletDataG;
 import java.awt.Color;
 import java.awt.Font;
@@ -143,6 +144,7 @@ public class PaymentProducts  implements KeyListener
             public void actionPerformed(ActionEvent e) 
             {
                 if(getAuthentication()){
+                    WalletDataG.setBalence(Float.valueOf(CustomerProfileData.getBankBalance()));//customer Balence
                     WalletDataG.setTransationType("Products");
                     WalletDataG.setItemWeight(Float.valueOf(quantity));
                     stock.setItemQuantity(String.valueOf(stockQuantity-quantity));
@@ -179,7 +181,7 @@ public class PaymentProducts  implements KeyListener
             quantity= Integer.valueOf(temp);
             WalletDataG.setItemPrice(Float.valueOf(quantity*price));
             pro_payment_amount_info.setText(":           "+WalletDataG.getItemPrice());
-            System.out.println(":  ---->         "+WalletDataG.getItemPrice());  
+              
            }
            catch(Exception m){}
             
@@ -198,7 +200,7 @@ public class PaymentProducts  implements KeyListener
             quantity= Integer.valueOf(temp);
             WalletDataG.setItemPrice(Float.valueOf(quantity*price));
             pro_payment_amount_info.setText(":           "+WalletDataG.getItemPrice());
-            System.out.println(":  ---->         "+WalletDataG.getItemPrice());  
+              
            }
            catch(Exception m){}
             
@@ -217,7 +219,7 @@ public class PaymentProducts  implements KeyListener
             quantity= Integer.valueOf(temp);
             WalletDataG.setItemPrice(Float.valueOf(quantity*price));
             pro_payment_amount_info.setText(":           "+WalletDataG.getItemPrice());
-            System.out.println(":  ---->         "+WalletDataG.getItemPrice());  
+             
            }
            catch(Exception m){}
             
@@ -237,14 +239,12 @@ public class PaymentProducts  implements KeyListener
             int salt = Integer.parseInt(list.get(1).toString());
             
             String password = login.createHash(pro_payment_password_info.getText(), salt);
-            System.out.println(list);
-            System.out.println(password);
-            System.out.println(list.get(1).toString());
+            
 
             if(password.equals(list.get(0).toString()))
             {   
                 JOptionPane.showMessageDialog(null,"Login Successful");
-                System.out.println(list.get(2).toString());
+                
                 return true;
                 
             }

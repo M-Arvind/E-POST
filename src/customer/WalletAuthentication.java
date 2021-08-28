@@ -83,6 +83,7 @@ public class WalletAuthentication {
                     main.switchPage("customerPanel");
                     removeWalletCurrentDetails();
                     setWalletCurrentDetails();
+                    
                     customerCard.show(contentForCustomer,"Wallet");
                     newdialog.dispose();
                 }
@@ -108,14 +109,12 @@ public class WalletAuthentication {
             int salt = Integer.parseInt(list.get(1).toString());
             
             String password = login.createHash(auth_password_info.getText(), salt);
-            System.out.println(list);
-            System.out.println(password);
-            System.out.println(list.get(1).toString());
+            
 
             if(password.equals(list.get(0).toString()))
             {   
                 
-                System.out.println(list.get(2).toString());
+              
                 return true;
                 
             }

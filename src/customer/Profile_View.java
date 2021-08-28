@@ -1,4 +1,5 @@
 package customer;
+import customer.DatasForCustomer.CustomerProfileData;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -8,9 +9,10 @@ public class Profile_View extends JPanel implements ActionListener, MouseListene
 	//JPanel ViewPanel;
 	Icon ProfIcon,EditIcon,BackIcon;
 	Border emptyBorder = BorderFactory.createEmptyBorder();
-	JLabel UserNameTop;
-	JLabel CustomerIDLabel,FirstNameLabel,LastNameLabel,DOBLabel,AgeLabel,ContactNumberLabel,GenderLabel,AddressLabel,BankBalanceLabel,AccountNumberLabel;
-	JLabel CustomerIDValue,FirstNameValue,LastNameValue,DOBValue,AgeValue,ContactNumberValue,GenderValue,AddressValue,BankBalanceValue,AccountNumberValue;
+	static JLabel UserNameTop;
+	static JLabel CustomerIDLabel,FirstNameLabel,LastNameLabel,DOBLabel,AgeLabel,ContactNumberLabel,GenderLabel,AddressLabel,BankBalanceLabel,AccountNumberLabel;
+	static JLabel CustomerIDValue,FirstNameValue,LastNameValue,DOBValue,AgeValue,ContactNumberValue,GenderValue,BankBalanceValue,AccountNumberValue;
+        static JTextArea AddressValue;
 	JLabel Collon1,Collon2,Collon3,Collon4,Collon5,Collon6,Collon7,Collon8,Collon9,Collon10;
 	JButton ProfIconLabel,BackIconLabel,EditIconLabel;
 	JButton SaveButton;
@@ -246,9 +248,12 @@ public class Profile_View extends JPanel implements ActionListener, MouseListene
 		
 		//address value label
 		
-		AddressValue=new JLabel("Address");
-		AddressValue.setBounds(X+240,Y+420,800,150);
+		AddressValue=new JTextArea("Address");
+                AddressValue.setLineWrap(true);
+                AddressValue.setEditable(false);
+		AddressValue.setBounds(X+240,Y+420+64,800,70);
 		AddressValue.setFont(new Font("Bold",Font.BOLD,labelFontSize));
+                AddressValue.setBackground(new Color(R,G,B));
 		AddressValue.setForeground(Color.WHITE);
 		
 		add(AddressLabel);
@@ -338,6 +343,20 @@ public class Profile_View extends JPanel implements ActionListener, MouseListene
     @Override
     public void mouseExited(MouseEvent e) {
         
+    }
+    public static void setCustomercProfileData(){
+        UserNameTop.setText(CustomerProfileData.getFirstName()+" "+CustomerProfileData.getLastName());
+        CustomerIDValue.setText(CustomerProfileData.getId());
+        FirstNameValue.setText(CustomerProfileData.getFirstName());
+        LastNameValue.setText(CustomerProfileData.getLastName());
+        DOBValue.setText(CustomerProfileData.getDob().toString());
+        AgeValue.setText(String.valueOf(CustomerProfileData.getAge()));
+        ContactNumberValue.setText(CustomerProfileData.getContactNumber());
+        GenderValue.setText(CustomerProfileData.getGender());
+        AddressValue.setText(CustomerProfileData.getAddress()+","+CustomerProfileData.getDistrict()+","+CustomerProfileData.getState()+","+CustomerProfileData.getPinCode());
+        BankBalanceValue.setText(CustomerProfileData.getBankBalance());
+        AccountNumberValue.setText(CustomerProfileData.getAccountNumber());
+            
     }
 
 }

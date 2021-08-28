@@ -2,6 +2,7 @@ package customer;
 import Database.DatabaseOperations;
 import Login.login;
 import customer.DatasForCustomer.ConsignmentData;
+import customer.DatasForCustomer.CustomerProfileData;
 import main.*;
 import customer.DatasForCustomer.EPostData;
 import customer.DatasForCustomer.ParcelData;
@@ -31,7 +32,7 @@ public class AuthenticationForParcel
     Color primary_Color = new Color(71,63,145);
     
     JLabel auth_password;
-    JTextField auth_password_info,userID;
+    JTextField auth_password_info;
     JButton auth_btn_confirm;
     private static boolean flag;
 
@@ -48,7 +49,6 @@ public class AuthenticationForParcel
         
         auth_password = new JLabel("Enter Your Password");
         auth_password_info = new JTextField();
-        userID=new JTextField();
         auth_btn_confirm = new JButton("Confirm");
         
         auth_password.setBounds(135, 120, 200, 20);
@@ -75,11 +75,10 @@ public class AuthenticationForParcel
             @Override
             public void actionPerformed(ActionEvent e) 
             {
-             ParcelData.setIsPasswordCorrect(getAuthentication());
+        
            
-              if(ParcelData.isIsPasswordCorrect()){
-               JOptionPane.showMessageDialog(null,"Password Successful");
-              WalletDataG.setBalence(5000.25F);//
+              if(getAuthentication()){
+              WalletDataG.setBalence(Float.valueOf(CustomerProfileData.getBankBalance()));//
               WalletDataG.setTransationType("Parcel");
               WalletDataG.setAmount(Float.valueOf(DatabaseOperations.getStocks().get(1).getItemPrice()));//fees for Parcel 1kg
           
@@ -89,6 +88,7 @@ public class AuthenticationForParcel
       
               ConsignmentData.listForConsignment.clear();
               ConsignmentData.setIsUpdate(true);
+              JOptionPane.showMessageDialog(null,"Payment Successfull");
               CustomerPanel.contentForCustomer.add(new ConsignmentPanel(),"update");
               main.switchPage("customerPanel");
               CustomerPanel.BParcel.setBounds(55+180+180+180,110,160,30);
@@ -98,7 +98,7 @@ public class AuthenticationForParcel
 
                 }
              else{
-                JOptionPane.showMessageDialog(null,"Incorrect Password"+DatabaseOperations.getMessageIdGenerator());
+                JOptionPane.showMessageDialog(null,"Incorrect Password");
             
              }     
                                
@@ -111,6 +111,8 @@ public class AuthenticationForParcel
 
     }
   private  boolean getAuthentication(){
+      JTextField userID=new JTextField();
+      userID.setText(Login.login.user_ID);
         ArrayList list = DatabaseOperations.getLoginCredentials(userID,auth_password_info);
         
         try
@@ -118,9 +120,7 @@ public class AuthenticationForParcel
             int salt = Integer.parseInt(list.get(1).toString());
             
             String password = login.createHash(auth_password_info.getText(), salt);
-            System.out.println(list);
-            System.out.println(password);
-            System.out.println(list.get(1).toString());
+            
 
             if(password.equals(list.get(0).toString()))
                 return true;

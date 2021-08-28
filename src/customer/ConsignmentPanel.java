@@ -58,7 +58,6 @@ class ConsignmentPanel extends JPanel implements ActionListener{
         int[] selectedRow = table.getSelectedRows();
         Integer data= (Integer)table.getValueAt(selectedRow[0], 0);
         int temp=data-1;
-        System.out.println(temp);
         ConsignmentDetails ob=(ConsignmentDetails)CustomerPanel.PConsignmentDetails;
         ob.setConignmentDetails(temp);
         CustomerPanel.customerCard.show(CustomerPanel.contentForCustomer,"ConsignmentDetails");

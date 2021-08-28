@@ -1,5 +1,9 @@
 package Login;
 import Database.DatabaseOperations;
+import customer.CustomerPanel;
+import static customer.CustomerPanel.contentForCustomer;
+import static customer.CustomerPanel.customerCard;
+import customer.InboxPanel;
 import main.main;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -169,6 +173,9 @@ public class login extends JPanel implements ActionListener
                 }
                 else if(list.get(2).toString().equals("Customer"))
                 {
+                    DatabaseOperations.getCustomerProfileForCustomerPanel(Login.login.user_ID);
+                    CustomerPanel.contentForCustomer.add(new InboxPanel(),"Inbox");
+                   customerCard.show(CustomerPanel.contentForCustomer,"Inbox");
                     main.switchPage("customerPanel");
                 }
 

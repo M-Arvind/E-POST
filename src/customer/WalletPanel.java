@@ -1,5 +1,6 @@
 package customer;
 import Database.DatabaseOperations;
+import customer.DatasForCustomer.CustomerProfileData;
 import customer.DatasForCustomer.WalletData;
 import javax.swing.JPanel;
 import java.awt.CardLayout;
@@ -17,13 +18,14 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import main.main;
+import profile.CustomerProfile;
 public class WalletPanel extends JPanel 
 {
         public static DefaultTableModel model;
 	private JLabel icon;	
 	private JButton bE_pay,bMoney_Order,bAdd_Money;	
-	private JLabel UserName,Account_no,WalletBalance;	
-	private static  JTable table;
+	static  public JLabel UserName,Account_no,WalletBalance;	
+	static  private   JTable table;
 	private JScrollPane sp;	
 	private Color panel = new Color(254,254,254);
 	private Color back = new Color(34,34,44);
@@ -40,10 +42,11 @@ public class WalletPanel extends JPanel
 		
 		this.setLayout(null);
 		this.setBounds(55,150,1260,570);
-		this.setBackground(panel);
+		
 		model = new DefaultTableModel();
                 
 		table = new JTable(model);
+                table.setRowHeight(30);
                 for(Object c:column_name){
                     model.addColumn(c);
                 }
@@ -56,7 +59,7 @@ public class WalletPanel extends JPanel
 		
 		//table.setBackground(button);
 		sp = new JScrollPane(table);
-		sp.setBounds(160,150,950,300);	
+		sp.setBounds(160,100+40,950+50,350);	
 		sp.setBackground(back);
 		sp.setFont(new Font("arial", Font.BOLD	,20));
 		sp.setVisible(true);
@@ -64,10 +67,11 @@ public class WalletPanel extends JPanel
 		
 		
                 bMoney_Order = new JButton("Money Order");
-                bAdd_Money = new JButton("Add Money");    	
-    	UserName = new JLabel("Username   : ABHI@2001 ");    	
-    	Account_no = new JLabel("Account no : 1000125690");    	
-    	WalletBalance = new JLabel("Rs.35,000");      	
+                bAdd_Money = new JButton("Add Money");   
+      
+    	UserName = new JLabel(); 
+    	Account_no = new JLabel();   
+    	WalletBalance = new JLabel(CustomerProfileData.getBankBalance());      	
     	bE_pay = new JButton("E-Pay");
     	bMoney_Order = new JButton("Money Order");
     	bAdd_Money = new JButton("Add Money");      	
@@ -158,6 +162,7 @@ public class WalletPanel extends JPanel
                 
             } 
             
+            WalletBalance.setText(list.get(list.size()-1).getBalance());
             
         }
         static void removeWalletCurrentDetails(){

@@ -89,21 +89,9 @@ public class PaymentEPost extends JPanel implements MouseListener
         e_payment_btn_confirm = new JButton();
         e_payment_btn_confirm.addActionListener((a)->{
             new AuthenticationForE_Post();
-           /*if(EPostData.isIsPasswordCorrect()){
-              if(EPostData.isHardCopy()==true && EPostData.isSoftCopy()==true){
-                  
-              }
-              if(EPostData.isHardCopy()==true){
-                 
-              }
-              if(EPostData.isSoftCopy()==true){
-                   Database.DatabaseOperations.inboxUpdate();
-              }
-            }
-                else{
-                JOptionPane.showMessageDialog(null,"Failed ID:"+DatabaseOperations.getMessageIdGenerator());
-            
-            }*/
+            EPostData.setSoftCopy(false);
+            EPostData.setSoftCopy(false);
+           
            
         });
         e_payment_btn_back = new JLabel(new ImageIcon(getClass().getResource("/Images/arrow_back_button.png")));
@@ -183,7 +171,7 @@ public class PaymentEPost extends JPanel implements MouseListener
         e_payment_amount_info.setBounds(400, 50 + 80, 300, 50);
         e_payment_to_info.setBounds(400,100 + 80,150, 50);
         e_payment_contact_info.setBounds(400,150 + 80,150, 50);
-        e_payment_type_info.setBounds(400,200 + 80,200, 50);
+        e_payment_type_info.setBounds(400,200 + 80,300, 50);
         e_payment_firstName_info.setBounds(400,250 + 80,300, 50);
         e_payment_lastName_info.setBounds(400,300 + 80,300, 50);
         e_payment_address_info.setBounds(400,360 + 80,800,90);
@@ -304,9 +292,9 @@ public class PaymentEPost extends JPanel implements MouseListener
         e_payment_amount_info.setText(WalletDataG.getAmount().toString());
         e_payment_to_info.setText(EPostData.getTo());
         e_payment_contact_info.setText(EPostData.getPhoneNumber().toString());
-        if(EPostData.isHardCopy()&&EPostData.isHardCopy()) e_payment_type_info.setText("Hard Copy And Soft Copy");
-        else if(EPostData.isHardCopy())  e_payment_type_info.setText("Hard Copy");
-        else if(EPostData.isSoftCopy())  e_payment_type_info.setText("Soft Copy");
+        e_payment_type_info.setText("E-Post");
+        
+        
         e_payment_firstName_info.setText(EPostData.getFirstName());
         e_payment_lastName_info.setText(EPostData.getLastName());
         e_payment_address_info.setText(EPostData.getAddress());

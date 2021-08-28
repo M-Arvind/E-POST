@@ -26,6 +26,7 @@ import static customer.WalletPanel.removeWalletCurrentDetails;
 import static customer.WalletPanel.setWalletCurrentDetails;
 import javax.swing.plaf.ButtonUI;
 import Database.DatabaseOperations;
+import customer.DatasForCustomer.CustomerProfileData;
 import javax.swing.JTextField;
 import javax.swing.RowFilter;
 import javax.swing.event.DocumentEvent;
@@ -56,18 +57,19 @@ public class CustomerPanel extends JPanel implements ActionListener, MouseListen
        customerCard=new CardLayout();
        PWallet=new WalletPanel();
        contentForCustomer=new JPanel(customerCard);
-       PInbox=new InboxPanel();
        PE_Post=new E_PostPanel();
        PParcel=new ParcelPanel();
        PProducts=new ProductsPanel();
        PConsignmentDetails=new ConsignmentDetails();
+       PInbox=new InboxPanel();
+       contentForCustomer.add(PInbox,"Inbox");
        contentForCustomer.add(PInbox,"Inbox");
        contentForCustomer.add(PE_Post,"E-Post");
        contentForCustomer.add(PParcel,"Parcel");
        contentForCustomer.add(PProducts,"Products");
        contentForCustomer.add(PWallet,"Wallet");
        contentForCustomer.add(PConsignmentDetails,"ConsignmentDetails");
-        
+       customerCard.show(contentForCustomer,"Inbox");
        contentForCustomer.setBounds(X_FORCUSTOMER,Y_FORCUSTOMER,WIDTHFORCUSTOMER,HIGHTFORCUSTOMER);
        add(contentForCustomer);
        setPreferredSize(new Dimension(1350,890));
@@ -135,7 +137,32 @@ public class CustomerPanel extends JPanel implements ActionListener, MouseListen
        add(search);
        
        IProfile=new JLabel(image);
-       IProfile.addMouseListener(this);
+       IProfile.addMouseListener(new MouseListener() {
+           @Override
+           public void mouseClicked(MouseEvent e) {
+               if(e.getSource() == IProfile)
+                DatabaseOperations.getCustomerProfileForCustomerPanel(Login.login.user_ID);
+                Profile_View.setCustomercProfileData();
+                main.switchPage("Profile");
+        
+             }
+
+           @Override
+           public void mousePressed(MouseEvent e) {
+                          }
+
+           @Override
+           public void mouseReleased(MouseEvent e) {
+                   }
+
+           @Override
+           public void mouseEntered(MouseEvent e) {
+                   }
+
+           @Override
+           public void mouseExited(MouseEvent e) {
+                   }
+       });
        IProfile.setBounds(1240,22, 50, 50);
        add(IProfile);
      
@@ -149,7 +176,7 @@ public class CustomerPanel extends JPanel implements ActionListener, MouseListen
        BInbox.setFont(font);
        BInbox.setBorder(null);
        BInbox.setUI(ui);
-       BInbox.setBounds(X_FORCUSTOMER,110,160,30);
+       BInbox.setBounds(X_FORCUSTOMER,120,160,30);
        BInbox.setBackground(Buttoncolor);
        BInbox.addActionListener(this);
        add(BInbox); 
@@ -224,11 +251,11 @@ public class CustomerPanel extends JPanel implements ActionListener, MouseListen
               CustomerPanel.contentForCustomer.add(new ConsignmentPanel(),"Consignment");
               //CustomerPanel.customerCard.show(CustomerPanel.contentForCustomer,"Consignment");
             if(!ConsignmentData.isIsUpdate()){
-                 System.out.println("--------->BuutonConsign");
+                
                  customerCard.show(contentForCustomer,"Consignment");}
 
              else{
-            System.out.println("--------->Button1");
+            
                  customerCard.show(contentForCustomer,"update");
              }
              BInbox.setBounds(X_FORCUSTOMER,110,160,30);
@@ -270,7 +297,8 @@ public class CustomerPanel extends JPanel implements ActionListener, MouseListen
         }
         else if(o==BWallet){
             
-            
+            WalletPanel.Account_no.setText("Username   : "+CustomerProfileData.getAccountNumber());
+            WalletPanel.UserName.setText("Account no : "+CustomerProfileData.getId());
             BWallet.setBounds(X_FORCUSTOMER+180+180+180+180+180,120,160,30);
             removeWalletCurrentDetails();
             setWalletCurrentDetails();
@@ -293,9 +321,7 @@ public class CustomerPanel extends JPanel implements ActionListener, MouseListen
         if(e.getSource()==search){
             search.setText("");
         }
-        else if(e.getSource() == IProfile)
-            main.switchPage("Profile");
-        }
+    }
 
     @Override
     public void mousePressed(MouseEvent e) {

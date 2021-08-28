@@ -1,4 +1,5 @@
 package customer;
+import Database.DatabaseOperations;
 import main.*;
 import java.awt.Color;
 import customer.DatasForCustomer.*;
@@ -10,11 +11,16 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.geom.Line2D;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.PrintStream;
 import java.util.Vector;
+import java.util.regex.Pattern;
 import javax.swing.AbstractButton;
 import javax.swing.BorderFactory;
 import javax.swing.ButtonModel;
@@ -23,6 +29,7 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -56,6 +63,73 @@ public class E_PostPanel extends JPanel implements ActionListener{
           TTo.setBounds(40,70,200,28);
           TTo.setBorder(border);
           TTo.setFont(fontForText);
+          TTo.addKeyListener(new KeyListener() {
+              @Override
+              public void keyTyped(KeyEvent e) {
+                    String temp=TTo.getText();
+                    if(DatabaseOperations.CheckIdPresentOrNot(temp)){
+                        DatabaseOperations.getReciverProfileForCustomerPanel(temp);
+                        setData("1");
+                    }
+                  
+              }
+
+              @Override
+              public void keyPressed(KeyEvent e) {
+                  String temp=TTo.getText();
+                    if(DatabaseOperations.CheckIdPresentOrNot(temp)){
+                        DatabaseOperations.getReciverProfileForCustomerPanel(temp);
+                        setData("1");
+                    }
+                 }
+
+              @Override
+              public void keyReleased(KeyEvent e) {
+                  String temp=TTo.getText();
+                    if(DatabaseOperations.CheckIdPresentOrNot(temp)){
+                        DatabaseOperations.getReciverProfileForCustomerPanel(temp);
+                        setData("1");
+                    }
+  
+               }
+          });
+          TTo.addMouseListener(new MouseListener() {
+              @Override
+              public void mouseClicked(MouseEvent e) {
+                  String temp=TTo.getText();
+                  if(DatabaseOperations.CheckIdPresentOrNot(temp)){
+                        DatabaseOperations.getReciverProfileForCustomerPanel(temp);
+                        setData("1");
+                    }
+                    else{
+                        TTo.setText("");
+                        TFirstname.setText("");
+                        TLastName.setText("");
+                        TPincode.setText("");
+                        TPhoneNumber.setText("");
+                        TAddress.setText("");
+                        CState.setSelectedItem("");
+                        CDistrict.setSelectedItem("");
+                    }
+                     }
+
+              @Override
+              public void mousePressed(MouseEvent e) {
+                    }
+
+              @Override
+              public void mouseReleased(MouseEvent e) {
+                      }
+
+              @Override
+              public void mouseEntered(MouseEvent e) {
+                      }
+
+              @Override
+              public void mouseExited(MouseEvent e) {
+                  
+                          }
+          });
           add(TTo);
           
           LFirstName=new JLabel("FirstName");
@@ -149,7 +223,7 @@ public class E_PostPanel extends JPanel implements ActionListener{
           Message=new JTextArea();
           Message.setLineWrap(true);
           Message.setFont(fontForText);
-          Message.setBorder(BorderFactory.createLineBorder(Color.black, 1));
+          Message.setBorder(border);
           JScrollPane messageScrool=new JScrollPane(Message);
           messageScrool.setBounds(680,110,500,442-32-50);
           add(messageScrool);
@@ -265,7 +339,51 @@ public class E_PostPanel extends JPanel implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        String temp=TTo.getText();
+        if(isSoftCopySelected==true&&DatabaseOperations.CheckIdPresentOrNot(temp)){
+           DatabaseOperations.getReciverProfileForCustomerPanel(temp);
+           setData("1");
+           setDataForEPost(); 
+        }
         
+        else if(DatabaseOperations.CheckIdPresentOrNot(temp) ){
+            DatabaseOperations.getReciverProfileForCustomerPanel(temp);
+            setData("1");
+            setDataForEPost();
+        }
+        else if(isHardCopySelected==true&&!DatabaseOperations.CheckIdPresentOrNot(temp)){
+            setData("2");
+            setDataForEPost();
+        }
+        else if(isHardCopySelected==true){
+            DatabaseOperations.getReciverProfileForCustomerPanel(temp);
+            setData("1");
+            setDataForEPost();
+        }
+        else {
+            JOptionPane.showMessageDialog(null,"Receiver ID is Mandatory for Soft Copy");
+        }
+       
+    
+    }
+    private void setData(String s){
+    if(s.equals("1")){
+     TTo.setText(RecieverProfileData.getId());
+     TFirstname.setText(RecieverProfileData.getFirstName());
+     TLastName.setText(RecieverProfileData.getLastName());
+     TPincode.setText(RecieverProfileData.getPinCode());
+     TPhoneNumber.setText(RecieverProfileData.getContactNumber());
+     TAddress.setText(RecieverProfileData.getAddress());
+     CState.setSelectedItem(RecieverProfileData.getState());
+     CDistrict.setSelectedItem(RecieverProfileData.getDistrict());
+        }
+     else if(s.equals("2")){
+     TTo.setText("");
+     }
+     
+    
+    }
+    private void setDataForEPost(){
         EPostData.setTo(TTo.getText());
         EPostData.setFirstName(TFirstname.getText());
         EPostData.setLastName(TLastName.getText());
@@ -279,9 +397,43 @@ public class E_PostPanel extends JPanel implements ActionListener{
         EPostData.setHardCopy(isHardCopySelected);
         EPostData.setSoftCopy(isSoftCopySelected);
         WalletDataG.setItemWeight(1F);
-        PaymentEPost.setDataForEPostPayment();
-        main.switchPage("paymentEPost");
-        
+        int validCount=0;
+        String regex1="^[A-Za-z]+";
+        String value1=EPostData.getFirstName();
+        boolean check1=Pattern.matches(regex1, value1);
+        if(!check1){
+         JOptionPane.showMessageDialog(null,"Enter valid First name");
+         validCount++;
+        }
+        String value2=EPostData.getLastName();
+        boolean check2=Pattern.matches(regex1, value2);
+        if(!check2){
+         JOptionPane.showMessageDialog(null,"Enter valid Last name");
+         validCount++;
+        }
+        String regex3="^[0-9]+";
+        String value3=EPostData.getPincode();
+        boolean check3=Pattern.matches(regex3, value3);
+        if(!check3){
+         JOptionPane.showMessageDialog(null,"Enter valid Pincode");
+         validCount++;
+        }
+        String regex4="^[0-9]+{10}";
+       
+        boolean check4=phoneNumberValidation( EPostData.getPhoneNumber().toString());
+        if(!check4){   
+         JOptionPane.showMessageDialog(null,"Enter valid PhoneNumber");
+         validCount++;
+        }
+        if(validCount==0){
+             PaymentEPost.setDataForEPostPayment();
+             main.switchPage("paymentEPost");
+        }
+   
     }
+     static boolean phoneNumberValidation(String number){
+        String regex = "(0/91)?[7-9][0-9]{9}";
+        return number.matches(regex);
+        }
   
 }

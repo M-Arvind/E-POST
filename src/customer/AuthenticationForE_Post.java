@@ -75,8 +75,7 @@ public class AuthenticationForE_Post
               EPostData.setIsPasswordCorrect(getAuthentication());
                 
               if(EPostData.isIsPasswordCorrect()){
-              JOptionPane.showMessageDialog(null,"Password Successful");
-              WalletDataG.setBalence(5000.25F);//customer Balence
+              WalletDataG.setBalence(Float.valueOf(CustomerProfileData.getBankBalance()));//customer Balence
               WalletDataG.setItemCode(DatabaseOperations.getStocks().get(0).getitemCode());
               WalletDataG.setItemPrice(Float.valueOf(DatabaseOperations.getStocks().get(0).getItemPrice()));
               WalletDataG.setAmount(Float.valueOf(DatabaseOperations.getStocks().get(0).getItemPrice()));//fees for Parcel 1kg
@@ -101,6 +100,7 @@ public class AuthenticationForE_Post
               try{
                   Thread.sleep(50);
               }catch(Exception q){}
+              JOptionPane.showMessageDialog(null,"Payment Successfull");
               CustomerPanel.contentForCustomer.add(new ConsignmentPanel(),"update");
               main.switchPage("customerPanel");
               CustomerPanel.BConsignment.setBounds(55+120+60,120,160,30);
@@ -110,7 +110,7 @@ public class AuthenticationForE_Post
 
                 }
              else{
-                JOptionPane.showMessageDialog(null,"Incorrect Password"+DatabaseOperations.getMessageIdGenerator());
+                JOptionPane.showMessageDialog(null,"Incorrect Password");
             
              }       
             }
@@ -129,13 +129,10 @@ public class AuthenticationForE_Post
             int salt = Integer.parseInt(list.get(1).toString());
             
             String password = login.createHash(auth_password_info.getText(), salt);
-            System.out.println(list);
-            System.out.println(password);
-            System.out.println(list.get(1).toString());
-
+            
             if(password.equals(list.get(0).toString()))
             {   
-                System.out.println(list.get(2).toString());
+                
                 return true;
                 
             }
