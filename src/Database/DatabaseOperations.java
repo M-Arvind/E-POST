@@ -1205,6 +1205,7 @@ public class DatabaseOperations
             Connection con = getConnection();
             Statement st = con.createStatement();
             String query = "select * from Delivery where DELIVERY_ID =?";
+            System.out.println(id);
             PreparedStatement pst = con.prepareStatement(query);
             pst.setString(1, id);
             ResultSet rst = pst.executeQuery();
@@ -1213,6 +1214,7 @@ public class DatabaseOperations
                 details.setFirstName(rst.getString("FIRST_NAME"));
                 details.setLastName(rst.getString("LAST_NAME"));
                 details.setDob(rst.getDate("DOB"));
+                System.out.println(rst.getDate("DOB"));
                 details.setJoinDate(rst.getDate("JOIN_DATE"));
                 details.setAge(rst.getInt("AGE"));
                 details.setMartialStatus(rst.getString("MARTIAL_STATUS"));
@@ -1435,11 +1437,11 @@ public class DatabaseOperations
             System.out.println(e);
         }
     }
-    public static void updateDeliveryProfile(DeliveryProfile details){
+    public static void updateDeliveryProfile(DeliveryProfile details,String id){
         try {
             Connection con = getConnection();
             Statement st = con.createStatement();
-            String query = "update Delivery set FIRST_NAME = ?, LAST_NAME = ?, DOB = ?, AGE = ?, CONTACT_NUMBER = ?, MARTIAL_STATUS = ?, SALARY = ?,STATE = ?, DISTRICT = ?, PERMANENT_ADDRESS = ?, TEMPORARY_ADDRESS = ?";
+            String query = "update Delivery set FIRST_NAME = ?, LAST_NAME = ?, DOB = ?, AGE = ?, CONTACT_NUMBER = ?, MARTIAL_STATUS = ?, SALARY = ?,STATE = ?, DISTRICT = ?, PERMANENT_ADDRESS = ?, TEMPORARY_ADDRESS = ? where DELIVERY_ID ='"+id+"' ";
             PreparedStatement pst = con.prepareStatement(query);
             pst.setString(1, details.getFirstName());
             pst.setString(2, details.getLastName());
@@ -1449,8 +1451,8 @@ public class DatabaseOperations
             pst.setString(6, details.getMartialStatus());
             pst.setInt(7, details.getSalary());
            // pst.setString(8, details.getdesignation());
-            pst.setString(8, details.getState());
             pst.setString(9, details.getDistrict());
+            pst.setString(8, details.getState());
             pst.setString(10, details.getPermanentAddress());
             pst.setString(11, details.getTemporaryAddress());
             pst.executeQuery();
