@@ -1,13 +1,7 @@
 package Admin;
 
 import static Admin.OnGoingConsignment.selectedData;
-import static Admin.OnGoingConsignment.table;
-import javax.swing.JLabel;
 import java.awt.Color;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import javax.swing.DefaultCellEditor;
-import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -18,7 +12,6 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
-import javax.swing.table.TableColumn;
 
 public class CompletedConsignment extends JPanel{
     //Private Variables
@@ -28,6 +21,7 @@ public class CompletedConsignment extends JPanel{
     public static JTable table;
     public static DefaultTableModel model;
     
+    //Constructer
     CompletedConsignment() {
         
         //Column values

@@ -4,18 +4,18 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.ScrollPane;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.geom.Line2D;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JProgressBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.ScrollPaneConstants;
 public class ConsignmentDetails extends JPanel implements ActionListener{
     
     //Private Variables
@@ -25,12 +25,19 @@ public class ConsignmentDetails extends JPanel implements ActionListener{
     private Icon icon;
     private JButton back;
     private JPanel details;
+    private static Color bg = new Color(34, 34, 45);
+    private static Color fg = new Color(254, 254, 254);
+    private static Color pri = new Color(71, 63, 145);
     
     //Public Variable
     public static JLabel vConsignDetail, vItem, vItemPrice, vItemWeight, vItemCode, vAgentId, vOrderDate, vDeliverDate, vPayment, vStatus;
     public static JLabel vSenderId, vSeFirstName, vSeLastName, vSeConstact;
     public static JLabel vReceId, vReceFirstName, vReceLastName, vReceContact;
     public static JTextArea vSeAddress, vReceAdress;
+    public static JProgressBar pick_transit, order_pick, transit_complete;
+    public static JLabel order, pick, transit, complete;
+    
+    
     
     //Paint
     public void paint(Graphics gp) { super.paint(gp); Graphics2D graphics = (Graphics2D) gp;
@@ -42,7 +49,7 @@ public class ConsignmentDetails extends JPanel implements ActionListener{
     
     //Constructer
     public ConsignmentDetails(){
-        Color fg = new Color(254, 254, 254);
+        
         //Details Panel
         details = new JPanel(null);
         details.setBackground(fg);
@@ -209,7 +216,7 @@ public class ConsignmentDetails extends JPanel implements ActionListener{
         vReceFirstName.setBounds(840, 290, 240, 40);
         vReceLastName.setBounds(840, 330, 240, 40);
         vReceContact.setBounds(840, 370, 240, 40);
-        vReceAdress.setBounds(840, 420, 350, 120);
+        vReceAdress.setBounds(840, 420, 350, 80);
         
         details.add(vItem);
         details.add(vConsignDetail);
@@ -259,8 +266,64 @@ public class ConsignmentDetails extends JPanel implements ActionListener{
         details.add(status);
         details.add(consignDetail);
 
-
-        this.add(details);
+        order_pick = new JProgressBar();
+        order_pick.setBounds(180, 550, 300, 15);
+        order_pick.setBackground(pri);
+//        order_pick.setForeground(new Color(71, 63, 145));
+        order_pick.setForeground(bg);
+        order_pick.setUI(new FancyprogressBar());
+        order_pick.setMaximum(100);
+        order_pick.setValue(100);
+        details.add(order_pick);
+        
+        pick_transit = new JProgressBar();
+        pick_transit.setBounds(300+180, 550, 300, 15);
+        pick_transit.setForeground(bg);
+        pick_transit.setUI(new FancyprogressBar());
+        pick_transit.setBackground(pri);
+        pick_transit.setMaximum(100);
+        pick_transit.setMinimum(100);
+        details.add(pick_transit);
+        
+        transit_complete = new JProgressBar();
+        transit_complete.setBounds(300+180+300, 550, 300, 15);
+        transit_complete.setForeground(fg);
+        transit_complete.setUI(new FancyprogressBar());
+        transit_complete.setBackground(pri);
+        transit_complete.setMaximum(100);
+        transit_complete.setMinimum(0);
+        details.add(transit_complete);
+        
+        order = new JLabel("Order Placed");
+        order.setBounds(130, 520, 200, 30);
+        order.setFont(font);
+        order.setForeground(bg);
+        details.add(order);
+        
+        pick = new JLabel("Picked-Up");
+        pick.setBounds(130+300, 520, 200, 30);
+        pick.setFont(font);
+        pick.setForeground(bg);
+        details.add(pick);
+        
+        transit = new JLabel("In-Transit");
+        transit.setBounds(130+300+300, 520, 200, 30);
+        transit.setFont(font);
+        transit.setForeground(bg);
+        details.add(transit);
+        
+        complete = new JLabel("Completed");
+        complete.setBounds(130+300+300+300, 520, 200, 30);
+        complete.setFont(font);
+        complete.setForeground(bg);
+        details.add(complete);
+        
+        JScrollPane scroll = new JScrollPane(details);
+        scroll.setPreferredSize(new Dimension(1260, 570));
+        scroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        scroll.setBorder(null);
+        
+        this.add(scroll);
         
        
     }
@@ -272,6 +335,70 @@ public class ConsignmentDetails extends JPanel implements ActionListener{
         if(o == back){
             AdminPanel.adminCard.show(AdminPanel.contentForAdmin, AdminPanel.card);
         }
+    }
+    //Funtion to set the progress bar
+    public static void setProgress(String s){
+        if(s.equals("Order Placed")){
+            order_pick.setBackground(pri);
+            order_pick.setForeground(fg);
+            order_pick.setValue(0);
+            pick_transit.setBackground(fg);
+            pick_transit.setForeground(fg);
+            pick_transit.setValue(0);
+            transit_complete.setBackground(fg);
+            transit_complete.setForeground(fg);
+            transit_complete.setValue(0);
+            order.setForeground(pri);
+            pick.setForeground(fg);
+            transit.setForeground(fg);
+            complete.setForeground(fg);
+        }
+        else if(s.equals("PickedUp")){
+            order_pick.setBackground(pri);
+            order_pick.setForeground(pri);
+            order_pick.setValue(100);
+            pick_transit.setBackground(pri);
+            pick_transit.setForeground(pri);
+            pick_transit.setValue(0);
+            transit_complete.setBackground(pri);
+            transit_complete.setForeground(fg);
+            transit_complete.setValue(0);
+            order.setForeground(pri);
+            pick.setForeground(pri);
+            transit.setForeground(fg);
+            complete.setForeground(fg);
+        }
+        else if(s.equals("In-Transit")){
+            order_pick.setBackground(pri);
+            order_pick.setForeground(pri);
+            order_pick.setValue(100);
+            pick_transit.setBackground(pri);
+            pick_transit.setForeground(pri);
+            pick_transit.setValue(100);
+            transit_complete.setBackground(pri);
+            transit_complete.setForeground(fg);
+            transit_complete.setValue(0);
+            order.setForeground(pri);
+            pick.setForeground(pri);
+            transit.setForeground(pri);
+            complete.setForeground(fg);
+        }
+        else if(s.equals("Completed")){
+            order_pick.setBackground(pri);
+            order_pick.setForeground(pri);
+            order_pick.setValue(100);
+            pick_transit.setBackground(pri);
+            pick_transit.setForeground(pri);
+            pick_transit.setValue(100);
+            transit_complete.setBackground(pri);
+            transit_complete.setForeground(pri);
+            transit_complete.setValue(100);
+            order.setForeground(pri);
+            pick.setForeground(pri);
+            transit.setForeground(pri);
+            complete.setForeground(pri);
+        }
+        
     }
 
 }
