@@ -122,6 +122,7 @@ public class AdminProfileUpdate extends JPanel implements MouseListener, ActionL
 		
 		//usernamevalue label
 		
+                
 		DOBValue=new JTextField("DOB");
 		DOBValue.setBounds(X+240-120,Y+60+70,300,35);
 		DOBValue.setFont(new Font("Segoe UI",Font.PLAIN,labelFontSize));
@@ -345,6 +346,7 @@ public class AdminProfileUpdate extends JPanel implements MouseListener, ActionL
 		SaveButton.setForeground(Color.WHITE);
 		SaveButton.setBackground(new Color(71,63,145));
                 SaveButton.addActionListener(this);
+                SaveButton.setUI(new StyledButtonUi());
 		add(SaveButton);
 		
 		setBounds(0,0,1350,890);
@@ -446,7 +448,7 @@ public class AdminProfileUpdate extends JPanel implements MouseListener, ActionL
         else if(!Pattern.matches("^[0-9]*$", contactNumber)||contactNumber.length()!=10){
             JOptionPane.showMessageDialog(this, "Enter valid Phone Number");
         }
-        else if(!Pattern.matches("^([A-Za-z])+$", designation)){
+        else if(!Pattern.matches("^([A-Za-z ])+$", designation)){
             JOptionPane.showMessageDialog(this, "Designation should contain only characters");
         }
         else if(!Pattern.matches("^([A-Za-z])+$", state)){

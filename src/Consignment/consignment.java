@@ -309,7 +309,6 @@ public class consignment
     }
     
     public static void setConsignmentDetails(String id){
-        try{
         consignment details = DatabaseOperations.getConsignmentDetails(id);
         ConsignmentDetails.vConsignDetail.setText(details.getConsignment_ID());
         ConsignmentDetails.vItem.setText(details.getItem());
@@ -331,10 +330,6 @@ public class consignment
         ConsignmentDetails.vReceLastName.setText(details.getReceiver_last_name());
         ConsignmentDetails.vReceContact.setText(details.getReceiver_contact_number().toString());
         ConsignmentDetails.vReceAdress.setText(details.getReceiver_address());
-        }
-        catch(Exception e){
-            JOptionPane.showMessageDialog(AdminPanel.contentForAdmin, "Consignent Id Not Found");
-        }
     }
     
     

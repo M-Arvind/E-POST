@@ -44,18 +44,6 @@ public class AdminDeliveryProfile extends JPanel implements ActionListener, Mous
                 BackIconLabel.setContentAreaFilled(false);
                 add(BackIconLabel);
 
-                //Edit icon
-
-//                EditIcon=new ImageIcon(getClass().getResource("/Images/edit_white.png"));
-//                EditIconLabel=new JButton(EditIcon);
-//                EditIconLabel.setBounds(X+1000,Y-50,40,40);
-//                EditIconLabel.setBackground(new Color(R,G,B));
-//                EditIconLabel.setBorder(emptyBorder);
-//                EditIconLabel.setVisible(true);
-//                EditIconLabel.addMouseListener(this);
-//                EditIconLabel.setContentAreaFilled(false);
-//                add(EditIconLabel);
-		
 		//Usernametop
 		
 		UserNameTop=new JLabel("Hello world");
@@ -291,18 +279,18 @@ public class AdminDeliveryProfile extends JPanel implements ActionListener, Mous
                                
                 
                 SalaryLabel=new JLabel("Salary");
-		SalaryLabel.setBounds(X,Y+710-30,200,150);
+		SalaryLabel.setBounds(X,Y+650-30,200,150);
 		SalaryLabel.setFont(new Font("Bold",Font.BOLD,labelFontSize));
 		SalaryLabel.setForeground(Color.WHITE);
 		Collon12=new JLabel(":");
-		Collon12.setBounds(X+200,Y+710-30,20,150);
+		Collon12.setBounds(X+200,Y+650-30,20,150);
 		Collon12.setFont(new Font("Bold",Font.BOLD,labelFontSize));
 		Collon12.setForeground(Color.WHITE);
 		
 		//designation value label
 		
 		SalaryValue=new JLabel("Salary");
-		SalaryValue.setBounds(X+240,Y+710-30,800,150);
+		SalaryValue.setBounds(X+240,Y+650-30,800,150);
 		SalaryValue.setFont(new Font("Bold",Font.BOLD,labelFontSize));
 		SalaryValue.setForeground(Color.WHITE);
 		

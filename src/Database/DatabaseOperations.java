@@ -467,9 +467,9 @@ public class DatabaseOperations
                         String salt = rspass.getString("salt");
                         String type = rspass.getString("login_type");
                         
-                        System.out.println(pass);
-                        System.out.println(salt);
-                        System.out.println(type);
+//                        System.out.println(pass);
+//                        System.out.println(salt);
+//                        System.out.println(type);
                         //System.out.println(hash_pass);
                         
                         loginCredentials.add(pass);
@@ -530,7 +530,7 @@ public class DatabaseOperations
                     
                     //st.executeUpdate(sql);
                     //getConnection().setAutoCommit(true);
-                    JOptionPane.showMessageDialog(null, "Login Create SuccessFul!"); 
+//                    JOptionPane.showMessageDialog(null, "Login Create SuccessFul!"); 
                     customerCreate(list);
                 }
             }

@@ -97,7 +97,7 @@ public class ForgetPassword
 
         fPass_btn_confirm.setBackground(primary_Color);
         fPass_btn_confirm.setBorder(null);
-
+        fPass_btn_confirm.setUI(new Admin.StyledButtonUi());
         fPass_btn_confirm.addActionListener(new ActionListener()
         {
             @Override
@@ -128,12 +128,12 @@ public class ForgetPassword
         
         if(hash_pass.isEmpty() || hash_confirm_pass.isEmpty())
         {
-            JOptionPane.showMessageDialog(null, "Please Enter the New Password");
+            JOptionPane.showMessageDialog(newdialog, "Please Enter the New Password");
         }
         
-        System.out.println("Password" + hash_pass);
-        System.out.println("Confirm Password" + hash_confirm_pass);
-        System.out.println("Salt" + salt);
+//        System.out.println("Password" + hash_pass);
+//        System.out.println("Confirm Password" + hash_confirm_pass);
+//        System.out.println("Salt" + salt);
         
         if(hash_pass.equals(hash_confirm_pass) || hash_pass != null || hash_confirm_pass != null)
         {
@@ -142,7 +142,7 @@ public class ForgetPassword
         }
         else
         {
-            JOptionPane.showMessageDialog(null, "Please make sure that Password and Confirm Password are same");
+            JOptionPane.showMessageDialog(newdialog, "Please make sure that Password and Confirm Password are same");
         }        
     }
 }

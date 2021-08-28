@@ -19,6 +19,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import main.main;
@@ -95,11 +96,11 @@ public class AdminPanel extends JPanel implements ActionListener, MouseListener 
        search.setFont(new Font("Segoe UI",Font.PLAIN,18));
        search.setBounds(970, 32, 200, 30);
        search.addMouseListener(this);
-       search.setBorder(BorderFactory.createEmptyBorder(2,5,0,5));
+//       search.setBorder(BorderFactory.createEmptyBorder(2,5,0,5));
        add(search);
        
        lSearch = new JLabel(imag);
-       lSearch.setBounds(1140, 28, 100, 36);
+       lSearch.setBounds(1155, 26, 100, 40);
        lSearch.addMouseListener(this);
        lSearch.setBorder(null);
        add(lSearch);
@@ -258,10 +259,15 @@ public class AdminPanel extends JPanel implements ActionListener, MouseListener 
             main.switchPage("AdminProfileView");
         }
         else if(e.getSource() == lSearch){
+            try{
             String con = search.getText();
             consignment.setConsignmentDetails(con);
 
             adminCard.show(contentForAdmin, "ConsignmentDetails");
+            }
+            catch(Exception ls){
+                JOptionPane.showMessageDialog(AdminPanel.contentForAdmin, "Consignment not Found");
+            }
         }
         }
 

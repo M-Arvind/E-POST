@@ -151,9 +151,9 @@ public class login extends JPanel implements ActionListener
             int salt = Integer.parseInt(list.get(1).toString());
             
             String password = login.createHash(passwordField.getText(), salt);
-            System.out.println(list);
-            System.out.println(password);
-            System.out.println(list.get(1).toString());
+//            System.out.println(list);
+//            System.out.println(password);
+//            System.out.println(list.get(1).toString());
 
             if(password.equals(list.get(0).toString()))
             {   
@@ -172,7 +172,7 @@ public class login extends JPanel implements ActionListener
                     main.switchPage("customerPanel");
                 }
 
-                System.out.println(list.get(2).toString());
+//                System.out.println(list.get(2).toString());
             }
             else
             {
