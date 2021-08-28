@@ -1,4 +1,5 @@
 package Login;
+import Consignment.consignment;
 import Database.DatabaseOperations;
 import customer.CustomerPanel;
 import static customer.CustomerPanel.contentForCustomer;
@@ -17,6 +18,10 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import javax.swing.*;
+import Delivery.*;
+import static Delivery.delivery.ContentForDelivery;
+import static Delivery.delivery.PCompleted;
+import static Delivery.delivery.deliveryCard;
 import javax.swing.plaf.basic.BasicButtonUI;
 
 public class login extends JPanel implements ActionListener
@@ -162,6 +167,7 @@ public class login extends JPanel implements ActionListener
             if(password.equals(list.get(0).toString()))
             {   
                 JOptionPane.showMessageDialog(this,"Login Successful");
+                
 
                 if(list.get(2).toString().equals("ADMIN"))
                 {
@@ -169,7 +175,11 @@ public class login extends JPanel implements ActionListener
                 }
                 else if(list.get(2).toString().equals("DELIVERY"))
                 {
-                    main.switchPage("deliveryPanel");
+                   
+                    consignment.setCompletedDeliveryConsignmentDetails();
+                    deliveryCard.show(ContentForDelivery,"completed");
+                    main.switchPage("deliveryPanel");     
+                   
                 }
                 else if(list.get(2).toString().equals("Customer"))
                 {

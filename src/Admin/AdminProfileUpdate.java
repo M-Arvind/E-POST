@@ -6,7 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.util.Date;
+import java.sql.Date;
 import java.util.regex.Pattern;
 import main.main;
 import profile.AdminProfile;
@@ -472,9 +472,9 @@ public class AdminProfileUpdate extends JPanel implements MouseListener, ActionL
             details.setPermanentAddress(pAddressValue.getText());
             details.setTemporaryAddress(tAddressValue.getText());
             String[] da= DOB.split("-");
-            details.setDob(new java.sql.Date(Integer.parseInt(da[0]), Integer.parseInt(da[1]), Integer.parseInt(da[2])));
-            Database.DatabaseOperations.updateAdminProfile(details);
-            
+            //details.setDob(new java.sql.Date(Integer.parseInt(da[0]), Integer.parseInt(da[1]), Integer.parseInt(da[2])));
+            details.setDob(Date.valueOf(DOBValue.getText()));
+            Database.DatabaseOperations.updateAdminProfile(details);            
             AdminProfile.setAdminProfile(Login.login.user_ID);
             main.switchPage("AdminProfileView");
             }
