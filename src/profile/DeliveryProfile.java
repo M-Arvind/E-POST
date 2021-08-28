@@ -2,6 +2,7 @@ package profile;
 
 import Admin.AdminDeliveryProfile;
 import Admin.deliveryDetails;
+import Delivery.*;
 import Database.DatabaseOperations;
 import java.sql.Date;
 import java.util.ArrayList;
@@ -21,6 +22,16 @@ public class DeliveryProfile {
     int salary;
     String state;
     String district;
+    String designation;
+    
+    public String getdesignation() {
+        return designation;
+    }
+
+    public void setdesignation(String designation) {
+        this.designation = designation;
+    }
+
 
     public String getId() {
         return id;
@@ -150,7 +161,8 @@ public class DeliveryProfile {
                 deliveryDetails.deliveryModel.addRow(new Object[]{temp.getId(),temp.getFirstName(),temp.getLastName(),temp.getDob(),temp.getJoinDate(),temp.getContactNumber(),temp.getGender(),temp.getSalary()});
             }
     }
-    public static void setDeliveryProfile(String id){
+    public static void setDeliveryProfile(String id)
+    {
         DeliveryProfile details = DatabaseOperations.getDeliveryProfile(id);
 
         AdminDeliveryProfile.UserNameValue.setText(details.getId());
@@ -170,5 +182,53 @@ public class DeliveryProfile {
 //        System.out.println(details.getPermanentAddress());
 //        System.out.println(details.getDob());
     }
+    public static void setDeliverydeliveryProfile(String id)
+    {
+        DeliveryProfile details = DatabaseOperations.getDeliveryProfile(id);
+
+       DeliveryProfileView.UserNameValue.setText(details.getId());
+       DeliveryProfileView.ContactNoValue.setText(details.getContactNumber());
+//        System.out.println(details.getDob().toString());
+       DeliveryProfileView.DOBValue.setText(details.getDob().toString());
+       DeliveryProfileView.AgeValue.setText(Integer.toString(details.getAge()));
+       DeliveryProfileView.JoinDateValue.setText(details.getJoinDate().toString());
+       DeliveryProfileView.PAddressValue.setText(details.getPermanentAddress());
+       DeliveryProfileView.TAddressValue.setText(details.getTemporaryAddress());
+       DeliveryProfileView.MaritalValue.setText(details.getMartialStatus());
+       DeliveryProfileView.DesignationValue.setText("Delivery Member");
+//        AdminDeliveryProfile.ExperienceValue.setText("None");
+        DeliveryProfileView.GenderValue.setText(details.getGender());
+        DeliveryProfileView.SalaryValue.setText(Integer.toString(details.getSalary()));
+        DeliveryProfileView.UserNameTop.setText(details.getFirstName()+" "+details.getLastName());
+//        System.out.println(details.getPermanentAddress());
+//        System.out.println(details.getDob());
+    }
+    public static void setDeliveryProfileUpdate(String id){
+        DeliveryProfile details = Database.DatabaseOperations.getDeliveryProfile(id);
+        int a=0;
+        if(details.getMartialStatus().equals("Single"))
+                a = 0;
+        else if(details.getMartialStatus().equals("Married"))
+                a = 1;
+        else if(details.getMartialStatus().equals("Divorced"))
+                a = 1;
+        DeliveryProfileUpdate .firstNameValue.setText(details.getFirstName());
+        DeliveryProfileUpdate .lastNameValue.setText(details.getLastName());
+        DeliveryProfileUpdate .DOBValue.setText(details.getDob().toString());
+        DeliveryProfileUpdate .ageValue.setText(Integer.toString(details.getAge()));
+        DeliveryProfileUpdate .contactNoValue.setText(details.getContactNumber());        
+        DeliveryProfileUpdate .pAddressValue.setText(details.getPermanentAddress());
+        DeliveryProfileUpdate .tAddressValue.setText(details.getTemporaryAddress());
+        DeliveryProfileUpdate .martialValue.setSelectedIndex(a);
+        DeliveryProfileUpdate .salaryValue.setText(Integer.toString(details.getSalary()));
+        DeliveryProfileUpdate .stateValue.setText(details.getState());
+        DeliveryProfileUpdate .districtValue.setText(details.getDistrict());
+//        AdminProfileView.ExperienceValue.setText(Integer.toString(details.getExperience()));
+//        AdminProfileView.GenderValue.setText(details.getGender());
+        DeliveryProfileUpdate .designationValue.setText("Delivery");
+        DeliveryProfileUpdate .UserNameTop.setText(details.getId());
+        
+    }
 }
+//public static JTextField firstNameValue,lastNameValue,contactNoValue,DOBValue,ageValue,JoinDateValue,designationValue, salaryValue, stateValue, districtValue;
 //JLabel UserNameValue,ContactNoValue,DOBValue,AgeValue,JoinDateValue,PAddressValue,TAddressValue,MaritalValue,DesignationValue, ExperienceValue, GenderValue, SalaryValue;

@@ -44,6 +44,7 @@ public class ongoing extends JPanel implements ItemListener
     private Font text1 = new Font("arial", Font.BOLD, font1);
     JComboBox comboBox;
     String value="";
+    String selectedData="";
      int Selected_row=0;
     public ongoing()
     {
@@ -68,7 +69,8 @@ public class ongoing extends JPanel implements ItemListener
         table.setFont(text1);
 	table.setRowHeight(30);	       
         table.setBackground(Color.white);
-	table.setForeground(back); 
+	table.setForeground(back);      
+        
         
         
         //COMBOBOX
