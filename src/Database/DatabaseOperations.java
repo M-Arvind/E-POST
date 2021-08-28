@@ -1102,6 +1102,252 @@ public class DatabaseOperations
         }
         return list;
     }
+    public static CustomerProfile getCustomerProfile(String id){
+        CustomerProfile details = new CustomerProfile();
+        try{
+            Connection con = getConnection();
+            Statement st = con.createStatement();
+            String query = "select * from Customer where CUSTOMER_ID = ?";
+            PreparedStatement pst = con.prepareStatement(query);
+            pst.setString(1, id);
+            ResultSet rst = pst.executeQuery();
+            while(rst.next()){
+                details.setId(rst.getString("CUSTOMER_ID"));
+                details.setFirstName(rst.getString("FIRST_NAME"));
+                details.setLastName(rst.getString("LAST_NAME"));
+                details.setDob(rst.getDate("DOB"));
+                details.setAge(rst.getInt("AGE"));
+                details.setContactNumber(rst.getString("CONTACT_NUMBER"));
+                details.setGender(rst.getString("GENDER"));
+                details.setAddress(rst.getString("ADDRESS"));
+                details.setState(rst.getString("STATE"));
+                details.setDistrict(rst.getString("DISTRICT"));
+                details.setPinCode(rst.getString("PIN_CODE"));
+                details.setBankBalance(rst.getString("BANK_BALANCE"));
+                details.setAccountNumber(rst.getString("ACCOUNT_NUMBER"));
+            }
+        }
+        catch(Exception e){
+            System.out.println(e);
+        }
+        return details;
+    }
+    
+    public static DeliveryProfile getDeliveryProfile(String id){
+        DeliveryProfile details = new DeliveryProfile();
+        try{
+            Connection con = getConnection();
+            Statement st = con.createStatement();
+            String query = "select * from Delivery where DELIVERY_ID =?";
+            PreparedStatement pst = con.prepareStatement(query);
+            pst.setString(1, id);
+            ResultSet rst = pst.executeQuery();
+            while(rst.next()){
+                details.setId(rst.getString("DELIVERY_ID"));
+                details.setFirstName(rst.getString("FIRST_NAME"));
+                details.setLastName(rst.getString("LAST_NAME"));
+                details.setDob(rst.getDate("DOB"));
+                details.setJoinDate(rst.getDate("JOIN_DATE"));
+                details.setAge(rst.getInt("AGE"));
+                details.setMartialStatus(rst.getString("MARTIAL_STATUS"));
+                details.setContactNumber(rst.getString("CONTACT_NUMBER"));
+                details.setGender(rst.getString("GENDER"));
+                details.setPermanentAddress(rst.getString("PERMANENT_ADDRESS"));
+                details.setTemporaryAddress(rst.getString("TEMPORARY_ADDRESS"));
+                details.setSalary(rst.getInt("SALARY"));
+                details.setState(rst.getString("STATE"));
+                details.setDistrict(rst.getString("DISTRICT"));
+            }
+        }
+        catch(Exception e){
+            System.out.println(e);
+        }
+        return details;
+    }
+  
+    public static consignment getConsignmentDetails(String id)
+    {
+        consignment ob = new consignment();
+        try {
+            Connection con = getConnection();
+            Statement st = con.createStatement();
+            String query = "select * from consignment where CONSIGNMENT_ID = ?";
+            PreparedStatement pst = con.prepareStatement(query);
+            pst.setString(1, id);
+            ResultSet res = pst.executeQuery();
+            while(res.next()){
+                ob.setConsignment_ID(res.getString("consignment_ID"));
+                ob.setCustomer_ID(res.getString("customer_ID"));
+                ob.setDelivery_ID(res.getString("delivery_ID"));
+                ob.setReceiver_ID(res.getString("receiver_ID"));
+                ob.setItem_code(res.getString("item_code"));
+                ob.setItem(res.getString("item"));
+                ob.setItem_price(res.getFloat("item_price"));
+                ob.setItem_weight(res.getFloat("item_weight"));
+                ob.setReceiver_first_name(res.getString("receiver_first_name"));
+                ob.setReceiver_last_name(res.getString("receiver_last_name"));
+                ob.setReceiver_address(res.getString("receiver_address"));
+                ob.setReceiver_contact_number(res.getLong("receiver_contact_number"));
+                ob.setCustomer_first_name(res.getString("customer_first_name"));
+                ob.setCustomer_last_name(res.getString("customer_last_name"));
+                ob.setCustomer_contact_number(res.getLong("customer_contact_number"));
+                ob.setShipping_address(res.getString("shipping_address"));
+                ob.setPayment_method(res.getString("payment_method"));
+                ob.setOrder_date(res.getDate("order_date"));
+                ob.setDelivery_date(res.getDate("delivery_date"));
+                ob.setStatus(res.getString("status"));
+
+            }
+        } catch (Exception e) {
+        }
+        return ob;
+    }
+    
+    public static ArrayList<consignment> getOngoingAdminConsignmentDetails(){
+        ArrayList<consignment> ongoingconsignment = new ArrayList<consignment>();
+        try {
+           Connection con=DatabaseOperations.getConnection();
+           String query="select * from Consignment"; 
+           PreparedStatement st1 = con.prepareStatement(query);
+           ResultSet res = st1.executeQuery(query);
+           
+           while(res.next())
+           {
+               String Status = res.getString("status");               
+               if(!Status.equals("Completed"))
+               {
+                    consignment od=new consignment();
+            
+                    od.setConsignment_ID(res.getString("consignment_ID"));
+                    od.setCustomer_ID(res.getString("customer_ID"));
+                    od.setDelivery_ID(res.getString("delivery_ID"));
+                    od.setReceiver_ID(res.getString("receiver_ID"));
+                    od.setItem_code(res.getString("item_code"));
+                    od.setItem(res.getString("item"));
+                    od.setItem_price(res.getFloat("item_price"));
+                    od.setItem_weight(res.getFloat("item_weight"));
+                    od.setReceiver_first_name(res.getString("receiver_first_name"));
+                    od.setReceiver_last_name(res.getString("receiver_last_name"));
+                    od.setReceiver_address(res.getString("receiver_address"));
+                    od.setReceiver_contact_number(res.getLong("receiver_contact_number"));
+                    od.setCustomer_first_name(res.getString("customer_first_name"));
+                    od.setCustomer_last_name(res.getString("customer_last_name"));
+                    od.setCustomer_contact_number(res.getLong("customer_contact_number"));
+                    od.setShipping_address(res.getString("shipping_address"));
+                    od.setPayment_method(res.getString("payment_method"));
+                    od.setOrder_date(res.getDate("order_date"));
+                    od.setDelivery_date(res.getDate("delivery_date"));
+                    od.setStatus(res.getString("status"));
+
+                    ongoingconsignment.add(od);
+                }   
+            }   
+        } 
+        catch (Exception ex) {
+           System.out.println("Error in OngoingConsignmentDetails---->"+ex.toString());
+        }
+        return ongoingconsignment;
+    }
+
+    public static ArrayList<consignment> getCompletedAdminConsignmentDetails(){
+        ArrayList<consignment> completedConsignment = new ArrayList<consignment>();
+        try {
+           Connection con=DatabaseOperations.getConnection();
+           String query="select * from Consignment"; 
+           PreparedStatement st1 = con.prepareStatement(query);
+           ResultSet res = st1.executeQuery(query);
+           
+           while(res.next())
+           {
+               String Status = res.getString("status");               
+               if(Status.equals("Completed"))
+               {
+                    consignment od=new consignment();
+            
+                    od.setConsignment_ID(res.getString("consignment_ID"));
+                    od.setCustomer_ID(res.getString("customer_ID"));
+                    od.setDelivery_ID(res.getString("delivery_ID"));
+                    od.setReceiver_ID(res.getString("receiver_ID"));
+                    od.setItem_code(res.getString("item_code"));
+                    od.setItem(res.getString("item"));
+                    od.setItem_price(res.getFloat("item_price"));
+                    od.setItem_weight(res.getFloat("item_weight"));
+                    od.setReceiver_first_name(res.getString("receiver_first_name"));
+                    od.setReceiver_last_name(res.getString("receiver_last_name"));
+                    od.setReceiver_address(res.getString("receiver_address"));
+                    od.setReceiver_contact_number(res.getLong("receiver_contact_number"));
+                    od.setCustomer_first_name(res.getString("customer_first_name"));
+                    od.setCustomer_last_name(res.getString("customer_last_name"));
+                    od.setCustomer_contact_number(res.getLong("customer_contact_number"));
+                    od.setShipping_address(res.getString("shipping_address"));
+                    od.setPayment_method(res.getString("payment_method"));
+                    od.setOrder_date(res.getDate("order_date"));
+                    od.setDelivery_date(res.getDate("delivery_date"));
+                    od.setStatus(res.getString("status"));
+
+                    completedConsignment.add(od);
+                }   
+            }   
+        } 
+        catch (Exception ex) {
+           System.out.println("Error in OngoingConsignmentDetails---->"+ex.toString());
+        }
+        return completedConsignment;
+    }    
+
+    public static ArrayList<consignment> getNewAdminConsignmentDetails(){
+        ArrayList<consignment> newConsignment = new ArrayList<consignment>();
+        try {
+           Connection con=DatabaseOperations.getConnection();
+           String query="select * from Consignment"; 
+           PreparedStatement st1 = con.prepareStatement(query);
+           ResultSet res = st1.executeQuery(query);
+           
+           while(res.next())
+           {
+               String Status = res.getString("delivery_ID");               
+               if(Status.isEmpty())
+               {
+                    consignment od = new consignment();
+            
+                    od.setConsignment_ID(res.getString("consignment_ID"));
+                    od.setCustomer_ID(res.getString("customer_ID"));
+                    od.setDelivery_ID(res.getString("delivery_ID"));
+                    od.setReceiver_ID(res.getString("receiver_ID"));
+                    od.setItem_code(res.getString("item_code"));
+                    od.setItem(res.getString("item"));
+                    od.setItem_price(res.getFloat("item_price"));
+                    od.setItem_weight(res.getFloat("item_weight"));
+                    od.setReceiver_first_name(res.getString("receiver_first_name"));
+                    od.setReceiver_last_name(res.getString("receiver_last_name"));
+                    od.setReceiver_address(res.getString("receiver_address"));
+                    od.setReceiver_contact_number(res.getLong("receiver_contact_number"));
+                    od.setCustomer_first_name(res.getString("customer_first_name"));
+                    od.setCustomer_last_name(res.getString("customer_last_name"));
+                    od.setCustomer_contact_number(res.getLong("customer_contact_number"));
+                    od.setShipping_address(res.getString("shipping_address"));
+                    od.setPayment_method(res.getString("payment_method"));
+                    od.setOrder_date(res.getDate("order_date"));
+                    od.setDelivery_date(res.getDate("delivery_date"));
+                    od.setStatus(res.getString("status"));
+
+                    newConsignment.add(od);
+                }   
+            }   
+        } 
+        catch (Exception ex) {
+           System.out.println("Error in OngoingConsignmentDetails---->"+ex.toString());
+        }
+        return newConsignment;
+    }
+
+
+
+
+
+
+
+
 
 
 }

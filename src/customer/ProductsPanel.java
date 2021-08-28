@@ -203,12 +203,12 @@ public class ProductsPanel extends JPanel implements MouseListener{
         prod.add(postCardPrice);
         prod.add(postCardQuantity);
         
-        
         JScrollPane scroll = new JScrollPane(prod);
         scroll.setPreferredSize(new Dimension(1260, 570));
+        scroll.setBorder(null);
         scroll.setHorizontalScrollBarPolicy(HORIZONTAL_SCROLLBAR_NEVER);
         this.add(scroll);
-        this.setBackground(bg);
+        this.setBackground(fg);
     }
 
     @Override

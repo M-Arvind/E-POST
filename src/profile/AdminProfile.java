@@ -1,5 +1,6 @@
 package profile;
 
+import Admin.AdminProfileView;
 import java.sql.Date;
 
 
@@ -152,6 +153,20 @@ public class AdminProfile {
  
     public static void setAdminProfile(String id){
         AdminProfile details = Database.DatabaseOperations.getAdminProfile(id);
+        AdminProfileView.UserNameValue.setText(details.id);
+        AdminProfileView.ContactNoValue.setText(details.getContactNumber());
+        AdminProfileView.DOBValue.setText(details.getDob().toString());
+        AdminProfileView.AgeValue.setText(Integer.toString(details.getAge()));
+        AdminProfileView.JoinDateValue.setText(details.getJoinDate().toString());
+        AdminProfileView.PAddressValue.setText(details.getPermanentAddress());
+        AdminProfileView.TAddressValue.setText(details.getTemporaryAddress());
+        AdminProfileView.MaritalValue.setText(details.getMartialStatus());
+        AdminProfileView.DesignationValue.setText(details.getDesignation());
+        AdminProfileView.ExperienceValue.setText(Integer.toString(details.getExperience()));
+        AdminProfileView.GenderValue.setText(details.getGender());
+        AdminProfileView.SalaryValue.setText(Integer.toString(details.getSalary()));
+        AdminProfileView.UserNameTop.setText(details.getFirstName()+" "+details.getLastName());
         System.out.println(details.getPermanentAddress());
+        System.out.println(details.getDob());
     }
 }
