@@ -18,9 +18,9 @@ public class Profile_Update extends JPanel implements MouseListener{
 	Icon ProfIcon,EditIcon,BackIcon;
 	Border emptyBorder = BorderFactory.createEmptyBorder();
 	JLabel UserNameTop;
-	JLabel CustomerIDLabel,FirstNameLabel,LastNameLabel,DOBLabel,AgeLabel,ContactNumberLabel,GenderLabel,AddressLabel,AccountNumberLabel;
-	JTextArea CustomerIDValue,FirstNameValue,LastNameValue,DOBValue,AgeValue,ContactNumberValue,AddressValue,AccountNumberValue;
-	JLabel Collon1,Collon2,Collon3,Collon4,Collon5,Collon6,Collon7,Collon8,Collon9;
+	JLabel CustomerIDLabel,FirstNameLabel,LastNameLabel,DOBLabel,AgeLabel,ContactNumberLabel,GenderLabel,AddressLabel,AccountNumberLabel,PinCodeLabel,StateLabel,DistrictLabel;
+	JTextArea CustomerIDValue,FirstNameValue,LastNameValue,DOBValue,AgeValue,ContactNumberValue,AddressValue,AccountNumberValue,StateValue,PinCodeValue,DistrictValue;
+	JLabel Collon1,Collon2,Collon3,Collon4,Collon5,Collon6,Collon7,Collon8,Collon9,Collon10,Collon11,Collon12;
 	JButton ProfIconLabel,BackIconLabel,EditIconLabel;
 	JButton SaveButton;
         ButtonGroup bg;
@@ -59,7 +59,7 @@ public class Profile_Update extends JPanel implements MouseListener{
 		
 		//Usernametop
 		
-		UserNameTop=new JLabel("Kishore P");
+		UserNameTop=new JLabel(Login.login.user_ID);
 		UserNameTop.setBounds(X,Y-80,1000,150);
 		UserNameTop.setFont(new Font("Bold",Font.BOLD,labelFontSize+20));
 		UserNameTop.setForeground(Color.WHITE);
@@ -210,18 +210,25 @@ public class Profile_Update extends JPanel implements MouseListener{
 		add(ContactNumberValue);
 		
 		//Gender Label
-		
-		GenderLabel=new JLabel("Gender");
+		//temp change
+                /**
+		GenderLabel=new JLabel("");
 		GenderLabel.setBounds(X,Y+410,200,150);
 		GenderLabel.setFont(new Font("Bold",Font.BOLD,labelFontSize));
+                
 		GenderLabel.setForeground(Color.WHITE);
 		Collon7=new JLabel(":");
 		Collon7.setBounds(X+200,Y+410,20,150);
 		Collon7.setFont(new Font("Bold",Font.BOLD,labelFontSize));
 		Collon7.setForeground(Color.WHITE);
 		
+                **/
+                
+                
+                //temp changes
+                
 		//gender radio box
-		
+		/**
                 rb1=new JRadioButton("Male");
                 rb1.setActionCommand("Male");
                 rb2=new JRadioButton("Female");
@@ -247,23 +254,24 @@ public class Profile_Update extends JPanel implements MouseListener{
 		add(Collon7);
 		add(rb1);
                 add(rb2);
+                * */
 		
 		
 		//Address label
 		
 		AddressLabel=new JLabel("Address");
-		AddressLabel.setBounds(X,Y+470,200,150);
+		AddressLabel.setBounds(X,Y+410,200,150); //-->470
 		AddressLabel.setFont(new Font("Bold",Font.BOLD,labelFontSize));
 		AddressLabel.setForeground(Color.WHITE);
 		Collon8=new JLabel(":");
-		Collon8.setBounds(X+200,Y+470,20,150);
+		Collon8.setBounds(X+200,Y+410,20,150); //-->470
 		Collon8.setFont(new Font("Bold",Font.BOLD,labelFontSize));
 		Collon8.setForeground(Color.WHITE);
 		
 		//address value label
 		
 		AddressValue=new JTextArea();
-		AddressValue.setBounds(X+240,Y+535,800,55);
+		AddressValue.setBounds(X+240,Y+470,800,55); // -->535
 		AddressValue.setFont(new Font("Bold",Font.BOLD,labelFontSize));
 		//MaritalValue.setBackground(new Color(R,G,B));
 		AddressValue.setForeground(Color.BLACK);
@@ -271,22 +279,86 @@ public class Profile_Update extends JPanel implements MouseListener{
 		add(AddressLabel);
 		add(Collon8);
 		add(AddressValue);
+                
+                
+                //PinCodeLabel,StateLabel,DistrictLabel
+                //PinCodeLabel
+                
+                PinCodeLabel=new JLabel("Pin Code");
+                PinCodeLabel.setBounds(X,Y+490,200,150);
+                PinCodeLabel.setFont(new Font("Bold",Font.BOLD,labelFontSize));
+		PinCodeLabel.setForeground(Color.WHITE);
+                Collon10=new JLabel(":");
+		Collon10.setBounds(X+200,Y+490,20,150); //-->470
+		Collon10.setFont(new Font("Bold",Font.BOLD,labelFontSize));
+		Collon10.setForeground(Color.WHITE);
+                
+                PinCodeValue=new JTextArea();
+                PinCodeValue.setBounds(X+240,Y+555,200,25);
+                PinCodeValue.setFont(new Font("Bold",Font.BOLD,labelFontSize));
+		
+		PinCodeValue.setForeground(Color.BLACK);
+                
+                add(PinCodeValue);
+                add(PinCodeLabel);
+                add(Collon10);
+                
+                
+                StateLabel=new JLabel("State");
+                StateLabel.setBounds(X+500,Y+490,100,150);
+                StateLabel.setFont(new Font("Bold",Font.BOLD,labelFontSize));
+		StateLabel.setForeground(Color.WHITE);
+                Collon11=new JLabel(":");
+		Collon11.setBounds(X+600,Y+490,20,150); //-->470
+		Collon11.setFont(new Font("Bold",Font.BOLD,labelFontSize));
+		Collon11.setForeground(Color.WHITE);
+                
+                StateValue=new JTextArea();
+                StateValue.setBounds(X+620,Y+555,200,25);
+                StateValue.setFont(new Font("Bold",Font.BOLD,labelFontSize));
+		
+		StateValue.setForeground(Color.BLACK);
+                
+                add(StateValue);
+                add(StateLabel);
+                add(Collon11);
+                
+                
+                DistrictLabel=new JLabel("District");
+                DistrictLabel.setBounds(X,Y+550,200,150);
+                DistrictLabel.setFont(new Font("Bold",Font.BOLD,labelFontSize));
+		DistrictLabel.setForeground(Color.WHITE);
+                Collon12=new JLabel(":");
+		Collon12.setBounds(X+200,Y+550,20,150); //-->470
+		Collon12.setFont(new Font("Bold",Font.BOLD,labelFontSize));
+		Collon12.setForeground(Color.WHITE);
+                
+                DistrictValue=new JTextArea();
+                DistrictValue.setBounds(X+240,Y+610,200,25);
+                DistrictValue.setFont(new Font("Bold",Font.BOLD,labelFontSize));
+		
+		DistrictValue.setForeground(Color.BLACK);
+                
+                add(DistrictValue);
+                add(DistrictLabel);
+                add(Collon12);
+                
 		
 		//account number label
 		
 		AccountNumberLabel=new JLabel("Account Number");
-		AccountNumberLabel.setBounds(X,Y+560,200,150);
+		AccountNumberLabel.setBounds(X,Y+610,200,150); //-->560
 		AccountNumberLabel.setFont(new Font("Bold",Font.BOLD,labelFontSize));
 		AccountNumberLabel.setForeground(Color.WHITE);
 		Collon9=new JLabel(":");
-		Collon9.setBounds(X+200,Y+560,20,150);
+		Collon9.setBounds(X+200,Y+610,20,150); //-->560
 		Collon9.setFont(new Font("Bold",Font.BOLD,labelFontSize));
 		Collon9.setForeground(Color.WHITE);
 		
 		//account number value label
 		
 		AccountNumberValue=new JTextArea();
-		AccountNumberValue.setBounds(X+240,Y+625,800,25);
+		AccountNumberValue.setBounds(X+240,Y+675,800,25); //-->625
 		AccountNumberValue.setFont(new Font("Bold",Font.BOLD,labelFontSize));
 		//DesignationValue.setBackground(new Color(R,G,B));
 		AccountNumberValue.setForeground(Color.BLACK);
@@ -300,7 +372,7 @@ public class Profile_Update extends JPanel implements MouseListener{
 		
 		
 		SaveButton=new JButton("Save");
-		SaveButton.setBounds(X+400,Y+690,100,30);
+		SaveButton.setBounds(X+400,Y+750,100,30);
 		SaveButton.setForeground(Color.black);
 		SaveButton.setBackground(new Color(71,63,145));
                 SaveButton.addActionListener((c)->{
@@ -310,7 +382,10 @@ public class Profile_Update extends JPanel implements MouseListener{
                     ProfileUpdateData.setDOB(DOBValue.getText());
                     ProfileUpdateData.setAGE(AgeValue.getText());
                     ProfileUpdateData.setCONTACT_NUMBER(ContactNumberValue.getText());
-                    ProfileUpdateData.setGENDER( bg.getSelection().getActionCommand());
+                    //ProfileUpdateData.setGENDER( bg.getSelection().getActionCommand());
+                    ProfileUpdateData.setPIN_CODE(PinCodeValue.getText());
+                    ProfileUpdateData.setSTATE(StateValue.getText());
+                    ProfileUpdateData.setDISTRICT(DistrictValue.getText());
                     ProfileUpdateData.setADDRESS(AddressValue.getText());
                     ProfileUpdateData.setACCOUNT_NUMBER(AccountNumberValue.getText());
                     if(phoneNumberValidation(ContactNumberValue.getText())){
@@ -342,6 +417,10 @@ public class Profile_Update extends JPanel implements MouseListener{
         return number.matches(regex);
     }
     
+    static boolean pincodeValidate(String code){
+        String regex="[0-9]";
+        return code.matches(regex);
+    }
         
     @Override
     public void mouseClicked(MouseEvent e) {

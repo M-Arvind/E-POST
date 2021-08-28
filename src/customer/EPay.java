@@ -1,8 +1,12 @@
 package customer;
+import Database.DatabaseOperations;
+import Login.login;
+import customer.DatasForCustomer.WalletDataG;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
@@ -94,7 +98,21 @@ public class EPay{
             @Override
             public void actionPerformed(ActionEvent e) 
             {
-                JOptionPane.showMessageDialog(null, "Money has been transfered successfully");  
+                if(getAuthentication()){
+                    try{
+                      WalletDataG.setBalence(Float.valueOf(WalletPanel.WalletBalance.getText()));
+                      WalletDataG.setItemPrice(Float.valueOf(ePay_amount_info.getText()));  
+                    }
+                    catch(Exception r){}
+                    DatabaseOperations.updateCustomerBalence();
+                    WalletPanel.WalletBalance.setText(String.valueOf(WalletDataG.getBalence()));
+                    ePay_amount_info.getText();
+                   JOptionPane.showMessageDialog(null, "Money has been transfered successfully");  
+                }
+                else{
+                     JOptionPane.showMessageDialog(null,"Incorrect Password");
+                }
+               
                 newdialog.dispose();
             }
                         
@@ -105,7 +123,36 @@ public class EPay{
 
     }
     
+        private  boolean getAuthentication(){
+            JTextField userID=new JTextField();
+            userID.setText(Login.login.user_ID);
+        ArrayList list = DatabaseOperations.getLoginCredentials(userID,ePay_password_info);
+        
+        try
+        {
+            int salt = Integer.parseInt(list.get(1).toString());
+            
+            String password = login.createHash(ePay_password_info.getText(), salt);
+            
+
+            if(password.equals(list.get(0).toString()))
+            {   
+                
+                return true;
+                
+            }
+            else
+            {
+                return false;
+            }     
+        }
+        catch(Exception ex)
+        {
+            JOptionPane.showMessageDialog(null, "Wrong E-mail/Password");
+        } 
     
+        return false;
+    }
     
     
     
