@@ -14,6 +14,7 @@ import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumn;
 
@@ -21,6 +22,7 @@ public class NewConsignment extends JPanel implements ActionListener{
     JPanel PConTable;
     JTable table;
     JScrollPane scroll;
+    DefaultTableModel newModel;
     NewConsignment() {
 
         this.setLayout(null);
@@ -30,8 +32,9 @@ public class NewConsignment extends JPanel implements ActionListener{
         
         Border border = new LineBorder(new Color(71, 63, 145), 1, true);
         
-        
-        table =new JTable(rows, columns);
+        newModel = new DefaultTableModel();
+        newModel.setColumnIdentifiers(columns);
+        table =new JTable(newModel);
     
         table.setRowHeight(30);
         table.setBorder(border);
