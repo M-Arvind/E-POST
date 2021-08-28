@@ -15,6 +15,7 @@ public class customerDetails extends JPanel implements ListSelectionListener {
     private JScrollPane tableScroll;
     public static JTable customerDetailsTable;
     public static DefaultTableModel customermodel;
+    
     public customerDetails() {
         
         String[] columns = {"Customer ID", "First Name","Last Name", "DOB", "Age" ,"Contact Number", "Gender", "Bank Balance"};
@@ -50,15 +51,13 @@ public class customerDetails extends JPanel implements ListSelectionListener {
 
     @Override
     public void valueChanged(ListSelectionEvent e) {
-            int selectRow = customerDetailsTable.getSelectedRow();
-            if(selectRow != -1){
+        int selectRow = customerDetailsTable.getSelectedRow();
+        if(selectRow != -1){
             String selectedData = (String) customerDetailsTable.getValueAt(selectRow, 0);
             profile.CustomerProfile.setCustomerProfile(selectedData);
             main.switchPage("ACustomerProfile");
-//            System.out.println("Selected: " + selectedData);
             customerDetailsTable.clearSelection();
-       }
-
+        }
     }
     
 }

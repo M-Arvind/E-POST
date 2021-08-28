@@ -17,40 +17,45 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 public class ConsignmentDetails extends JPanel implements ActionListener{
+    
+    //Private Variables
     private JLabel consignDetail, item, itemPrice, itemWeight, itemCode, agentId, orderDate, deliverDate, payment, status;
     private JLabel billingDetail, senderId, seFirstName, seLastName, seConstact, seAddress;
     private JLabel shipDetails, receId, receFirstName, receLastName, receContact, receAdress;
+    private Icon icon;
+    private JButton back;
+    private JPanel details;
     
+    //Public Variable
     public static JLabel vConsignDetail, vItem, vItemPrice, vItemWeight, vItemCode, vAgentId, vOrderDate, vDeliverDate, vPayment, vStatus;
     public static JLabel vSenderId, vSeFirstName, vSeLastName, vSeConstact;
     public static JLabel vReceId, vReceFirstName, vReceLastName, vReceContact;
     public static JTextArea vSeAddress, vReceAdress;
     
-    Icon icon;
-    private JButton back;
-    private JPanel details; 
-    
+    //Paint
     public void paint(Graphics gp) { super.paint(gp); Graphics2D graphics = (Graphics2D) gp;
         Line2D line = new Line2D.Float(100, 210, 1160, 210);
         Line2D line1 = new Line2D.Float(620,210,620,480);
-     
-      graphics.draw(line);
-      graphics.draw(line1);
+        graphics.draw(line);
+        graphics.draw(line1);
     }
     
+    //Constructer
     public ConsignmentDetails(){
-        Color bg = new Color(34, 34, 45);
         Color fg = new Color(254, 254, 254);
-        Color pri = new Color(71, 63, 145);
-         
+        //Details Panel
         details = new JPanel(null);
-
         details.setBackground(fg);
         details.setPreferredSize(new Dimension(1260, 590));
+        
+        //Font
         Font font = new Font("Segoe UI", Font.BOLD, 22);
         Font fon = new Font("Segoe UI", Font.PLAIN, 18);
+        
+        //Icon
         icon=new ImageIcon(getClass().getResource("/Images/back.png"));  
         
+        //Back Button
         back = new JButton(icon);
         back.setBounds(10, 10, 30, 30);
         back.setBackground(fg);
@@ -58,6 +63,7 @@ public class ConsignmentDetails extends JPanel implements ActionListener{
         back.addActionListener(this);
         details.add(back);
         
+        //Consignment Details Label
         consignDetail = new JLabel("Consignment Details");
         consignDetail.setFont(font);
         vConsignDetail = new JLabel();
@@ -155,6 +161,8 @@ public class ConsignmentDetails extends JPanel implements ActionListener{
         vReceAdress.setWrapStyleWord(true);
         vReceAdress.setEditable(false);
         
+        
+        //Consignment Details Bounds
         consignDetail.setBounds(80, 40, 240, 40);
         vConsignDetail.setBounds(1070, 40, 240, 40);
         item.setBounds(100, 80, 200, 40);
@@ -257,18 +265,11 @@ public class ConsignmentDetails extends JPanel implements ActionListener{
        
     }
     
+    //Action Listener
     @Override
     public void actionPerformed(ActionEvent e) {
         Object o = e.getSource();
         if(o == back){
-
-//            
-//            AdminPanel.bNew.setBounds(55,120,160,30);
-//            AdminPanel.bOnGoing.setBounds(55+180,110,160,30);
-//            AdminPanel.bCompleted.setBounds(55+180+180,110,160,30);
-//            AdminPanel.bCustomer.setBounds(55+180+180+180,110,160,30);
-//            AdminPanel.bDelivery.setBounds(55+180+180+180+180,110,160,30);
-//            AdminPanel.bStocks.setBounds(55+180+180+180+180+180,110,160,30);
             AdminPanel.adminCard.show(AdminPanel.contentForAdmin, AdminPanel.card);
         }
     }

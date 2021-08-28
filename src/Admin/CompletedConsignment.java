@@ -20,75 +20,58 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumn;
 
-public class CompletedConsignment extends JPanel implements ActionListener{
-    JPanel PConTable;
+public class CompletedConsignment extends JPanel{
+    //Private Variables
+    private JScrollPane scroll;
+    
+    //Public Variables
     public static JTable table;
-    JScrollPane scroll;
     public static DefaultTableModel model;
+    
     CompletedConsignment() {
-
-        this.setLayout(null);
-        this.setBackground(Color.white);
-        Object[][] rows = {};
-        String[] columns = {"Consignment ID", "From","To", "Item", "Delivery ID", "Payment Method", "Date", "Status"};
         
+        //Column values
+        String[] columns = {"Consignment ID", "From","To", "Item", "Delivery ID", "Payment Method", "Date", "Status"};
         Border border = new LineBorder(new Color(71, 63, 145), 1, true);
         
         model = new DefaultTableModel();
         model.setColumnIdentifiers(columns);
+        
+        //Table
         table =new JTable(model);
-//          @Override
-//         public boolean editCellAt(int row, int column, java.util.EventObject e) {
-//            return false;
-//         }
-//        };
-    
         table.setRowHeight(30);
         table.setBorder(border);
         table.setSelectionBackground(new Color(255, 255, 200));
- 
+        
+        //ListSelection Listener
         ListSelectionModel select = table.getSelectionModel();
         select.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        
         select.addListSelectionListener(new ListSelectionListener() {
-       public void valueChanged(ListSelectionEvent e) {
-        int selectRow = table.getSelectedRow();
-            if(selectRow != -1){
-            selectedData = (String) table.getValueAt(selectRow, 0);
-            Consignment.consignment.setConsignmentDetails(selectedData);
-            AdminPanel.card = "CompletedConsignment";
-            AdminPanel.adminCard.show(AdminPanel.contentForAdmin,"ConsignmentDetails");
-//            System.out.println("Selected: " + selectedData);
-            table.clearSelection();
-            }
-      }
-
-    });
+            public void valueChanged(ListSelectionEvent e) {
+                int selectRow = table.getSelectedRow();
+                    if(selectRow != -1){
+                        selectedData = (String) table.getValueAt(selectRow, 0);
+                        Consignment.consignment.setConsignmentDetails(selectedData);
+                        AdminPanel.card = "CompletedConsignment";
+                        AdminPanel.adminCard.show(AdminPanel.contentForAdmin,"ConsignmentDetails");
+                        table.clearSelection();
+                    }
+                } 
+        });
         
-       /* TableColumn testColumn = table.getColumnModel().getColumn(7);
-        JComboBox<String> comboBox = new JComboBox<>();
-        comboBox.addItem("Picked Up");
-        comboBox.addItem("In Transit");
-        comboBox.addItem("Delivered");
-
-        testColumn.setCellEditor(new DefaultCellEditor(comboBox));*/
-        
+        //Header
         JTableHeader tab = table.getTableHeader();
-        JTableHeader tableHeader = table.getTableHeader();
         tab.setBackground(new Color(71, 63, 145));
         tab.setForeground(Color.white);
 
-        
+        //Scroll Bar
         scroll = new JScrollPane(table);
-        
         scroll.setBounds(30, 30, 1200, 500);
         scroll.setVisible(true);
+        
+        this.setLayout(null);
+        this.setBackground(Color.white);
         this.add(scroll);
-    }
-
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
     }
     
 }
