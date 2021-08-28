@@ -5,10 +5,15 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import javax.swing.BorderFactory;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -16,8 +21,10 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.border.Border;
+import main.main;
 
-public class MoneyOrder extends JPanel
+public class MoneyOrder extends JPanel implements MouseListener
 {
     Color background_Color = new Color(34,34,45);
     Color on_background_Color = new Color(254,254,254);
@@ -38,7 +45,7 @@ public class MoneyOrder extends JPanel
     JLabel moneyOrder_state;
     JLabel moneyOrder_district;
     JLabel moneyOrder_pincode;
-    
+    JButton BackIconLabel;
     //Content Label
     JTextField moneyOrder_toUsername_info;
     JTextField moneyOrder_amount_info;
@@ -49,8 +56,8 @@ public class MoneyOrder extends JPanel
     JTextField moneyOrder_state_info;
     JTextField moneyOrder_district_info;
     JTextField moneyOrder_pincode_info;
-
-    
+    Border emptyBorder = BorderFactory.createEmptyBorder();
+    int R=34,G=34,B=45;
     int X_FORCUSTOMER=30,Y_FORCUSTOMER=150,WIDTHFORCUSTOMER=1260,HIGHTFORCUSTOMER=750;
     
     public MoneyOrder()
@@ -85,18 +92,16 @@ public class MoneyOrder extends JPanel
         
         moneyOrder_address_info.setLineWrap(true);
         
-        //Content Label Text
-        /**
-        moneyOrder_toUsername_info.setText("Asif M");
-        moneyOrder_amount_info.setText("12345");
-        moneyOrder_firstName_info.setText("Hello");
-        moneyOrder_lastName_info.setText("World");
-        moneyOrder_type_info.setText("Money Order");
-        moneyOrder_address_info.setText("Sai Leo Nagar,West Tambaram Poonthandalam, Village, Chennai Tamil Nadu 602109.");
-        moneyOrder_state_info.setText("Tamil Nadu");
-        moneyOrder_district_info.setText("Salem");
-        moneyOrder_pincode_info.setText("123456");
-        **/
+        Icon BackIcon=new ImageIcon(getClass().getResource("/Images/arrow_back_button.png"));
+        BackIconLabel=new JButton(BackIcon);
+	BackIconLabel.setBounds(10,10,30,30);
+	BackIconLabel.setBackground(new Color(R,G,B));
+	BackIconLabel.setBorder(emptyBorder);
+	BackIconLabel.setVisible(true);
+        BackIconLabel.setContentAreaFilled(false);
+	BackIconLabel.addMouseListener(this);
+	add(BackIconLabel);
+				
         //Button and title
         moneyOrder_title.setBounds(555,20, 200, 50);
         moneyOrder_btn_confirm.setBounds(570,675,150,40);
@@ -230,6 +235,31 @@ public class MoneyOrder extends JPanel
         setVisible(true); 
             
     }
-    
+     @Override
+    public void mouseClicked(MouseEvent e) {
+        if(e.getSource() == BackIconLabel){
+            main.switchPage("customerPanel");
+        }
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+        
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+        
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+        
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+        
+    }
     
 }

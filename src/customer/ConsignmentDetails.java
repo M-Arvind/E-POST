@@ -17,14 +17,16 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 class ConsignmentDetails extends JPanel implements ActionListener{
     private JLabel consignDetail, item, itemPrice, itemWeight, itemCode, agentId, orderDate, deliverDate, payment, status;
     private JLabel billingDetail, senderId, seFirstName, seLastName, seConstact, seAddress;
     private JLabel shipDetails, receId, receFirstName, receLastName, receContact, receAdress;
     
     private JLabel vConsignDetail, vItem, vItemPrice, vItemWeight, vItemCode, vAgentId, vOrderDate, vDeliverDate, vPayment, vStatus;
-    private JLabel vSenderId, vSeFirstName, vSeLastName, vSeConstact, vSeAddress;
-    private JLabel vReceId, vReceFirstName, vReceLastName, vReceContact, vReceAdress;
+    private JLabel vSenderId, vSeFirstName, vSeLastName, vSeConstact;
+    private JLabel vReceId, vReceFirstName, vReceLastName, vReceContact;
+    private JTextArea vReceAdress,vSeAddress;
     
     Icon icon;
     private JButton back;
@@ -120,8 +122,18 @@ class ConsignmentDetails extends JPanel implements ActionListener{
         vSeLastName.setFont(fon);
         vSeConstact = new JLabel("8754275064");
         vSeConstact.setFont(fon);
-        vSeAddress = new JLabel("<html>"+"48/18c, Lakshmi nagar Convent Road Mittapudhur Salem asfjcbakvbcadljvhbcadjdsvc ksdhvhbc jhskdhvckjsdvcjshdvkjcsdzkjvc jhjv v vjk v"+"</html>");
+        
+        vSeAddress = new JTextArea();
         vSeAddress.setFont(fon);
+        vSeAddress.setLineWrap(true);
+        vSeAddress.setWrapStyleWord(true);
+        vSeAddress.setEditable(false);
+        
+        vReceAdress = new JTextArea();       
+        vReceAdress.setFont(fon);
+        vReceAdress.setLineWrap(true);
+        vReceAdress.setWrapStyleWord(true);
+        vReceAdress.setEditable(false);
         
         shipDetails = new JLabel("Shipping Details");
         shipDetails.setFont(font);
@@ -144,8 +156,7 @@ class ConsignmentDetails extends JPanel implements ActionListener{
         vReceLastName.setFont(fon);
         vReceContact = new JLabel("123456789");
         vReceContact.setFont(fon);
-        vReceAdress = new JLabel("<html>"+"48/18c, Lakshmi nagar Convent Road Mittapudhur Salem asfjcbakvbcadljvhbcadjdsvc ksdhvhbc jhskdhvckjsdvcjshdvkjcsdzkjvc jhjv v vjk v"+"</html>");       
-        vReceAdress.setFont(fon);
+       
         
         consignDetail.setBounds(80, 40, 240, 40);
         item.setBounds(100, 80, 200, 40);
@@ -179,7 +190,7 @@ class ConsignmentDetails extends JPanel implements ActionListener{
         vSeFirstName.setBounds(270, 290, 240, 40);
         vSeLastName.setBounds(270, 330, 240, 40);
         vSeConstact.setBounds(270, 370, 240, 40);
-        vSeAddress.setBounds(270, 410, 350, 120);
+        vSeAddress.setBounds(270, 420, 350, 80);
         
         shipDetails.setBounds(660, 210, 240, 40);
         receId.setBounds(680, 250, 240, 40);
@@ -192,7 +203,7 @@ class ConsignmentDetails extends JPanel implements ActionListener{
         vReceFirstName.setBounds(840, 290, 240, 40);
         vReceLastName.setBounds(840, 330, 240, 40);
         vReceContact.setBounds(840, 370, 240, 40);
-        vReceAdress.setBounds(840, 410, 350, 120);
+        vReceAdress.setBounds(840, 420, 350, 80);
         
         details.add(vItem);
         details.add(vItemCode);
@@ -273,11 +284,11 @@ class ConsignmentDetails extends JPanel implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
          if(!ConsignmentData.isIsUpdate()){
-            System.out.println("--------->Details Consign Card");
+           
              CustomerPanel.customerCard.show(CustomerPanel.contentForCustomer,"Consignment");
         } 
          else {
-             System.out.println("--------->Details Update Card");
+             
             CustomerPanel.customerCard.show(CustomerPanel.contentForCustomer,"update");
         }
          }

@@ -150,16 +150,16 @@ public class PaymentParcel extends JPanel implements MouseListener
         
         //Content Label Bounds
         p_payment_beneficiary_info.setBounds(400, 0 + 80, 250, 50);
-        p_payment_amount_info.setBounds(400, 50 + 80,150, 50);
+        p_payment_amount_info.setBounds(400, 50 + 80,200, 50);
         p_payment_to_info.setBounds(400,100 + 80,200, 50);
-        p_payment_contact_info.setBounds(400,150 + 80,150, 50);
-        p_payment_type_info.setBounds(400,200 + 80,150, 50);
-        p_payment_weight_info.setBounds(400,250 + 80,150, 50);
-        p_payment_firstName_info.setBounds(400,300 + 80,150, 50);
-        p_payment_lastName_info.setBounds(400,350 + 80,150, 50);
+        p_payment_contact_info.setBounds(400,150 + 80,200, 50);
+        p_payment_type_info.setBounds(400,200 + 80,200, 50);
+        p_payment_weight_info.setBounds(400,250 + 80,200, 50);
+        p_payment_firstName_info.setBounds(400,300 + 80,250, 50);
+        p_payment_lastName_info.setBounds(400,350 + 80,250, 50);
         p_payment_address_info.setBounds(400,410 + 80,800,90);
-        p_payment_state_info.setBounds(400,500 + 80,150, 50);
-        p_payment_district_info.setBounds(400,550 + 80,150, 50);
+        p_payment_state_info.setBounds(400,500 + 80,200, 50);
+        p_payment_district_info.setBounds(400,550 + 80,200, 50);
         p_payment_pincode_info.setBounds(400,600 + 80,150, 50);
         
         
@@ -271,7 +271,7 @@ public class PaymentParcel extends JPanel implements MouseListener
         p_payment_amount_info.setText(WalletDataG.getItemPrice().toString());
         p_payment_to_info.setText(ParcelData.getTo());
         p_payment_contact_info.setText(ParcelData.getPhoneNumber().toString());
-        p_payment_type_info.setText(WalletDataG.getTransationType());
+        p_payment_type_info.setText("Parcel");
         p_payment_weight_info.setText(WalletDataG.getItemWeight().toString());
         p_payment_firstName_info.setText(ParcelData.getFirstName());
         p_payment_lastName_info.setText(ParcelData.getLastName());

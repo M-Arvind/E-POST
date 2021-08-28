@@ -1,6 +1,8 @@
 package customer;
 import Database.DatabaseOperations;
+import Login.login;
 import customer.DatasForCustomer.ConsignmentData;
+import customer.DatasForCustomer.CustomerProfileData;
 import main.*;
 import customer.DatasForCustomer.EPostData;
 import customer.DatasForCustomer.ParcelData;
@@ -10,6 +12,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
@@ -72,11 +75,10 @@ public class AuthenticationForParcel
             @Override
             public void actionPerformed(ActionEvent e) 
             {
-             ParcelData.setIsPasswordCorrect(getAuthentication());
-             System.out.println("I am out .....");  
-              if(ParcelData.isIsPasswordCorrect()){
-              System.out.println("I am in .....");
-              WalletDataG.setBalence(5000.25F);//
+        
+           
+              if(getAuthentication()){
+              WalletDataG.setBalence(Float.valueOf(CustomerProfileData.getBankBalance()));//
               WalletDataG.setTransationType("Parcel");
               WalletDataG.setAmount(Float.valueOf(DatabaseOperations.getStocks().get(1).getItemPrice()));//fees for Parcel 1kg
           
@@ -86,6 +88,7 @@ public class AuthenticationForParcel
       
               ConsignmentData.listForConsignment.clear();
               ConsignmentData.setIsUpdate(true);
+              JOptionPane.showMessageDialog(null,"Payment Successfull");
               CustomerPanel.contentForCustomer.add(new ConsignmentPanel(),"update");
               main.switchPage("customerPanel");
               CustomerPanel.BParcel.setBounds(55+180+180+180,110,160,30);
@@ -95,7 +98,7 @@ public class AuthenticationForParcel
 
                 }
              else{
-                JOptionPane.showMessageDialog(null,"Incorrect Password"+DatabaseOperations.getMessageIdGenerator());
+                JOptionPane.showMessageDialog(null,"Incorrect Password");
             
              }     
                                
@@ -107,8 +110,32 @@ public class AuthenticationForParcel
         newdialog.setVisible(true);
 
     }
-    private  boolean getAuthentication(){
-        return true;
+  private  boolean getAuthentication(){
+      JTextField userID=new JTextField();
+      userID.setText(Login.login.user_ID);
+        ArrayList list = DatabaseOperations.getLoginCredentials(userID,auth_password_info);
+        
+        try
+        {
+            int salt = Integer.parseInt(list.get(1).toString());
+            
+            String password = login.createHash(auth_password_info.getText(), salt);
+            
+
+            if(password.equals(list.get(0).toString()))
+                return true;
+    
+            else
+                 return false;
+                     
+        }
+        catch(Exception ex)
+        {
+            JOptionPane.showMessageDialog(null, "Wrong E-mail/Password");
+        } 
+    
+        return false;
     }
+
 }
 
