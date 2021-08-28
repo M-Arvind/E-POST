@@ -125,7 +125,7 @@ public class E_PostPanel extends JPanel implements ActionListener{
           add(TPincode);
          
           LPhoneNumber=new JLabel("Phone Number");
-          LPhoneNumber.setBounds(350,400, 130, 40);
+          LPhoneNumber.setBounds(350,400, 200, 40);
           LPhoneNumber.setFont(font);
           add(LPhoneNumber);
           

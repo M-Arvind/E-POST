@@ -10,6 +10,7 @@ package customer;
  * @author kavya
  */
 import Database.DatabaseOperations;
+import Login.login;
 import customer.DatasForCustomer.WalletDataG;
 import java.awt.Color;
 import java.awt.Font;
@@ -17,6 +18,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -56,6 +59,10 @@ public class PaymentProducts  implements KeyListener
     {
         ArrayList<Warehouse> temp=DatabaseOperations.getStocks();
         stock=temp.get(i);
+        System.out.println(stock.getItem());
+        System.out.println(stock.getItemPrice());
+        System.out.println(stock.getItemQuantity());
+        System.out.println(stock.getitemCode());
         price=Integer.valueOf(stock.getItemPrice());
         WalletDataG.setBalence(5000F); // getBalanceFromDatabase
         stockQuantity=Integer.valueOf(stock.getItemQuantity());
@@ -77,7 +84,10 @@ public class PaymentProducts  implements KeyListener
         pro_payment_product_name_info = new JLabel( ":           " +stock.getItem());
         
         pro_payment_product_quantity_info = new JTextField();
+        pro_payment_product_quantity_info .addKeyListener(this);
+   
         pro_payment_amount_info = new JLabel(":           " + "");
+        pro_payment_amount_info.setFont(new Font("Bold",Font.BOLD,22));
         pro_payment_password_info = new JTextField();
         
         pro_payment_btn_confirm = new JButton("Confirm");
@@ -141,7 +151,7 @@ public class PaymentProducts  implements KeyListener
                     DatabaseOperations.updateStocks(tempstock);
                     DatabaseOperations.updateConsignment();
                     DatabaseOperations.updateWalletTransaction();
-                    JOptionPane.showMessageDialog(null, "Payment Successful!");
+                    //JOptionPane.showMessageDialog(null, "Payment Successful!");
                     newdialog.dispose();
                     
                 }
@@ -163,24 +173,93 @@ public class PaymentProducts  implements KeyListener
 
     @Override
     public void keyTyped(KeyEvent ke) {
-        //pro_payment_amount_info = new JLabel(":           " + "");
-       quantity= Integer.valueOf(pro_payment_product_quantity_info.getText());
-       WalletDataG.setItemPrice(Float.valueOf(quantity*price));
-       pro_payment_amount_info.setText(":           "+WalletDataG.getItemPrice());
+        String temp=pro_payment_product_quantity_info.getText();
+       if(!temp.isEmpty()){
+           try{
+            quantity= Integer.valueOf(temp);
+            WalletDataG.setItemPrice(Float.valueOf(quantity*price));
+            pro_payment_amount_info.setText(":           "+WalletDataG.getItemPrice());
+            System.out.println(":  ---->         "+WalletDataG.getItemPrice());  
+           }
+           catch(Exception m){}
+            
+       }
+        else{
+           pro_payment_amount_info.setText(":           "+"");
+       }
        
     }
 
     @Override
     public void keyPressed(KeyEvent ke) {
-        
+         String temp=pro_payment_product_quantity_info.getText();
+       if(!temp.isEmpty()){
+           try{
+            quantity= Integer.valueOf(temp);
+            WalletDataG.setItemPrice(Float.valueOf(quantity*price));
+            pro_payment_amount_info.setText(":           "+WalletDataG.getItemPrice());
+            System.out.println(":  ---->         "+WalletDataG.getItemPrice());  
+           }
+           catch(Exception m){}
+            
+       }
+       else{
+            pro_payment_amount_info.setText(":           "+"");
+       }
+       
     }
 
     @Override
     public void keyReleased(KeyEvent ke) {
+         String temp=pro_payment_product_quantity_info.getText();
+       if(!temp.isEmpty()){
+           try{
+            quantity= Integer.valueOf(temp);
+            WalletDataG.setItemPrice(Float.valueOf(quantity*price));
+            pro_payment_amount_info.setText(":           "+WalletDataG.getItemPrice());
+            System.out.println(":  ---->         "+WalletDataG.getItemPrice());  
+           }
+           catch(Exception m){}
+            
+       }
+       else{
+             pro_payment_amount_info.setText(":           "+"");
+       }
         
     }
-    private boolean getAuthentication(){
-        return true;
+   private  boolean getAuthentication(){
+       JTextField userID=new JTextField();
+       userID.setText(Login.login.user_ID);
+        ArrayList list = DatabaseOperations.getLoginCredentials(userID,pro_payment_password_info);
+        
+        try
+        {
+            int salt = Integer.parseInt(list.get(1).toString());
+            
+            String password = login.createHash(pro_payment_password_info.getText(), salt);
+            System.out.println(list);
+            System.out.println(password);
+            System.out.println(list.get(1).toString());
+
+            if(password.equals(list.get(0).toString()))
+            {   
+                JOptionPane.showMessageDialog(null,"Login Successful");
+                System.out.println(list.get(2).toString());
+                return true;
+                
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(null, "Wrong E-mail/Password");
+                return false;
+            }     
+        }
+        catch(Exception ex)
+        {
+            JOptionPane.showMessageDialog(null, "Wrong E-mail/Password");
+        } 
+    
+        return false;
     }
     
 }

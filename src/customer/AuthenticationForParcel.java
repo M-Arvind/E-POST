@@ -1,5 +1,6 @@
 package customer;
 import Database.DatabaseOperations;
+import Login.login;
 import customer.DatasForCustomer.ConsignmentData;
 import main.*;
 import customer.DatasForCustomer.EPostData;
@@ -10,6 +11,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
@@ -29,7 +31,7 @@ public class AuthenticationForParcel
     Color primary_Color = new Color(71,63,145);
     
     JLabel auth_password;
-    JTextField auth_password_info;
+    JTextField auth_password_info,userID;
     JButton auth_btn_confirm;
     private static boolean flag;
 
@@ -46,6 +48,7 @@ public class AuthenticationForParcel
         
         auth_password = new JLabel("Enter Your Password");
         auth_password_info = new JTextField();
+        userID=new JTextField();
         auth_btn_confirm = new JButton("Confirm");
         
         auth_password.setBounds(135, 120, 200, 20);
@@ -73,9 +76,9 @@ public class AuthenticationForParcel
             public void actionPerformed(ActionEvent e) 
             {
              ParcelData.setIsPasswordCorrect(getAuthentication());
-             System.out.println("I am out .....");  
+           
               if(ParcelData.isIsPasswordCorrect()){
-              System.out.println("I am in .....");
+               JOptionPane.showMessageDialog(null,"Password Successful");
               WalletDataG.setBalence(5000.25F);//
               WalletDataG.setTransationType("Parcel");
               WalletDataG.setAmount(Float.valueOf(DatabaseOperations.getStocks().get(1).getItemPrice()));//fees for Parcel 1kg
@@ -107,8 +110,32 @@ public class AuthenticationForParcel
         newdialog.setVisible(true);
 
     }
-    private  boolean getAuthentication(){
-        return true;
+  private  boolean getAuthentication(){
+        ArrayList list = DatabaseOperations.getLoginCredentials(userID,auth_password_info);
+        
+        try
+        {
+            int salt = Integer.parseInt(list.get(1).toString());
+            
+            String password = login.createHash(auth_password_info.getText(), salt);
+            System.out.println(list);
+            System.out.println(password);
+            System.out.println(list.get(1).toString());
+
+            if(password.equals(list.get(0).toString()))
+                return true;
+    
+            else
+                 return false;
+                     
+        }
+        catch(Exception ex)
+        {
+            JOptionPane.showMessageDialog(null, "Wrong E-mail/Password");
+        } 
+    
+        return false;
     }
+
 }
 

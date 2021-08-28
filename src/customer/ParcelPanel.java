@@ -84,6 +84,7 @@ private JButton BSend;
           
           TAddress=new JTextArea();
           TAddress.setBounds(40,215,565,100);
+          TAddress.setLineWrap(true);
           TAddress.setBorder(border);
           TAddress.setFont(fontForText);
           add(TAddress);
@@ -120,7 +121,7 @@ private JButton BSend;
           add(TPincode);
          
           LPhoneNumber=new JLabel("Phone Number");
-          LPhoneNumber.setBounds(350,400, 130, 40);
+          LPhoneNumber.setBounds(350,400,200, 40);
           LPhoneNumber.setFont(font);
           add(LPhoneNumber);
           

@@ -11,6 +11,7 @@ package customer;
  */
 
 import Database.DatabaseOperations;
+import Login.login;
 import static customer.CustomerPanel.BConsignment;
 import static customer.CustomerPanel.BWallet;
 import static customer.CustomerPanel.contentForCustomer;
@@ -22,6 +23,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
@@ -75,13 +77,19 @@ public class WalletAuthentication {
             @Override
             public void actionPerformed(ActionEvent e) 
             {
-                DatabaseOperations.WalletUpdatationOnMoneyOrder();
+                if(getAuthentication()){
+                    JOptionPane.showMessageDialog(null,"Password Correct");
+                    DatabaseOperations.WalletUpdatationOnMoneyOrder();
+                    main.switchPage("customerPanel");
+                    removeWalletCurrentDetails();
+                    setWalletCurrentDetails();
+                    customerCard.show(contentForCustomer,"Wallet");
+                    newdialog.dispose();
+                }
+                else{
+                    JOptionPane.showMessageDialog(null, "Wrong E-mail/Password");
+                }
                 
-                main.switchPage("customerPanel");
-                removeWalletCurrentDetails();
-                setWalletCurrentDetails();
-                customerCard.show(contentForCustomer,"Wallet");
-                newdialog.dispose();
                                
             }
                         
@@ -90,4 +98,39 @@ public class WalletAuthentication {
         newdialog.getContentPane().setBackground(background_Color);
         newdialog.setVisible(true);
     }
+    private  boolean getAuthentication(){
+        JTextField userID=new JTextField();
+        userID.setText(Login.login.user_ID);
+        ArrayList list = DatabaseOperations.getLoginCredentials(userID,auth_password_info);
+        
+        try
+        {
+            int salt = Integer.parseInt(list.get(1).toString());
+            
+            String password = login.createHash(auth_password_info.getText(), salt);
+            System.out.println(list);
+            System.out.println(password);
+            System.out.println(list.get(1).toString());
+
+            if(password.equals(list.get(0).toString()))
+            {   
+                
+                System.out.println(list.get(2).toString());
+                return true;
+                
+            }
+            else
+            {
+                
+                return false;
+            }     
+        }
+        catch(Exception ex)
+        {
+            JOptionPane.showMessageDialog(null, "Wrong E-mail/Password");
+        } 
+    
+        return false;
+    }
 }
+

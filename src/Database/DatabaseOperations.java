@@ -65,7 +65,6 @@ public class DatabaseOperations
            String query="select *from Consignment where customer_ID='"+Customer_ID+"'";
            PreparedStatement  st1=con.prepareStatement(query);
            ResultSet res=st1.executeQuery(query);
-           
            while(res.next()){
               ConsignmentData ob=new ConsignmentData();
             
@@ -271,7 +270,7 @@ public class DatabaseOperations
         try{
         String senderid="",recieverid="",recieverName="",balanceS="",balanceR="",rcontact="",firstnamesender="",lastnamesender="",contactnumbersender="";
         Connection con=DatabaseOperations.getConnection();
-        String saccountnoquery="select account_number from Customer where customer_id='Kishore P'";
+        String saccountnoquery="select account_number from Customer where customer_id='"+Login.login.user_ID+"'";
         PreparedStatement  stSAccNo=con.prepareStatement(saccountnoquery);
         ResultSet rs1=stSAccNo.executeQuery(saccountnoquery);
         if(rs1.next()){
@@ -292,7 +291,7 @@ public class DatabaseOperations
             recieverName=rs3.getString(1);
         }
         
-        String bsquery="select bank_balance from Customer where customer_id='Kishore P'";
+        String bsquery="select bank_balance from Customer where customer_id='"+Login.login.user_ID+"'";
         PreparedStatement  stsbal=con.prepareStatement(bsquery);
         ResultSet rs4=stsbal.executeQuery(bsquery);
         if(rs4.next()){
@@ -311,7 +310,7 @@ public class DatabaseOperations
         PreparedStatement  st=con.prepareStatement(q);
         
         st.setString(1,getTransactionIdGenerator());
-        st.setString(2,"Kishore P");
+        st.setString(2,Login.login.user_ID);
         st.setString(3,WalletData.MoneyOrderValues.get(0));
         st.setString(4,WalletData.MoneyOrderValues.get(2));
         st.setString(5,WalletData.MoneyOrderValues.get(3));
@@ -744,10 +743,7 @@ public class DatabaseOperations
             pst.setString(9,EPostData.getSubject());
             pst.executeUpdate();
             con.setAutoCommit(true);
-            con.close();
-            JOptionPane.showMessageDialog(null,"Inbox Updated Succesfully ID:"+DatabaseOperations.getMessageIdGenerator());
-            
-            
+            con.close();            
         }
         catch(Exception e){
             JOptionPane.showMessageDialog(null,"Inbox Updated Failed ID:"+e.toString());
@@ -759,9 +755,10 @@ public class DatabaseOperations
             String query="INSERT INTO Consignment VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
             Connection con=DatabaseOperations.getConnection();
             PreparedStatement pst=con.prepareStatement(query);
-            pst.setString(1,DatabaseOperations.getConsignmentIdGenerator());//consignment_ID
+            String ID=DatabaseOperations.getConsignmentIdGenerator();
+            pst.setString(1,ID);//consignment_ID
             pst.setString(2,Login.login.user_ID);//customer_ID
-            pst.setString(3, "");//delivery_ID
+            pst.setString(3, "Keshav B");//delivery_ID
             if(WalletDataG.getTransationType().equals("E-Post"))
                  pst.setString(4,EPostData.getTo());//receiver_ID
             if(WalletDataG.getTransationType().equals("Parcel"))
@@ -804,9 +801,7 @@ public class DatabaseOperations
             pst.executeUpdate();
             con.setAutoCommit(true);
             con.close();
-            System.out.println("ConsignmentUpdate end");
-            JOptionPane.showMessageDialog(null,"Consignment Updated Succesfully ID:"+DatabaseOperations.getConsignmentIdGenerator());
-    
+            System.out.println("ConsignmentUpdate end");    
         }
         catch(Exception e){
             JOptionPane.showMessageDialog(null,"Consignment Update Failed ID:"+e.toString());
@@ -857,7 +852,6 @@ public class DatabaseOperations
             con.setAutoCommit(true);
             con.close();
             System.out.println("WalletTransaction end");
-            JOptionPane.showMessageDialog(null,"Wallet Updated Succesfully for ID:"+DatabaseOperations.getMessageIdGenerator());
             updateCustomerBalence();
             
         }
@@ -1012,7 +1006,7 @@ public class DatabaseOperations
         try{
             Connection con=DatabaseOperations.getConnection();
             String cId=Login.login.user_ID;
-            String query="select * from Inbox where sender_name='"+cId+"'";
+            String query="select * from Inbox where receiver_ID='"+cId+"'";
             PreparedStatement  st1=con.prepareStatement(query);
             ResultSet res=st1.executeQuery(query);
             while(res.next()){
@@ -1088,8 +1082,8 @@ public class DatabaseOperations
                 list.add(ob);
             }
             int i=0;
-            System.out.println(list.size());
-            /**
+            System.out.println("Wallet table:"+list.size());
+           
             while(i<list.size()){
                 System.out.println(list.get(i).getTransactionid());
                 System.out.println(list.get(i).getTransactiontype());
@@ -1101,7 +1095,7 @@ public class DatabaseOperations
                 i++;
                 
             }
-            *  **/
+           
         }catch(Exception e){
             System.out.println("Exception in getCurrentWalletDetails() : databaseoperations---->"+e.toString());
             

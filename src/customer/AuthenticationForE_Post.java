@@ -1,5 +1,7 @@
 package customer;
 import Database.DatabaseOperations;
+import Login.login;
+import static Login.login.user_ID;
 import static customer.CustomerPanel.BE_Post;
 import static customer.CustomerPanel.contentForCustomer;
 import main.*;
@@ -8,6 +10,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
@@ -23,7 +26,7 @@ public class AuthenticationForE_Post
     Color primary_Color = new Color(71,63,145);
     
     JLabel auth_password;
-    JTextField auth_password_info;
+    JTextField auth_password_info,userID;
     JButton auth_btn_confirm;
     private static boolean flag;
 
@@ -40,6 +43,8 @@ public class AuthenticationForE_Post
         
         auth_password = new JLabel("Enter Your Password");
         auth_password_info = new JTextField();
+        userID=new JTextField();
+        userID.setText(Login.login.user_ID);
         auth_btn_confirm = new JButton("Confirm");
         
         auth_password.setBounds(135, 120, 200, 20);
@@ -70,6 +75,7 @@ public class AuthenticationForE_Post
               EPostData.setIsPasswordCorrect(getAuthentication());
                 
               if(EPostData.isIsPasswordCorrect()){
+              JOptionPane.showMessageDialog(null,"Password Successful");
               WalletDataG.setBalence(5000.25F);//customer Balence
               WalletDataG.setItemCode(DatabaseOperations.getStocks().get(0).getitemCode());
               WalletDataG.setItemPrice(Float.valueOf(DatabaseOperations.getStocks().get(0).getItemPrice()));
@@ -92,6 +98,9 @@ public class AuthenticationForE_Post
               }
               ConsignmentData.listForConsignment.clear();
               ConsignmentData.setIsUpdate(true);
+              try{
+                  Thread.sleep(50);
+              }catch(Exception q){}
               CustomerPanel.contentForCustomer.add(new ConsignmentPanel(),"update");
               main.switchPage("customerPanel");
               CustomerPanel.BConsignment.setBounds(55+120+60,120,160,30);
@@ -113,7 +122,34 @@ public class AuthenticationForE_Post
 
     }
     private  boolean getAuthentication(){
-        return true;
+        ArrayList list = DatabaseOperations.getLoginCredentials(userID,auth_password_info);
+        
+        try
+        {
+            int salt = Integer.parseInt(list.get(1).toString());
+            
+            String password = login.createHash(auth_password_info.getText(), salt);
+            System.out.println(list);
+            System.out.println(password);
+            System.out.println(list.get(1).toString());
+
+            if(password.equals(list.get(0).toString()))
+            {   
+                System.out.println(list.get(2).toString());
+                return true;
+                
+            }
+            else
+            {
+                return false;
+            }     
+        }
+        catch(Exception ex)
+        {
+            JOptionPane.showMessageDialog(null, "Wrong E-mail/Password");
+        } 
+    
+        return false;
     }
 }
 

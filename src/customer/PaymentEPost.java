@@ -179,16 +179,16 @@ public class PaymentEPost extends JPanel implements MouseListener
         e_payment_message.setBounds(120,600 + 80,150,50);
         
         //Content Label Bounds
-        e_payment_beneficiary_info.setBounds(400, 0 + 80, 150, 50);
-        e_payment_amount_info.setBounds(400, 50 + 80, 150, 50);
+        e_payment_beneficiary_info.setBounds(400, 0 + 80,300, 50);
+        e_payment_amount_info.setBounds(400, 50 + 80, 300, 50);
         e_payment_to_info.setBounds(400,100 + 80,150, 50);
         e_payment_contact_info.setBounds(400,150 + 80,150, 50);
-        e_payment_type_info.setBounds(400,200 + 80,150, 50);
-        e_payment_firstName_info.setBounds(400,250 + 80,150, 50);
-        e_payment_lastName_info.setBounds(400,300 + 80,150, 50);
+        e_payment_type_info.setBounds(400,200 + 80,200, 50);
+        e_payment_firstName_info.setBounds(400,250 + 80,300, 50);
+        e_payment_lastName_info.setBounds(400,300 + 80,300, 50);
         e_payment_address_info.setBounds(400,360 + 80,800,90);
-        e_payment_state_info.setBounds(400,450 + 80,150, 50);
-        e_payment_district_info.setBounds(400,500 + 80,150, 50);
+        e_payment_state_info.setBounds(400,450 + 80,300, 50);
+        e_payment_district_info.setBounds(400,500 + 80,300, 50);
         e_payment_pincode_info.setBounds(400,550 + 80,150, 50);
         e_payment_message_info.setBounds(400,610 + 80,800, 90);
         

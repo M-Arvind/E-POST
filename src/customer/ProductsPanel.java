@@ -216,25 +216,25 @@ public class ProductsPanel extends JPanel implements MouseListener{
         ArrayList<Warehouse> stock=getStocks();
         //,, , , , , postCard
         if(me.getSource()==revenueStamp){
-            new PaymentProducts(0);
-        }
-        if(me.getSource()== postageStamp){
-            new PaymentProducts(1);
-        }
-        if(me.getSource()== postageStamp1){
-            new PaymentProducts(2);
-        }
-        if(me.getSource()== collectorStamp){
             new PaymentProducts(3);
         }
-        if(me.getSource()== inlandLetter){
+        if(me.getSource()== postageStamp){
             new PaymentProducts(4);
         }
-        if(me.getSource()== envelope){
+        if(me.getSource()== postageStamp1){
             new PaymentProducts(5);
         }
-        if(me.getSource()== postCard){
+        if(me.getSource()== collectorStamp){
             new PaymentProducts(6);
+        }
+        if(me.getSource()== inlandLetter){
+            new PaymentProducts(7);
+        }
+        if(me.getSource()== envelope){
+            new PaymentProducts(8);
+        }
+        if(me.getSource()== postCard){
+            new PaymentProducts(9);
         }
         
         
