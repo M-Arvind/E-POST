@@ -7,15 +7,24 @@ import Login.*;
 import customer.*;
 import Delivery.*;
 
-public class main extends JFrame {
+public class main extends JFrame
+{
+    //Static Variables
     public static JPanel mainPanel;
     static CardLayout card;
     public static Component main;
-    main() {
+    
+    //Constructure
+    main() 
+    {
+        //CardLayout
         card = new CardLayout();
+        
+        //Main Panel
         mainPanel = new JPanel(card);
         mainPanel.setBackground(new Color(34, 34, 45));
         mainPanel.setPreferredSize(new Dimension(1350, 890));
+        
         
         login login = new login();
         register register = new register();
@@ -30,12 +39,11 @@ public class main extends JFrame {
         DeliveryProfileUpdate deliveryProfileUpdate = new DeliveryProfileUpdate();
         AdminDeliveryProfile ADeliveryProfile = new AdminDeliveryProfile();
         AdminCustomerProfile ACustomerProfile = new AdminCustomerProfile();
-
-        
-
         PaymentEPost paymentEPost=new PaymentEPost();
         PaymentParcel paymentParcel=new PaymentParcel();
         MoneyOrder moneyOrder=new MoneyOrder();
+        
+        //Adding Components to the Main Panel
         mainPanel.add(login, "login");
         mainPanel.add(register, "register");
         mainPanel.add(customerPanel, "customerPanel");
@@ -52,7 +60,10 @@ public class main extends JFrame {
         mainPanel.add(deliveryProfileUpdate,"deliveryProfileUpdate");
         mainPanel.add(ADeliveryProfile, "AdminDeliveryprofile");
         mainPanel.add(ACustomerProfile, "ACustomerProfile");
+        
+        //Adding components to CardLayout 
         card.first(mainPanel);
+        
         JScrollPane scroll=new JScrollPane(mainPanel,ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         scroll.setBounds(0,0,2000, 1000);
         this.add(scroll);
@@ -62,10 +73,12 @@ public class main extends JFrame {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
     
+    //Function to Switch Page
     static public void switchPage(String pageName){
         card.show(mainPanel, pageName);
     }
     
+    //Main Function
     public static void main(String[] args) {
         new main();
     }
