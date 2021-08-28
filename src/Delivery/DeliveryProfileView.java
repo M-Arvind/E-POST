@@ -253,7 +253,10 @@ public class DeliveryProfileView extends JPanel implements ActionListener, Mouse
         //Listener for Logout Button
         logoutButton.addActionListener((e1)-> 
         {
-         main.switchPage("login");
+            int choose = JOptionPane.showConfirmDialog(this, "Are you sure?", "Logout", JOptionPane.YES_NO_OPTION);
+            if (choose == JOptionPane.YES_OPTION) {
+                main.switchPage("login");
+        }
         });
         add(logoutButton);
 
