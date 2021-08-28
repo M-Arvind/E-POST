@@ -41,7 +41,7 @@ public class InboxPanel extends JPanel implements MouseListener{
    JPanel MyPanel;
    public  JScrollPane scroll;
    CardLayout card=new CardLayout();
-   InboxPanel(){
+   public InboxPanel(){
        setLayout(card);
        MyPanel=new JPanel();
        MyPanel.setLayout(null);
@@ -49,15 +49,18 @@ public class InboxPanel extends JPanel implements MouseListener{
        // my insertion
        DatabaseOperations.getInboxDetails();
        // my insertion
-      /*while(i<InboxData.ListForInbox.size()){
+      int count=0;
+      i=InboxData.ListForInbox.size()-1;
+      while(i>0){
            JPanel temp=this.getPanel(i, y);
            temp.addMouseListener(this);
            MyPanel.add(temp); 
            y=y+130;
            
-           i++;
-       }*/ 
-
+           i--;
+           count++;
+       }
+     MyPanel.setPreferredSize(new Dimension(1260,count*150));
       scroll=new JScrollPane(MyPanel,ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
       add(scroll,"MessagePanel");
       card.show(this,"MessagePanel");
@@ -155,7 +158,7 @@ public class InboxPanel extends JPanel implements MouseListener{
         message.setText(m);
         message.setFont(font);
         message.setBounds(120,190,990,370);
-        message.setBorder(BorderFactory.createRaisedBevelBorder());
+        message.setBorder(null);
         
         viewMessage.add(ProfileIcon);
         viewMessage.add(Time);

@@ -37,7 +37,7 @@ public class ProductsPanel extends JPanel implements MouseListener{
         
         
         JPanel prod = new JPanel(null);
-        prod.setBackground(fg);
+        
         prod.setPreferredSize(new Dimension(1260, 780));
         
         revenueStampImage = new ImageIcon(getClass().getResource("/Images/REVENUE STAMP.jpg"));
@@ -216,25 +216,25 @@ public class ProductsPanel extends JPanel implements MouseListener{
         ArrayList<Warehouse> stock=getStocks();
         //,, , , , , postCard
         if(me.getSource()==revenueStamp){
-            new PaymentProducts(0);
+            new PaymentProducts(9);
         }
         if(me.getSource()== postageStamp){
-            new PaymentProducts(1);
+            new PaymentProducts(6);
         }
         if(me.getSource()== postageStamp1){
-            new PaymentProducts(2);
+            new PaymentProducts(7);
         }
         if(me.getSource()== collectorStamp){
-            new PaymentProducts(3);
+            new PaymentProducts(8);
         }
         if(me.getSource()== inlandLetter){
-            new PaymentProducts(4);
-        }
-        if(me.getSource()== envelope){
             new PaymentProducts(5);
         }
+        if(me.getSource()== envelope){
+            new PaymentProducts(3);
+        }
         if(me.getSource()== postCard){
-            new PaymentProducts(6);
+            new PaymentProducts(4);
         }
         
         

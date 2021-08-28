@@ -1,5 +1,7 @@
 package customer;
+import Database.DatabaseOperations;
 import customer.DatasForCustomer.ParcelData;
+import customer.DatasForCustomer.RecieverProfileData;
 import customer.DatasForCustomer.WalletDataG;
 import main.*;
 import java.awt.Color;
@@ -10,14 +12,18 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.geom.Line2D;
 import java.util.Vector;
+import java.util.regex.Pattern;
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
@@ -31,7 +37,6 @@ private JButton BSend;
      private JTextField TItem_Price,TItem_Weight,TTo,TFirstname,TLastName,TPincode,TPhoneNumber;
      private JTextArea TAddress,Message;
      private JComboBox CState,CDistrict,CPincode;
-     private JCheckBox SoftCopy,HardCopy;
      private Font font=new Font("Segoe UI",Font.PLAIN,22);
      private Font fontForText=new Font("Bold",Font.PLAIN,17);
      private Border border;
@@ -52,6 +57,73 @@ private JButton BSend;
           TTo.setBounds(40,70,200,28);
           TTo.setBorder(border);
           TTo.setFont(fontForText);
+          TTo.addKeyListener(new KeyListener() {
+              @Override
+              public void keyTyped(KeyEvent e) {
+                    String temp=TTo.getText();
+                    if(DatabaseOperations.CheckIdPresentOrNot(temp)){
+                        DatabaseOperations.getReciverProfileForCustomerPanel(temp);
+                        setData("1");
+                    }
+                  
+              }
+
+              @Override
+              public void keyPressed(KeyEvent e) {
+                  String temp=TTo.getText();
+                    if(DatabaseOperations.CheckIdPresentOrNot(temp)){
+                        DatabaseOperations.getReciverProfileForCustomerPanel(temp);
+                        setData("1");
+                    }
+                 }
+
+              @Override
+              public void keyReleased(KeyEvent e) {
+                  String temp=TTo.getText();
+                    if(DatabaseOperations.CheckIdPresentOrNot(temp)){
+                        DatabaseOperations.getReciverProfileForCustomerPanel(temp);
+                        setData("1");
+                    }
+  
+               }
+          });
+          TTo.addMouseListener(new MouseListener() {
+              @Override
+              public void mouseClicked(MouseEvent e) {
+                  String temp=TTo.getText();
+                  if(DatabaseOperations.CheckIdPresentOrNot(temp)){
+                        DatabaseOperations.getReciverProfileForCustomerPanel(temp);
+                        setData("1");
+                    }
+                    else{
+                        TTo.setText("");
+                        TFirstname.setText("");
+                        TLastName.setText("");
+                        TPincode.setText("");
+                        TPhoneNumber.setText("");
+                        TAddress.setText("");
+                        CState.setSelectedItem("");
+                        CDistrict.setSelectedItem("");
+                    }
+                     }
+
+              @Override
+              public void mousePressed(MouseEvent e) {
+                    }
+
+              @Override
+              public void mouseReleased(MouseEvent e) {
+                      }
+
+              @Override
+              public void mouseEntered(MouseEvent e) {
+                      }
+
+              @Override
+              public void mouseExited(MouseEvent e) {
+                  
+                          }
+          });
           add(TTo);
           
           LFirstName=new JLabel("FirstName");
@@ -84,6 +156,7 @@ private JButton BSend;
           
           TAddress=new JTextArea();
           TAddress.setBounds(40,215,565,100);
+          TAddress.setLineWrap(true);
           TAddress.setBorder(border);
           TAddress.setFont(fontForText);
           add(TAddress);
@@ -120,7 +193,7 @@ private JButton BSend;
           add(TPincode);
          
           LPhoneNumber=new JLabel("Phone Number");
-          LPhoneNumber.setBounds(350,400, 130, 40);
+          LPhoneNumber.setBounds(350,400,200, 40);
           LPhoneNumber.setFont(font);
           add(LPhoneNumber);
           
@@ -186,16 +259,6 @@ private JButton BSend;
           btngrb.add(More_than_10kg);
           btngrb.add(More_than_11kg);
           
-          SoftCopy=new JCheckBox("Soft Copy");
-          SoftCopy.setBounds(300,60,123,40);
-          SoftCopy.setFont(font);
-          add(SoftCopy);
-          
-          HardCopy=new JCheckBox("HardCopy");
-          HardCopy.setBounds(450,60,125,40);
-          HardCopy.setFont(font);
-          add( HardCopy);
-        
           BSend=new JButton("Send");
           BSend.setBounds((1260/2)-20,520,120,30);
           BSend.setBackground(Cbutton);
@@ -283,30 +346,36 @@ private JButton BSend;
     }
     @Override
     public void actionPerformed(ActionEvent e) {
+         String temp=TTo.getText();
+        if(DatabaseOperations.CheckIdPresentOrNot(temp)){
+            DatabaseOperations.getReciverProfileForCustomerPanel(temp);
+            setData("1");
+            setDataForParcel();
+        }
+        else{
+            setData("2");
+            setDataForParcel();
+        }
         
-        ParcelData.setTo(TTo.getText());
-        ParcelData.setFirstName(TFirstname.getText());
-        ParcelData.setLastName(TLastName.getText());
-        ParcelData.setPincode(TPincode.getText());
-        ParcelData.setPhoneNumber(new Long(TPhoneNumber.getText()));
-        ParcelData.setAddress(TAddress.getText());
-        ParcelData.setState(CState.getSelectedItem().toString());
-        ParcelData.setDistrict(CDistrict.getSelectedItem().toString());
-        ParcelData.setItemWeight(Float.valueOf(TItem_Weight.getText()));
-        ParcelData.setItemPrice(WalletDataG.getItemPrice());
-        WalletDataG.setItemWeight(Float.valueOf(TItem_Weight.getText()));
-        PaymentParcel.setDataForParcelPanel();
-        main.switchPage("paymentParcel");
     
     }
  
     @Override
     public void keyTyped(KeyEvent e) {
          if(!TItem_Weight.getText().isEmpty()){
-             Float temp=Float.valueOf(TItem_Weight.getText());
-             WalletDataG.setItemPrice(temp*WalletDataG.getAmount());
-            TItem_Price.setText(String.valueOf(WalletDataG.getItemPrice()));
+             try{
+                Float temp=Float.valueOf(TItem_Weight.getText());
+                WalletDataG.setItemPrice(temp*WalletDataG.getAmount());
+                 TItem_Price.setText(String.valueOf(WalletDataG.getItemPrice())); 
+             }
+             catch(Exception t){
+                 
+             }
+             
         }
+         else{
+             TItem_Price.setText("");
+         }
         }
 
     @Override
@@ -321,5 +390,86 @@ private JButton BSend;
           
        
       }
+    public void setData(String s){
+     if(s.equals("1")){
+      TTo.setText(RecieverProfileData.getId());
+      TFirstname.setText(RecieverProfileData.getFirstName());
+      TLastName.setText(RecieverProfileData.getLastName());
+      TPincode.setText(RecieverProfileData.getPinCode());
+      TPhoneNumber.setText(RecieverProfileData.getContactNumber());
+      TAddress.setText(RecieverProfileData.getAddress());
+      CState.setSelectedItem(RecieverProfileData.getState());
+      CDistrict.setSelectedItem(RecieverProfileData.getDistrict());
+
+     }
+     else if(s.equals("2")){
+     TTo.setText("");
+     }
+     
+    }
+    private void  setDataForParcel() {
+    ParcelData.setTo(TTo.getText());
+        ParcelData.setFirstName(TFirstname.getText());
+        ParcelData.setLastName(TLastName.getText());
+        ParcelData.setPincode(TPincode.getText());
+        ParcelData.setPhoneNumber(new Long(TPhoneNumber.getText()));
+        ParcelData.setAddress(TAddress.getText());
+        ParcelData.setState(CState.getSelectedItem().toString());
+        ParcelData.setDistrict(CDistrict.getSelectedItem().toString());
+        
+        ParcelData.setItemPrice(WalletDataG.getItemPrice());
+        
+        int validCount=0;
+        String regex1="^[A-Za-z]+";
+        String value1=ParcelData.getFirstName();
+        boolean check1=Pattern.matches(regex1, value1);
+        if(!check1){
+         JOptionPane.showMessageDialog(null,"Enter valid First name");
+         validCount++;
+        }
+        String value2=ParcelData.getLastName();
+        boolean check2=Pattern.matches(regex1, value2);
+        if(!check2){
+         JOptionPane.showMessageDialog(null,"Enter valid Last name");
+         validCount++;
+        }
+        String regex3="^[0-9]+";
+        String value3=ParcelData.getPincode();
+        boolean check3=Pattern.matches(regex3, value3);
+        if(!check3){
+         JOptionPane.showMessageDialog(null,"Enter valid Pincode");
+         validCount++;
+        }
+        String regex4="^[0-9]+{10}";
+       
+        boolean check4=phoneNumberValidation( ParcelData.getPhoneNumber().toString());
+        if(!check4){   
+         JOptionPane.showMessageDialog(null,"Enter valid PhoneNumber");
+         validCount++;
+        }
+        
+        String regex5 = "[+-]?[0-9]+(\\.[0-9]+)?([Ee][+-]?[0-9]+)?";
+        String value5=TItem_Weight.getText();
+        boolean check5=Pattern.matches(regex5, value5);
+        if(!check3 || TItem_Weight.getText().isEmpty()){
+         JOptionPane.showMessageDialog(null,"Enter valid Weight");
+         validCount++;
+        }
+        else{
+            ParcelData.setItemWeight(Float.valueOf(TItem_Weight.getText()));
+            WalletDataG.setItemWeight(Float.valueOf(TItem_Weight.getText()));
+        }
+        if(validCount==0){
+             PaymentParcel.setDataForParcelPanel();
+             main.switchPage("paymentParcel");
+        }
+        
+   
+        
+ }
+    static boolean phoneNumberValidation(String number){
+        String regex = "(0/91)?[7-9][0-9]{9}";
+        return number.matches(regex);
+        }
     
 }

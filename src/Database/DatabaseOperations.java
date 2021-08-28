@@ -49,7 +49,7 @@ public class DatabaseOperations
         try
         {
             Class.forName("oracle.jdbc.driver.OracleDriver");
-            connection = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE","E_post","123"); //-->E_post  123
+            connection = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE","E_post","123");
         }
   
         
@@ -66,7 +66,6 @@ public class DatabaseOperations
            String query="select *from Consignment where customer_ID='"+Customer_ID+"'";
            PreparedStatement  st1=con.prepareStatement(query);
            ResultSet res=st1.executeQuery(query);
-           
            while(res.next()){
               ConsignmentData ob=new ConsignmentData();
             
@@ -272,7 +271,7 @@ public class DatabaseOperations
         try{
         String senderid="",recieverid="",recieverName="",balanceS="",balanceR="",rcontact="",firstnamesender="",lastnamesender="",contactnumbersender="";
         Connection con=DatabaseOperations.getConnection();
-        String saccountnoquery="select account_number from Customer where customer_id='Kishore P'";
+        String saccountnoquery="select account_number from Customer where customer_id='"+Login.login.user_ID+"'";
         PreparedStatement  stSAccNo=con.prepareStatement(saccountnoquery);
         ResultSet rs1=stSAccNo.executeQuery(saccountnoquery);
         if(rs1.next()){
@@ -293,7 +292,7 @@ public class DatabaseOperations
             recieverName=rs3.getString(1);
         }
         
-        String bsquery="select bank_balance from Customer where customer_id='Kishore P'";
+        String bsquery="select bank_balance from Customer where customer_id='"+Login.login.user_ID+"'";
         PreparedStatement  stsbal=con.prepareStatement(bsquery);
         ResultSet rs4=stsbal.executeQuery(bsquery);
         if(rs4.next()){
@@ -312,7 +311,7 @@ public class DatabaseOperations
         PreparedStatement  st=con.prepareStatement(q);
         
         st.setString(1,getTransactionIdGenerator());
-        st.setString(2,"Kishore P");
+        st.setString(2,Login.login.user_ID);
         st.setString(3,WalletData.MoneyOrderValues.get(0));
         st.setString(4,WalletData.MoneyOrderValues.get(2));
         st.setString(5,WalletData.MoneyOrderValues.get(3));
@@ -736,19 +735,16 @@ public class DatabaseOperations
             PreparedStatement pst=con.prepareStatement(query);
             pst.setString(1,DatabaseOperations.getMessageIdGenerator());
             pst.setString(2,EPostData.getMessage());
-            pst.setString(3,"Gowtham");//userName
+            pst.setString(3,CustomerProfileData.getFirstName());//userName
             pst.setString(4, EPostData.getFirstName());
             pst.setDate(5,java.sql.Date.valueOf(java.time.LocalDate.now()));//new java.sql.Date(System.currentTimeMillis())
             pst.setTimestamp(6,Timestamp.valueOf(LocalDateTime.now()));//new java.sql.Timestamp(9000)
-            pst.setString(7, "Kishore P");//Login.login.user_ID)
-            pst.setString(8, EPostData.getTo());
+            pst.setString(7,Login.login.user_ID );//Customer ID
+            pst.setString(8, EPostData.getTo());//Receiver ID
             pst.setString(9,EPostData.getSubject());
             pst.executeUpdate();
             con.setAutoCommit(true);
-            con.close();
-            JOptionPane.showMessageDialog(null,"Inbox Updated Succesfully ID:"+DatabaseOperations.getMessageIdGenerator());
-            
-            
+            con.close();            
         }
         catch(Exception e){
             JOptionPane.showMessageDialog(null,"Inbox Updated Failed ID:"+e.toString());
@@ -756,22 +752,21 @@ public class DatabaseOperations
     }
     public static void updateConsignment(){
          try{ 
-            System.out.println("ConsignmentUpdate Start");
+           // System.out.println("ConsignmentUpdate Start");
             String query="INSERT INTO Consignment VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
             Connection con=DatabaseOperations.getConnection();
             PreparedStatement pst=con.prepareStatement(query);
-            pst.setString(1,DatabaseOperations.getConsignmentIdGenerator());//consignment_ID
+            String ID=DatabaseOperations.getConsignmentIdGenerator();
+            pst.setString(1,ID);//consignment_ID
             pst.setString(2,Login.login.user_ID);//customer_ID
-            pst.setString(3, "");//delivery_ID
+            pst.setString(3, "Keshav B");//delivery_ID
             if(WalletDataG.getTransationType().equals("E-Post"))
                  pst.setString(4,EPostData.getTo());//receiver_ID
             if(WalletDataG.getTransationType().equals("Parcel"))
                  pst.setString(4,ParcelData.getTo());//receiver_ID 
             if(WalletDataG.getTransationType().equals("Products"))
                  pst.setString(4,Login.login.user_ID);//receiver_ID
-            System.out.println(WalletDataG.getTransationType());
-            System.out.println(WalletDataG.getItemPrice());
-            System.out.println(WalletDataG.getItemWeight()+"money this weight-->"+WalletDataG.getBalence());
+           
             pst.setString(5,WalletDataG.getItemCode());//item_code
             pst.setString(6,WalletDataG.getTransationType());//item
             pst.setFloat(7,WalletDataG.getItemPrice());//item_price+
@@ -789,15 +784,15 @@ public class DatabaseOperations
                 pst.setLong(12, ParcelData.getPhoneNumber()); //receiver_contact_number    
                }  
             else if(WalletDataG.getTransationType().equals("Products")){
-                pst.setString(9,"FirstName");//current log in customer first_name                                             
-                pst.setString(10,"LastName"); //current log in customer Last_name  
-                pst.setString(11,""); //current log in customer receiver_address 
-                pst.setLong(12,90L); //receiver_contact_number      
+                pst.setString(9,CustomerProfileData.getFirstName());//current log in customer first_name                                             
+                pst.setString(10,CustomerProfileData.getLastName()); //current log in customer Last_name  
+                pst.setString(11,CustomerProfileData.getAddress()); //current log in customer receiver_address 
+                pst.setLong(12,Long.valueOf(CustomerProfileData.getContactNumber())); //receiver_contact_number      
             }
-            pst.setString(13,"Kishore");      //customer_first_name 
-            pst.setString(14, "P");           //customer_last_name 
-            pst.setLong(15,9095305385L);   //customer_contact_number
-            pst.setString(16, "No.24 Second street, Yelankahana New Town, Karanataka, Bangalore");//shipping_address
+            pst.setString(13,CustomerProfileData.getFirstName());      //customer_first_name 
+            pst.setString(14, CustomerProfileData.getLastName());           //customer_last_name 
+            pst.setLong(15,Long.valueOf(CustomerProfileData.getContactNumber()));   //customer_contact_number
+            pst.setString(16, CustomerProfileData.getAddress());//shipping_address
             pst.setString(17,"E-Pay");  //payment_method 
             pst.setDate(18,java.sql.Date.valueOf(java.time.LocalDate.now()));//order_date DATE
             pst.setDate(19,java.sql.Date.valueOf(java.time.LocalDate.now()));  //delivery_date DATE                                                    
@@ -805,9 +800,7 @@ public class DatabaseOperations
             pst.executeUpdate();
             con.setAutoCommit(true);
             con.close();
-            System.out.println("ConsignmentUpdate end");
-            JOptionPane.showMessageDialog(null,"Consignment Updated Succesfully ID:"+DatabaseOperations.getConsignmentIdGenerator());
-    
+            //System.out.println("ConsignmentUpdate end");    
         }
         catch(Exception e){
             JOptionPane.showMessageDialog(null,"Consignment Update Failed ID:"+e.toString());
@@ -820,6 +813,9 @@ public class DatabaseOperations
             PreparedStatement pst=con.prepareStatement(query);
             pst.setFloat(1, WalletDataG.getBalence());
             pst.setString(2,Login.login.user_ID);
+            con.setAutoCommit(true);
+            pst.executeUpdate();
+            con.close();
             JOptionPane.showMessageDialog(null,"Your Balence Updated Succesfully in Your AccountNumber and Remaining Balence is:"+WalletDataG.getBalence());
        } 
        catch(Exception e){
@@ -828,7 +824,7 @@ public class DatabaseOperations
     }
     public static void updateWalletTransaction(){
         try{ 
-             System.out.println("WalletTransaction Start");
+            // System.out.println("WalletTransaction Start");
             String query="INSERT INTO Wallet VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
             Connection con=DatabaseOperations.getConnection();
             PreparedStatement pst=con.prepareStatement(query);
@@ -840,16 +836,16 @@ public class DatabaseOperations
                 pst.setString(5, EPostData.getLastName());  
             }
             if(WalletDataG.getTransationType().equals("Parcel")){
-                pst.setString(4, ParcelData.getFirstName());
+                 pst.setString(4, ParcelData.getFirstName());
                 pst.setString(5,  ParcelData.getLastName());  
             }
             if(WalletDataG.getTransationType().equals("Products")){
-                pst.setString(4,"Kishore");//current log in user first name
-                pst.setString(5, "P"); //current log in user Last name    
+                pst.setString(4,CustomerProfileData.getFirstName());//current log in user first name
+                pst.setString(5,CustomerProfileData.getLastName()); //current log in user Last name    
             }
             pst.setString(6, WalletDataG.getTransationType());
             pst.setDate(7,java.sql.Date.valueOf(java.time.LocalDate.now()));//new java.sql.Date(System.currentTimeMillis())
-            pst.setLong(8,350700001);//current logged in customer's wallet account number
+            pst.setLong(8,Long.valueOf(CustomerProfileData.getAccountNumber()));//current logged in customer's wallet account number
             pst.setLong(9,350700000);//Admin Account Number
             pst.setFloat(10,WalletDataG.getAmount());//amount
             pst.setString(11,"Admin");//money reciever name
@@ -857,8 +853,7 @@ public class DatabaseOperations
             pst.executeUpdate();
             con.setAutoCommit(true);
             con.close();
-            System.out.println("WalletTransaction end");
-            JOptionPane.showMessageDialog(null,"Wallet Updated Succesfully for ID:"+DatabaseOperations.getMessageIdGenerator());
+            //System.out.println("WalletTransaction end");
             updateCustomerBalence();
             
         }
@@ -1013,7 +1008,7 @@ public class DatabaseOperations
         try{
             Connection con=DatabaseOperations.getConnection();
             String cId=Login.login.user_ID;
-            String query="select * from Inbox where sender_name='"+cId+"'";
+            String query="select * from Inbox where receiver_ID='"+cId+"'";
             PreparedStatement  st1=con.prepareStatement(query);
             ResultSet res=st1.executeQuery(query);
             while(res.next()){
@@ -1034,12 +1029,12 @@ public class DatabaseOperations
         }
         
     }
-    public static void profileUpdationOnSave(){
+        public static void profileUpdationOnSave(){
         try{
             Connection con=DatabaseOperations.getConnection();
             String cId=Login.login.user_ID;
             
-            String query="update customer set first_name=?,last_name=?,DOB=?,AGE=?,CONTACT_NUMBER=?,GENDER=?, ADDRESS=?,ACCOUNT_NUMBER=? where customer_id=?";
+            String query="update customer set first_name=?,last_name=?,DOB=?,AGE=?,CONTACT_NUMBER=?,GENDER=?, ADDRESS=?,STATE=?,DISTRICT=?,PIN_CODE=?,ACCOUNT_NUMBER=? where customer_id=?";
             PreparedStatement profileUpdateQuery=con.prepareStatement(query);
             profileUpdateQuery.setString(1,ProfileUpdateData.getFIRST_NAME());
             
@@ -1054,10 +1049,12 @@ public class DatabaseOperations
             profileUpdateQuery.setString(6,ProfileUpdateData.getGENDER());
             
             profileUpdateQuery.setString(7,ProfileUpdateData.getADDRESS());
+            profileUpdateQuery.setString(8,ProfileUpdateData.getSTATE());
+            profileUpdateQuery.setString(9,ProfileUpdateData.getDISTRICT());
+            profileUpdateQuery.setString(10,ProfileUpdateData.getPIN_CODE());
+            profileUpdateQuery.setString(11,ProfileUpdateData.getACCOUNT_NUMBER());
             
-            profileUpdateQuery.setString(8,ProfileUpdateData.getACCOUNT_NUMBER());
-            
-            profileUpdateQuery.setString(9,Login.login.user_ID);
+            profileUpdateQuery.setString(12,Login.login.user_ID);
             
             profileUpdateQuery.executeQuery();
            
@@ -1066,7 +1063,7 @@ public class DatabaseOperations
             con.close();
             
         }catch(Exception e){
-            System.out.println("Exception in profileUpdationOnSave() : DatabaseOperations----->"+e.getStackTrace().toString());
+            System.out.println("Exception in profileUpdationOnSave() : DatabaseOperations----->"+e.toString());
         }
     }
     public static ArrayList<WalletData> getCurrentWalletDetails(){
@@ -1089,8 +1086,8 @@ public class DatabaseOperations
                 list.add(ob);
             }
             int i=0;
-            System.out.println(list.size());
-            /**
+            System.out.println("Wallet table:"+list.size());
+           
             while(i<list.size()){
                 System.out.println(list.get(i).getTransactionid());
                 System.out.println(list.get(i).getTransactiontype());
@@ -1102,7 +1099,7 @@ public class DatabaseOperations
                 i++;
                 
             }
-            *  **/
+           
         }catch(Exception e){
             System.out.println("Exception in getCurrentWalletDetails() : databaseoperations---->"+e.toString());
             
@@ -1139,6 +1136,68 @@ public class DatabaseOperations
         }
         return details;
     }
+    //Customer Profile
+    public static void getCustomerProfileForCustomerPanel(String id){
+        
+        try{
+            Connection con = getConnection();
+            Statement st = con.createStatement();
+            String query = "select * from Customer where CUSTOMER_ID = ?";
+            PreparedStatement pst = con.prepareStatement(query);
+            pst.setString(1, id);
+            ResultSet rst = pst.executeQuery();
+            while(rst.next()){
+                CustomerProfileData.setId(rst.getString("CUSTOMER_ID"));
+                CustomerProfileData.setFirstName(rst.getString("FIRST_NAME"));
+                CustomerProfileData.setLastName(rst.getString("LAST_NAME"));
+                CustomerProfileData.setDob(rst.getDate("DOB"));
+                CustomerProfileData.setAge(rst.getInt("AGE"));
+                CustomerProfileData.setContactNumber(rst.getString("CONTACT_NUMBER"));
+                CustomerProfileData.setGender(rst.getString("GENDER"));
+                CustomerProfileData.setAddress(rst.getString("ADDRESS"));
+                CustomerProfileData.setState(rst.getString("STATE"));
+                CustomerProfileData.setDistrict(rst.getString("DISTRICT"));
+                CustomerProfileData.setPinCode(rst.getString("PIN_CODE"));
+                CustomerProfileData.setBankBalance(rst.getString("BANK_BALANCE"));
+                CustomerProfileData.setAccountNumber(rst.getString("ACCOUNT_NUMBER"));
+            }
+        }
+        catch(Exception e){
+            System.out.println(e);
+        }
+      
+    }
+    public static void getReciverProfileForCustomerPanel(String id){
+        
+        try{
+            Connection con = getConnection();
+            Statement st = con.createStatement();
+            String query = "select * from Customer where CUSTOMER_ID = ?";
+            PreparedStatement pst = con.prepareStatement(query);
+            pst.setString(1, id);
+            ResultSet rst = pst.executeQuery();
+            while(rst.next()){
+                RecieverProfileData.setId(rst.getString("CUSTOMER_ID"));
+                RecieverProfileData.setFirstName(rst.getString("FIRST_NAME"));
+                RecieverProfileData.setLastName(rst.getString("LAST_NAME"));
+                RecieverProfileData.setDob(rst.getDate("DOB"));
+                RecieverProfileData.setAge(rst.getInt("AGE"));
+                RecieverProfileData.setContactNumber(rst.getString("CONTACT_NUMBER"));
+                RecieverProfileData.setGender(rst.getString("GENDER"));
+                RecieverProfileData.setAddress(rst.getString("ADDRESS"));
+                RecieverProfileData.setState(rst.getString("STATE"));
+                RecieverProfileData.setDistrict(rst.getString("DISTRICT"));
+                RecieverProfileData.setPinCode(rst.getString("PIN_CODE"));
+                RecieverProfileData.setBankBalance(rst.getString("BANK_BALANCE"));
+                RecieverProfileData.setAccountNumber(rst.getString("ACCOUNT_NUMBER"));
+            }
+        }
+        catch(Exception e){
+            System.out.println(e);
+        }
+      
+    }
+    
     
     public static DeliveryProfile getDeliveryProfile(String id){
         DeliveryProfile details = new DeliveryProfile();
@@ -1146,6 +1205,7 @@ public class DatabaseOperations
             Connection con = getConnection();
             Statement st = con.createStatement();
             String query = "select * from Delivery where DELIVERY_ID =?";
+            System.out.println(id);
             PreparedStatement pst = con.prepareStatement(query);
             pst.setString(1, id);
             ResultSet rst = pst.executeQuery();
@@ -1154,6 +1214,7 @@ public class DatabaseOperations
                 details.setFirstName(rst.getString("FIRST_NAME"));
                 details.setLastName(rst.getString("LAST_NAME"));
                 details.setDob(rst.getDate("DOB"));
+                System.out.println(rst.getDate("DOB"));
                 details.setJoinDate(rst.getDate("JOIN_DATE"));
                 details.setAge(rst.getInt("AGE"));
                 details.setMartialStatus(rst.getString("MARTIAL_STATUS"));
@@ -1376,11 +1437,11 @@ public class DatabaseOperations
             System.out.println(e);
         }
     }
-    public static void updateDeliveryProfile(DeliveryProfile details){
+    public static void updateDeliveryProfile(DeliveryProfile details,String id){
         try {
             Connection con = getConnection();
             Statement st = con.createStatement();
-            String query = "update Delivery set FIRST_NAME = ?, LAST_NAME = ?, DOB = ?, AGE = ?, CONTACT_NUMBER = ?, MARTIAL_STATUS = ?, SALARY = ?,STATE = ?, DISTRICT = ?, PERMANENT_ADDRESS = ?, TEMPORARY_ADDRESS = ?";
+            String query = "update Delivery set FIRST_NAME = ?, LAST_NAME = ?, DOB = ?, AGE = ?, CONTACT_NUMBER = ?, MARTIAL_STATUS = ?, SALARY = ?,STATE = ?, DISTRICT = ?, PERMANENT_ADDRESS = ?, TEMPORARY_ADDRESS = ? where DELIVERY_ID ='"+id+"' ";
             PreparedStatement pst = con.prepareStatement(query);
             pst.setString(1, details.getFirstName());
             pst.setString(2, details.getLastName());
@@ -1390,8 +1451,8 @@ public class DatabaseOperations
             pst.setString(6, details.getMartialStatus());
             pst.setInt(7, details.getSalary());
            // pst.setString(8, details.getdesignation());
-            pst.setString(8, details.getState());
             pst.setString(9, details.getDistrict());
+            pst.setString(8, details.getState());
             pst.setString(10, details.getPermanentAddress());
             pst.setString(11, details.getTemporaryAddress());
             pst.executeQuery();
