@@ -5,6 +5,7 @@ import Admin.CompletedConsignment;
 import Admin.ConsignmentDetails;
 import Admin.NewConsignment;
 import Database.DatabaseOperations;
+import Delivery.DeliveryConsignment;
 import java.sql.Date;
 import java.util.*;
 import Delivery.ongoing.*;
@@ -330,6 +331,34 @@ public class consignment
         ConsignmentDetails.vReceLastName.setText(details.getReceiver_last_name());
         ConsignmentDetails.vReceContact.setText(details.getReceiver_contact_number().toString());
         ConsignmentDetails.vReceAdress.setText(details.getReceiver_address());
+    }
+    public static void setDeliveryConsignmentDetails(String id){
+        try{
+        consignment details = DatabaseOperations.getConsignmentDetails(id);
+        DeliveryConsignment.vConsignDetail.setText(details.getConsignment_ID());
+        DeliveryConsignment.vItem.setText(details.getItem());
+        DeliveryConsignment.vItemPrice.setText(Float.toString(details.getItem_price()));
+        DeliveryConsignment.vItemWeight.setText(Float.toString(details.getItem_weight()));
+        DeliveryConsignment.vItemCode.setText(details.getItem_code());
+        DeliveryConsignment.vAgentId.setText(details.getDelivery_ID());
+        DeliveryConsignment.vOrderDate.setText(details.getOrder_date().toString());
+        DeliveryConsignment.vDeliverDate.setText(details.getDelivery_date().toString());
+        DeliveryConsignment.vPayment.setText(details.getPayment_method());
+        DeliveryConsignment.vStatus.setText(details.getStatus());
+        DeliveryConsignment.vSenderId.setText(details.getCustomer_ID());
+        DeliveryConsignment.vSeFirstName.setText(details.getCustomer_first_name());
+        DeliveryConsignment.vSeLastName.setText(details.getCustomer_last_name());
+        DeliveryConsignment.vSeConstact.setText(details.getCustomer_contact_number().toString());
+        DeliveryConsignment.vSeAddress.setText(details.getShipping_address());
+        DeliveryConsignment.vReceId.setText(details.getReceiver_ID());
+        DeliveryConsignment.vReceFirstName.setText(details.getReceiver_first_name());
+        DeliveryConsignment.vReceLastName.setText(details.getReceiver_last_name());
+        DeliveryConsignment.vReceContact.setText(details.getReceiver_contact_number().toString());
+        DeliveryConsignment.vReceAdress.setText(details.getReceiver_address());
+        }
+        catch(Exception e){
+            JOptionPane.showMessageDialog(AdminPanel.contentForAdmin, "Consignent Id Not Found");
+        }
     }
     
     

@@ -4,13 +4,14 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.border.Border;
 import main.main;
+import profile.DeliveryProfile;
 public class DeliveryProfileView extends JPanel implements ActionListener, MouseListener  {
 	//JPanel ViewPanel;
 	Icon ProfIcon,EditIcon,BackIcon;
 	Border emptyBorder = BorderFactory.createEmptyBorder();
-	JLabel UserNameTop;
+	public static JLabel UserNameTop;
 	JLabel UserNameLabel,ContactNoLabel,DOBLabel,AgeLabel,JoinDateLabel,PAddressLabel,TAddressLabel,MaritalStatusLabel,DesignationLabel, GenderLabel, SalaryLabel;
-	JLabel UserNameValue,ContactNoValue,DOBValue,AgeValue,JoinDateValue,PAddressValue,TAddressValue,MaritalValue,DesignationValue, ExperienceValue, GenderValue, SalaryValue;
+	public static JLabel UserNameValue,ContactNoValue,DOBValue,AgeValue,JoinDateValue,PAddressValue,TAddressValue,MaritalValue,DesignationValue, ExperienceValue, GenderValue, SalaryValue;
 	JLabel Collon1,Collon2,Collon3,Collon4,Collon5,Collon6,Collon7,Collon8,Collon9, Collon10, Collon11, Collon12;
 	JButton ProfIconLabel,BackIconLabel,EditIconLabel;
 	JButton SaveButton, logoutButton;
@@ -340,7 +341,8 @@ public class DeliveryProfileView extends JPanel implements ActionListener, Mouse
         }
         else if(e.getSource()== EditIconLabel)
         {
-             main.switchPage("deliveryProfileUpdate");
+            DeliveryProfile.setDeliveryProfileUpdate(Login.login.user_ID);
+            main.switchPage("deliveryProfileUpdate");
         }
     }
 
