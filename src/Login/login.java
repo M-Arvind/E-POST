@@ -17,11 +17,8 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import javax.swing.*;
-import Delivery.*;
 import static Delivery.delivery.ContentForDelivery;
-import static Delivery.delivery.PCompleted;
 import static Delivery.delivery.deliveryCard;
-import javax.swing.plaf.basic.BasicButtonUI;
 
 public class login extends JPanel implements ActionListener
 {
@@ -30,14 +27,9 @@ public class login extends JPanel implements ActionListener
     
     //Private Variables
     private JLabel loginLabel,usernameLabel, passwordLabel, forgotPasswordLabel, messageLabel;
-    private JLabel registerLabel;
     private JTextField usernameTextField;
     private JPasswordField passwordField;
     private JButton loginButton, createOneButton;
-    private String pass;
-    private String salt;
-    private String hash_pass;
-    private ArrayList list;
     
     public static String user_ID;
     
@@ -176,9 +168,6 @@ public class login extends JPanel implements ActionListener
             int salt = Integer.parseInt(list.get(1).toString());
             
             String password = login.createHash(passwordField.getText(), salt);
-//            System.out.println(list);
-//            System.out.println(password);
-//            System.out.println(list.get(1).toString());
 
             if(password.equals(list.get(0).toString()))
             {   
@@ -207,7 +196,6 @@ public class login extends JPanel implements ActionListener
                     main.switchPage("customerPanel");
                 }
 
-                //System.out.println(list.get(2).toString());
             }
             else
             {
