@@ -261,7 +261,6 @@ public class ConsignmentDetails extends JPanel implements ActionListener{
         order_pick = new JProgressBar();
         order_pick.setBounds(180, 550, 300, 15);
         order_pick.setBackground(pri);
-//        order_pick.setForeground(new Color(71, 63, 145));
         order_pick.setForeground(bg);
         order_pick.setUI(new FancyprogressBar());
         order_pick.setMaximum(100);

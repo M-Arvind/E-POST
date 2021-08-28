@@ -353,7 +353,8 @@ public class consignment
         DeliveryConsignment.vReceFirstName.setText(details.getReceiver_first_name());
         DeliveryConsignment.vReceLastName.setText(details.getReceiver_last_name());
         DeliveryConsignment.vReceContact.setText(details.getReceiver_contact_number().toString());
-        DeliveryConsignment.vReceAdress.setText(details.getReceiver_address());        
+        DeliveryConsignment.vReceAdress.setText(details.getReceiver_address());
+        DeliveryConsignment.setProgress(details.getStatus());
     }
 
     //Function to set the values for the table in Ongoing consignment page
