@@ -10,21 +10,22 @@ import java.util.ArrayList;
 
 public class DeliveryProfile {
 
-    String id;
-    String firstName;
-    String lastName;
-    Date dob;
-    Date joinDate;
-    int age;
-    String martialStatus;
-    String contactNumber;
-    String gender;
-    String permanentAddress;
-    String temporaryAddress;
-    int salary;
-    String state;
-    String district;
-    String designation;
+    
+    private int salary;
+    private int age;
+    private String id;
+    private String firstName;
+    private String lastName;
+    private Date dob;
+    private Date joinDate;
+    private String martialStatus;
+    private String contactNumber;
+    private String gender;
+    private String permanentAddress;
+    private String temporaryAddress;
+    private String state;
+    private String district;
+    private String designation;
 
     public String getdesignation() {
         return designation;
