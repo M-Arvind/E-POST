@@ -17,16 +17,13 @@ import javax.swing.table.TableRowSorter;
 
 class ConsignmentPanel extends JPanel {
 
-    //Panel
-    JPanel PConTable;
-    //Table
-    public JTable table;
-    //scroll Pane
-    JScrollPane scroll;
-    //Sorter For Table
-    public static TableRowSorter sorter;
-    //Table Model
+    //private
+    private JPanel PConTable;
     private TableModel model;
+    private JScrollPane scroll;
+    //public
+    public static TableRowSorter sorter;
+    public JTable table;
 
     public ConsignmentPanel() {
 

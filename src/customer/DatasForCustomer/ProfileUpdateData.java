@@ -2,6 +2,7 @@ package customer.DatasForCustomer;
 //Setters and Getters For Encapsulation
 public class ProfileUpdateData {
 
+    //private
     private static String CUSTOMER_ID;
     private static String FIRST_NAME;
     private static String LAST_NAME;

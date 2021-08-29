@@ -16,25 +16,24 @@ import javax.swing.JTextField;
 
 public class EPay {
 
-    JDialog newdialog = new JDialog();
-
-    //colours
-    Color background_Color = new Color(34, 34, 45);
-    Color on_background_Color = new Color(254, 254, 254);
-    Color primary_Color = new Color(71, 63, 145);
+    //private
+    private JDialog newdialog = new JDialog();
+    private Color background_Color = new Color(34, 34, 45);
+    private Color on_background_Color = new Color(254, 254, 254);
+    private Color primary_Color = new Color(71, 63, 145);
 
     //label
-    JLabel ePay_to;
-    JLabel ePay_amount;
-    JLabel ePay_password;
+    private JLabel ePay_to;
+    private JLabel ePay_amount;
+    private JLabel ePay_password;
 
     //Text Field
-    JTextField ePay_to_info;
-    JTextField ePay_amount_info;
-    JTextField ePay_password_info;
+    private JTextField ePay_to_info;
+    private JTextField ePay_amount_info;
+    private JTextField ePay_password_info;
 
     //Confirm Button
-    JButton ePay_btn_confirm;
+     private JButton ePay_btn_confirm;
 
     public EPay() {
         newdialog.setBounds(375, 100, 600, 600);//1350,890
@@ -94,7 +93,6 @@ public class EPay {
         newdialog.add(ePay_password_info);
         newdialog.add(ePay_btn_confirm);
 
- 
         ePay_btn_confirm.setBackground(primary_Color);
         ePay_btn_confirm.setBorder(null);
 

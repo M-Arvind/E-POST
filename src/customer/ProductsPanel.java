@@ -19,14 +19,14 @@ import warehouse.Warehouse;
 
 public class ProductsPanel extends JPanel implements MouseListener {
 
-    //Label
-    JLabel revenueStamp, postageStamp, postageStamp1, collectorStamp, inlandLetter, envelope, postCard;
-    JLabel revenueStampName, postageStampName, postageStamp1Name, collectorStampName, inlandLetterName, postCardName, envelopeName;
-    JLabel revenueStampPrice, postageStampPrice, postageStamp1Price, collectorStampPrice, inlandLetterPrice, postCardPrice, envelopePrice;
-    JLabel revenueStampQuantity, postageStampQuantity, postageStamp1Quantity, collectorStampQuantity, inlandLetterQuantity, postCardQuantity, envelopeQuantity;
+    //private 
+    private JLabel revenueStamp, postageStamp, postageStamp1, collectorStamp, inlandLetter, envelope, postCard;
+    private JLabel revenueStampName, postageStampName, postageStamp1Name, collectorStampName, inlandLetterName, postCardName, envelopeName;
+    private JLabel revenueStampPrice, postageStampPrice, postageStamp1Price, collectorStampPrice, inlandLetterPrice, postCardPrice, envelopePrice;
+    private JLabel revenueStampQuantity, postageStampQuantity, postageStamp1Quantity, collectorStampQuantity, inlandLetterQuantity, postCardQuantity, envelopeQuantity;
     //Stamp Images
-    ImageIcon revenueStampImage, postageStampImage, postageStamp1Image, collectorStampImage, inlandLetterImage, postCardImage, envelopeImage;
-    Image image, newimg;
+    private ImageIcon revenueStampImage, postageStampImage, postageStamp1Image, collectorStampImage, inlandLetterImage, postCardImage, envelopeImage;
+    private Image image, newimg;
 
     public ProductsPanel() {
         Color bg = new Color(34, 34, 45);
@@ -206,7 +206,7 @@ public class ProductsPanel extends JPanel implements MouseListener {
     @Override
     public void mouseClicked(MouseEvent me) {
         ArrayList<Warehouse> stock = getStocks();
-       
+
         if (me.getSource() == revenueStamp) {
             WalletDataG.setItemCode(stock.get(9).getitemCode());
             new PaymentProducts(9);

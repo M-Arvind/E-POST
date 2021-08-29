@@ -5,6 +5,7 @@ import java.sql.Date;
 //Setters and Getters For Encapsulation
 public class RecieverProfileData {
 
+    //private
     private static String id;
     private static String firstName;
     private static String lastName;

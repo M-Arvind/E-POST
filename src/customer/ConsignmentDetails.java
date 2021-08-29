@@ -18,18 +18,16 @@ import javax.swing.JTextArea;
 
 class ConsignmentDetails extends JPanel implements ActionListener {
 
-    //Label
+    //private Label
     private JLabel consignDetail, item, itemPrice, itemWeight, itemCode, agentId, orderDate, deliverDate, payment, status;
     private JLabel billingDetail, senderId, seFirstName, seLastName, seConstact, seAddress;
     private JLabel shipDetails, receId, receFirstName, receLastName, receContact, receAdress;
-
     private JLabel vConsignDetail, vItem, vItemPrice, vItemWeight, vItemCode, vAgentId, vOrderDate, vDeliverDate, vPayment, vStatus;
     private JLabel vSenderId, vSeFirstName, vSeLastName, vSeConstact;
     private JLabel vReceId, vReceFirstName, vReceLastName, vReceContact;
     private JTextArea vReceAdress, vSeAddress;
-
     //icon
-    Icon icon;
+    private Icon icon;
     //Back button
     private JButton back;
     //Panel

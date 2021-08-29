@@ -19,20 +19,14 @@ import javax.swing.JTextField;
 
 public class AuthenticationForParcel {
 
-    //DialogPanel
-    JDialog newdialog = new JDialog();
-
-    //colur
-    Color background_Color = new Color(34, 34, 45);
-    Color on_background_Color = new Color(254, 254, 254);
-    Color primary_Color = new Color(71, 63, 145);
-
-    //Label
-    JLabel auth_password;
-    //TextField
-    JTextField auth_password_info;
-    //Confirm Buuton
-    JButton auth_btn_confirm;
+    //private
+    private JDialog newdialog = new JDialog();
+    private Color background_Color = new Color(34, 34, 45);
+    private Color on_background_Color = new Color(254, 254, 254);
+    private Color primary_Color = new Color(71, 63, 145);
+    private JLabel auth_password;
+    private JTextField auth_password_info;
+    private JButton auth_btn_confirm;
 
     public AuthenticationForParcel() {
         newdialog.setSize(600, 450);
