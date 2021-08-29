@@ -1,5 +1,7 @@
 package customer;
 
+
+import Admin.StyledButtonUi;
 import Database.DatabaseOperations;
 import customer.DatasForCustomer.CustomerProfileData;
 import javax.swing.*;
@@ -9,22 +11,21 @@ import javax.swing.border.Border;
 import main.main;
 
 public class Profile_View extends JPanel implements ActionListener, MouseListener {
-    //JPanel ViewPanel;
-
+    //private 
     //Icon
-    Icon ProfIcon, EditIcon, BackIcon;
-    Border emptyBorder = BorderFactory.createEmptyBorder();
-    
-    //Label
-    static JLabel UserNameTop;
-    static JLabel CustomerIDLabel, FirstNameLabel, LastNameLabel, DOBLabel, AgeLabel, ContactNumberLabel, GenderLabel, AddressLabel, BankBalanceLabel, AccountNumberLabel;
-    static JLabel CustomerIDValue, FirstNameValue, LastNameValue, DOBValue, AgeValue, ContactNumberValue, GenderValue, BankBalanceValue, AccountNumberValue;
-   //TextArea
-    static JTextArea AddressValue;
-    JLabel Collon1, Collon2, Collon3, Collon4, Collon5, Collon6, Collon7, Collon8, Collon9, Collon10;
-    JButton ProfIconLabel, BackIconLabel, EditIconLabel;
-    JButton SaveButton;
+    private Icon ProfIcon, EditIcon, BackIcon;
+    private Border emptyBorder = BorderFactory.createEmptyBorder();
 
+    //Label
+    private static JLabel UserNameTop;
+    private static JLabel CustomerIDLabel, FirstNameLabel, LastNameLabel, DOBLabel, AgeLabel, ContactNumberLabel, GenderLabel, AddressLabel, BankBalanceLabel, AccountNumberLabel;
+    private static JLabel CustomerIDValue, FirstNameValue, LastNameValue, DOBValue, AgeValue, ContactNumberValue, GenderValue, BankBalanceValue, AccountNumberValue;
+    //TextArea
+    private static JTextArea AddressValue;
+    private JLabel Collon1, Collon2, Collon3, Collon4, Collon5, Collon6, Collon7, Collon8, Collon9, Collon10;
+    private JButton ProfIconLabel, BackIconLabel, EditIconLabel;
+    private JButton logoutButton;
+    
     private static final int X = 230, Y = 90;
     private static final int R = 34, G = 34, B = 45;
     private static final int labelFontSize = 20;
@@ -272,6 +273,14 @@ public class Profile_View extends JPanel implements ActionListener, MouseListene
         AccountNumberValue.setFont(new Font("Bold", Font.BOLD, labelFontSize));
         AccountNumberValue.setForeground(Color.WHITE);
 
+        logoutButton = new JButton("Logout");
+        logoutButton.setBounds(X + 400, Y + 710, 100, 30);
+        logoutButton.setForeground(Color.WHITE);
+        logoutButton.setBackground(new Color(71, 63, 145));
+        logoutButton.addActionListener(this);
+        logoutButton.setUI(new StyledButtonUi());
+        add(logoutButton);
+        
         add(AccountNumberValue);
         add(Collon10);
         add(AccountNumberLabel);
@@ -286,8 +295,12 @@ public class Profile_View extends JPanel implements ActionListener, MouseListene
     @Override
     public void actionPerformed(ActionEvent e) {
         Profile_Update.UserNameTop.setText(Login.login.user_ID);
-        main.switchPage("Profile update");
+        if(e.getSource() == EditIconLabel)
+            main.switchPage("Profile update");
+        else if(e.getSource() == logoutButton)
+            main.switchPage("login");
     }
+    
 
     @Override
     public void mouseClicked(MouseEvent e) {

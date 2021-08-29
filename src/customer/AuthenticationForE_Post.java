@@ -17,20 +17,14 @@ import javax.swing.JTextField;
 
 public class AuthenticationForE_Post {
 
-    //Dialog
-    JDialog newdialog = new JDialog();
-
-    //color
-    Color background_Color = new Color(34, 34, 45);
-    Color on_background_Color = new Color(254, 254, 254);
-    Color primary_Color = new Color(71, 63, 145);
-
-    //Label
-    JLabel auth_password;
-    //TextField
-    JTextField auth_password_info, userID;
-    //Button
-    JButton auth_btn_confirm;
+    //private
+    private JDialog newdialog = new JDialog();
+    private Color background_Color = new Color(34, 34, 45);
+    private Color on_background_Color = new Color(254, 254, 254);
+    private Color primary_Color = new Color(71, 63, 145);
+    private JLabel auth_password;
+    private JTextField auth_password_info, userID;
+    private  JButton auth_btn_confirm;
 
     public AuthenticationForE_Post() {
         newdialog.setSize(600, 450);

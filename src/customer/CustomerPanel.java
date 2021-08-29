@@ -30,36 +30,22 @@ import javax.swing.event.DocumentListener;
 
 public class CustomerPanel extends JPanel implements ActionListener, MouseListener {
 
-    //Inner Panel Size
+    //private
     private static final int X_FORCUSTOMER = 55, Y_FORCUSTOMER = 150, WIDTHFORCUSTOMER = 1260, HIGHTFORCUSTOMER = 570;
-    
-    //RGB value
     private static final int R = 34, G = 34, B = 45;
-    
-    //Label
-    private JLabel LE_Post, IProfile, lSearch,LCustomer,userLogo;
-    //inner Panels
-    public static JPanel PInbox, PConsignment, PE_Post, PParcel, PProducts, PWallet, PConsignmentDetails,customerPanel;
-    //images
-    Icon image = new ImageIcon(getClass().getResource("/Images/ProfileImage.png"));
-    Icon seargeImage = new ImageIcon(getClass().getResource("/Images/search_white.png"));
-   
-    //content Panel For All inner Panel
-    public static JPanel contentForCustomer;
-    
-    //LayoutFor Inner Panel
-    public static CardLayout customerCard = null;
-    //Buttons
-    public static JButton BInbox, BConsignment, BE_Post, BParcel, BProducts, BWallet;
-   
-    //color
+    private JLabel LE_Post, IProfile, lSearch, LCustomer, userLogo;
+    public static JPanel PInbox, PConsignment, PE_Post, PParcel, PProducts, PWallet, PConsignmentDetails, customerPanel;
+    private Icon image = new ImageIcon(getClass().getResource("/Images/ProfileImage.png"));
+    private Icon seargeImage = new ImageIcon(getClass().getResource("/Images/search_white.png"));
     private Color Buttoncolor = new Color(240, 238, 240);
-    //search Field
     private JTextField search;
-    //font
+
+    //public variables
+    public static JPanel contentForCustomer;
+    public static CardLayout customerCard = null;
+    public static JButton BInbox, BConsignment, BE_Post, BParcel, BProducts, BWallet;
     private Font font = new Font("Bold", Font.BOLD, 20);
-   //Button UI
-    ButtonUI ui = new StyledButtonUi();
+    private ButtonUI ui = new StyledButtonUi();
 
     public CustomerPanel() {
 
@@ -73,7 +59,7 @@ public class CustomerPanel extends JPanel implements ActionListener, MouseListen
         PProducts = new ProductsPanel();
         PConsignmentDetails = new ConsignmentDetails();
         PInbox = new InboxPanel();
-        
+
         //Adding Inner Panel to Content Panel -> contentForCustomer
         contentForCustomer.add(PInbox, "Inbox");
         contentForCustomer.add(PInbox, "Inbox");
@@ -82,17 +68,17 @@ public class CustomerPanel extends JPanel implements ActionListener, MouseListen
         contentForCustomer.add(PProducts, "Products");
         contentForCustomer.add(PWallet, "Wallet");
         contentForCustomer.add(PConsignmentDetails, "ConsignmentDetails");
-        
+
         //Default Landing Panel
         customerCard.show(contentForCustomer, "Inbox");
-        
+
         //setBounds For contentForCustomer Panel
         contentForCustomer.setBounds(X_FORCUSTOMER, Y_FORCUSTOMER, WIDTHFORCUSTOMER, HIGHTFORCUSTOMER);
         add(contentForCustomer);
         setPreferredSize(new Dimension(1350, 890));
         setVisible(true);
         setBackground(new Color(R, G, B));
-        
+
         //Labels
         LE_Post = new JLabel("E-Post");
         LE_Post.setFont(new Font("Segoe UI", Font.BOLD, 30));
@@ -122,7 +108,6 @@ public class CustomerPanel extends JPanel implements ActionListener, MouseListen
                 search(search.getText());
 
                 customerCard.show(contentForCustomer, "Consignment");
-                System.out.println("--------->TextField Consign");
 
                 BInbox.setBounds(X_FORCUSTOMER, 110, 160, 30);
                 BE_Post.setBounds(X_FORCUSTOMER + 180 + 180, 110, 160, 30);
@@ -157,14 +142,14 @@ public class CustomerPanel extends JPanel implements ActionListener, MouseListen
         });
         search.setBorder(BorderFactory.createEmptyBorder(2, 5, 0, 5));
         add(search);
-        
+
         //Search Logo
         lSearch = new JLabel(seargeImage);
         lSearch.setBounds(1155, 26, 100, 40);
         lSearch.addMouseListener(this);
         lSearch.setBorder(null);
         add(lSearch);
-        
+
         //Profile Logo
         IProfile = new JLabel(image);
         IProfile.addMouseListener(new MouseListener() {
@@ -260,7 +245,12 @@ public class CustomerPanel extends JPanel implements ActionListener, MouseListen
         Object o = e.getSource();
 
         if (o == BInbox) {
-            InboxData.ListForInbox.clear();
+            try {
+                InboxData.ListForInbox.clear();
+            } catch (Exception ex) {
+
+            }
+
             PInbox = new InboxPanel();
             contentForCustomer.add(PInbox, "Inbox");
             BInbox.setBounds(X_FORCUSTOMER, 120, 160, 30);
@@ -277,7 +267,7 @@ public class CustomerPanel extends JPanel implements ActionListener, MouseListen
             ConsignmentData.listForConsignment.clear();
 
             CustomerPanel.contentForCustomer.add(new ConsignmentPanel(), "Consignment");
-           
+
             if (!ConsignmentData.isIsUpdate()) {
 
                 customerCard.show(contentForCustomer, "Consignment");
@@ -343,6 +333,17 @@ public class CustomerPanel extends JPanel implements ActionListener, MouseListen
         if (e.getSource() == search) {
             search.setText("");
         } else if (e.getSource() == lSearch) {
+            try {
+                String str = search.getText();
+                if ((str.length() == 0)) {
+                    ConsignmentPanel.sorter.setRowFilter(null);
+                } else {
+                    ConsignmentPanel.sorter.setRowFilter(RowFilter.regexFilter(str));
+                }
+            } catch (Exception a) {
+
+            }
+
             BConsignment.setBounds(X_FORCUSTOMER + 120 + 60, 120, 160, 30);
             ConsignmentData.listForConsignment.clear();
             CustomerPanel.contentForCustomer.add(new ConsignmentPanel(), "Consignment");

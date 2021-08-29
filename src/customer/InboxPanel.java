@@ -19,28 +19,22 @@ import javax.swing.JTextArea;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.border.Border;
 import customer.DatasForCustomer.*;
+import javax.swing.JOptionPane;
 
 public class InboxPanel extends JPanel implements MouseListener {
 
-    //Label
+    // private
     private JLabel icon, Sender_Name, Subject, Date, Time;
     private Integer index;
-    //Border
-    Border border = BorderFactory.createRaisedBevelBorder();
-    //Image
-    Icon image = new ImageIcon(getClass().getResource("/Images/profile.png"));
+    private Border border = BorderFactory.createRaisedBevelBorder();
+    private Icon image = new ImageIcon(getClass().getResource("/Images/profile.png"));
     private final int fontSize = 18;
-    //font
-    Font font = new Font("Bold", Font.BOLD, fontSize);
-    Integer i = 0, y = 0;
-    //Panel
-    JPanel MyPanel;
-    //Scroll Panel
-    public JScrollPane scroll;
-    //CardLayout
-    CardLayout card = new CardLayout();
-    //back
-    JLabel back;
+    private Font font = new Font("Bold", Font.BOLD, fontSize);
+    private Integer i = 0, y = 0;
+    private JPanel MyPanel;
+    private JScrollPane scroll;
+    private CardLayout card = new CardLayout();
+    private JLabel back;
 
     public InboxPanel() {
         setLayout(card);
@@ -48,16 +42,17 @@ public class InboxPanel extends JPanel implements MouseListener {
         MyPanel.setLayout(null);
         MyPanel.setPreferredSize(new Dimension(1260, 3000));
         // Fetching All IncommingMessages From Database
-        try{
-          DatabaseOperations.getInboxDetails();   
-        }
-        catch(Exception h){
-            
+        try {
+            DatabaseOperations.getInboxDetails();
+        } catch (Exception h) {
+
         }
 
         int count = 0;
+
         i = InboxData.ListForInbox.size()-1;
         while (i>=0) {
+
             JPanel temp = this.getPanel(i, y);
             temp.addMouseListener(this);
             MyPanel.add(temp);

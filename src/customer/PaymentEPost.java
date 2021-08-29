@@ -1,82 +1,62 @@
 package customer;
 
-import Database.DatabaseOperations;
+
 import customer.DatasForCustomer.CustomerProfileData;
 import customer.DatasForCustomer.EPostData;
 import customer.DatasForCustomer.WalletDataG;
 import main.*;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.Image;
-import java.awt.PopupMenu;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JDialog;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JPasswordField;
 import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
-import javax.swing.JTextField;
-import javax.swing.ScrollPaneConstants;
 
-/**
- *
- * @author htara
- */
 public class PaymentEPost extends JPanel implements MouseListener {
 
-    Color background_Color = new Color(34, 34, 45);
-    Color on_background_Color = new Color(254, 254, 254);
-    Color primary_Color = new Color(71, 63, 145);
-
-    JPanel p_payment_Panel;
+    // private
+    private Color background_Color = new Color(34, 34, 45);
+    private Color on_background_Color = new Color(254, 254, 254);
+    private Color primary_Color = new Color(71, 63, 145);
+    private JPanel p_payment_Panel;
     private JScrollPane sbrText;
-
-    JLabel e_payment_title;
-    JButton e_payment_btn_confirm;
-    JLabel e_payment_btn_back;
-
-    JPopupMenu e_payment_authentication;
-
+    private JLabel e_payment_title;
+    private JButton e_payment_btn_confirm;
+    private JLabel e_payment_btn_back;
+    private JPopupMenu e_payment_authentication;
     //Left Label
-    JLabel e_payment_beneficiary;
-    JLabel e_payment_amount;
-    JLabel e_payment_to;
-    JLabel e_payment_contact;
-    JLabel e_payment_type;
-    JLabel e_payment_firstName;
-    JLabel e_payment_lastName;
-    JLabel e_payment_address;
-    JLabel e_payment_state;
-    JLabel e_payment_district;
-    JLabel e_payment_pincode;
-    JLabel e_payment_message;
+    private JLabel e_payment_beneficiary;
+    private JLabel e_payment_amount;
+    private JLabel e_payment_to;
+    private JLabel e_payment_contact;
+    private JLabel e_payment_type;
+    private JLabel e_payment_firstName;
+    private JLabel e_payment_lastName;
+    private JLabel e_payment_address;
+    private JLabel e_payment_state;
+    private JLabel e_payment_district;
+    private JLabel e_payment_pincode;
+    private JLabel e_payment_message;
 
     //Content Label
-    static JLabel e_payment_beneficiary_info;
-    static JLabel e_payment_amount_info;
-    static JLabel e_payment_to_info;
-    static JLabel e_payment_contact_info;
-    static JLabel e_payment_type_info;
-    static JLabel e_payment_firstName_info;
-    static JLabel e_payment_lastName_info;
-    static JTextArea e_payment_address_info;
-    static JLabel e_payment_state_info;
-    static JLabel e_payment_district_info;
-    static JLabel e_payment_pincode_info;
-    static JTextArea e_payment_message_info;
+    private static JLabel e_payment_beneficiary_info;
+    private static JLabel e_payment_amount_info;
+    private static JLabel e_payment_to_info;
+    private static JLabel e_payment_contact_info;
+    private static JLabel e_payment_type_info;
+    private static JLabel e_payment_firstName_info;
+    private static JLabel e_payment_lastName_info;
+    private static JTextArea e_payment_address_info;
+    private static JLabel e_payment_state_info;
+    private static JLabel e_payment_district_info;
+    private static JLabel e_payment_pincode_info;
+    private static JTextArea e_payment_message_info;
 
     int X_FORCUSTOMER = 0, Y_FORCUSTOMER = 100, WIDTHFORCUSTOMER = 1260, HIGHTFORCUSTOMER = 750;
 

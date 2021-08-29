@@ -3,6 +3,7 @@ package customer.DatasForCustomer;
 //Setters and Getters For Encapsulation
 public class ParcelData {
 
+    //private
     private static String To;
     private static String FirstName;
     private static String LastName;

@@ -7,22 +7,22 @@ import java.sql.Date;
 //Admin Object Class
 public class AdminProfile {
 
-    String id;
-    String firstName;
-    String lastName;
-    Date dob;
-    Date joinDate;
-    int experience;
-    int age;
-    String martialStatus;
-    String contactNumber;
-    String gender;
-    String permanentAddress;
-    String temporaryAddress;
-    int salary;
-    String state;
-    String district;
-    String designation;
+    private int experience;
+    private int age;
+    private int salary;
+    private String id;
+    private String firstName;
+    private String lastName;
+    private Date dob;
+    private Date joinDate;
+    private String martialStatus;
+    private String contactNumber;
+    private String gender;
+    private String permanentAddress;
+    private String temporaryAddress;
+    private String state;
+    private String district;
+    private String designation;
 
     public String getId() {
         return id;

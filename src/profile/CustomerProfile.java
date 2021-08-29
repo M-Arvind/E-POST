@@ -9,19 +9,20 @@ import java.util.ArrayList;
 
 public class CustomerProfile {
 
-    String id;
-    String firstName;
-    String lastName;
-    Date dob;
-    int age;
-    String contactNumber;
-    String gender;
-    String address;
-    String state;
-    String district;
-    String pinCode;
-    String bankBalance;
-    String accountNumber;
+    
+    private int age;
+    private String id;
+    private String firstName;
+    private String lastName;
+    private Date dob;
+    private String contactNumber;
+    private String gender;
+    private String address;
+    private String state;
+    private String district;
+    private String pinCode;
+    private String bankBalance;
+    private String accountNumber;
 
     public String getId() {
         return id;
