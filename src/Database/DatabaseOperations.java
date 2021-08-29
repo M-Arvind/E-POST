@@ -49,7 +49,7 @@ public class DatabaseOperations
         try
         {
             Class.forName("oracle.jdbc.driver.OracleDriver");
-            connection = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE","E_Post","123");
+            connection = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE","system","Kavya**2001");
         }
   
         
@@ -350,7 +350,7 @@ public class DatabaseOperations
         }
         
         
-        String consignmentQuery="insert into consignment (consignment_id,CUSTOMER_ID,RECEIVER_ID,ITEM,RECEIVER_FIRST_NAME,RECEIVER_LAST_NAME,RECEIVER_ADDRESS,RECEIVER_CONTACT_NUMBER,CUSTOMER_FIRST_NAME,CUSTOMER_LAST_NAME, CUSTOMER_CONTACT_NUMBER,SHIPPING_ADDRESS,PAYMENT_METHOD,ORDER_DATE,DELIVERY_DATE, STATUS) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        String consignmentQuery="insert into consignment (consignment_id,CUSTOMER_ID,RECEIVER_ID,ITEM,RECEIVER_FIRST_NAME,RECEIVER_LAST_NAME,RECEIVER_ADDRESS,RECEIVER_CONTACT_NUMBER,CUSTOMER_FIRST_NAME,CUSTOMER_LAST_NAME, CUSTOMER_CONTACT_NUMBER,SHIPPING_ADDRESS,PAYMENT_METHOD,ORDER_DATE,DELIVERY_DATE, STATUS,ITEM_CODE,ITEM_WEIGHT,DELIVERY_ID) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         PreparedStatement  st1=con.prepareStatement(consignmentQuery);
         st1.setString(1,getConsignmentIdGenerator());
         st1.setString(2,Login.login.user_ID);
@@ -369,6 +369,9 @@ public class DatabaseOperations
         st1.setDate(14,java.sql.Date.valueOf(java.time.LocalDate.now()));
         st1.setDate(15,java.sql.Date.valueOf(java.time.LocalDate.now()));
         st1.setString(16,"completed");
+        st1.setString(17,"WH0003");
+        st1.setFloat(18,1F);
+        st1.setString(19, "-");
         st1.executeUpdate();
         
         
@@ -808,6 +811,7 @@ public class DatabaseOperations
         }
     }
     public static void updateCustomerBalence(){
+        
        try{
            String query = "update customer set bank_balance=? where customer_ID=?";
             Connection con=DatabaseOperations.getConnection();

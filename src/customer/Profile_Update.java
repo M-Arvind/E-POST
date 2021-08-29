@@ -1,14 +1,13 @@
 package customer;
+import Database.DatabaseOperations;
 import static Database.DatabaseOperations.profileUpdationOnSave;
+import customer.DatasForCustomer.CustomerProfileData;
 import customer.DatasForCustomer.ProfileUpdateData;
-import static customer.DatasForCustomer.ProfileUpdateData.*;
+
 import javax.swing.*;
 import javax.swing.border.Border;
 
 import java.awt.*;
-import java.awt.event.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import main.main;
@@ -17,7 +16,7 @@ public class Profile_Update extends JPanel implements MouseListener{
        //Objects
 	Icon ProfIcon,EditIcon,BackIcon;
 	Border emptyBorder = BorderFactory.createEmptyBorder();
-	JLabel UserNameTop;
+	static JLabel UserNameTop;
 	JLabel CustomerIDLabel,FirstNameLabel,LastNameLabel,DOBLabel,AgeLabel,ContactNumberLabel,GenderLabel,AddressLabel,AccountNumberLabel,PinCodeLabel,StateLabel,DistrictLabel;
 	JTextArea CustomerIDValue,FirstNameValue,LastNameValue,DOBValue,AgeValue,ContactNumberValue,AddressValue,AccountNumberValue,StateValue,PinCodeValue,DistrictValue;
 	JLabel Collon1,Collon2,Collon3,Collon4,Collon5,Collon6,Collon7,Collon8,Collon9,Collon10,Collon11,Collon12;
@@ -56,7 +55,7 @@ public class Profile_Update extends JPanel implements MouseListener{
 		
 		//Usernametop
 		
-		UserNameTop=new JLabel(Login.login.user_ID);
+		UserNameTop=new JLabel(CustomerProfileData.getId());
 		UserNameTop.setBounds(X,Y-80,1000,150);
 		UserNameTop.setFont(new Font("Bold",Font.BOLD,labelFontSize+20));
 		UserNameTop.setForeground(Color.WHITE);

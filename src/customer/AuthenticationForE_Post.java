@@ -73,6 +73,7 @@ public class AuthenticationForE_Post {
         auth_btn_confirm.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                
 
                 EPostData.setIsPasswordCorrect(getAuthentication());
 

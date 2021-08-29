@@ -137,6 +137,7 @@ public class PaymentProducts implements KeyListener {
         pro_payment_btn_confirm.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                if(Integer.parseInt(pro_payment_amount.getText())<=Integer.parseInt(CustomerProfileData.getBankBalance())){
                 if (getAuthentication()) {
                     WalletDataG.setBalence(Float.valueOf(CustomerProfileData.getBankBalance()));//customer Balence
                     WalletDataG.setTransationType("Products");
@@ -160,6 +161,11 @@ public class PaymentProducts implements KeyListener {
                     JOptionPane.showMessageDialog(null, "Password Incorrect.Try Again");
                 }
 
+            }
+            
+            else{
+            JOptionPane.showMessageDialog(null, "Insufficient balance");
+            }
             }
 
         });
