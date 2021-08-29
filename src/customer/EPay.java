@@ -12,6 +12,7 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 public class EPay {
@@ -30,7 +31,7 @@ public class EPay {
     //Text Field
     private JTextField ePay_to_info;
     private JTextField ePay_amount_info;
-    private JTextField ePay_password_info;
+    private JPasswordField ePay_password_info;
 
     //Confirm Button
      private JButton ePay_btn_confirm;
@@ -53,7 +54,7 @@ public class EPay {
         //Objects For TextField
         ePay_to_info = new JTextField();
         ePay_amount_info = new JTextField();
-        ePay_password_info = new JTextField();
+        ePay_password_info = new JPasswordField();
 
         //Confirm Button
         ePay_btn_confirm = new JButton("Confirm");

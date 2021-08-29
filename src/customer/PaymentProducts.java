@@ -15,6 +15,7 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import main.main;
 import warehouse.Warehouse;
@@ -33,7 +34,7 @@ public class PaymentProducts implements KeyListener {
     private JLabel pro_payment_product_name_info;
     private JLabel pro_payment_amount_info;
     private JTextField pro_payment_product_quantity_info;
-    private JTextField pro_payment_password_info;
+    private JPasswordField pro_payment_password_info;
     private JButton pro_payment_btn_confirm;
     private Warehouse stock;
     private int price;
@@ -74,7 +75,7 @@ public class PaymentProducts implements KeyListener {
 
         pro_payment_amount_info = new JLabel(":           " + "");
         pro_payment_amount_info.setFont(new Font("Bold", Font.BOLD, 22));
-        pro_payment_password_info = new JTextField();
+        pro_payment_password_info = new JPasswordField();
 
         pro_payment_btn_confirm = new JButton("Confirm");
 
