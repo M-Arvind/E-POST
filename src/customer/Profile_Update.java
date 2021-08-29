@@ -1,5 +1,6 @@
 package customer;
 
+import Admin.StyledButtonUi;
 import static Database.DatabaseOperations.profileUpdationOnSave;
 import customer.DatasForCustomer.ProfileUpdateData;
 import javax.swing.*;
@@ -265,8 +266,9 @@ public class Profile_Update extends JPanel implements MouseListener {
         //button
         SaveButton = new JButton("Save");
         SaveButton.setBounds(X + 400, Y + 750, 100, 30);
-        SaveButton.setForeground(Color.black);
+        SaveButton.setForeground(new Color(245,245,245));
         SaveButton.setBackground(new Color(71, 63, 145));
+        SaveButton.setUI(new StyledButtonUi());
         SaveButton.addActionListener((c) -> {
 
             ProfileUpdateData.setFIRST_NAME(FirstNameValue.getText());

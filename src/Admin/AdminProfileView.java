@@ -302,7 +302,8 @@ public class AdminProfileView extends JPanel implements ActionListener, MouseLis
         add(SalaryLabel);
         add(Collon12);
         add(SalaryValue);
-
+        
+        //LogOut button
         logoutButton = new JButton("Logout");
         logoutButton.setBounds(X + 400, Y + 780, 100, 30);
         logoutButton.setForeground(Color.WHITE);
