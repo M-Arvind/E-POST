@@ -98,6 +98,7 @@ public class NewConsignment extends JPanel implements ItemListener {
     //Item Listener
     @Override
     public void itemStateChanged(ItemEvent e) {
+        try{
         if (Select != -1) {
             int column = 0;
             String newStatus = comboBox.getSelectedItem().toString();
@@ -105,6 +106,7 @@ public class NewConsignment extends JPanel implements ItemListener {
             DatabaseOperations.updateConsignmentDelivery(newStatus, value);
             Consignment.consignment.setNewdAdminConsignmentDetails();
         }
+    }catch(Exception E){}
     }
 
 }

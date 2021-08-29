@@ -1,5 +1,6 @@
 package Database;
 
+import Admin.AdminPanel;
 import Login.ForgetPassword;
 import Consignment.*;
 import javax.swing.JTextField;
@@ -20,7 +21,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.ArrayList;
-import javax.swing.JPasswordField;
 import main.main;
 import warehouse.*;
 import profile.*;
@@ -75,7 +75,7 @@ public class DatabaseOperations {
                 ConsignmentData.listForConsignment.add(ob);
 
             }
-            System.out.println("Success in Consignment--->"+ConsignmentData.listForConsignment.size());
+            con.close();
         } catch (Exception ex) {
             System.out.println("Error in getCustomerConsignmentDetails---->" + ex.toString());
         }
@@ -108,7 +108,6 @@ public class DatabaseOperations {
         try {
             Connection con = DatabaseOperations.getConnection();
             String Delivery_Id = Login.login.user_ID;
-            System.out.println(Delivery_Id);
             String query = "select *from Consignment where delivery_ID='" + Delivery_Id + "'";
             PreparedStatement st1 = con.prepareStatement(query);
             ResultSet res = st1.executeQuery(query);
@@ -141,7 +140,7 @@ public class DatabaseOperations {
 
                     list.add(od);
                 }
-
+                con.close();
             }
 
         } catch (Exception ex) {
@@ -188,6 +187,7 @@ public class DatabaseOperations {
                 list.add(od);
 
             }
+            con.close();
 
         } catch (Exception ex) {
             System.out.println("Error in CompletedConsignmentDetails---->" + ex.toString());
@@ -204,6 +204,7 @@ public class DatabaseOperations {
             smt.execute(query);
             getConnection().setAutoCommit(true);
             JOptionPane.showMessageDialog(null, "Successful");
+            con.close();
         } catch (Exception e1) {
             System.out.println("Update---->" + e1.toString());
         }
@@ -221,7 +222,7 @@ public class DatabaseOperations {
                 return true;
 
             }
-  
+            con.close();
         } catch (SQLException ex) {
 
             System.out.println("Error in checkIdPresentOrNot Function (DatabaseOperations)---->" + ex.toString());
@@ -356,7 +357,7 @@ public class DatabaseOperations {
             con.setAutoCommit(true);
 
             String s = "CONID";
-            System.out.println(s + Integer.toString(c + 1));
+            con.close();
             return s + Integer.toString(c + 1);
         } catch (Exception ex1) {
             System.out.println("Error in getconsignmentIdGenerator---->" + ex1.toString());
@@ -376,14 +377,15 @@ public class DatabaseOperations {
             int c = rs.getInt(1);
             con.setAutoCommit(true);
             String s = "TRANSID";
+            con.close();
             return s + Integer.toString(c + 1);
         } catch (Exception ex1) {
             System.out.println("Error in getTransactionIdGenerator---->" + ex1.toString());
         }
 
-
         return "";
     }
+
     //getMessageIdGenerator
     public static String getMessageIdGenerator() {
         try {
@@ -395,6 +397,7 @@ public class DatabaseOperations {
             int c = rs.getInt(1);
             con.setAutoCommit(true);
             String s = "MSGID";
+            con.close();
             return s + Integer.toString(c + 1);
 
         } catch (Exception ex1) {
@@ -403,8 +406,9 @@ public class DatabaseOperations {
         return "";
     }
 
-    //Database
-    public static ArrayList getLoginCredentials(JTextField usernameTextField, JPasswordField passwordField) {
+    //Database Login credentials
+    public static ArrayList getLoginCredentials(JTextField usernameTextField, JTextField passwordField) {
+
         ArrayList loginCredentials = new ArrayList();
 
         try {
@@ -422,14 +426,9 @@ public class DatabaseOperations {
                     String salt = rspass.getString("salt");
                     String type = rspass.getString("login_type");
 
-//                        System.out.println(pass);
-//                        System.out.println(salt);
-//                        System.out.println(type);
-                    //System.out.println(hash_pass);
                     loginCredentials.add(pass);
                     loginCredentials.add(salt);
                     loginCredentials.add(type);
-                    //loginCredentials.add(hash_pass);                          
                 }
             }
         } catch (Exception ex) {
@@ -457,12 +456,6 @@ public class DatabaseOperations {
             if (next) {
                 JOptionPane.showMessageDialog(null, "You have Already Registered to E-Post");
             } else {
-//               String query="INSERT INTO Customer VALUES ('"+list.get(0).toString()+"','"+list.get(1).toString()+"','"+list.get(2).toString()+"',"+TO_DATE(list.get(3).toString(),'YYYY-MM-DD')+",'"+list.get(4).toString()+"','"+list.get(5).toString()+"',"
-//                       + "'"+list.get(6).toString()+"','"+list.get(7).toString()+"','"+list.get(8).toString()+"','"+list.get(9).toString()+"','"+list.get(10).toString()+"','"+list.get(11).toString()+"','"+list.get(12).toString()+"')";
-//
-//               st.executeUpdate(query);
-//               getConnection().setAutoCommit(true);
-//               JOptionPane.showMessageDialog(null, "Registration Success!"); 
                 String sql = "INSERT INTO Login VALUES (?, ?, ?, ?, ?)";
                 try (PreparedStatement stmt = getConnection().prepareStatement(sql)) {
                     stmt.setString(1, list.get(0).toString());
@@ -474,9 +467,7 @@ public class DatabaseOperations {
                     stmt.executeUpdate();
                     getConnection().setAutoCommit(true);
 
-                    //st.executeUpdate(sql);
-                    //getConnection().setAutoCommit(true);
-//                    JOptionPane.showMessageDialog(null, "Login Create SuccessFul!"); 
+
                     customerCreate(list);
                 }
             }
@@ -492,7 +483,6 @@ public class DatabaseOperations {
             rs.next();
 
             int count = rs.getInt(1);
-            System.out.println(count);
 
             return count;
         } catch (Exception ex) {
@@ -536,7 +526,7 @@ public class DatabaseOperations {
 
                     stmt.executeUpdate();
                     getConnection().setAutoCommit(true);
-                    JOptionPane.showMessageDialog(null, "Registration Success!"); 
+                    JOptionPane.showMessageDialog(null, "Registration Success!");
                     main.switchPage("login");
 
                 }
@@ -652,7 +642,6 @@ public class DatabaseOperations {
     //updateConsignment
     public static void updateConsignment() {
         try {
-            System.out.println("ConsignmentUpdate Start");
             String query = "INSERT INTO Consignment VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
             Connection con = DatabaseOperations.getConnection();
             PreparedStatement pst = con.prepareStatement(query);
@@ -700,11 +689,11 @@ public class DatabaseOperations {
             pst.executeUpdate();
             con.setAutoCommit(true);
             con.close();
-            System.out.println("ConsignmentUpdate end");    
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Consignment Update Failed ID:" + e.toString());
         }
     }
+
     //updateCustomerBalence
     public static void updateCustomerBalence() {
         try {
@@ -725,7 +714,6 @@ public class DatabaseOperations {
     //updateWalletTransaction
     public static void updateWalletTransaction() {
         try {
-            // System.out.println("WalletTransaction Start");
             String query = "INSERT INTO Wallet VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
             Connection con = DatabaseOperations.getConnection();
             PreparedStatement pst = con.prepareStatement(query);
@@ -754,7 +742,6 @@ public class DatabaseOperations {
             pst.executeUpdate();
             con.setAutoCommit(true);
             con.close();
-            //System.out.println("WalletTransaction end");
             updateCustomerBalence();
 
         } catch (Exception e) {
@@ -799,12 +786,13 @@ public class DatabaseOperations {
                 pst.executeQuery();
                 con.setAutoCommit(true);
                 con.close();
+                JOptionPane.showMessageDialog(AdminPanel.contentForAdmin, "Stocks Updated");
             } catch (Exception e) {
-                System.out.println(e);
+                //System.out.println(e);
             }
 
         }
-       
+
     }
 
     public static AdminProfile getAdminProfile(String id) {
@@ -834,8 +822,9 @@ public class DatabaseOperations {
                 details.setDistrict(rst.getString("DISTRICT"));
                 details.setDesignation(rst.getString("DESIGNATION"));
             }
+            con.close();
         } catch (Exception e) {
-            System.out.println(e);
+            ////System.out.println(e);
         }
         return details;
     }
@@ -865,8 +854,9 @@ public class DatabaseOperations {
                 details.setAccountNumber(rst.getString("ACCOUNT_NUMBER"));
                 customerDetails.add(details);
             }
+            con.close();
         } catch (Exception e) {
-            System.out.println(e);
+            ////System.out.println(e);
         }
         return customerDetails;
     }
@@ -897,8 +887,9 @@ public class DatabaseOperations {
                 details.setDistrict(rst.getString("DISTRICT"));
                 deliveryDetails.add(details);
             }
+            con.close();
         } catch (Exception e) {
-            System.out.println(e);
+            ////System.out.println(e);
         }
         return deliveryDetails;
     }
@@ -932,6 +923,7 @@ public class DatabaseOperations {
 
     }
 
+    //Customer Profile update
     public static void profileUpdationOnSave() {
         try {
             Connection con = DatabaseOperations.getConnection();
@@ -970,6 +962,7 @@ public class DatabaseOperations {
         }
     }
 
+    //Wallet Table Details
     public static ArrayList<WalletData> getCurrentWalletDetails() {
         ArrayList<WalletData> list = new ArrayList<WalletData>();
         try {
@@ -991,7 +984,6 @@ public class DatabaseOperations {
                 list.add(ob);
             }
 
-            //System.out.println("Wallet table:"+list.size());
             con.close();
 
         } catch (Exception e) {
@@ -1001,6 +993,7 @@ public class DatabaseOperations {
         return list;
     }
 
+    //Customer profile Details
     public static CustomerProfile getCustomerProfile(String id) {
         CustomerProfile details = new CustomerProfile();
         try {
@@ -1025,8 +1018,9 @@ public class DatabaseOperations {
                 details.setBankBalance(rst.getString("BANK_BALANCE"));
                 details.setAccountNumber(rst.getString("ACCOUNT_NUMBER"));
             }
+            con.close();
         } catch (Exception e) {
-            System.out.println(e);
+            ////System.out.println(e);
         }
         return details;
     }
@@ -1058,11 +1052,12 @@ public class DatabaseOperations {
             }
             con.close();
         } catch (Exception e) {
-            System.out.println(e);
+//            ////System.out.println(e);
         }
 
     }
 
+    //reciever Profile Details
     public static void getReciverProfileForCustomerPanel(String id) {
 
         try {
@@ -1088,18 +1083,18 @@ public class DatabaseOperations {
                 RecieverProfileData.setAccountNumber(rst.getString("ACCOUNT_NUMBER"));
             }
         } catch (Exception e) {
-            System.out.println(e);
+//            ////System.out.println(e);
         }
 
     }
 
+    //Delivery Details for Admin
     public static DeliveryProfile getDeliveryProfile(String id) {
         DeliveryProfile details = new DeliveryProfile();
         try {
             Connection con = getConnection();
             Statement st = con.createStatement();
             String query = "select * from Delivery where DELIVERY_ID =?";
-            System.out.println(id);
             PreparedStatement pst = con.prepareStatement(query);
             pst.setString(1, id);
             ResultSet rst = pst.executeQuery();
@@ -1108,7 +1103,6 @@ public class DatabaseOperations {
                 details.setFirstName(rst.getString("FIRST_NAME"));
                 details.setLastName(rst.getString("LAST_NAME"));
                 details.setDob(rst.getDate("DOB"));
-                System.out.println(rst.getDate("DOB"));
                 details.setJoinDate(rst.getDate("JOIN_DATE"));
                 details.setAge(rst.getInt("AGE"));
                 details.setMartialStatus(rst.getString("MARTIAL_STATUS"));
@@ -1120,8 +1114,9 @@ public class DatabaseOperations {
                 details.setState(rst.getString("STATE"));
                 details.setDistrict(rst.getString("DISTRICT"));
             }
+            con.close();
         } catch (Exception e) {
-            System.out.println(e);
+            ////System.out.println(e);
         }
         return details;
     }
@@ -1130,7 +1125,6 @@ public class DatabaseOperations {
     public static consignment getConsignmentDetails(String id) {
         consignment ob = new consignment();
         try {
-            System.out.println("ConsignmentDetails start-----");
             Connection con = getConnection();
             Statement st = con.createStatement();
             String query = "select * from consignment where CONSIGNMENT_ID = ?";
@@ -1160,13 +1154,13 @@ public class DatabaseOperations {
                 ob.setStatus(res.getString("status"));
 
             }
-            System.out.println("ConsignmentDetails end-----");
             con.close();
         } catch (Exception e) {
         }
         return ob;
     }
 
+    //Ongoing Consignment detail table for admin
     public static ArrayList<consignment> getOngoingAdminConsignmentDetails() {
         ArrayList<consignment> ongoingconsignment = new ArrayList<consignment>();
         try {
@@ -1204,12 +1198,14 @@ public class DatabaseOperations {
                     ongoingconsignment.add(od);
                 }
             }
+            con.close();
         } catch (Exception ex) {
             System.out.println("Error in OngoingConsignmentDetails---->" + ex.toString());
         }
         return ongoingconsignment;
     }
 
+    //Completed consignment details for admin
     public static ArrayList<consignment> getCompletedAdminConsignmentDetails() {
         ArrayList<consignment> completedConsignment = new ArrayList<consignment>();
         try {
@@ -1247,12 +1243,14 @@ public class DatabaseOperations {
                     completedConsignment.add(od);
                 }
             }
+            con.close();
         } catch (Exception ex) {
             System.out.println("Error in OngoingConsignmentDetails---->" + ex.toString());
         }
         return completedConsignment;
     }
 
+    //New Consignment details for admin
     public static ArrayList<consignment> getNewAdminConsignmentDetails() {
         ArrayList<consignment> newConsignment = new ArrayList<consignment>();
         try {
@@ -1263,9 +1261,7 @@ public class DatabaseOperations {
 
             while (res.next()) {
                 String Status = res.getString("delivery_ID");
-//               System.out.println(Status);
                 if (Status.equals("Keshav B")) {
-//                    System.out.print(1);
                     consignment od = new consignment();
 
                     od.setConsignment_ID(res.getString("consignment_ID"));
@@ -1292,12 +1288,14 @@ public class DatabaseOperations {
                     newConsignment.add(od);
                 }
             }
+            con.close();
         } catch (Exception ex) {
             System.out.println("Error in NewAdminConsignmentDetails---->" + ex.toString());
         }
         return newConsignment;
     }
 
+    //Update Admin Profile for Admin
     public static void updateAdminProfile(AdminProfile details) {
         try {
             Connection con = getConnection();
@@ -1321,10 +1319,11 @@ public class DatabaseOperations {
             con.close();
             JOptionPane.showMessageDialog(main.mainPanel, "Update Admin Successful");
         } catch (Exception e) {
-            System.out.println(e);
+            ////System.out.println(e);
         }
     }
 
+    //Update Delivery Profile for Delivery
     public static void updateDeliveryProfile(DeliveryProfile details, String id) {
         try {
             Connection con = getConnection();
@@ -1338,7 +1337,6 @@ public class DatabaseOperations {
             pst.setString(5, details.getContactNumber());
             pst.setString(6, details.getMartialStatus());
             pst.setInt(7, details.getSalary());
-            // pst.setString(8, details.getdesignation());
             pst.setString(9, details.getDistrict());
             pst.setString(8, details.getState());
             pst.setString(10, details.getPermanentAddress());
@@ -1348,10 +1346,11 @@ public class DatabaseOperations {
             con.close();
             JOptionPane.showMessageDialog(main.mainPanel, "Update Delivery Successful");
         } catch (Exception e) {
-            System.out.println(e);
+            ////System.out.println(e);
         }
     }
 
+    //Updating consignment details form delivery
     public static void updateConsignmentDelivery(String delivery_id, String consignment_id) {
         try {
             Connection con = getConnection();
@@ -1361,6 +1360,7 @@ public class DatabaseOperations {
             pst.setString(1, delivery_id);
             pst.setString(2, consignment_id);
             pst.executeQuery();
+            con.close();
         } catch (Exception e) {
         }
     }
