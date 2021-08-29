@@ -5,6 +5,7 @@ import java.util.*;
 //Setters and Getters For Encapsulation
 public class InboxData {
 
+    //private
     public static ArrayList<InboxData> ListForInbox;
     private String message_ID;
     private String message;

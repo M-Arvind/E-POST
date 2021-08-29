@@ -98,7 +98,9 @@ public class DatabaseOperations
        } catch (Exception ex) {
            System.out.println("Error in getCustomerConsignmentDetails---->"+ex.toString());
        }
-       Object[][] row=new Object[ConsignmentData.listForConsignment.size()][9];
+       Object[][] row={};
+       try{
+           row=new Object[ConsignmentData.listForConsignment.size()][9];
        int i=0;
        for(ConsignmentData Data:ConsignmentData.listForConsignment){
            row[i][0]=i+1;
@@ -109,13 +111,15 @@ public class DatabaseOperations
            row[i][5]=Data.getDelivery_ID();
            row[i][6]=Data.getPayment_method();
            row[i][7]=Data.getOrder_date();
-           row[i][8]=Data.getStatus();
-
-          
-          
+           row[i][8]=Data.getStatus(); 
          i++;
              
        }
+       }
+       catch(Exception m){
+         JOptionPane.showMessageDialog(null,"You have no consignments");
+       }
+       
        return row;
     }
     public static ArrayList getOnGoingDeliveryConsignmentDetails()
@@ -350,7 +354,7 @@ public class DatabaseOperations
         }
         
         
-        String consignmentQuery="insert into consignment (consignment_id,CUSTOMER_ID,RECEIVER_ID,ITEM,RECEIVER_FIRST_NAME,RECEIVER_LAST_NAME,RECEIVER_ADDRESS,RECEIVER_CONTACT_NUMBER,CUSTOMER_FIRST_NAME,CUSTOMER_LAST_NAME, CUSTOMER_CONTACT_NUMBER,SHIPPING_ADDRESS,PAYMENT_METHOD,ORDER_DATE,DELIVERY_DATE, STATUS) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        String consignmentQuery="insert into consignment (consignment_id,CUSTOMER_ID,RECEIVER_ID,ITEM,RECEIVER_FIRST_NAME,RECEIVER_LAST_NAME,RECEIVER_ADDRESS,RECEIVER_CONTACT_NUMBER,CUSTOMER_FIRST_NAME,CUSTOMER_LAST_NAME, CUSTOMER_CONTACT_NUMBER,SHIPPING_ADDRESS,PAYMENT_METHOD,ORDER_DATE,DELIVERY_DATE, STATUS,item_code ,delivery_ID, item_weight) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         PreparedStatement  st1=con.prepareStatement(consignmentQuery);
         st1.setString(1,getConsignmentIdGenerator());
         st1.setString(2,Login.login.user_ID);
@@ -369,6 +373,9 @@ public class DatabaseOperations
         st1.setDate(14,java.sql.Date.valueOf(java.time.LocalDate.now()));
         st1.setDate(15,java.sql.Date.valueOf(java.time.LocalDate.now()));
         st1.setString(16,"completed");
+        st1.setString(17,"WH0003");
+        st1.setString(18, "Keshav B");
+        st1.setFloat(19,1F);
         st1.executeUpdate();
         
         

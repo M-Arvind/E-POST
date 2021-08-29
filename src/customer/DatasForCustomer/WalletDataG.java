@@ -3,6 +3,7 @@ package customer.DatasForCustomer;
 //Setters and Getters For Encapsulation
 public class WalletDataG {
 
+    //private
     private static Float amount;
     private static Float balence;
     private static String transationType;

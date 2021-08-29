@@ -16,18 +16,14 @@ import javax.swing.JTextField;
 
 public class AddMoney {
 
-    JDialog newdialog = new JDialog();
-
-    Color background_Color = new Color(34, 34, 45);
-    Color on_background_Color = new Color(254, 254, 254);
-    Color primary_Color = new Color(71, 63, 145);
-
-    //JLabel
-    JLabel addMoney_pbank_name, addMoney_username, addMoney_amount, addMoney_password;
-    //TextField
-    JTextField addMoney_pbank_name_info, addMoney_username_info, addMoney_amount_info, addMoney_password_info;
-    //Button
-    JButton addMoney_btn_confirm;
+    //private variables
+    private JDialog newdialog = new JDialog();
+    private Color background_Color = new Color(34, 34, 45);
+    private Color on_background_Color = new Color(254, 254, 254);
+    private Color primary_Color = new Color(71, 63, 145);
+    private JLabel addMoney_pbank_name, addMoney_username, addMoney_amount, addMoney_password;
+    private JTextField addMoney_pbank_name_info, addMoney_username_info, addMoney_amount_info, addMoney_password_info;
+    private JButton addMoney_btn_confirm;
 
     public AddMoney() {
         newdialog.setBounds(375, 50, 600, 700);

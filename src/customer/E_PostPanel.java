@@ -32,26 +32,17 @@ import javax.swing.border.Border;
 
 public class E_PostPanel extends JPanel implements ActionListener {
 
-    //Button
+  // private
     private JButton BSend;
-    //Label
     private JLabel LTo, LHardCopy, LSoftCopy, LFirstName, LLastName, LAddress, LState, LDistrict, LPincode, LPhoneNumber, LMessage;
-    //TextField
     private JTextField TTo, TFirstname, TLastName, TPincode, TPhoneNumber, TSubject;
-    //TextArea
     private JTextArea TAddress, Message;
-    //JComboBox
     private JComboBox CState, CDistrict, CPincode;
-    //JCheckBox 
     private JCheckBox SoftCopy, HardCopy;
-    //Flags
     private boolean isSoftCopySelected, isHardCopySelected;
-    //Fonts
     private Font font = new Font("Segoe UI", Font.PLAIN, 22);
     private Font fontForText = new Font("Segoe UI", Font.PLAIN, 17);
-    //Border
     private Border border;
-    //Colour
     private Color Cpanel = new Color(254, 254, 254);
     private Color Cback = new Color(34, 34, 44);
     private Color Cbutton = new Color(71, 63, 144);

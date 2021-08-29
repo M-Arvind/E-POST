@@ -6,7 +6,9 @@ import java.util.*;
 
 public class ConsignmentData {
 
+    //public
     public static ArrayList<ConsignmentData> listForConsignment;
+    //private
     private String consignment_ID;
     private String customer_ID;
     private String delivery_ID;
@@ -21,7 +23,6 @@ public class ConsignmentData {
     private Long receiver_contact_number;
     private String customer_first_name;
     private String customer_last_name;
-
     private Long customer_contact_number;
     private String shipping_address;
     private String payment_method;

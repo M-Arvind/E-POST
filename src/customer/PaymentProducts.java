@@ -21,42 +21,32 @@ import warehouse.Warehouse;
 
 public class PaymentProducts implements KeyListener {
 
-    //DialogBox
-    JDialog newdialog = new JDialog();
-
-    //Colour
-    Color background_Color = new Color(34, 34, 45);
-    Color on_background_Color = new Color(254, 254, 254);
-    Color primary_Color = new Color(71, 63, 145);
-
-    //Label
-    JLabel pro_payment_product_name;
-    JLabel pro_payment_product_quantity;
-    JLabel pro_payment_amount;
-    JLabel pro_payment_password;
-    JLabel pro_payment_product_name_info;
-    JLabel pro_payment_amount_info;
-
-    //TextField
-    JTextField pro_payment_product_quantity_info;
-    JTextField pro_payment_password_info;
-
-    //Button
-    JButton pro_payment_btn_confirm;
-    //Local Variables
-    Warehouse stock;
-    int price;
-    int stockQuantity;
-    int quantity;
+    //private
+    private JDialog newdialog = new JDialog();
+    private Color background_Color = new Color(34, 34, 45);
+    private Color on_background_Color = new Color(254, 254, 254);
+    private Color primary_Color = new Color(71, 63, 145);
+    private JLabel pro_payment_product_name;
+    private JLabel pro_payment_product_quantity;
+    private JLabel pro_payment_amount;
+    private JLabel pro_payment_password;
+    private JLabel pro_payment_product_name_info;
+    private JLabel pro_payment_amount_info;
+    private JTextField pro_payment_product_quantity_info;
+    private JTextField pro_payment_password_info;
+    private JButton pro_payment_btn_confirm;
+    private Warehouse stock;
+    private int price;
+    private int stockQuantity;
+    private int quantity;
 
     public PaymentProducts(int i) {
-        try{
-        ArrayList<Warehouse> temp = DatabaseOperations.getStocks();
-       
-            stock = temp.get(i); 
+        try {
+            ArrayList<Warehouse> temp = DatabaseOperations.getStocks();
+
+            stock = temp.get(i);
+        } catch (Exception k) {
         }
-        catch(Exception k){}
-       
 
         price = Integer.valueOf(stock.getItemPrice());
         WalletDataG.setBalence(5000F); // getBalanceFromDatabase
@@ -152,9 +142,8 @@ public class PaymentProducts implements KeyListener {
                     CustomerPanel.contentForCustomer.add(new ConsignmentPanel(), "update");
                     main.switchPage("customerPanel");
                     CustomerPanel.BConsignment.setBounds(55 + 120 + 60, 120, 160, 30);
-                    CustomerPanel.BProducts.setBounds(55+ 180 + 180 + 180 + 180, 120, 160, 30);
+                    CustomerPanel.BProducts.setBounds(55 + 180 + 180 + 180 + 180, 120, 160, 30);
                     CustomerPanel.customerCard.show(CustomerPanel.contentForCustomer, "update");
-                    
 
                 } else {
                     JOptionPane.showMessageDialog(null, "Password Incorrect.Try Again");

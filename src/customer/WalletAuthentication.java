@@ -19,20 +19,18 @@ import javax.swing.JTextField;
 
 public class WalletAuthentication {
 
-    //Dialog  
-    JDialog newdialog = new JDialog();
-
+    //private  
+    private JDialog newdialog = new JDialog();
     //color
-    Color background_Color = new Color(34, 34, 45);
-    Color on_background_Color = new Color(254, 254, 254);
-    Color primary_Color = new Color(71, 63, 145);
-
+    private Color background_Color = new Color(34, 34, 45);
+    private Color on_background_Color = new Color(254, 254, 254);
+    private Color primary_Color = new Color(71, 63, 145);
     //Label
-    JLabel auth_password;
+    private JLabel auth_password;
     //TextField
-    JTextField auth_password_info;
+    private JTextField auth_password_info;
     //Button 
-    JButton auth_btn_confirm;
+    private JButton auth_btn_confirm;
 
     public WalletAuthentication() {
         newdialog.setSize(600, 450);
@@ -63,7 +61,6 @@ public class WalletAuthentication {
         newdialog.add(auth_password_info);
         newdialog.add(auth_btn_confirm);
 
-    
         auth_btn_confirm.setBackground(primary_Color);
         auth_btn_confirm.setBorder(null);
 

@@ -32,27 +32,18 @@ import javax.swing.border.Border;
 
 public class ParcelPanel extends JPanel implements ActionListener, KeyListener {
 
-    //Button
+    //private
     private JButton BSend;
-    //Label
     private JLabel LPrice_Description, LItem_Price, LItem_Weight, LTo, LHardCopy, LSoftCopy, LFirstName, LLastName, LAddress, LState, LDistrict, LPincode, LPhoneNumber;
-    //labels
     private JTextField TItem_Price, TItem_Weight, TTo, TFirstname, TLastName, TPincode, TPhoneNumber;
-    //TextArea
     private JTextArea TAddress, Message;
-    //ComboBox
     private JComboBox CState, CDistrict, CPincode;
-    //Font
     private Font font = new Font("Segoe UI", Font.PLAIN, 22);
     private Font fontForText = new Font("Bold", Font.PLAIN, 17);
-    //Border
     private Border border;
-    //RadioButton
     private JRadioButton Less_Than_1Kg, More_than_1kg, More_than_10kg, More_than_11kg;
     private ButtonGroup btngrb;
-    //Color
     private Color Cbutton = new Color(71, 63, 144);
-    //state and city info
     private static Vector<String> infoState = new Vector();
     private static Vector<String> infoCity = new Vector();
 
