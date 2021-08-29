@@ -332,7 +332,7 @@ public class DatabaseOperations {
             st1.setDate(15, java.sql.Date.valueOf(java.time.LocalDate.now()));
             st1.setString(16, "completed");
             st1.setString(17, "WH0003");
-            st1.setString(18, "-");
+            st1.setString(18, "Keshav B");
             st1.setFloat(19, 1F);
             st1.executeUpdate();
 
