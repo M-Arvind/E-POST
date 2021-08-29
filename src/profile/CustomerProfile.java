@@ -6,8 +6,9 @@ import Database.DatabaseOperations;
 import java.sql.Date;
 import java.util.ArrayList;
 //Customer Object Class
+
 public class CustomerProfile {
-    
+
     String id;
     String firstName;
     String lastName;
@@ -30,7 +31,6 @@ public class CustomerProfile {
         this.id = id;
     }
 
-    
     public String getFirstName() {
         return firstName;
     }
@@ -38,7 +38,7 @@ public class CustomerProfile {
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
-    
+
     public String getLastName() {
         return lastName;
     }
@@ -126,26 +126,27 @@ public class CustomerProfile {
     public void setAccountNumber(String accountNumber) {
         this.accountNumber = accountNumber;
     }
-//Function to set CustomerDetails table in admin     
-    public static void setCustomerDetails(){
-        
-            customerDetails.customerDetailsTable.getSelectionModel().clearSelection();
 
-            while(customerDetails.customermodel.getRowCount()>0){
-                customerDetails.customermodel.removeRow(0);
-            }
- 
-            ArrayList<CustomerProfile> listForDeliveryConsignment = DatabaseOperations.getCustomerDetails();         
-            for(int i=0;i<listForDeliveryConsignment.size();i++)
-            {
-                CustomerProfile temp = listForDeliveryConsignment.get(i);
-                customerDetails.customermodel.addRow(new Object[]{temp.getId(), temp.getFirstName(), temp.getLastName(), temp.getDob(), temp.getAge(),temp.getContactNumber(),temp.getGender(),temp.getBankBalance()});
-            }
+    //Function to set CustomerDetails table in admin     
+    public static void setCustomerDetails() {
+
+        customerDetails.customerDetailsTable.getSelectionModel().clearSelection();
+
+        while (customerDetails.customermodel.getRowCount() > 0) {
+            customerDetails.customermodel.removeRow(0);
+        }
+
+        ArrayList<CustomerProfile> listForDeliveryConsignment = DatabaseOperations.getCustomerDetails();
+        for (int i = 0; i < listForDeliveryConsignment.size(); i++) {
+            CustomerProfile temp = listForDeliveryConsignment.get(i);
+            customerDetails.customermodel.addRow(new Object[]{temp.getId(), temp.getFirstName(), temp.getLastName(), temp.getDob(), temp.getAge(), temp.getContactNumber(), temp.getGender(), temp.getBankBalance()});
+        }
     }
-//Function to set Customer profile in Admin
-    public static void setCustomerProfile(String id){
+
+    //Function to set Customer profile in Admin
+    public static void setCustomerProfile(String id) {
         CustomerProfile details = DatabaseOperations.getCustomerProfile(id);
-        
+
         AdminCustomerProfile.CustomerIDValue.setText(details.getId());
         AdminCustomerProfile.FirstNameValue.setText(details.getFirstName());
         AdminCustomerProfile.LastNameValue.setText(details.getLastName());
@@ -156,8 +157,8 @@ public class CustomerProfile {
         AdminCustomerProfile.AddressValue.setText(details.getAddress());
         AdminCustomerProfile.BankBalanceValue.setText(details.getBankBalance());
         AdminCustomerProfile.AccountNumberValue.setText(details.getAccountNumber());
-        AdminCustomerProfile.UserNameTop.setText(details.getFirstName()+" "+details.getLastName());
-        
+        AdminCustomerProfile.UserNameTop.setText(details.getFirstName() + " " + details.getLastName());
+
     }
-    
+
 }

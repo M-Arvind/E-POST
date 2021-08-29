@@ -535,7 +535,9 @@ public class DatabaseOperations {
 
                     stmt.executeUpdate();
                     getConnection().setAutoCommit(true);
-                    JOptionPane.showMessageDialog(null, "Registration Success!");
+                    JOptionPane.showMessageDialog(null, "Registration Success!"); 
+                    main.switchPage("login");
+
                 }
             }
         } catch (Exception ex) {
