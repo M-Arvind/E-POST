@@ -20,6 +20,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.ArrayList;
+import javax.swing.JPasswordField;
 import main.main;
 import warehouse.*;
 import profile.*;
@@ -74,7 +75,7 @@ public class DatabaseOperations {
                 ConsignmentData.listForConsignment.add(ob);
 
             }
-            //System.out.println("Success in Consignment--->"+ConsignmentData.listForConsignment.size());
+            System.out.println("Success in Consignment--->"+ConsignmentData.listForConsignment.size());
         } catch (Exception ex) {
             System.out.println("Error in getCustomerConsignmentDetails---->" + ex.toString());
         }
@@ -403,7 +404,7 @@ public class DatabaseOperations {
     }
 
     //Database
-    public static ArrayList getLoginCredentials(JTextField usernameTextField, JTextField passwordField) {
+    public static ArrayList getLoginCredentials(JTextField usernameTextField, JPasswordField passwordField) {
         ArrayList loginCredentials = new ArrayList();
 
         try {
@@ -651,7 +652,7 @@ public class DatabaseOperations {
     //updateConsignment
     public static void updateConsignment() {
         try {
-            // System.out.println("ConsignmentUpdate Start");
+            System.out.println("ConsignmentUpdate Start");
             String query = "INSERT INTO Consignment VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
             Connection con = DatabaseOperations.getConnection();
             PreparedStatement pst = con.prepareStatement(query);
@@ -699,7 +700,7 @@ public class DatabaseOperations {
             pst.executeUpdate();
             con.setAutoCommit(true);
             con.close();
-            //System.out.println("ConsignmentUpdate end");    
+            System.out.println("ConsignmentUpdate end");    
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Consignment Update Failed ID:" + e.toString());
         }
@@ -1129,6 +1130,7 @@ public class DatabaseOperations {
     public static consignment getConsignmentDetails(String id) {
         consignment ob = new consignment();
         try {
+            System.out.println("ConsignmentDetails start-----");
             Connection con = getConnection();
             Statement st = con.createStatement();
             String query = "select * from consignment where CONSIGNMENT_ID = ?";
@@ -1158,6 +1160,7 @@ public class DatabaseOperations {
                 ob.setStatus(res.getString("status"));
 
             }
+            System.out.println("ConsignmentDetails end-----");
             con.close();
         } catch (Exception e) {
         }

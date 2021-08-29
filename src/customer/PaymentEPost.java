@@ -66,10 +66,8 @@ public class PaymentEPost extends JPanel implements MouseListener {
 
         e_payment_btn_confirm = new JButton();
         e_payment_btn_confirm.addActionListener((a) -> {
-            if(Integer.parseInt(e_payment_amount_info.getText())<= Integer.parseInt(CustomerProfileData.getBankBalance())){
+            if(Float.parseFloat(e_payment_amount_info.getText())<= Float.parseFloat(CustomerProfileData.getBankBalance())){
             new AuthenticationForE_Post();
-            EPostData.setSoftCopy(false);
-            EPostData.setSoftCopy(false);
             }else{
                 JOptionPane.showMessageDialog(this, "Insufficient Balance :"+CustomerProfileData.getBankBalance() );
             }
