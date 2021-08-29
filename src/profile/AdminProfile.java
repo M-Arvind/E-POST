@@ -5,7 +5,7 @@ import Admin.AdminProfileView;
 import java.sql.Date;
 
 
-
+//Admin Object Class
 public class AdminProfile {
     String id;
     String firstName;
@@ -151,7 +151,7 @@ public class AdminProfile {
     public void setDesignation(String designation) {
         this.designation = designation;
     }
- 
+ //Function to set Admin Profile Page
     public static void setAdminProfile(String id){
         AdminProfile details = Database.DatabaseOperations.getAdminProfile(id);
         AdminProfileView.UserNameValue.setText(details.id);
@@ -167,10 +167,8 @@ public class AdminProfile {
         AdminProfileView.GenderValue.setText(details.getGender());
         AdminProfileView.SalaryValue.setText(Integer.toString(details.getSalary()));
         AdminProfileView.UserNameTop.setText(details.getFirstName()+" "+details.getLastName());
-//        System.out.println(details.getPermanentAddress());
-//        System.out.println(details.getDob());
     }
-    
+ //Function to set AdminProfileUpdate Page   
     public static void setAdminProfileUpdate(String id){
         AdminProfile details = Database.DatabaseOperations.getAdminProfile(id);
         int a=0;
@@ -191,10 +189,7 @@ public class AdminProfile {
         AdminProfileUpdate.salaryValue.setText(Integer.toString(details.getSalary()));
         AdminProfileUpdate.stateValue.setText(details.getState());
         AdminProfileUpdate.districtValue.setText(details.getDistrict());
-//        AdminProfileView.ExperienceValue.setText(Integer.toString(details.getExperience()));
-//        AdminProfileView.GenderValue.setText(details.getGender());
         AdminProfileUpdate.designationValue.setText(details.getDesignation());
         AdminProfileUpdate.UserNameTop.setText(details.getId());
     }
 }
-//firstNameValue,lastNameValue,contactNoValue,DOBValue,ageValue,JoinDateValue,designationValue, salaryValue, stateValue, districtValue;

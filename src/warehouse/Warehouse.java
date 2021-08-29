@@ -4,73 +4,104 @@ import Database.DatabaseOperations;
 import java.util.ArrayList;
 import Admin.*;
 
-public class Warehouse {
+public class Warehouse 
+{
+    //Private Variables
     String itemCode;
     String item;
     String itemPrice;
     String itemQuantity;
 
-    public Warehouse() {
+    //Empty constructure
+    public Warehouse() 
+    {
     }
-    public Warehouse(String code, String quantity){
+    
+    public Warehouse(String code, String quantity)
+    {
         this.itemCode = code;
         this.itemQuantity = quantity;
     }
     
-    public String getitemCode(){
+    //Getting Item Code
+    public String getitemCode()
+    {
         return itemCode;
     }
-
-    public String getItem() {
+    
+    //Getting Item
+    public String getItem() 
+    {
         return item;
     }
 
-    public String getItemPrice() {
+    //Getting ItemPrice
+    public String getItemPrice() 
+    {
         return itemPrice;
     }
 
-    public String getItemQuantity() {
+    //Getting ItemQuantity
+    public String getItemQuantity() 
+    {
         return itemQuantity;
     }
     
-    
-    public void setItemCode(String itemCode) {
+    //Setting ItemCode
+    public void setItemCode(String itemCode) 
+    {
         this.itemCode = itemCode;
     }
 
-    public void setItem(String item) {
+    //Setting Item
+    public void setItem(String item) 
+    {
         this.item = item;
     }
 
-    public void setItemPrice(String itemPrice) {
+    //Setting ItemPrice
+    public void setItemPrice(String itemPrice) 
+    {
         this.itemPrice = itemPrice;
     }
 
-    public void setItemQuantity(String itemQuantity) {
+    //Setting ItemQuantity
+    public void setItemQuantity(String itemQuantity) 
+    {
         this.itemQuantity = itemQuantity;
     }
     
-    
-    
-    
-    public static void setStocks(){
+    //Sets and Displayes All the values in Warhouse Panel
+    public static void setStocks()
+    {
+        //Gets An ArrayList of Stocks from DatabaseOperations
         ArrayList<Warehouse> stock = DatabaseOperations.getStocks();
-        for(int i=0;i<stock.size();i++){
+        
+        for(int i=0;i<stock.size();i++)
+        {
             Warehouse temp = stock.get(i);
+            
             if(temp.getitemCode().equals("WH0004"))
                 Stocks.envelopeQuantity_Info.setText(temp.getItemQuantity());
+            
             else if(temp.getitemCode().equals("WH0005"))
                 Stocks.postCardQuantity_Info.setText(temp.getItemQuantity());
+            
             else if(temp.getitemCode().equals("WH0006"))
                 Stocks.inlandLetterQuantity_Info.setText(temp.getItemQuantity());
+            
             else if(temp.getitemCode().equals("WH0007"))
                 Stocks.postageStampQuantity_Info.setText(temp.getItemQuantity());
+            
             else if(temp.getitemCode().equals("WH0008"))
                 Stocks.postageStamp1Quantity_Info.setText(temp.getItemQuantity());
+            
             else if(temp.getitemCode().equals("WH0009"))
                 Stocks.collectorStampQuantity_Info.setText(temp.getItemQuantity());
+            
             else if(temp.getitemCode().equals("WH0010"))
                 Stocks.revenueStampQuantity_Info.setText(temp.getItemQuantity());
+            
         }
     }
 }

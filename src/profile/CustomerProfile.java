@@ -5,7 +5,7 @@ import Admin.customerDetails;
 import Database.DatabaseOperations;
 import java.sql.Date;
 import java.util.ArrayList;
-
+//Customer Object Class
 public class CustomerProfile {
     
     String id;
@@ -126,14 +126,13 @@ public class CustomerProfile {
     public void setAccountNumber(String accountNumber) {
         this.accountNumber = accountNumber;
     }
-     
+//Function to set CustomerDetails table in admin     
     public static void setCustomerDetails(){
         
             customerDetails.customerDetailsTable.getSelectionModel().clearSelection();
 
             while(customerDetails.customermodel.getRowCount()>0){
                 customerDetails.customermodel.removeRow(0);
-//                System.out.println("deleted row");
             }
  
             ArrayList<CustomerProfile> listForDeliveryConsignment = DatabaseOperations.getCustomerDetails();         
@@ -143,7 +142,7 @@ public class CustomerProfile {
                 customerDetails.customermodel.addRow(new Object[]{temp.getId(), temp.getFirstName(), temp.getLastName(), temp.getDob(), temp.getAge(),temp.getContactNumber(),temp.getGender(),temp.getBankBalance()});
             }
     }
-    
+//Function to set Customer profile in Admin
     public static void setCustomerProfile(String id){
         CustomerProfile details = DatabaseOperations.getCustomerProfile(id);
         
@@ -158,9 +157,7 @@ public class CustomerProfile {
         AdminCustomerProfile.BankBalanceValue.setText(details.getBankBalance());
         AdminCustomerProfile.AccountNumberValue.setText(details.getAccountNumber());
         AdminCustomerProfile.UserNameTop.setText(details.getFirstName()+" "+details.getLastName());
-//        System.out.println(details.getFirstName());
         
     }
     
 }
-//JLabel CustomerIDValue,FirstNameValue,LastNameValue,DOBValue,AgeValue,ContactNumberValue,GenderValue,AddressValue,BankBalanceValue,AccountNumberValue;

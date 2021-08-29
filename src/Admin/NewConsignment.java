@@ -1,11 +1,8 @@
 package Admin;
 
 import Database.DatabaseOperations;
-import javax.swing.JLabel;
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.ArrayList;
@@ -24,38 +21,40 @@ import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumn;
 import profile.DeliveryProfile;
 
-public class NewConsignment extends JPanel implements ActionListener,ItemListener{
-    JPanel PConTable;
+public class NewConsignment extends JPanel implements ItemListener{
+    //Private Variables
     public static JTable table;
-    JScrollPane scroll;
     public static DefaultTableModel newModel;
+    
+    //Private Variables
+    private JScrollPane scroll;
     private int font = 16;
     private int font1 = 16;
     private Font text = new Font("Verdana", Font.BOLD, font);
     private Font text1 = new Font("arial", Font.BOLD, font1);
-    int Select;
-    JComboBox<String> comboBox;
-    String value;
+    private int Select;
+    private JComboBox<String> comboBox;
+    private String value;
+    
+    //Constructer
     NewConsignment() {
 
-        this.setLayout(null);
-        this.setBackground(Color.white);
-        Object[][] rows = {{"12345", "Keshav", "Arvind", "E Post", "    ", "E PAY", "29.09.2001", "Order Placed"}, {"2345", "Keshav", "Arvind", "E Post", "   ", "E PAY", "29.09.2001", "Order Placed"}};
+        //Column Values     
         String[] columns = {"Consignment ID", "From","To", "Item", "Delivery ID", "Payment Method", "Date", "Status"};
         
         Border border = new LineBorder(new Color(71, 63, 145), 1, true);
         
         newModel = new DefaultTableModel();
         newModel.setColumnIdentifiers(columns);
+        //Table
         table =new JTable(newModel);
-    
         table.setRowHeight(30);
         table.setBorder(border);
         table.setRowSelectionAllowed(true);
  
+        //List Selection Listener
         ListSelectionModel select = table.getSelectionModel();
         select.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        
         select.addListSelectionListener(new ListSelectionListener() 
         {
             public void valueChanged(ListSelectionEvent e) 
@@ -63,31 +62,28 @@ public class NewConsignment extends JPanel implements ActionListener,ItemListene
                 Select=table.getSelectedRow();
             }
         });    
-        
+        //Combobox
         TableColumn testColumn = table.getColumnModel().getColumn(4);
         comboBox = new JComboBox<>(NewConsignment.getDeliveryMembers());
         comboBox.addItemListener(this);
         comboBox.setFont(text1);
         testColumn.setCellEditor(new DefaultCellEditor(comboBox));
-        
+        //Header
         JTableHeader tab = table.getTableHeader();
-        JTableHeader tableHeader = table.getTableHeader();
         tab.setBackground(new Color(71, 63, 145));
         tab.setForeground(Color.white);
 
-        
+        //Scroll
         scroll = new JScrollPane(table);
-        
         scroll.setBounds(30, 30, 1200, 500);
         scroll.setVisible(true);
+        
         this.add(scroll);
+        this.setLayout(null);
+        this.setBackground(Color.white);
     }
-
-
     
-    @Override
-    public void actionPerformed(ActionEvent e) {
-    }
+    //Function to get the all the delivery members id to set in new consignment table 
     public static String[] getDeliveryMembers(){
         ArrayList<DeliveryProfile> details = Database.DatabaseOperations.getDeliveryDetails();
         String[] delivery = new String[details.size()];
@@ -99,29 +95,18 @@ public class NewConsignment extends JPanel implements ActionListener,ItemListene
         return delivery;        
     }
 
+    //Item Listener
     @Override
     public void itemStateChanged(ItemEvent e) {
-//if(e.getStateChange()== 2)
-//        {
-               
-            if(Select != -1)
-            {
-                int column = 0;
-                String newStatus = comboBox.getSelectedItem().toString();
-                //Selected_row = table.getSelectedRow(); 
-//                System.out.println(Select);
-                value = table.getModel().getValueAt(Select, column).toString();
-//                System.out.println(value);
-//                System.out.println(newStatus);   
-                DatabaseOperations.updateConsignmentDelivery(newStatus,value); 
-                Consignment.consignment.setNewdAdminConsignmentDetails();
-                //model.removeRow(Selected_row);
-                //model.setRowCount(model.getRowCount()-1);
-                //System.out.println(model.getRowCount());
-//            }
-            
-            }           
-            }
+        if(Select != -1)
+        {
+            int column = 0;
+            String newStatus = comboBox.getSelectedItem().toString();
+            value = table.getModel().getValueAt(Select, column).toString();
+            DatabaseOperations.updateConsignmentDelivery(newStatus,value); 
+            Consignment.consignment.setNewdAdminConsignmentDetails();
+        }           
+    }
     
 }
 
