@@ -1,6 +1,7 @@
 package customer;
 
 
+import Admin.StyledButtonUi;
 import customer.DatasForCustomer.CustomerProfileData;
 import customer.DatasForCustomer.EPostData;
 import customer.DatasForCustomer.WalletDataG;
@@ -25,7 +26,6 @@ public class PaymentEPost extends JPanel implements MouseListener {
     private Color on_background_Color = new Color(254, 254, 254);
     private Color primary_Color = new Color(71, 63, 145);
     private JPanel p_payment_Panel;
-    private JScrollPane sbrText;
     private JLabel e_payment_title;
     private JButton e_payment_btn_confirm;
     private JLabel e_payment_btn_back;
@@ -122,6 +122,7 @@ public class PaymentEPost extends JPanel implements MouseListener {
         e_payment_btn_confirm.setText("Confirm");
         e_payment_btn_confirm.setForeground(on_background_Color);
         e_payment_btn_confirm.setBorder(null);
+        e_payment_btn_confirm.setUI(new StyledButtonUi());
 
         e_payment_btn_back.setBounds(25, 25, 40, 40);
         e_payment_btn_back.setBackground(null);

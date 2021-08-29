@@ -1,5 +1,6 @@
 package customer;
 
+import Admin.StyledButtonUi;
 import Database.DatabaseOperations;
 import Login.login;
 import customer.DatasForCustomer.WalletDataG;
@@ -34,7 +35,7 @@ public class EPay {
     private JPasswordField ePay_password_info;
 
     //Confirm Button
-     private JButton ePay_btn_confirm;
+    private JButton ePay_btn_confirm;
 
     public EPay() {
         newdialog.setBounds(375, 100, 600, 600);//1350,890
@@ -80,6 +81,7 @@ public class EPay {
         ePay_password_info.setForeground(background_Color);
 
         ePay_btn_confirm.setForeground(on_background_Color);
+        ePay_btn_confirm.setUI(new StyledButtonUi());
 
         ePay_to.setFont(new Font("Segoe UI", Font.PLAIN, 22));
         ePay_amount.setFont(new Font("Segoe UI", Font.PLAIN, 22));

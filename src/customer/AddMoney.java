@@ -1,5 +1,6 @@
 package customer;
 
+import Admin.StyledButtonUi;
 import Database.DatabaseOperations;
 import Login.login;
 import customer.DatasForCustomer.WalletDataG;
@@ -75,6 +76,7 @@ public class AddMoney {
         addMoney_password_info.setForeground(background_Color);
 
         addMoney_btn_confirm.setForeground(on_background_Color);
+        addMoney_btn_confirm.setUI(new StyledButtonUi());
 
         //setFont
         addMoney_pbank_name.setFont(new Font("Segoe UI", Font.PLAIN, 22));

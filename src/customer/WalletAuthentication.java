@@ -1,5 +1,6 @@
 package customer;
 
+import Admin.StyledButtonUi;
 import Database.DatabaseOperations;
 import Login.login;
 import static customer.CustomerPanel.contentForCustomer;
@@ -64,6 +65,7 @@ public class WalletAuthentication {
 
         auth_btn_confirm.setBackground(primary_Color);
         auth_btn_confirm.setBorder(null);
+        auth_btn_confirm.setUI(new StyledButtonUi());
 
         //ActionListener for Confirm Button
         auth_btn_confirm.addActionListener(new ActionListener() {

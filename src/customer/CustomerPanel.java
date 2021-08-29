@@ -264,11 +264,10 @@ public class CustomerPanel extends JPanel implements ActionListener, MouseListen
 
         } else if (o == BConsignment) {
             BConsignment.setBounds(X_FORCUSTOMER + 120 + 60, 120, 160, 30);
-            try{
-               ConsignmentData.listForConsignment.clear(); 
+            try {
+                ConsignmentData.listForConsignment.clear();
+            } catch (Exception r) {
             }
-            catch(Exception r){}
-            
 
             CustomerPanel.contentForCustomer.add(new ConsignmentPanel(), "Consignment");
 

@@ -128,34 +128,32 @@ public class PaymentProducts implements KeyListener {
         pro_payment_btn_confirm.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(Float.parseFloat(pro_payment_amount.getText())<=Float.parseFloat(CustomerProfileData.getBankBalance())){
-                if (getAuthentication()) {
-                    WalletDataG.setBalence(Float.valueOf(CustomerProfileData.getBankBalance()));//customer Balence
-                    WalletDataG.setTransationType("Products");
-                    WalletDataG.setItemWeight(Float.valueOf(quantity));
-                    stock.setItemQuantity(String.valueOf(stockQuantity - quantity));
-                    ArrayList<Warehouse> tempstock = new ArrayList();
-                    tempstock.add(stock);
-                    DatabaseOperations.updateStocks(tempstock);
-                    DatabaseOperations.updateConsignment();
-                    DatabaseOperations.updateWalletTransaction();
-                    JOptionPane.showMessageDialog(null, "Payment Succesfully");
-                    newdialog.dispose();
-                    CustomerPanel.contentForCustomer.add(new ConsignmentPanel(), "update");
-                    main.switchPage("customerPanel");
-                    CustomerPanel.BConsignment.setBounds(55 + 120 + 60, 120, 160, 30);
-                    CustomerPanel.BProducts.setBounds(55 + 180 + 180 + 180 + 180, 120, 160, 30);
-                    CustomerPanel.customerCard.show(CustomerPanel.contentForCustomer, "update");
+                if (Float.parseFloat(pro_payment_amount_info.getText().trim().split(":")[1]) <= Float.parseFloat(CustomerProfileData.getBankBalance())) {
+                    if (getAuthentication()) {
+                        WalletDataG.setBalence(Float.valueOf(CustomerProfileData.getBankBalance()));//customer Balence
+                        WalletDataG.setTransationType("Products");
+                        WalletDataG.setItemWeight(Float.valueOf(quantity));
+                        stock.setItemQuantity(String.valueOf(stockQuantity - quantity));
+                        ArrayList<Warehouse> tempstock = new ArrayList();
+                        tempstock.add(stock);
+                        DatabaseOperations.updateStocks(tempstock);
+                        DatabaseOperations.updateConsignment();
+                        DatabaseOperations.updateWalletTransaction();
+                        JOptionPane.showMessageDialog(null, "Payment Succesfully");
+                        newdialog.dispose();
+                        CustomerPanel.contentForCustomer.add(new ConsignmentPanel(), "update");
+                        main.switchPage("customerPanel");
+                        CustomerPanel.BConsignment.setBounds(55 + 120 + 60, 120, 160, 30);
+                        CustomerPanel.BProducts.setBounds(55 + 180 + 180 + 180 + 180, 120, 160, 30);
+                        CustomerPanel.customerCard.show(CustomerPanel.contentForCustomer, "update");
+
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Password Incorrect.Try Again");
+                    }
 
                 } else {
-                    JOptionPane.showMessageDialog(null, "Password Incorrect.Try Again");
+                    JOptionPane.showMessageDialog(null, "Insufficient balance");
                 }
-
-            }
-            
-            else{
-            JOptionPane.showMessageDialog(null, "Insufficient balance");
-            }
             }
 
         });

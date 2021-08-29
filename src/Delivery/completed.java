@@ -14,8 +14,7 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
-public class completed extends JPanel 
-{
+public class completed extends JPanel {
 
     //Private Variables
     private String column_name[] = {"Con-ID", "From", "To", "Item", "Delivery Id", "Payment ", "Date", "Status"};
@@ -36,8 +35,7 @@ public class completed extends JPanel
     public Object row[][] = {};
 
     //Constructor
-    completed() 
-    {
+    completed() {
         this.setLayout(null);
         this.setBounds(55, 150, 1260, 570);
 
@@ -55,13 +53,10 @@ public class completed extends JPanel
         ListSelectionModel select = table1.getSelectionModel();
         select.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         //Listener For Table
-        select.addListSelectionListener(new ListSelectionListener() 
-        {
-            public void valueChanged(ListSelectionEvent e) 
-            {
+        select.addListSelectionListener(new ListSelectionListener() {
+            public void valueChanged(ListSelectionEvent e) {
                 int selectRow = table1.getSelectedRow();
-                if (selectRow != -1) 
-                {
+                if (selectRow != -1) {
                     selectedData = (String) table1.getValueAt(selectRow, 0);
                     Consignment.consignment.setDeliveryConsignmentDetails(selectedData);
                     delivery.deliveryCard.show(delivery.ContentForDelivery, "PDeliveryConsignment");
@@ -79,7 +74,7 @@ public class completed extends JPanel
         sp.setForeground(Color.black);
         sp.setFont(new Font("arial", Font.BOLD, 20));
         sp.setVisible(true);
-        
+
         add(sp);
         setVisible(true);
         this.setBackground(panel);

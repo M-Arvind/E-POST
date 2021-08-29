@@ -1,5 +1,6 @@
 package customer;
 
+import Admin.StyledButtonUi;
 import Database.DatabaseOperations;
 import Login.login;
 import customer.DatasForCustomer.ConsignmentData;
@@ -64,6 +65,7 @@ public class AuthenticationForParcel {
 
         auth_btn_confirm.setBackground(primary_Color);
         auth_btn_confirm.setBorder(null);
+        auth_btn_confirm.setUI(new StyledButtonUi());
 
         //Action Listener For Confirm Button
         auth_btn_confirm.addActionListener(new ActionListener() {
@@ -71,17 +73,16 @@ public class AuthenticationForParcel {
             public void actionPerformed(ActionEvent e) {
 
                 if (getAuthentication()) {
-                    try{
-                       WalletDataG.setBalence(Float.valueOf(CustomerProfileData.getBankBalance()));//
-                    WalletDataG.setItemCode(DatabaseOperations.getStocks().get(1).getitemCode());
-                    WalletDataG.setTransationType("Parcel");
-                    WalletDataG.setAmount(Float.valueOf(DatabaseOperations.getStocks().get(1).getItemPrice()));//fees for Parcel 1kg
-  
+                    try {
+                        WalletDataG.setBalence(Float.valueOf(CustomerProfileData.getBankBalance()));//
+                        WalletDataG.setItemCode(DatabaseOperations.getStocks().get(1).getitemCode());
+                        WalletDataG.setTransationType("Parcel");
+                        WalletDataG.setAmount(Float.valueOf(DatabaseOperations.getStocks().get(1).getItemPrice()));//fees for Parcel 1kg
+
+                    } catch (Exception l) {
+                        System.out.println("Auatentication Parcel" + l.toString());
                     }
-                    catch(Exception l){
-                        System.out.println("Auatentication Parcel"+l.toString());
-                    }
-                   
+
                     Database.DatabaseOperations.updateConsignment();
                     Database.DatabaseOperations.updateWalletTransaction();
 

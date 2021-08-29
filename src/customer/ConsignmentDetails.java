@@ -22,7 +22,7 @@ class ConsignmentDetails extends JPanel implements ActionListener {
     private JLabel consignDetail, item, itemPrice, itemWeight, itemCode, agentId, orderDate, deliverDate, payment, status;
     private JLabel billingDetail, senderId, seFirstName, seLastName, seConstact, seAddress;
     private JLabel shipDetails, receId, receFirstName, receLastName, receContact, receAdress;
-    private JLabel vConsignDetail, vItem, vItemPrice, vItemWeight, vItemCode, vAgentId, vOrderDate, vDeliverDate, vPayment, vStatus;
+    private JLabel vItem, vItemPrice, vItemWeight, vItemCode, vAgentId, vOrderDate, vDeliverDate, vPayment, vStatus;
     private JLabel vSenderId, vSeFirstName, vSeLastName, vSeConstact;
     private JLabel vReceId, vReceFirstName, vReceLastName, vReceContact;
     private JTextArea vReceAdress, vSeAddress;
@@ -110,7 +110,7 @@ class ConsignmentDetails extends JPanel implements ActionListener {
         vStatus = new JLabel("Delivered");
         vStatus.setFont(fon);
 
-        billingDetail = new JLabel("Billint Details");
+        billingDetail = new JLabel("Billing Details");
         billingDetail.setFont(font);
         senderId = new JLabel("Sender ID          :");
         senderId.setFont(fon);

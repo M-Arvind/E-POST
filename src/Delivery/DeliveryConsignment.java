@@ -4,11 +4,8 @@ import Admin.FancyprogressBar;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.geom.Line2D;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -122,7 +119,7 @@ public class DeliveryConsignment extends JPanel implements ActionListener {
         vStatus = new JLabel("");
         vStatus.setFont(fon);
 
-        billingDetail = new JLabel("Billint Details");
+        billingDetail = new JLabel("Billing Details");
         billingDetail.setFont(font);
 
         senderId = new JLabel("Sender ID          :");

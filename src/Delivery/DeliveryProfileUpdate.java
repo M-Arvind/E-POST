@@ -12,11 +12,11 @@ import java.util.regex.Pattern;
 import main.main;
 import profile.DeliveryProfile;
 
-public class DeliveryProfileUpdate extends JPanel implements MouseListener, ActionListener 
-{
+public class DeliveryProfileUpdate extends JPanel implements MouseListener, ActionListener {
+
     //Private Variables
     private JLabel Collon1, Collon2, Collon3, Collon4, Collon5, Collon6, Collon7, Collon8, Collon9, Collon10, Collon11, Collon12;
-    private JButton ProfIconLabel, BackIconLabel, EditIconLabel;
+    private JButton ProfIconLabel, BackIconLabel;
     private JButton SaveButton;
     private int X = 230, Y = 90;
     private int R = 34, G = 34, B = 45;
@@ -32,8 +32,7 @@ public class DeliveryProfileUpdate extends JPanel implements MouseListener, Acti
     public static JTextArea pAddressValue, tAddressValue;
     public static JComboBox martialValue;
 
-    public DeliveryProfileUpdate() 
-    {
+    public DeliveryProfileUpdate() {
         //Adding A Image
         ProfIcon = new ImageIcon(getClass().getResource("/Images/ProfileImage.png"));
         ProfIconLabel = new JButton(ProfIcon);
@@ -42,7 +41,7 @@ public class DeliveryProfileUpdate extends JPanel implements MouseListener, Acti
         ProfIconLabel.setBackground(new Color(R, G, B));
         ProfIconLabel.setBorder(emptyBorder);
         add(ProfIconLabel);
-        
+
         //Adding A Image
         BackIcon = new ImageIcon(getClass().getResource("/Images/arrow_back_button.png"));
         BackIconLabel = new JButton(BackIcon);
@@ -60,7 +59,7 @@ public class DeliveryProfileUpdate extends JPanel implements MouseListener, Acti
         UserNameTop.setFont(new Font("Bold", Font.BOLD, labelFontSize + 20));
         UserNameTop.setForeground(Color.WHITE);
         add(UserNameTop);
-       
+
         firstNameLabel = new JLabel("FIRST NAME");
         firstNameLabel.setBounds(X - 150, Y, 200, 150);
         firstNameLabel.setFont(new Font("Segoe UI", Font.BOLD, labelFontSize));
@@ -68,7 +67,7 @@ public class DeliveryProfileUpdate extends JPanel implements MouseListener, Acti
         Collon1 = new JLabel(":");
         Collon1.setBounds(X + 60 + 30, Y, 20, 150);
         Collon1.setFont(new Font("Segoe UI", Font.BOLD, labelFontSize));
-        Collon1.setForeground(Color.WHITE);       
+        Collon1.setForeground(Color.WHITE);
         firstNameValue = new JTextField("First Name");
         firstNameValue.setBounds(X + 240 - 120, Y + 60, 300, 35);
         firstNameValue.setFont(new Font("Segoe UI", Font.PLAIN, labelFontSize));
@@ -87,7 +86,7 @@ public class DeliveryProfileUpdate extends JPanel implements MouseListener, Acti
         Collon2 = new JLabel(":");
         Collon2.setBounds(X + 450 + 150 + 40 + 30 + 10, Y, 20, 150);
         Collon2.setFont(new Font("Bold", Font.BOLD, labelFontSize));
-        Collon2.setForeground(Color.WHITE);        
+        Collon2.setForeground(Color.WHITE);
         lastNameValue = new JTextField("Last Name");
         lastNameValue.setBounds(X + 240 + 300 + 100 + 60 + 10, Y + 60, 300, 35);
         lastNameValue.setFont(new Font("Segoe UI", Font.PLAIN, labelFontSize));
@@ -106,7 +105,7 @@ public class DeliveryProfileUpdate extends JPanel implements MouseListener, Acti
         Collon3 = new JLabel(":");
         Collon3.setBounds(X + 60 + 30, Y + 70, 20, 150);
         Collon3.setFont(new Font("Segoe UI", Font.BOLD, labelFontSize));
-        Collon3.setForeground(Color.WHITE);       
+        Collon3.setForeground(Color.WHITE);
         DOBValue = new JTextField("DOB");
         DOBValue.setBounds(X + 240 - 120, Y + 60 + 70, 300, 35);
         DOBValue.setFont(new Font("Segoe UI", Font.PLAIN, labelFontSize));
@@ -125,7 +124,7 @@ public class DeliveryProfileUpdate extends JPanel implements MouseListener, Acti
         Collon4 = new JLabel(":");
         Collon4.setBounds(X + 450 + 150 + 40 + 30 + 10, Y + 70, 20, 150);
         Collon4.setFont(new Font("Bold", Font.BOLD, labelFontSize));
-        Collon4.setForeground(Color.WHITE);       
+        Collon4.setForeground(Color.WHITE);
         ageValue = new JTextField("AGE");
         ageValue.setBounds(X + 240 + 300 + 100 + 60 + 10, Y + 60 + 70, 300, 35);
         ageValue.setFont(new Font("Segoe UI", Font.PLAIN, labelFontSize));
@@ -144,7 +143,7 @@ public class DeliveryProfileUpdate extends JPanel implements MouseListener, Acti
         Collon5 = new JLabel(":");
         Collon5.setBounds(X + 60 + 30, Y + 70 + 70, 20, 150);
         Collon5.setFont(new Font("Segoe UI", Font.BOLD, labelFontSize));
-        Collon5.setForeground(Color.WHITE);        
+        Collon5.setForeground(Color.WHITE);
         contactNoValue = new JTextField("Contact Number");
         contactNoValue.setBounds(X + 240 - 120, Y + 60 + 70 + 70, 300, 35);
         contactNoValue.setFont(new Font("Segoe UI", Font.PLAIN, labelFontSize));
@@ -166,7 +165,7 @@ public class DeliveryProfileUpdate extends JPanel implements MouseListener, Acti
         Collon6.setForeground(Color.WHITE);
         martialValue = new JComboBox(martialStatusValues);
         martialValue.setBounds(X + 240 + 300 + 100 + 60 + 10, Y + 60 + 70 + 70, 300, 35);
-        martialValue.setFont(new Font("Segoe UI", Font.PLAIN, labelFontSize));        
+        martialValue.setFont(new Font("Segoe UI", Font.PLAIN, labelFontSize));
         add(martialLabel);
         add(Collon6);
         add(martialValue);
@@ -178,7 +177,7 @@ public class DeliveryProfileUpdate extends JPanel implements MouseListener, Acti
         Collon7 = new JLabel(":");
         Collon7.setBounds(X + 60 + 30, Y + 70 + 70 + 70, 20, 150);
         Collon7.setFont(new Font("Segoe UI", Font.BOLD, labelFontSize));
-        Collon7.setForeground(Color.WHITE);       
+        Collon7.setForeground(Color.WHITE);
         salaryValue = new JTextField("Salary");
         salaryValue.setBounds(X + 240 - 120, Y + 60 + 70 + 70 + 70, 300, 35);
         salaryValue.setFont(new Font("Segoe UI", Font.PLAIN, labelFontSize));
@@ -197,7 +196,7 @@ public class DeliveryProfileUpdate extends JPanel implements MouseListener, Acti
         Collon8 = new JLabel(":");
         Collon8.setBounds(X + 450 + 150 + 40 + 30 + 10, Y + 70 + 70 + 70, 20, 150);
         Collon8.setFont(new Font("Bold", Font.BOLD, labelFontSize));
-        Collon8.setForeground(Color.WHITE);        
+        Collon8.setForeground(Color.WHITE);
         designationValue = new JTextField("Delivery Member");
         designationValue.setBounds(X + 240 + 300 + 100 + 60 + 10, Y + 60 + 70 + 70 + 70, 300, 35);
         designationValue.setFont(new Font("Segoe UI", Font.PLAIN, labelFontSize));
@@ -216,7 +215,7 @@ public class DeliveryProfileUpdate extends JPanel implements MouseListener, Acti
         Collon9 = new JLabel(":");
         Collon9.setBounds(X + 60 + 30, Y + 70 + 70 + 70 + 70, 20, 150);
         Collon9.setFont(new Font("Segoe UI", Font.BOLD, labelFontSize));
-        Collon9.setForeground(Color.WHITE);       
+        Collon9.setForeground(Color.WHITE);
         stateValue = new JTextField("State");
         stateValue.setBounds(X + 240 - 120, Y + 60 + 70 + 70 + 70 + 70, 300, 35);
         stateValue.setFont(new Font("Segoe UI", Font.PLAIN, labelFontSize));
@@ -254,7 +253,7 @@ public class DeliveryProfileUpdate extends JPanel implements MouseListener, Acti
         Collon11 = new JLabel(":");
         Collon11.setBounds(X + 60 + 30, Y + 70 + 70 + 70 + 70 + 70, 20, 150);
         Collon11.setFont(new Font("Segoe UI", Font.BOLD, labelFontSize));
-        Collon11.setForeground(Color.WHITE);       
+        Collon11.setForeground(Color.WHITE);
         pAddressValue = new JTextArea("Permanent Address");
         pAddressValue.setBounds(X + 240 - 120, Y + 60 + 70 + 70 + 70 + 70 + 70, 300, 100);
         pAddressValue.setFont(new Font("Segoe UI", Font.PLAIN, labelFontSize));
@@ -288,15 +287,16 @@ public class DeliveryProfileUpdate extends JPanel implements MouseListener, Acti
         add(tAddressLabel);
         add(Collon12);
         add(tAddressValue);
-        
+
         //JButton
         SaveButton = new JButton("Save");
         SaveButton.setBounds(X + 400, Y + 600, 100, 30);
         SaveButton.setForeground(Color.WHITE);
         SaveButton.setBackground(new Color(71, 63, 145));
         SaveButton.addActionListener(this);
+        SaveButton.setUI(new StyledButtonUI());
         add(SaveButton);
-        
+
         //JPanel
         setBounds(0, 0, 1350, 890);
         setBackground(new Color(R, G, B));
@@ -307,58 +307,35 @@ public class DeliveryProfileUpdate extends JPanel implements MouseListener, Acti
 
     //MouseListener
     @Override
-    public void mouseClicked(MouseEvent e) 
-    {
-        if (e.getSource() == BackIconLabel) 
-        {
+    public void mouseClicked(MouseEvent e) {
+        if (e.getSource() == BackIconLabel) {
             DeliveryProfile.setDeliveryProfile(Login.login.user_ID);
             main.switchPage("deliveryProfileView");
-        } 
-        else if (e.getSource() == firstNameValue) 
-        {
+        } else if (e.getSource() == firstNameValue) {
             firstNameValue.setText("");
-        } 
-        else if (e.getSource() == lastNameValue) 
-        {
+        } else if (e.getSource() == lastNameValue) {
             lastNameValue.setText("");
-        } 
-        else if (e.getSource() == DOBValue) 
-        {
+        } else if (e.getSource() == DOBValue) {
             DOBValue.setText("");
-        } 
-        else if (e.getSource() == ageValue) 
-        {
+        } else if (e.getSource() == ageValue) {
             ageValue.setText("");
-        } 
-        else if (e.getSource() == contactNoValue) 
-        {
+        } else if (e.getSource() == contactNoValue) {
             contactNoValue.setText("");
-        } 
-        else if (e.getSource() == salaryValue) 
-        {
+        } else if (e.getSource() == salaryValue) {
             salaryValue.setText("");
-        } 
-        else if (e.getSource() == designationValue) 
-        {
+        } else if (e.getSource() == designationValue) {
             designationValue.setText("");
-        } 
-        else if (e.getSource() == stateValue) 
-        {
+        } else if (e.getSource() == stateValue) {
             stateValue.setText("");
-        } 
-        else if (e.getSource() == districtValue) 
-        {
+        } else if (e.getSource() == districtValue) {
             districtValue.setText("");
-        } 
-        else if (e.getSource() == pAddressValue) 
-        {
+        } else if (e.getSource() == pAddressValue) {
             pAddressValue.setText("");
-        } 
-        else if (e.getSource() == tAddressValue) 
-        {
+        } else if (e.getSource() == tAddressValue) {
             tAddressValue.setText("");
         }
     }
+
     @Override
     public void mousePressed(MouseEvent e) {
 
@@ -378,11 +355,10 @@ public class DeliveryProfileUpdate extends JPanel implements MouseListener, Acti
     public void mouseExited(MouseEvent e) {
 
     }
-    
+
     //ActionListener
     @Override
-    public void actionPerformed(ActionEvent e) 
-    {
+    public void actionPerformed(ActionEvent e) {
         //String Variables
         String firstName = firstNameValue.getText();
         String lastName = lastNameValue.getText();
@@ -392,49 +368,30 @@ public class DeliveryProfileUpdate extends JPanel implements MouseListener, Acti
         String designation = designationValue.getText();
         String state = stateValue.getText();
         String district = districtValue.getText();
-        
+
         //Validating
-        if (!Pattern.matches("^([A-Za-z ])+$", firstName)) 
-        {
+        if (!Pattern.matches("^([A-Za-z ])+$", firstName)) {
             JOptionPane.showMessageDialog(this, "First Name should contain only Characters");
-        } 
-        else if (firstName.length() < 3) 
-        {
+        } else if (firstName.length() < 3) {
             JOptionPane.showMessageDialog(this, "First Name should contain atleast 4 Characters");
-        } 
-        else if (lastName.length() < 1) 
-        {
+        } else if (lastName.length() < 1) {
             JOptionPane.showMessageDialog(this, "Enter last Name");
-        } 
-        else if (!Pattern.matches("^([0-9]{4})-([0-9]{2})-([0-9]{2})$", DOB)) 
-        {
+        } else if (!Pattern.matches("^([0-9]{4})-([0-9]{2})-([0-9]{2})$", DOB)) {
             JOptionPane.showMessageDialog(this, "Enter date in yyyy-mm-dd format");
-        } 
-        else if (!Pattern.matches("^[0-9]+$", age)) 
-        {
+        } else if (!Pattern.matches("^[0-9]+$", age)) {
             JOptionPane.showMessageDialog(this, "Enter valid age");
-        } 
-        else if (!Pattern.matches("^[0-9]*$", contactNumber) || contactNumber.length() != 10) 
-        {
+        } else if (!Pattern.matches("^[0-9]*$", contactNumber) || contactNumber.length() != 10) {
             JOptionPane.showMessageDialog(this, "Enter valid Phone Number");
-        } 
-        else if (!Pattern.matches("^([A-Za-z ])+$", designation)) 
-        {
+        } else if (!Pattern.matches("^([A-Za-z ])+$", designation)) {
             JOptionPane.showMessageDialog(this, "Designation should contain only characters");
-        } 
-        else if (!Pattern.matches("^([A-Za-z ])+$", state)) 
-        {
+        } else if (!Pattern.matches("^([A-Za-z ])+$", state)) {
             JOptionPane.showMessageDialog(this, "state should contain only characters");
-        } 
-        else if (!Pattern.matches("^([A-Za-z ])+$", district)) 
-        {
+        } else if (!Pattern.matches("^([A-Za-z ])+$", district)) {
             JOptionPane.showMessageDialog(this, "district should contain only characters");
-        } 
-        else 
-        {
+        } else {
             //Setter Method
             DeliveryProfile details = new DeliveryProfile();
-            
+
             details.setFirstName(firstName);
             details.setLastName(lastName);
             details.setAge(Integer.parseInt(age));
@@ -445,12 +402,12 @@ public class DeliveryProfileUpdate extends JPanel implements MouseListener, Acti
             details.setState(state);
             details.setDistrict(district);
             details.setPermanentAddress(pAddressValue.getText());
-            details.setTemporaryAddress(tAddressValue.getText());            
+            details.setTemporaryAddress(tAddressValue.getText());
             details.setDob(Date.valueOf(DOBValue.getText()));
-            
+
             //Updating the Database
             Database.DatabaseOperations.updateDeliveryProfile(details, Login.login.user_ID);
-            
+
             DeliveryProfile.setDeliverydeliveryProfile(Login.login.user_ID);
             main.switchPage("DeliveryProfileView");
         }
