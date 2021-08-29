@@ -1,9 +1,7 @@
 package customer;
+
 import Database.DatabaseOperations;
 import Login.login;
-import static Login.login.user_ID;
-import static customer.CustomerPanel.BE_Post;
-import static customer.CustomerPanel.contentForCustomer;
 import main.*;
 import customer.DatasForCustomer.*;
 import java.awt.Color;
@@ -17,21 +15,24 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
-public class AuthenticationForE_Post
-{
-    JDialog newdialog = new JDialog();
-    
-    Color background_Color = new Color(34,34,45);
-    Color on_background_Color = new Color(254,254,254);
-    Color primary_Color = new Color(71,63,145);
-    
-    JLabel auth_password;
-    JTextField auth_password_info,userID;
-    JButton auth_btn_confirm;
-    private static boolean flag;
+public class AuthenticationForE_Post {
 
-    public AuthenticationForE_Post() 
-    {
+    //Dialog
+    JDialog newdialog = new JDialog();
+
+    //color
+    Color background_Color = new Color(34, 34, 45);
+    Color on_background_Color = new Color(254, 254, 254);
+    Color primary_Color = new Color(71, 63, 145);
+
+    //Label
+    JLabel auth_password;
+    //TextField
+    JTextField auth_password_info, userID;
+    //Button
+    JButton auth_btn_confirm;
+
+    public AuthenticationForE_Post() {
         newdialog.setSize(600, 450);
         newdialog.setLayout(null);
 
@@ -40,113 +41,113 @@ public class AuthenticationForE_Post
         e_payment_auth.setBounds(220, 30, 187, 20);
         e_payment_auth.setForeground(on_background_Color);
         newdialog.add(e_payment_auth);
-        
+
         auth_password = new JLabel("Enter Your Password");
         auth_password_info = new JTextField();
-        userID=new JTextField();
+        userID = new JTextField();
         userID.setText(Login.login.user_ID);
         auth_btn_confirm = new JButton("Confirm");
-        
+
+        //setBounds
         auth_password.setBounds(135, 120, 200, 20);
         auth_password_info.setBounds(135, 160, 310, 30);
         auth_btn_confirm.setBounds(220, 250, 150, 40);
-        
+
+        //setForeground
         auth_password.setForeground(on_background_Color);
         auth_password_info.setForeground(background_Color);
         auth_btn_confirm.setForeground(on_background_Color);
-        
+
         auth_password.setFont(new Font("Segoe UI", Font.PLAIN, 22));
-        
+
+        //addComponent
         newdialog.add(auth_password);
         newdialog.add(auth_password_info);
         newdialog.add(auth_btn_confirm);
-        
-        //auth_password_info.setColumns(10);
 
+        //auth_password_info.setColumns(10);
         auth_btn_confirm.setBackground(primary_Color);
         auth_btn_confirm.setBorder(null);
-        
-        auth_btn_confirm.addActionListener(new ActionListener()
-        {
+
+        //Confirm Button
+        auth_btn_confirm.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) 
-            {
-                
-              EPostData.setIsPasswordCorrect(getAuthentication());
-                
-              if(EPostData.isIsPasswordCorrect()){
-              WalletDataG.setBalence(Float.valueOf(CustomerProfileData.getBankBalance()));//customer Balence
-              WalletDataG.setItemCode(DatabaseOperations.getStocks().get(0).getitemCode());
-              WalletDataG.setItemPrice(Float.valueOf(DatabaseOperations.getStocks().get(0).getItemPrice()));
-              WalletDataG.setAmount(Float.valueOf(DatabaseOperations.getStocks().get(0).getItemPrice()));//fees for Parcel 1kg
-              WalletDataG.setTransationType("E-Post");
-              if(EPostData.isHardCopy()==true && EPostData.isSoftCopy()==true){
-                  Database.DatabaseOperations.updateInbox();
-                  Database.DatabaseOperations.updateConsignment();
-                  Database.DatabaseOperations.updateWalletTransaction();
-              }
-              else if(EPostData.isHardCopy()==true){
-                 Database.DatabaseOperations.updateConsignment();
-                 Database.DatabaseOperations.updateWalletTransaction();
-              }
-              else if(EPostData.isSoftCopy()==true){
-                   Database.DatabaseOperations.updateInbox();
-                   Database.DatabaseOperations.updateConsignment();
-                   Database.DatabaseOperations.updateWalletTransaction();
-                   
-              }
-              ConsignmentData.listForConsignment.clear();
-              ConsignmentData.setIsUpdate(true);
-              try{
-                  Thread.sleep(50);
-              }catch(Exception q){}
-              JOptionPane.showMessageDialog(null,"Payment Successfull");
-              CustomerPanel.contentForCustomer.add(new ConsignmentPanel(),"update");
-              main.switchPage("customerPanel");
-              CustomerPanel.BConsignment.setBounds(55+120+60,120,160,30);
-              CustomerPanel.BE_Post.setBounds(55+180+180,110,160,30);
-              CustomerPanel.customerCard.show(CustomerPanel.contentForCustomer,"update");
-              newdialog.dispose();
+            public void actionPerformed(ActionEvent e) {
+
+                EPostData.setIsPasswordCorrect(getAuthentication());
+
+                if (EPostData.isIsPasswordCorrect()) {
+                    try{
+                   WalletDataG.setBalence(Float.valueOf(CustomerProfileData.getBankBalance()));//customer Balence
+                    WalletDataG.setItemCode(DatabaseOperations.getStocks().get(0).getitemCode());
+                    WalletDataG.setItemPrice(Float.valueOf(DatabaseOperations.getStocks().get(0).getItemPrice()));
+                    WalletDataG.setAmount(Float.valueOf(DatabaseOperations.getStocks().get(0).getItemPrice()));//fees for Parcel 1kg
+                    WalletDataG.setTransationType("E-Post");
+                    }
+                    catch(Exception y){
+                        System.out.println("Authentication E-Post"+y.toString());
+                    }
+                    
+                    if (EPostData.isHardCopy() == true && EPostData.isSoftCopy() == true) {
+                        Database.DatabaseOperations.updateInbox();
+                        Database.DatabaseOperations.updateConsignment();
+                        Database.DatabaseOperations.updateWalletTransaction();
+                    } else if (EPostData.isHardCopy() == true) {
+                        Database.DatabaseOperations.updateConsignment();
+                        Database.DatabaseOperations.updateWalletTransaction();
+                    } else if (EPostData.isSoftCopy() == true) {
+                        Database.DatabaseOperations.updateInbox();
+                        Database.DatabaseOperations.updateConsignment();
+                        Database.DatabaseOperations.updateWalletTransaction();
+
+                    }
+                    ConsignmentData.listForConsignment.clear();
+                    ConsignmentData.setIsUpdate(true);
+                    try {
+                        Thread.sleep(50);
+                    } catch (Exception q) {
+                    }
+                    JOptionPane.showMessageDialog(null, "Payment Successfull");
+                    CustomerPanel.contentForCustomer.add(new ConsignmentPanel(), "update");
+                    main.switchPage("customerPanel");
+                    CustomerPanel.BConsignment.setBounds(55 + 120 + 60, 120, 160, 30);
+                    CustomerPanel.BE_Post.setBounds(55 + 180 + 180, 110, 160, 30);
+                    CustomerPanel.customerCard.show(CustomerPanel.contentForCustomer, "update");
+                    newdialog.dispose();
+
+                } else {
+                    JOptionPane.showMessageDialog(null, "Incorrect Password");
 
                 }
-             else{
-                JOptionPane.showMessageDialog(null,"Incorrect Password");
-            
-             }       
             }
-                        
-        });        
+
+        });
 
         newdialog.getContentPane().setBackground(background_Color);
         newdialog.setVisible(true);
 
     }
-    private  boolean getAuthentication(){
-        ArrayList list = DatabaseOperations.getLoginCredentials(userID,auth_password_info);
-        
-        try
-        {
+
+    //Authentication
+    private boolean getAuthentication() {
+        ArrayList list = DatabaseOperations.getLoginCredentials(userID, auth_password_info);
+
+        try {
             int salt = Integer.parseInt(list.get(1).toString());
-            
+
             String password = login.createHash(auth_password_info.getText(), salt);
-            
-            if(password.equals(list.get(0).toString()))
-            {   
-                
+
+            if (password.equals(list.get(0).toString())) {
+
                 return true;
-                
-            }
-            else
-            {
+
+            } else {
                 return false;
-            }     
-        }
-        catch(Exception ex)
-        {
+            }
+        } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Wrong E-mail/Password");
-        } 
-    
+        }
+
         return false;
     }
 }
-

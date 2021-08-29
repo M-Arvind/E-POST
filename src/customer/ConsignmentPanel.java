@@ -1,11 +1,7 @@
 package customer;
+
 import Database.*;
-import javax.swing.JLabel;
 import java.awt.Color;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import javax.swing.DefaultCellEditor;
-import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -16,71 +12,77 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
-class ConsignmentPanel extends JPanel implements ActionListener{
+class ConsignmentPanel extends JPanel {
+
+    //Panel
     JPanel PConTable;
+    //Table
     public JTable table;
+    //scroll Pane
     JScrollPane scroll;
-    public static TableRowSorter sorter; 
-    private  TableModel model;
-    public ConsignmentPanel(){
+    //Sorter For Table
+    public static TableRowSorter sorter;
+    //Table Model
+    private TableModel model;
+
+    public ConsignmentPanel() {
 
         this.setLayout(null);
         this.setBackground(Color.white);
-        Object[][] rows =DatabaseOperations.getCustomerConsignmentDetails();
-        String[] columns = {"S.NO","Consignment ID", "From","To", "Item", "Delivery ID", "Payment Method", "Date", "Status"};     
+        //Rows
+        Object[][] rows = DatabaseOperations.getCustomerConsignmentDetails();
+        //columns
+        String[] columns = {"S.NO", "Consignment ID", "From", "To", "Item", "Delivery ID", "Payment Method", "Date", "Status"};
         Border border = new LineBorder(new Color(71, 63, 145), 1, true);
-        
-        
-        model=new DefaultTableModel(rows, columns);
-        sorter=new TableRowSorter(model);
-        table =new JTable(model){
-          @Override
-         public boolean editCellAt(int row, int column, java.util.EventObject e) {
-            return false;
-         }
+
+        model = new DefaultTableModel(rows, columns);
+        sorter = new TableRowSorter(model);
+
+        //Object For Table
+        table = new JTable(model) {
+            @Override
+            public boolean editCellAt(int row, int column, java.util.EventObject e) {
+                return false;
+            }
         };
         table.setRowSorter(sorter);
         table.setRowHeight(30);
         table.setBorder(border);
         table.setRowSelectionAllowed(true);
-        
+
         ListSelectionModel select = table.getSelectionModel();
         select.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        
+
+        //ListSelectionListener to Listen Selected Row
         select.addListSelectionListener(new ListSelectionListener() {
-       public void valueChanged(ListSelectionEvent e) {
-       
-        
-        int[] selectedRow = table.getSelectedRows();
-        Integer data= (Integer)table.getValueAt(selectedRow[0], 0);
-        int temp=data-1;
-        ConsignmentDetails ob=(ConsignmentDetails)CustomerPanel.PConsignmentDetails;
-        ob.setConignmentDetails(temp);
-        CustomerPanel.customerCard.show(CustomerPanel.contentForCustomer,"ConsignmentDetails");
-        
-      }
+            public void valueChanged(ListSelectionEvent e) {
 
-    });
+                int[] selectedRow = table.getSelectedRows();
+                Integer data = (Integer) table.getValueAt(selectedRow[0], 0);
+                int temp = data - 1;
+                ConsignmentDetails ob = (ConsignmentDetails) CustomerPanel.PConsignmentDetails;
+                ob.setConignmentDetails(temp);
+                CustomerPanel.customerCard.show(CustomerPanel.contentForCustomer, "ConsignmentDetails");
 
+            }
+
+        });
+
+        //Table header
         JTableHeader tab = table.getTableHeader();
         JTableHeader tableHeader = table.getTableHeader();
         tab.setBackground(new Color(71, 63, 145));
         tab.setForeground(Color.white);
 
-        
+        //adding Table in Scroll Pane
         scroll = new JScrollPane(table);
-        
+
         scroll.setBounds(30, 30, 1200, 500);
         scroll.setVisible(true);
         this.add(scroll);
     }
-    
-    @Override
-    public void actionPerformed(ActionEvent e) {
-    }
-    
+
 }

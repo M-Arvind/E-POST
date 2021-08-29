@@ -1,4 +1,5 @@
 package customer;
+
 import Database.DatabaseOperations;
 import customer.DatasForCustomer.WalletData;
 import java.awt.BorderLayout;
@@ -24,17 +25,17 @@ import javax.swing.JTextField;
 import javax.swing.border.Border;
 import main.main;
 
-public class MoneyOrder extends JPanel implements MouseListener
-{
-    Color background_Color = new Color(34,34,45);
-    Color on_background_Color = new Color(254,254,254);
-    Color primary_Color = new Color(71,63,145);
-    
+public class MoneyOrder extends JPanel implements MouseListener {
+
+    Color background_Color = new Color(34, 34, 45);
+    Color on_background_Color = new Color(254, 254, 254);
+    Color primary_Color = new Color(71, 63, 145);
+
     JPanel moneyOrderPanel;
 
     JLabel moneyOrder_title;
     JButton moneyOrder_btn_confirm;
-    
+
     //Left Label
     JLabel moneyOrder_toUsername;
     JLabel moneyOrder_amount;
@@ -57,16 +58,14 @@ public class MoneyOrder extends JPanel implements MouseListener
     JTextField moneyOrder_district_info;
     JTextField moneyOrder_pincode_info;
     Border emptyBorder = BorderFactory.createEmptyBorder();
-    int R=34,G=34,B=45;
-    int X_FORCUSTOMER=30,Y_FORCUSTOMER=150,WIDTHFORCUSTOMER=1260,HIGHTFORCUSTOMER=750;
-    
-    public MoneyOrder()
-    { 
-          
-      
+    int R = 34, G = 34, B = 45;
+    int X_FORCUSTOMER = 30, Y_FORCUSTOMER = 150, WIDTHFORCUSTOMER = 1260, HIGHTFORCUSTOMER = 750;
+
+    public MoneyOrder() {
+
         setLayout(null);
         moneyOrder_btn_confirm = new JButton();
-        
+
         //Label
         moneyOrder_title = new JLabel("Money Order");
         moneyOrder_toUsername = new JLabel("To Username");
@@ -78,7 +77,7 @@ public class MoneyOrder extends JPanel implements MouseListener
         moneyOrder_state = new JLabel("State");
         moneyOrder_district = new JLabel("District");
         moneyOrder_pincode = new JLabel("Pincode");
-        
+
         //Content Label
         moneyOrder_toUsername_info = new JTextField(20);
         moneyOrder_amount_info = new JTextField(20);
@@ -89,70 +88,67 @@ public class MoneyOrder extends JPanel implements MouseListener
         moneyOrder_state_info = new JTextField(20);
         moneyOrder_district_info = new JTextField(20);
         moneyOrder_pincode_info = new JTextField(20);
-        
+
         moneyOrder_address_info.setLineWrap(true);
-        
-        Icon BackIcon=new ImageIcon(getClass().getResource("/Images/arrow_back_button.png"));
-        BackIconLabel=new JButton(BackIcon);
-	BackIconLabel.setBounds(10,10,30,30);
-	BackIconLabel.setBackground(new Color(R,G,B));
-	BackIconLabel.setBorder(emptyBorder);
-	BackIconLabel.setVisible(true);
+
+        Icon BackIcon = new ImageIcon(getClass().getResource("/Images/arrow_back_button.png"));
+        BackIconLabel = new JButton(BackIcon);
+        BackIconLabel.setBounds(10, 10, 30, 30);
+        BackIconLabel.setBackground(new Color(R, G, B));
+        BackIconLabel.setBorder(emptyBorder);
+        BackIconLabel.setVisible(true);
         BackIconLabel.setContentAreaFilled(false);
-	BackIconLabel.addMouseListener(this);
-	add(BackIconLabel);
-				
+        BackIconLabel.addMouseListener(this);
+        add(BackIconLabel);
+
         //Button and title
-        moneyOrder_title.setBounds(555,20, 200, 50);
-        moneyOrder_btn_confirm.setBounds(570,675,150,40);
+        moneyOrder_title.setBounds(555, 20, 200, 50);
+        moneyOrder_btn_confirm.setBounds(570, 675, 150, 40);
         moneyOrder_btn_confirm.setBackground(primary_Color);
         moneyOrder_btn_confirm.setText("Confirm");
         moneyOrder_btn_confirm.setForeground(on_background_Color);
         moneyOrder_btn_confirm.setBorder(null);
-        moneyOrder_btn_confirm.addActionListener((l)->{
-            
-           if( DatabaseOperations.CheckIdPresentOrNot(moneyOrder_toUsername_info.getText())){
-               WalletData.MoneyOrderValues.add(moneyOrder_toUsername_info.getText()); //0
-               WalletData.MoneyOrderValues.add(moneyOrder_amount_info.getText()); //1
-               WalletData.MoneyOrderValues.add(moneyOrder_firstName_info.getText()); //2
-               WalletData.MoneyOrderValues.add(moneyOrder_lastName_info.getText()); //3
-               WalletData.MoneyOrderValues.add(moneyOrder_type_info.getText()); //4
-               WalletData.MoneyOrderValues.add(moneyOrder_address_info.getText());//5
-               WalletData.MoneyOrderValues.add(moneyOrder_state_info.getText());//6
-               WalletData.MoneyOrderValues.add(moneyOrder_district_info.getText());//7
-               WalletData.MoneyOrderValues.add(moneyOrder_pincode_info.getText());//8
-               new WalletAuthentication();
-               
-            
-            //new Authentication();
+        moneyOrder_btn_confirm.addActionListener((l) -> {
+
+            if (DatabaseOperations.CheckIdPresentOrNot(moneyOrder_toUsername_info.getText())) {
+                WalletData.MoneyOrderValues.add(moneyOrder_toUsername_info.getText()); //0
+                WalletData.MoneyOrderValues.add(moneyOrder_amount_info.getText()); //1
+                WalletData.MoneyOrderValues.add(moneyOrder_firstName_info.getText()); //2
+                WalletData.MoneyOrderValues.add(moneyOrder_lastName_info.getText()); //3
+                WalletData.MoneyOrderValues.add(moneyOrder_type_info.getText()); //4
+                WalletData.MoneyOrderValues.add(moneyOrder_address_info.getText());//5
+                WalletData.MoneyOrderValues.add(moneyOrder_state_info.getText());//6
+                WalletData.MoneyOrderValues.add(moneyOrder_district_info.getText());//7
+                WalletData.MoneyOrderValues.add(moneyOrder_pincode_info.getText());//8
+                new WalletAuthentication();
+
+            } else {
+                JOptionPane.showMessageDialog(null, "Invalid userId");
             }
-           else{
-               JOptionPane.showMessageDialog(null,"Invalid userId");
-           }
-         });
-        
+        });
+
         //Label Bounds
         moneyOrder_toUsername.setBounds(120, 100, 150, 50);
         moneyOrder_amount.setBounds(750, 100, 150, 50);
-        moneyOrder_firstName.setBounds(120,200,150,50);
-        moneyOrder_lastName.setBounds(750,200,150,50);
-        moneyOrder_type.setBounds(120,300,150,50);
-        moneyOrder_address.setBounds(120,500,150,50);
-        moneyOrder_state.setBounds(120,400,150,50);
-        moneyOrder_district.setBounds(750,400,150,50);
-        moneyOrder_pincode.setBounds(750,300,150,50);
-        
+        moneyOrder_firstName.setBounds(120, 200, 150, 50);
+        moneyOrder_lastName.setBounds(750, 200, 150, 50);
+        moneyOrder_type.setBounds(120, 300, 150, 50);
+        moneyOrder_address.setBounds(120, 500, 150, 50);
+        moneyOrder_state.setBounds(120, 400, 150, 50);
+        moneyOrder_district.setBounds(750, 400, 150, 50);
+        moneyOrder_pincode.setBounds(750, 300, 150, 50);
+
         //Content Label Bounds
-        moneyOrder_toUsername_info.setBounds(300, 10+100, 200, 30);
-        moneyOrder_amount_info.setBounds(880, 10+100, 200, 30);
-        moneyOrder_firstName_info.setBounds(300,110+100,200, 30);
-        moneyOrder_lastName_info.setBounds(880,110+100,200, 30);
-        moneyOrder_type_info.setBounds(300,210+100,200, 30);
-        moneyOrder_address_info.setBounds(300,410+100,750,150);
-        moneyOrder_state_info.setBounds(300,310+100,200, 30);
-        moneyOrder_district_info.setBounds(880,310+100,200,30);
-        moneyOrder_pincode_info.setBounds(880,210+100,200, 30);
-        
+        moneyOrder_toUsername_info.setBounds(300, 10 + 100, 200, 30);
+        moneyOrder_amount_info.setBounds(880, 10 + 100, 200, 30);
+        moneyOrder_firstName_info.setBounds(300, 110 + 100, 200, 30);
+        moneyOrder_lastName_info.setBounds(880, 110 + 100, 200, 30);
+        moneyOrder_type_info.setBounds(300, 210 + 100, 200, 30);
+        moneyOrder_address_info.setBounds(300, 410 + 100, 750, 150);
+        moneyOrder_state_info.setBounds(300, 310 + 100, 200, 30);
+        moneyOrder_district_info.setBounds(880, 310 + 100, 200, 30);
+        moneyOrder_pincode_info.setBounds(880, 210 + 100, 200, 30);
+
         //Label Text Color
         moneyOrder_title.setForeground(on_background_Color);
         moneyOrder_toUsername.setForeground(on_background_Color);
@@ -164,7 +160,7 @@ public class MoneyOrder extends JPanel implements MouseListener
         moneyOrder_state.setForeground(on_background_Color);
         moneyOrder_district.setForeground(on_background_Color);
         moneyOrder_pincode.setForeground(on_background_Color);
-        
+
         //Content Label Text Color
         moneyOrder_toUsername_info.setForeground(background_Color);
         moneyOrder_amount_info.setForeground(background_Color);
@@ -175,7 +171,7 @@ public class MoneyOrder extends JPanel implements MouseListener
         moneyOrder_state_info.setForeground(background_Color);
         moneyOrder_district_info.setForeground(background_Color);
         moneyOrder_pincode_info.setForeground(background_Color);
-        
+
         //Label Font
         moneyOrder_title.setFont(new Font("Segoe UI", Font.PLAIN, 30));
         moneyOrder_toUsername.setFont(new Font("Segoe UI", Font.PLAIN, 22));
@@ -187,7 +183,7 @@ public class MoneyOrder extends JPanel implements MouseListener
         moneyOrder_state.setFont(new Font("Segoe UI", Font.PLAIN, 22));
         moneyOrder_district.setFont(new Font("Segoe UI", Font.PLAIN, 22));
         moneyOrder_pincode.setFont(new Font("Segoe UI", Font.PLAIN, 22));
-        
+
         //Content Label Font
         moneyOrder_toUsername_info.setFont(new Font("Segoe UI", Font.PLAIN, 22));
         moneyOrder_amount_info.setFont(new Font("Segoe UI", Font.PLAIN, 22));
@@ -198,68 +194,67 @@ public class MoneyOrder extends JPanel implements MouseListener
         moneyOrder_state_info.setFont(new Font("Segoe UI", Font.PLAIN, 22));
         moneyOrder_district_info.setFont(new Font("Segoe UI", Font.PLAIN, 22));
         moneyOrder_pincode_info.setFont(new Font("Segoe UI", Font.PLAIN, 22));
-        
-       setBounds(50,0,1350,890);  
-       
-        
+
+        setBounds(50, 0, 1350, 890);
+
         //Add to Panel
         //moneyOrderPanel.add(moneyOrder_title);
-        add(moneyOrder_toUsername); 
-        add(moneyOrder_amount); 
-        add(moneyOrder_firstName); 
-        add(moneyOrder_lastName); 
-        add(moneyOrder_type); 
-        add(moneyOrder_address); 
-        add(moneyOrder_state); 
-        add(moneyOrder_district); 
+        add(moneyOrder_toUsername);
+        add(moneyOrder_amount);
+        add(moneyOrder_firstName);
+        add(moneyOrder_lastName);
+        add(moneyOrder_type);
+        add(moneyOrder_address);
+        add(moneyOrder_state);
+        add(moneyOrder_district);
         add(moneyOrder_pincode);
-        
-        add(moneyOrder_toUsername_info); 
-        add(moneyOrder_amount_info); 
-        add(moneyOrder_firstName_info); 
-        add(moneyOrder_lastName_info); 
-        add(moneyOrder_type_info); 
-        add(moneyOrder_address_info); 
-        add(moneyOrder_state_info); 
-        add(moneyOrder_district_info); 
+
+        add(moneyOrder_toUsername_info);
+        add(moneyOrder_amount_info);
+        add(moneyOrder_firstName_info);
+        add(moneyOrder_lastName_info);
+        add(moneyOrder_type_info);
+        add(moneyOrder_address_info);
+        add(moneyOrder_state_info);
+        add(moneyOrder_district_info);
         add(moneyOrder_pincode_info);
         add(moneyOrder_btn_confirm);
         add(moneyOrder_title);
-        
-        
+
         //Panel
-        
         setBackground(background_Color);
-        setSize(1350,925);
-       
-        setVisible(true); 
-            
+        setSize(1350, 925);
+
+        setVisible(true);
+
     }
-     @Override
+
+    //Mouse Listener For BackButton to Switch
+    @Override
     public void mouseClicked(MouseEvent e) {
-        if(e.getSource() == BackIconLabel){
+        if (e.getSource() == BackIconLabel) {
             main.switchPage("customerPanel");
         }
     }
 
     @Override
     public void mousePressed(MouseEvent e) {
-        
+
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
-        
+
     }
 
     @Override
     public void mouseEntered(MouseEvent e) {
-        
+
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
-        
+
     }
-    
+
 }

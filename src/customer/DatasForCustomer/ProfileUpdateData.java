@@ -1,18 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package customer.DatasForCustomer;
-
-import java.util.ArrayList;
-
-/**
- *
- * @author kavya
- */
+//Setters and Getters For Encapsulation
 public class ProfileUpdateData {
-    
+
     private static String CUSTOMER_ID;
     private static String FIRST_NAME;
     private static String LAST_NAME;
@@ -130,10 +119,5 @@ public class ProfileUpdateData {
     public static void setACCOUNT_NUMBER(String ACCOUNT_NUMBER) {
         ProfileUpdateData.ACCOUNT_NUMBER = ACCOUNT_NUMBER;
     }
-
-    
-     
-     
-    
 
 }

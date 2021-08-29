@@ -1,21 +1,14 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package customer.DatasForCustomer;
 
 import java.util.ArrayList;
 
-/**
- *
- * @author kavya
- */
+//Setters and Getters For Encapsulation
 public class WalletData {
-    public static ArrayList<String> MoneyOrderValues=new ArrayList<String>();
+
+    public static ArrayList<String> MoneyOrderValues = new ArrayList<String>();
     public static ArrayList<WalletData> ListForWalletInfo;
     private String transactionid;
-    
+
     private String beneficiary;
     private String customerid;
     private String recieverid;
@@ -28,8 +21,9 @@ public class WalletData {
     private String amount;
     private String recievername;
     private String balance;
-    static{
-        ListForWalletInfo=new ArrayList<>();
+
+    static {
+        ListForWalletInfo = new ArrayList<>();
     }
 
     public static ArrayList<WalletData> getListForWalletInfo() {
@@ -39,9 +33,6 @@ public class WalletData {
     public static void setListForWalletInfo(ArrayList<WalletData> ListForWalletInfo) {
         WalletData.ListForWalletInfo = ListForWalletInfo;
     }
-    
-
-    
 
     public String getTransactionid() {
         return transactionid;
@@ -146,9 +137,5 @@ public class WalletData {
     public void setBalance(String balance) {
         this.balance = balance;
     }
-    
-    
-    
-    
-    
+
 }

@@ -1,7 +1,8 @@
-
 package customer.DatasForCustomer;
 
+//Setters and Getters For Encapsulation
 public class WalletDataG {
+
     private static Float amount;
     private static Float balence;
     private static String transationType;
@@ -26,7 +27,7 @@ public class WalletDataG {
     }
 
     public static Float getBalence() {
-        return balence-getItemPrice();//then u need to update the balence in customer table by minus item price
+        return balence - getItemPrice();//then u need to update the balence in customer table by minus item price
     }
 
     public static void setBalence(Float balence) {
