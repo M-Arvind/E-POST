@@ -11,6 +11,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import java.awt.Image;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -57,6 +58,11 @@ public class AdminPanel extends JPanel implements ActionListener, MouseListener
         pStocks = new Stocks();
         pConsignmentDetails = new ConsignmentDetails();
 
+        ImageIcon logo = new ImageIcon(getClass().getResource("/Images/Group 33.png"));
+        Image ima = logo.getImage();
+        Image newimg = ima.getScaledInstance(100, 50, java.awt.Image.SCALE_SMOOTH);
+        logo = new ImageIcon(newimg);
+        
         //Creating Admin Pages
         contentForAdmin.add(pNewconsignment, "NewConsignment");
         contentForAdmin.add(pOnGoingConsignment, "OnGoingConsignment");
@@ -72,9 +78,8 @@ public class AdminPanel extends JPanel implements ActionListener, MouseListener
         add(contentForAdmin);
         
         //E Post Label
-        LE_Post = new JLabel("E-Post");
-        LE_Post.setFont(new Font("Segoe UI", Font.BOLD, 30));
-        LE_Post.setBounds(X_FORCUSTOMER, 30, 100, 30);
+        LE_Post = new JLabel(logo);
+        LE_Post.setBounds(X_FORCUSTOMER, 20, 100, 50);
         LE_Post.setForeground(Color.WHITE);
         add(LE_Post);
 
