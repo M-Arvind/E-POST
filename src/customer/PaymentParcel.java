@@ -1,5 +1,6 @@
 package customer;
 
+import customer.DatasForCustomer.CustomerProfileData;
 import customer.DatasForCustomer.ParcelData;
 import customer.DatasForCustomer.WalletDataG;
 import main.*;
@@ -13,6 +14,7 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
@@ -237,9 +239,17 @@ public class PaymentParcel extends JPanel implements MouseListener {
         add(p_payment_btn_confirm);
         add(p_payment_btn_back);
 
-        p_payment_btn_confirm.addActionListener((o) -> {
-            new AuthenticationForParcel();
+        
+        
+      
+        p_payment_btn_confirm.addActionListener((o)->{ 
+            if(Integer.parseInt(p_payment_amount_info.getText())<=Integer.parseInt(CustomerProfileData.getBankBalance())){
+                new AuthenticationForParcel();
+            }else{
+                JOptionPane.showMessageDialog(this, "Insufficient BankBalance:"+CustomerProfileData.getBankBalance());
+            }
         });
+
 
         //Panel
         setLayout(null);

@@ -1,6 +1,8 @@
 package customer;
 
+
 import Admin.StyledButtonUi;
+import Database.DatabaseOperations;
 import customer.DatasForCustomer.CustomerProfileData;
 import javax.swing.*;
 import java.awt.*;
@@ -202,7 +204,8 @@ public class Profile_View extends JPanel implements ActionListener, MouseListene
         Collon7.setForeground(Color.WHITE);
 
         //Gender value label
-        GenderValue = new JLabel("Gender");
+        GenderValue = new JLabel(CustomerProfileData.getGender());
+        
         GenderValue.setBounds(X + 240, Y + 360, 800, 150);
         GenderValue.setFont(new Font("Bold", Font.BOLD, labelFontSize));
         GenderValue.setForeground(Color.WHITE);
@@ -291,6 +294,7 @@ public class Profile_View extends JPanel implements ActionListener, MouseListene
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        Profile_Update.UserNameTop.setText(Login.login.user_ID);
         if(e.getSource() == EditIconLabel)
             main.switchPage("Profile update");
         else if(e.getSource() == logoutButton)
@@ -326,7 +330,9 @@ public class Profile_View extends JPanel implements ActionListener, MouseListene
     }
 
     //setCustomercProfileData
+    
     public static void setCustomercProfileData() {
+        DatabaseOperations.getCustomerProfileForCustomerPanel(Login.login.user_ID);
         UserNameTop.setText(CustomerProfileData.getFirstName() + " " + CustomerProfileData.getLastName());
         CustomerIDValue.setText(CustomerProfileData.getId());
         FirstNameValue.setText(CustomerProfileData.getFirstName());

@@ -1,6 +1,7 @@
 package customer;
 
 import Database.DatabaseOperations;
+import customer.DatasForCustomer.CustomerProfileData;
 import customer.DatasForCustomer.WalletData;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -108,22 +109,45 @@ public class MoneyOrder extends JPanel implements MouseListener {
         moneyOrder_btn_confirm.setForeground(on_background_Color);
         moneyOrder_btn_confirm.setBorder(null);
         moneyOrder_btn_confirm.addActionListener((l) -> {
-
-            if (DatabaseOperations.CheckIdPresentOrNot(moneyOrder_toUsername_info.getText())) {
-                WalletData.MoneyOrderValues.add(moneyOrder_toUsername_info.getText()); //0
-                WalletData.MoneyOrderValues.add(moneyOrder_amount_info.getText()); //1
-                WalletData.MoneyOrderValues.add(moneyOrder_firstName_info.getText()); //2
-                WalletData.MoneyOrderValues.add(moneyOrder_lastName_info.getText()); //3
-                WalletData.MoneyOrderValues.add(moneyOrder_type_info.getText()); //4
-                WalletData.MoneyOrderValues.add(moneyOrder_address_info.getText());//5
-                WalletData.MoneyOrderValues.add(moneyOrder_state_info.getText());//6
-                WalletData.MoneyOrderValues.add(moneyOrder_district_info.getText());//7
-                WalletData.MoneyOrderValues.add(moneyOrder_pincode_info.getText());//8
-                new WalletAuthentication();
-
-            } else {
-                JOptionPane.showMessageDialog(null, "Invalid userId");
+               if(!moneyOrder_toUsername_info.getText().isEmpty() && !moneyOrder_amount_info.getText().isEmpty() && !moneyOrder_firstName_info.getText().isEmpty() && !moneyOrder_lastName_info.getText().isEmpty() && !moneyOrder_type_info.getText().isEmpty() && !moneyOrder_address_info.getText().isEmpty() && !moneyOrder_state_info.getText().isEmpty() && !moneyOrder_district_info.getText().isEmpty() && !moneyOrder_pincode_info.getText().isEmpty()){
+            
+                if( DatabaseOperations.CheckIdPresentOrNot(moneyOrder_toUsername_info.getText()) &&  pincodeValidate(moneyOrder_amount_info.getText()) && pincodeValidate(moneyOrder_pincode_info.getText()) && (Integer.parseInt(moneyOrder_amount_info.getText())<= Integer.parseInt(CustomerProfileData.getBankBalance()))){
+               
+               
+                        WalletData.MoneyOrderValues.add(moneyOrder_toUsername_info.getText()); //0
+                        WalletData.MoneyOrderValues.add(moneyOrder_amount_info.getText()); //1
+                        WalletData.MoneyOrderValues.add(moneyOrder_firstName_info.getText()); //2
+                        WalletData.MoneyOrderValues.add(moneyOrder_lastName_info.getText()); //3
+                        WalletData.MoneyOrderValues.add(moneyOrder_type_info.getText()); //4
+                        WalletData.MoneyOrderValues.add(moneyOrder_address_info.getText());//5
+                        WalletData.MoneyOrderValues.add(moneyOrder_state_info.getText());//6
+                        WalletData.MoneyOrderValues.add(moneyOrder_district_info.getText());//7
+                        WalletData.MoneyOrderValues.add(moneyOrder_pincode_info.getText());//8
+                        new WalletAuthentication();
+               
+            
+            //new Authentication();
+                }
+                else if(Integer.parseInt(moneyOrder_amount_info.getText()) > Integer.parseInt(CustomerProfileData.getBankBalance())){
+                    JOptionPane.showMessageDialog(null,"Insufficient balance");
+                }
+                else if(!pincodeValidate(moneyOrder_amount_info.getText()) && !pincodeValidate(moneyOrder_pincode_info.getText())){
+                        JOptionPane.showMessageDialog(null,"Invalid Amountand Invalid Pincode");
+                }
+                else if(!pincodeValidate(moneyOrder_pincode_info.getText())){
+                        JOptionPane.showMessageDialog(null,"Invalid Pincode");
+                }
+                else if(!pincodeValidate(moneyOrder_amount_info.getText())){
+                        JOptionPane.showMessageDialog(null,"Invalid amount");
+                }
+                else{
+                        JOptionPane.showMessageDialog(null,"Invalid userId");
+                }
             }
+            else{
+                JOptionPane.showMessageDialog(null,"Enter all the Fields");
+            }
+            
         });
 
         //Label Bounds
@@ -254,6 +278,10 @@ public class MoneyOrder extends JPanel implements MouseListener {
     @Override
     public void mouseExited(MouseEvent e) {
 
+    }
+    static boolean pincodeValidate(String code){
+        String s="[0-9]+";
+        return code.matches(s);
     }
 
 }

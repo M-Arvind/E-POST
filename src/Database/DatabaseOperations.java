@@ -331,7 +331,7 @@ public class DatabaseOperations {
             st1.setDate(15, java.sql.Date.valueOf(java.time.LocalDate.now()));
             st1.setString(16, "completed");
             st1.setString(17, "WH0003");
-            st1.setString(18, "Keshav B");
+            st1.setString(18, "-");
             st1.setFloat(19, 1F);
             st1.executeUpdate();
 
@@ -380,9 +380,9 @@ public class DatabaseOperations {
             System.out.println("Error in getTransactionIdGenerator---->" + ex1.toString());
         }
 
+
         return "";
     }
-
     //getMessageIdGenerator
     public static String getMessageIdGenerator() {
         try {
@@ -704,7 +704,6 @@ public class DatabaseOperations {
             JOptionPane.showMessageDialog(null, "Consignment Update Failed ID:" + e.toString());
         }
     }
-
     //updateCustomerBalence
     public static void updateCustomerBalence() {
         try {

@@ -1,5 +1,7 @@
 package customer;
 
+
+import customer.DatasForCustomer.CustomerProfileData;
 import customer.DatasForCustomer.EPostData;
 import customer.DatasForCustomer.WalletDataG;
 import main.*;
@@ -10,6 +12,7 @@ import java.awt.event.MouseListener;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
@@ -63,9 +66,13 @@ public class PaymentEPost extends JPanel implements MouseListener {
 
         e_payment_btn_confirm = new JButton();
         e_payment_btn_confirm.addActionListener((a) -> {
+            if(Integer.parseInt(e_payment_amount_info.getText())<= Integer.parseInt(CustomerProfileData.getBankBalance())){
             new AuthenticationForE_Post();
             EPostData.setSoftCopy(false);
             EPostData.setSoftCopy(false);
+            }else{
+                JOptionPane.showMessageDialog(this, "Insufficient Balance :"+CustomerProfileData.getBankBalance() );
+            }
 
         });
         e_payment_btn_back = new JLabel(new ImageIcon(getClass().getResource("/Images/arrow_back_button.png")));
@@ -273,6 +280,7 @@ public class PaymentEPost extends JPanel implements MouseListener {
     //MouseClick Listener For Page Switching
     @Override
     public void mouseClicked(MouseEvent e) {
+        
         if (e.getSource() == e_payment_btn_back) {
             main.switchPage("customerPanel");
         }

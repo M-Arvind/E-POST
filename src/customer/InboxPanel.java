@@ -49,12 +49,10 @@ public class InboxPanel extends JPanel implements MouseListener {
         }
 
         int count = 0;
-        try {
-            i = InboxData.ListForInbox.size() - 1;
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "No messages found in your Inbox");
-        }
-        while (i > 0) {
+
+        i = InboxData.ListForInbox.size()-1;
+        while (i>=0) {
+
             JPanel temp = this.getPanel(i, y);
             temp.addMouseListener(this);
             MyPanel.add(temp);

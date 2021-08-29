@@ -2,31 +2,32 @@ package customer;
 
 import Admin.StyledButtonUi;
 import static Database.DatabaseOperations.profileUpdationOnSave;
+import customer.DatasForCustomer.CustomerProfileData;
 import customer.DatasForCustomer.ProfileUpdateData;
 import javax.swing.*;
 import javax.swing.border.Border;
-
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import main.main;
 
+
 public class Profile_Update extends JPanel implements MouseListener {
 
     //private 
-    private Icon ProfIcon, EditIcon, BackIcon;
+    private Icon ProfIcon, BackIcon;
     private Border emptyBorder = BorderFactory.createEmptyBorder();
-    private JLabel UserNameTop;
-    private JLabel CustomerIDLabel, FirstNameLabel, LastNameLabel, DOBLabel, AgeLabel, ContactNumberLabel, GenderLabel, AddressLabel, AccountNumberLabel, PinCodeLabel, StateLabel, DistrictLabel;
-    private JTextArea CustomerIDValue, FirstNameValue, LastNameValue, DOBValue, AgeValue, ContactNumberValue, AddressValue, AccountNumberValue, StateValue, PinCodeValue, DistrictValue;
-    private JLabel Collon1, Collon2, Collon3, Collon4, Collon5, Collon6, Collon7, Collon8, Collon9, Collon10, Collon11, Collon12;
-    private JButton ProfIconLabel, BackIconLabel, EditIconLabel;
+    private JLabel  FirstNameLabel, LastNameLabel, DOBLabel, AgeLabel, ContactNumberLabel, AddressLabel, AccountNumberLabel, PinCodeLabel, StateLabel, DistrictLabel;
+    private JTextArea FirstNameValue, LastNameValue, DOBValue, AgeValue, ContactNumberValue, AddressValue, AccountNumberValue, StateValue, PinCodeValue, DistrictValue;
+    private JLabel Collon2, Collon3, Collon4, Collon5, Collon6, Collon8, Collon9, Collon10, Collon11, Collon12;
+    private JButton ProfIconLabel, BackIconLabel;
     private JButton SaveButton;
-    private ButtonGroup bg;
-    private JRadioButton rb1, rb2;
     private int X = 230, Y = 90;
     private int R = 34, G = 34, B = 45;
     private int labelFontSize = 20;
+    
+    //public
+    public static JLabel UserNameTop;
 
     public Profile_Update() {
 
@@ -52,7 +53,7 @@ public class Profile_Update extends JPanel implements MouseListener {
         add(BackIconLabel);
 
         //Usernametop
-        UserNameTop = new JLabel(Login.login.user_ID);
+        UserNameTop = new JLabel(CustomerProfileData.getId());
         UserNameTop.setBounds(X, Y - 80, 1000, 150);
         UserNameTop.setFont(new Font("Bold", Font.BOLD, labelFontSize + 20));
         UserNameTop.setForeground(Color.WHITE);
@@ -298,6 +299,7 @@ public class Profile_Update extends JPanel implements MouseListener {
         setVisible(true);
 
     }
+
 
     //Validations
     static boolean phoneNumberValidation(String number) {
