@@ -108,7 +108,6 @@ public class CustomerPanel extends JPanel implements ActionListener, MouseListen
                 search(search.getText());
 
                 customerCard.show(contentForCustomer, "Consignment");
-                System.out.println("--------->TextField Consign");
 
                 BInbox.setBounds(X_FORCUSTOMER, 110, 160, 30);
                 BE_Post.setBounds(X_FORCUSTOMER + 180 + 180, 110, 160, 30);
