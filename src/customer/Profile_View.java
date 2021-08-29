@@ -1,5 +1,6 @@
 package customer;
 
+import Admin.StyledButtonUi;
 import customer.DatasForCustomer.CustomerProfileData;
 import javax.swing.*;
 import java.awt.*;
@@ -21,7 +22,7 @@ public class Profile_View extends JPanel implements ActionListener, MouseListene
     private static JTextArea AddressValue;
     private JLabel Collon1, Collon2, Collon3, Collon4, Collon5, Collon6, Collon7, Collon8, Collon9, Collon10;
     private JButton ProfIconLabel, BackIconLabel, EditIconLabel;
-    private JButton SaveButton;
+    private JButton logoutButton;
     
     private static final int X = 230, Y = 90;
     private static final int R = 34, G = 34, B = 45;
@@ -269,6 +270,14 @@ public class Profile_View extends JPanel implements ActionListener, MouseListene
         AccountNumberValue.setFont(new Font("Bold", Font.BOLD, labelFontSize));
         AccountNumberValue.setForeground(Color.WHITE);
 
+        logoutButton = new JButton("Logout");
+        logoutButton.setBounds(X + 400, Y + 710, 100, 30);
+        logoutButton.setForeground(Color.WHITE);
+        logoutButton.setBackground(new Color(71, 63, 145));
+        logoutButton.addActionListener(this);
+        logoutButton.setUI(new StyledButtonUi());
+        add(logoutButton);
+        
         add(AccountNumberValue);
         add(Collon10);
         add(AccountNumberLabel);
@@ -282,8 +291,12 @@ public class Profile_View extends JPanel implements ActionListener, MouseListene
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        main.switchPage("Profile update");
+        if(e.getSource() == EditIconLabel)
+            main.switchPage("Profile update");
+        else if(e.getSource() == logoutButton)
+            main.switchPage("login");
     }
+    
 
     @Override
     public void mouseClicked(MouseEvent e) {
