@@ -25,11 +25,12 @@ import javax.swing.ScrollPaneConstants;
 
 public class PaymentParcel extends JPanel implements MouseListener
 {
-    
+    //Colour
     Color background_Color = new Color(34,34,45);
     Color on_background_Color = new Color(254,254,254);
     Color primary_Color = new Color(71,63,145);
     
+    //panel
     JPanel p_payment_Panel;
 
     JLabel p_payment_title;
@@ -266,6 +267,7 @@ public class PaymentParcel extends JPanel implements MouseListener
         setVisible(true);
         
     }
+    //setDataForParcelPanel this set details int front end of this class
     public static void setDataForParcelPanel(){
         p_payment_beneficiary_info.setText(ParcelData.getFirstName()+" "+ParcelData.getLastName());
         p_payment_amount_info.setText(WalletDataG.getItemPrice().toString());
@@ -281,6 +283,7 @@ public class PaymentParcel extends JPanel implements MouseListener
         p_payment_pincode_info.setText(ParcelData.getPincode());
     }
 
+    //MouseClick Listener For Page Switching
     @Override
     public void mouseClicked(MouseEvent e) {
         if(e.getSource()== p_payment_btn_back){

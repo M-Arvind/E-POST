@@ -1,4 +1,5 @@
 package customer;
+
 import Database.DatabaseOperations;
 import customer.DatasForCustomer.EPostData;
 import customer.DatasForCustomer.WalletDataG;
@@ -33,22 +34,21 @@ import javax.swing.ScrollPaneConstants;
  *
  * @author htara
  */
-public class PaymentEPost extends JPanel implements MouseListener
-{
-    
-    Color background_Color = new Color(34,34,45);
-    Color on_background_Color = new Color(254,254,254);
-    Color primary_Color = new Color(71,63,145);
-    
+public class PaymentEPost extends JPanel implements MouseListener {
+
+    Color background_Color = new Color(34, 34, 45);
+    Color on_background_Color = new Color(254, 254, 254);
+    Color primary_Color = new Color(71, 63, 145);
+
     JPanel p_payment_Panel;
     private JScrollPane sbrText;
 
     JLabel e_payment_title;
     JButton e_payment_btn_confirm;
     JLabel e_payment_btn_back;
-    
+
     JPopupMenu e_payment_authentication;
-    
+
     //Left Label
     JLabel e_payment_beneficiary;
     JLabel e_payment_amount;
@@ -62,7 +62,7 @@ public class PaymentEPost extends JPanel implements MouseListener
     JLabel e_payment_district;
     JLabel e_payment_pincode;
     JLabel e_payment_message;
-    
+
     //Content Label
     static JLabel e_payment_beneficiary_info;
     static JLabel e_payment_amount_info;
@@ -77,26 +77,22 @@ public class PaymentEPost extends JPanel implements MouseListener
     static JLabel e_payment_pincode_info;
     static JTextArea e_payment_message_info;
 
-    
-    int X_FORCUSTOMER=0,Y_FORCUSTOMER=100,WIDTHFORCUSTOMER=1260,HIGHTFORCUSTOMER=750;
-    
-    public PaymentEPost()
-    { 
-            
+    int X_FORCUSTOMER = 0, Y_FORCUSTOMER = 100, WIDTHFORCUSTOMER = 1260, HIGHTFORCUSTOMER = 750;
+
+    public PaymentEPost() {
+
         p_payment_Panel = new JPanel();
-        
-        
+
         e_payment_btn_confirm = new JButton();
-        e_payment_btn_confirm.addActionListener((a)->{
+        e_payment_btn_confirm.addActionListener((a) -> {
             new AuthenticationForE_Post();
             EPostData.setSoftCopy(false);
             EPostData.setSoftCopy(false);
-           
-           
+
         });
         e_payment_btn_back = new JLabel(new ImageIcon(getClass().getResource("/Images/arrow_back_button.png")));
-         e_payment_btn_back.addMouseListener(this);
-        
+        e_payment_btn_back.addMouseListener(this);
+
         //Label
         e_payment_title = new JLabel("Payment");
         e_payment_beneficiary = new JLabel("Beneficiary");
@@ -111,8 +107,7 @@ public class PaymentEPost extends JPanel implements MouseListener
         e_payment_district = new JLabel("District");
         e_payment_pincode = new JLabel("Pincode");
         e_payment_message = new JLabel("Subject");
-        
-        
+
         //Content Label
         e_payment_beneficiary_info = new JLabel();
         e_payment_amount_info = new JLabel();
@@ -126,61 +121,57 @@ public class PaymentEPost extends JPanel implements MouseListener
         e_payment_district_info = new JLabel();
         e_payment_pincode_info = new JLabel();
         e_payment_message_info = new JTextArea();
-        
-        
+
         e_payment_address_info.setBackground(background_Color);
         e_payment_address_info.setEditable(false);
         e_payment_address_info.setHighlighter(null);
         e_payment_address_info.setLineWrap(true);
-        
+
         e_payment_message_info.setBackground(background_Color);
         e_payment_message_info.setEditable(false);
         e_payment_message_info.setHighlighter(null);
         e_payment_message_info.setLineWrap(true);
-        
-        
+
         //Button and title
         e_payment_title.setBounds(585, 25, 200, 50);
-        e_payment_btn_confirm.setBounds(585,755 + 10,150,40);
+        e_payment_btn_confirm.setBounds(585, 755 + 10, 150, 40);
         e_payment_btn_confirm.setBackground(primary_Color);
         e_payment_btn_confirm.setText("Confirm");
         e_payment_btn_confirm.setForeground(on_background_Color);
         e_payment_btn_confirm.setBorder(null);
-        
-        e_payment_btn_back.setBounds(25,25,40,40);
+
+        e_payment_btn_back.setBounds(25, 25, 40, 40);
         e_payment_btn_back.setBackground(null);
         e_payment_btn_back.setBorder(null);
-  
-        
+
         //Label Bounds
         e_payment_beneficiary.setBounds(120, 80, 150, 50);
         e_payment_amount.setBounds(120, 50 + 80, 150, 50);
-        e_payment_to.setBounds(120,100 + 80,150,50);
-        e_payment_contact.setBounds(120,150 + 80,150,50);
-        e_payment_type.setBounds(120,200 + 80,150,50);
-        e_payment_firstName.setBounds(120,250 + 80,150,50);
-        e_payment_lastName.setBounds(120,300 + 80,150,50);
-        e_payment_address.setBounds(120,350 + 80,150,50);
-        e_payment_state.setBounds(120,450 + 80,150,50);
-        e_payment_district.setBounds(120,500 + 80,150,50);
-        e_payment_pincode.setBounds(120,550 + 80,150,50);
-        e_payment_message.setBounds(120,600 + 80,150,50);
-        
+        e_payment_to.setBounds(120, 100 + 80, 150, 50);
+        e_payment_contact.setBounds(120, 150 + 80, 150, 50);
+        e_payment_type.setBounds(120, 200 + 80, 150, 50);
+        e_payment_firstName.setBounds(120, 250 + 80, 150, 50);
+        e_payment_lastName.setBounds(120, 300 + 80, 150, 50);
+        e_payment_address.setBounds(120, 350 + 80, 150, 50);
+        e_payment_state.setBounds(120, 450 + 80, 150, 50);
+        e_payment_district.setBounds(120, 500 + 80, 150, 50);
+        e_payment_pincode.setBounds(120, 550 + 80, 150, 50);
+        e_payment_message.setBounds(120, 600 + 80, 150, 50);
+
         //Content Label Bounds
-        e_payment_beneficiary_info.setBounds(400, 0 + 80,300, 50);
+        e_payment_beneficiary_info.setBounds(400, 0 + 80, 300, 50);
         e_payment_amount_info.setBounds(400, 50 + 80, 300, 50);
-        e_payment_to_info.setBounds(400,100 + 80,150, 50);
-        e_payment_contact_info.setBounds(400,150 + 80,150, 50);
-        e_payment_type_info.setBounds(400,200 + 80,300, 50);
-        e_payment_firstName_info.setBounds(400,250 + 80,300, 50);
-        e_payment_lastName_info.setBounds(400,300 + 80,300, 50);
-        e_payment_address_info.setBounds(400,360 + 80,800,90);
-        e_payment_state_info.setBounds(400,450 + 80,300, 50);
-        e_payment_district_info.setBounds(400,500 + 80,300, 50);
-        e_payment_pincode_info.setBounds(400,550 + 80,150, 50);
-        e_payment_message_info.setBounds(400,610 + 80,800, 90);
-        
-        
+        e_payment_to_info.setBounds(400, 100 + 80, 150, 50);
+        e_payment_contact_info.setBounds(400, 150 + 80, 150, 50);
+        e_payment_type_info.setBounds(400, 200 + 80, 300, 50);
+        e_payment_firstName_info.setBounds(400, 250 + 80, 300, 50);
+        e_payment_lastName_info.setBounds(400, 300 + 80, 300, 50);
+        e_payment_address_info.setBounds(400, 360 + 80, 800, 90);
+        e_payment_state_info.setBounds(400, 450 + 80, 300, 50);
+        e_payment_district_info.setBounds(400, 500 + 80, 300, 50);
+        e_payment_pincode_info.setBounds(400, 550 + 80, 150, 50);
+        e_payment_message_info.setBounds(400, 610 + 80, 800, 90);
+
         //Label Text Color
         e_payment_title.setForeground(on_background_Color);
         e_payment_beneficiary.setForeground(on_background_Color);
@@ -195,7 +186,7 @@ public class PaymentEPost extends JPanel implements MouseListener
         e_payment_district.setForeground(on_background_Color);
         e_payment_pincode.setForeground(on_background_Color);
         e_payment_message.setForeground(on_background_Color);
-        
+
         //Content Label Text Color
         e_payment_beneficiary_info.setForeground(on_background_Color);
         e_payment_amount_info.setForeground(on_background_Color);
@@ -209,7 +200,7 @@ public class PaymentEPost extends JPanel implements MouseListener
         e_payment_district_info.setForeground(on_background_Color);
         e_payment_pincode_info.setForeground(on_background_Color);
         e_payment_message_info.setForeground(on_background_Color);
-        
+
         //Label Font
         e_payment_title.setFont(new Font("Segoe UI", Font.PLAIN, 30));
         e_payment_beneficiary.setFont(new Font("Segoe UI", Font.PLAIN, 22));
@@ -224,7 +215,7 @@ public class PaymentEPost extends JPanel implements MouseListener
         e_payment_district.setFont(new Font("Segoe UI", Font.PLAIN, 22));
         e_payment_pincode.setFont(new Font("Segoe UI", Font.PLAIN, 22));
         e_payment_message.setFont(new Font("Segoe UI", Font.PLAIN, 22));
-        
+
         //Content Label Font
         e_payment_beneficiary_info.setFont(new Font("Segoe UI", Font.PLAIN, 22));
         e_payment_amount_info.setFont(new Font("Segoe UI", Font.PLAIN, 22));
@@ -238,63 +229,59 @@ public class PaymentEPost extends JPanel implements MouseListener
         e_payment_district_info.setFont(new Font("Segoe UI", Font.PLAIN, 22));
         e_payment_pincode_info.setFont(new Font("Segoe UI", Font.PLAIN, 22));
         e_payment_message_info.setFont(new Font("Segoe UI", Font.PLAIN, 22));
-        
-//        p_payment_Panel.setBounds(X_FORCUSTOMER,Y_FORCUSTOMER,WIDTHFORCUSTOMER,HIGHTFORCUSTOMER);  
-//        p_payment_Panel.setPreferredSize(new Dimension(1350, 890));
-        
+
         //Add to Panel
         add(e_payment_title);
-        add(e_payment_beneficiary); 
-        add(e_payment_amount); 
-        add(e_payment_to); 
-        add(e_payment_contact); 
-        add(e_payment_type); 
-        add(e_payment_firstName); 
-        add(e_payment_lastName); 
-        add(e_payment_address); 
+        add(e_payment_beneficiary);
+        add(e_payment_amount);
+        add(e_payment_to);
+        add(e_payment_contact);
+        add(e_payment_type);
+        add(e_payment_firstName);
+        add(e_payment_lastName);
+        add(e_payment_address);
         add(e_payment_state);
         add(e_payment_district);
         add(e_payment_pincode);
-        add(e_payment_message);        
-        
-        add(e_payment_beneficiary_info); 
-        add(e_payment_amount_info); 
-        add(e_payment_to_info); 
-        add(e_payment_contact_info); 
-        add(e_payment_type_info); 
-        add(e_payment_firstName_info); 
-        add(e_payment_lastName_info); 
+        add(e_payment_message);
+
+        add(e_payment_beneficiary_info);
+        add(e_payment_amount_info);
+        add(e_payment_to_info);
+        add(e_payment_contact_info);
+        add(e_payment_type_info);
+        add(e_payment_firstName_info);
+        add(e_payment_lastName_info);
         add(e_payment_address_info);
-        add(e_payment_state_info); 
-        add(e_payment_district_info); 
+        add(e_payment_state_info);
+        add(e_payment_district_info);
         add(e_payment_pincode_info);
         add(e_payment_btn_confirm);
-        add(e_payment_message_info); 
-         add(e_payment_btn_back);
-        
+        add(e_payment_message_info);
+        add(e_payment_btn_back);
+
         //Panel
         setLayout(null);
         setBackground(background_Color);
         setSize(1350, 890);
-        
+
         //Popup
         e_payment_authentication = new JPopupMenu("Authentication");
-        
+
         e_payment_authentication.setBackground(background_Color);
         e_payment_authentication.setBounds(X_FORCUSTOMER, Y_FORCUSTOMER, 1000, 1000);
         e_payment_authentication.setLayout(null);
-       
-        
-         
+
     }
-     public static void setDataForEPostPayment(){
-        e_payment_beneficiary_info.setText(EPostData.getFirstName()+" "+EPostData.getLastName());
+
+    //setDataForEPostPayment details in front end of this class
+    public static void setDataForEPostPayment() {
+        e_payment_beneficiary_info.setText(EPostData.getFirstName() + " " + EPostData.getLastName());
         e_payment_amount_info.setText(WalletDataG.getAmount().toString());
         e_payment_to_info.setText(EPostData.getTo());
         e_payment_contact_info.setText(EPostData.getPhoneNumber().toString());
         e_payment_type_info.setText("E-Post");
-        
-        
+
         e_payment_firstName_info.setText(EPostData.getFirstName());
         e_payment_lastName_info.setText(EPostData.getLastName());
         e_payment_address_info.setText(EPostData.getAddress());
@@ -302,31 +289,31 @@ public class PaymentEPost extends JPanel implements MouseListener
         e_payment_district_info.setText(EPostData.getDistrict());
         e_payment_pincode_info.setText(EPostData.getPincode());
         e_payment_message_info.setText(EPostData.getSubject());
-     
-    }
-    
 
+    }
+
+    //MouseClick Listener For Page Switching
     @Override
     public void mouseClicked(MouseEvent e) {
-        if(e.getSource()==e_payment_btn_back){
+        if (e.getSource() == e_payment_btn_back) {
             main.switchPage("customerPanel");
         }
-       }
+    }
 
     @Override
     public void mousePressed(MouseEvent e) {
-            }
+    }
 
     @Override
     public void mouseReleased(MouseEvent e) {
-           }
+    }
 
     @Override
     public void mouseEntered(MouseEvent e) {
-            }
+    }
 
     @Override
     public void mouseExited(MouseEvent e) {
-            }
-   
+    }
+
 }

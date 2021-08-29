@@ -1,18 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package customer.DatasForCustomer;
 
-/**
- *
- * @author kavya
- */
 import java.util.*;
-import java.sql.*;
 
+//Setters and Getters For Encapsulation
 public class InboxData {
+
     public static ArrayList<InboxData> ListForInbox;
     private String message_ID;
     private String message;
@@ -23,11 +15,13 @@ public class InboxData {
     private String customer_Id;
     private String receiver_Id;
     private String subject;
+
     static {
-        ListForInbox=new ArrayList<InboxData>();
-        
+        ListForInbox = new ArrayList<InboxData>();
+
     }
-    public static ArrayList getListForInbox(){
+
+    public static ArrayList getListForInbox() {
         return ListForInbox;
     }
 
@@ -102,5 +96,5 @@ public class InboxData {
     public void setSubject(String subject) {
         this.subject = subject;
     }
-    
+
 }

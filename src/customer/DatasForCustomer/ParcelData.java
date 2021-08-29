@@ -1,5 +1,8 @@
 package customer.DatasForCustomer;
+
+//Setters and Getters For Encapsulation
 public class ParcelData {
+
     private static String To;
     private static String FirstName;
     private static String LastName;
@@ -8,12 +11,12 @@ public class ParcelData {
     private static String District;
     private static String Pincode;
     private static Long PhoneNumber;
-    private static boolean SoftCopy=false;
-    private static boolean HardCopy=false;
-    private static boolean isPasswordCorrect=false;
+    private static boolean SoftCopy = false;
+    private static boolean HardCopy = false;
+    private static boolean isPasswordCorrect = false;
     private static Float itemWeight;
     private static Float itemPrice;
-    
+
     public static Float getItemWeight() {
         return itemWeight;
     }
@@ -30,7 +33,6 @@ public class ParcelData {
         itemPrice = aItemPrice;
     }
 
- 
     public static String getTo() {
         return To;
     }
@@ -118,6 +120,5 @@ public class ParcelData {
     public static void setIsPasswordCorrect(boolean aIsPasswordCorrect) {
         isPasswordCorrect = aIsPasswordCorrect;
     }
- 
 
 }

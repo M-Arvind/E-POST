@@ -49,7 +49,7 @@ public class DatabaseOperations
         try
         {
             Class.forName("oracle.jdbc.driver.OracleDriver");
-            connection = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE","E_post","123");
+            connection = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE","E_Post","123");
         }
   
         
@@ -94,7 +94,7 @@ public class DatabaseOperations
              
               
            }
-           System.out.println("Success in Consignment--->"+ConsignmentData.listForConsignment.size());
+           //System.out.println("Success in Consignment--->"+ConsignmentData.listForConsignment.size());
        } catch (Exception ex) {
            System.out.println("Error in getCustomerConsignmentDetails---->"+ex.toString());
        }
@@ -816,7 +816,7 @@ public class DatabaseOperations
             con.setAutoCommit(true);
             pst.executeUpdate();
             con.close();
-            JOptionPane.showMessageDialog(null,"Your Balence Updated Succesfully in Your AccountNumber and Remaining Balence is:"+WalletDataG.getBalence());
+            JOptionPane.showMessageDialog(null,"Your Balence Updated Succesfully in Your Wallet and Remaining Balence is:"+WalletDataG.getBalence());
        } 
        catch(Exception e){
            JOptionPane.showMessageDialog(null,"CustomerBalence Update Failed ID:"+e.toString());
@@ -902,7 +902,7 @@ public class DatabaseOperations
             }
 
         }
-        JOptionPane.showMessageDialog(AdminPanel.contentForAdmin, "Updated Successfully");
+        //JOptionPane.showMessageDialog(AdminPanel.contentForAdmin, "Updated Successfully");
     }
 
     public static AdminProfile getAdminProfile(String id){
@@ -1069,6 +1069,7 @@ public class DatabaseOperations
     public static ArrayList<WalletData> getCurrentWalletDetails(){
         ArrayList<WalletData>  list=new ArrayList<WalletData>();
         try{
+           
             Connection con=DatabaseOperations.getConnection();
             String Cid=Login.login.user_ID;
             String query="select * from wallet where customer_id='"+Cid+"'";
@@ -1085,20 +1086,10 @@ public class DatabaseOperations
                 ob.setBalance(res.getString("balance"));
                 list.add(ob);
             }
-            int i=0;
-            System.out.println("Wallet table:"+list.size());
+            
+            //System.out.println("Wallet table:"+list.size());
            
-            while(i<list.size()){
-                System.out.println(list.get(i).getTransactionid());
-                System.out.println(list.get(i).getTransactiontype());
-                System.out.println(list.get(i).getTransactiondate());
-                System.out.println(list.get(i).getRecieverid());
-                System.out.println(list.get(i).getBeneficiary());
-                System.out.println(list.get(i).getAmount());
-                System.out.println(list.get(i).getBalance());
-                i++;
-                
-            }
+            con.close();
            
         }catch(Exception e){
             System.out.println("Exception in getCurrentWalletDetails() : databaseoperations---->"+e.toString());

@@ -1,34 +1,37 @@
 package customer.DatasForCustomer;
+
 import java.sql.Date;
 import java.util.*;
+//Setters and Getters For Encapsulation
+
 public class ConsignmentData {
-   public static ArrayList<ConsignmentData> listForConsignment;         
-     private String consignment_ID;
-     private String customer_ID;
-     private String delivery_ID;
-     private String receiver_ID;
-     private String item_code;
-     private String item;
-     private Float item_price;
-     private Float item_weight;
-     private String receiver_first_name;
-     private String receiver_last_name;
-     private String receiver_address;     
-     private Long receiver_contact_number;
-     private String customer_first_name;
-     private String customer_last_name;
 
-   
-     private Long customer_contact_number;
-     private String shipping_address;
-     private String payment_method;
-     private Date order_date;
-     private Date delivery_date;
-     private String status;
-     private static boolean isUpdate;
+    public static ArrayList<ConsignmentData> listForConsignment;
+    private String consignment_ID;
+    private String customer_ID;
+    private String delivery_ID;
+    private String receiver_ID;
+    private String item_code;
+    private String item;
+    private Float item_price;
+    private Float item_weight;
+    private String receiver_first_name;
+    private String receiver_last_name;
+    private String receiver_address;
+    private Long receiver_contact_number;
+    private String customer_first_name;
+    private String customer_last_name;
 
-    static{
-       listForConsignment=new ArrayList<ConsignmentData>(); 
+    private Long customer_contact_number;
+    private String shipping_address;
+    private String payment_method;
+    private Date order_date;
+    private Date delivery_date;
+    private String status;
+    private static boolean isUpdate;
+
+    static {
+        listForConsignment = new ArrayList<ConsignmentData>();
     }
 
     public static boolean isIsUpdate() {
@@ -38,7 +41,7 @@ public class ConsignmentData {
     public static void setIsUpdate(boolean isUpdate) {
         ConsignmentData.isUpdate = isUpdate;
     }
-   
+
     public static ArrayList getListForConsignment() {
         return listForConsignment;
     }
@@ -46,6 +49,7 @@ public class ConsignmentData {
     public static void setListForConsignment(ArrayList aListForConsignment) {
         listForConsignment = aListForConsignment;
     }
+
     public String getConsignment_ID() {
         return consignment_ID;
     }
@@ -322,8 +326,5 @@ public class ConsignmentData {
     public void setStatus(String status) {
         this.status = status;
     }
-         
-         
-         
-     
+
 }
