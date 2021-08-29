@@ -1,11 +1,10 @@
-
 package customer.DatasForCustomer;
-import Database.DatabaseOperations;
+
 import java.sql.Date;
-import java.util.ArrayList;
+//Setters and Getters For Encapsulation
 
 public class CustomerProfileData {
-    
+
     private static String id;
     private static String firstName;
     private static String lastName;
@@ -20,9 +19,7 @@ public class CustomerProfileData {
     private static String bankBalance;
     private static String accountNumber;
 
-
-    
-       public static String getId() {
+    public static String getId() {
         return id;
     }
 
@@ -125,5 +122,5 @@ public class CustomerProfileData {
     public static void setAccountNumber(String aAccountNumber) {
         accountNumber = aAccountNumber;
     }
-    
+
 }

@@ -1,5 +1,8 @@
 package customer.DatasForCustomer;
+//Setters and Getters For Encapsulation
+
 public class EPostData {
+
     private static String To;
     private static String FirstName;
     private static String LastName;
@@ -10,10 +13,10 @@ public class EPostData {
     private static Long PhoneNumber;
     private static String Subject;
     private static String Message;
-    private static boolean SoftCopy=false;
-    private static boolean HardCopy=false;
-    private static boolean isPasswordCorrect=false;
- 
+    private static boolean SoftCopy = false;
+    private static boolean HardCopy = false;
+    private static boolean isPasswordCorrect = false;
+
     public static String getTo() {
         return To;
     }
@@ -117,7 +120,5 @@ public class EPostData {
     public static void setIsPasswordCorrect(boolean aIsPasswordCorrect) {
         isPasswordCorrect = aIsPasswordCorrect;
     }
-
-  
 
 }

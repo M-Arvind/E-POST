@@ -1,24 +1,23 @@
-
 package customer.DatasForCustomer;
 
 import java.sql.Date;
-import java.util.ArrayList;
 
+//Setters and Getters For Encapsulation
 public class CustomerData {
-   private String customer_ID;
-   private String first_name;
-   private String last_name;
-   private Date dob;
-   private int age;
-   private int contact_number;
-   private String  gender;
-   private String  address ;
-   private String  state;     
-   private String  district;
-   private int  pin_code;
-   private float  bank_balance;
-   private int account_number ;
-   
+
+    private String customer_ID;
+    private String first_name;
+    private String last_name;
+    private Date dob;
+    private int age;
+    private int contact_number;
+    private String gender;
+    private String address;
+    private String state;
+    private String district;
+    private int pin_code;
+    private float bank_balance;
+    private int account_number;
 
     public String getCustomer_ID() {
         return customer_ID;
@@ -27,7 +26,6 @@ public class CustomerData {
     public void setCustomer_ID(String customer_ID) {
         this.customer_ID = customer_ID;
     }
-
 
     public String getFirst_name() {
         return first_name;
@@ -41,7 +39,6 @@ public class CustomerData {
         return last_name;
     }
 
-
     public void setLast_name(String last_name) {
         this.last_name = last_name;
     }
@@ -54,7 +51,6 @@ public class CustomerData {
         this.dob = dob;
     }
 
-  
     public int getAge() {
         return age;
     }
@@ -63,22 +59,18 @@ public class CustomerData {
         this.age = age;
     }
 
- 
     public int getContact_number() {
         return contact_number;
     }
 
-  
     public void setContact_number(int contact_number) {
         this.contact_number = contact_number;
     }
 
-   
     public String getGender() {
         return gender;
     }
 
-  
     public void setGender(String gender) {
         this.gender = gender;
     }
