@@ -4,9 +4,9 @@ import Admin.AdminProfileUpdate;
 import Admin.AdminProfileView;
 import java.sql.Date;
 
-
 //Admin Object Class
 public class AdminProfile {
+
     String id;
     String firstName;
     String lastName;
@@ -151,8 +151,9 @@ public class AdminProfile {
     public void setDesignation(String designation) {
         this.designation = designation;
     }
- //Function to set Admin Profile Page
-    public static void setAdminProfile(String id){
+
+    //Function to set Admin Profile Page
+    public static void setAdminProfile(String id) {
         AdminProfile details = Database.DatabaseOperations.getAdminProfile(id);
         AdminProfileView.UserNameValue.setText(details.id);
         AdminProfileView.ContactNoValue.setText(details.getContactNumber());
@@ -166,18 +167,20 @@ public class AdminProfile {
         AdminProfileView.ExperienceValue.setText(Integer.toString(details.getExperience()));
         AdminProfileView.GenderValue.setText(details.getGender());
         AdminProfileView.SalaryValue.setText(Integer.toString(details.getSalary()));
-        AdminProfileView.UserNameTop.setText(details.getFirstName()+" "+details.getLastName());
+        AdminProfileView.UserNameTop.setText(details.getFirstName() + " " + details.getLastName());
     }
- //Function to set AdminProfileUpdate Page   
-    public static void setAdminProfileUpdate(String id){
+
+    //Function to set AdminProfileUpdate Page   
+    public static void setAdminProfileUpdate(String id) {
         AdminProfile details = Database.DatabaseOperations.getAdminProfile(id);
-        int a=0;
-        if(details.getMartialStatus().equals("Single"))
-                a = 0;
-        else if(details.getMartialStatus().equals("Married"))
-                a = 1;
-        else if(details.getMartialStatus().equals("Divorced"))
-                a = 1;
+        int a = 0;
+        if (details.getMartialStatus().equals("Single")) {
+            a = 0;
+        } else if (details.getMartialStatus().equals("Married")) {
+            a = 1;
+        } else if (details.getMartialStatus().equals("Divorced")) {
+            a = 1;
+        }
         AdminProfileUpdate.firstNameValue.setText(details.getFirstName());
         AdminProfileUpdate.lastNameValue.setText(details.getLastName());
         AdminProfileUpdate.DOBValue.setText(details.getDob().toString());
