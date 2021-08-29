@@ -238,6 +238,7 @@ public class E_PostPanel extends JPanel implements ActionListener {
             AbstractButton absB = (AbstractButton) c.getSource();
             ButtonModel bMod = absB.getModel();
             isSoftCopySelected = bMod.isSelected();
+            System.out.println(isSoftCopySelected+"Listen");
         });
         add(SoftCopy);
 

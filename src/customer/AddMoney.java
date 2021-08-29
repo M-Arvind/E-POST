@@ -12,6 +12,7 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 public class AddMoney {
@@ -22,8 +23,9 @@ public class AddMoney {
     private Color on_background_Color = new Color(254, 254, 254);
     private Color primary_Color = new Color(71, 63, 145);
     private JLabel addMoney_pbank_name, addMoney_username, addMoney_amount, addMoney_password;
-    private JTextField addMoney_pbank_name_info, addMoney_username_info, addMoney_amount_info, addMoney_password_info;
+    private JTextField addMoney_pbank_name_info, addMoney_username_info, addMoney_amount_info;
     private JButton addMoney_btn_confirm;
+    private JPasswordField addMoney_password_info;
 
     public AddMoney() {
         newdialog.setBounds(375, 50, 600, 700);
@@ -44,7 +46,7 @@ public class AddMoney {
         addMoney_pbank_name_info = new JTextField();
         addMoney_username_info = new JTextField();
         addMoney_amount_info = new JTextField();
-        addMoney_password_info = new JTextField();
+        addMoney_password_info = new JPasswordField();
 
         addMoney_btn_confirm = new JButton("Confirm");
 

@@ -14,9 +14,9 @@ public class EPostData {
     private static Long PhoneNumber;
     private static String Subject;
     private static String Message;
-    private static boolean SoftCopy = false;
-    private static boolean HardCopy = false;
-    private static boolean isPasswordCorrect = false;
+    private static boolean SoftCopy ;
+    private static boolean HardCopy ;
+    private static boolean isPasswordCorrect ;
 
     public static String getTo() {
         return To;
@@ -103,6 +103,7 @@ public class EPostData {
     }
 
     public static void setSoftCopy(boolean aSoftCopy) {
+        System.out.println(aSoftCopy+" Setters");
         SoftCopy = aSoftCopy;
     }
 

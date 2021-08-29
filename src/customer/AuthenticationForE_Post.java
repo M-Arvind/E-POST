@@ -13,6 +13,7 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 public class AuthenticationForE_Post {
@@ -23,7 +24,8 @@ public class AuthenticationForE_Post {
     private Color on_background_Color = new Color(254, 254, 254);
     private Color primary_Color = new Color(71, 63, 145);
     private JLabel auth_password;
-    private JTextField auth_password_info, userID;
+    private JTextField  userID;
+    private JPasswordField auth_password_info;
     private  JButton auth_btn_confirm;
 
     public AuthenticationForE_Post() {
@@ -37,7 +39,7 @@ public class AuthenticationForE_Post {
         newdialog.add(e_payment_auth);
 
         auth_password = new JLabel("Enter Your Password");
-        auth_password_info = new JTextField();
+        auth_password_info = new JPasswordField();
         userID = new JTextField();
         userID.setText(Login.login.user_ID);
         auth_btn_confirm = new JButton("Confirm");
@@ -73,6 +75,7 @@ public class AuthenticationForE_Post {
 
                 if (EPostData.isIsPasswordCorrect()) {
                     try{
+                        System.out.println(" I am in"); 
                    WalletDataG.setBalence(Float.valueOf(CustomerProfileData.getBankBalance()));//customer Balence
                     WalletDataG.setItemCode(DatabaseOperations.getStocks().get(0).getitemCode());
                     WalletDataG.setItemPrice(Float.valueOf(DatabaseOperations.getStocks().get(0).getItemPrice()));
@@ -82,6 +85,7 @@ public class AuthenticationForE_Post {
                     catch(Exception y){
                         System.out.println("Authentication E-Post"+y.toString());
                     }
+                
                     
                     if (EPostData.isHardCopy() == true && EPostData.isSoftCopy() == true) {
                         Database.DatabaseOperations.updateInbox();
@@ -90,7 +94,8 @@ public class AuthenticationForE_Post {
                     } else if (EPostData.isHardCopy() == true) {
                         Database.DatabaseOperations.updateConsignment();
                         Database.DatabaseOperations.updateWalletTransaction();
-                    } else if (EPostData.isSoftCopy() == true) {
+                    } else if (EPostData.isSoftCopy()) {
+                        System.out.print("EPOst data");
                         Database.DatabaseOperations.updateInbox();
                         Database.DatabaseOperations.updateConsignment();
                         Database.DatabaseOperations.updateWalletTransaction();
