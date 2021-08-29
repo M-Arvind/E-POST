@@ -3,6 +3,7 @@ package customer.DatasForCustomer;
 
 public class EPostData {
 
+    //private
     private static String To;
     private static String FirstName;
     private static String LastName;

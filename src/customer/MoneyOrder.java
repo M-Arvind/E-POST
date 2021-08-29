@@ -27,39 +27,38 @@ import main.main;
 
 public class MoneyOrder extends JPanel implements MouseListener {
 
-    Color background_Color = new Color(34, 34, 45);
-    Color on_background_Color = new Color(254, 254, 254);
-    Color primary_Color = new Color(71, 63, 145);
-
-    JPanel moneyOrderPanel;
-
-    JLabel moneyOrder_title;
-    JButton moneyOrder_btn_confirm;
+    // private
+    private Color background_Color = new Color(34, 34, 45);
+    private Color on_background_Color = new Color(254, 254, 254);
+    private Color primary_Color = new Color(71, 63, 145);
+    private JPanel moneyOrderPanel;
+    private JLabel moneyOrder_title;
+    private JButton moneyOrder_btn_confirm;
 
     //Left Label
-    JLabel moneyOrder_toUsername;
-    JLabel moneyOrder_amount;
-    JLabel moneyOrder_firstName;
-    JLabel moneyOrder_lastName;
-    JLabel moneyOrder_type;
-    JLabel moneyOrder_address;
-    JLabel moneyOrder_state;
-    JLabel moneyOrder_district;
-    JLabel moneyOrder_pincode;
-    JButton BackIconLabel;
+    private JLabel moneyOrder_toUsername;
+    private JLabel moneyOrder_amount;
+    private JLabel moneyOrder_firstName;
+    private JLabel moneyOrder_lastName;
+    private JLabel moneyOrder_type;
+    private JLabel moneyOrder_address;
+    private JLabel moneyOrder_state;
+    private JLabel moneyOrder_district;
+    private JLabel moneyOrder_pincode;
+    private JButton BackIconLabel;
     //Content Label
-    JTextField moneyOrder_toUsername_info;
-    JTextField moneyOrder_amount_info;
-    JTextField moneyOrder_firstName_info;
-    JTextField moneyOrder_lastName_info;
-    JTextField moneyOrder_type_info;
-    JTextArea moneyOrder_address_info;
-    JTextField moneyOrder_state_info;
-    JTextField moneyOrder_district_info;
-    JTextField moneyOrder_pincode_info;
-    Border emptyBorder = BorderFactory.createEmptyBorder();
-    int R = 34, G = 34, B = 45;
-    int X_FORCUSTOMER = 30, Y_FORCUSTOMER = 150, WIDTHFORCUSTOMER = 1260, HIGHTFORCUSTOMER = 750;
+    private JTextField moneyOrder_toUsername_info;
+    private JTextField moneyOrder_amount_info;
+    private JTextField moneyOrder_firstName_info;
+    private JTextField moneyOrder_lastName_info;
+    private JTextField moneyOrder_type_info;
+    private JTextArea moneyOrder_address_info;
+    private JTextField moneyOrder_state_info;
+    private JTextField moneyOrder_district_info;
+    private JTextField moneyOrder_pincode_info;
+    private Border emptyBorder = BorderFactory.createEmptyBorder();
+    private int R = 34, G = 34, B = 45;
+    private int X_FORCUSTOMER = 30, Y_FORCUSTOMER = 150, WIDTHFORCUSTOMER = 1260, HIGHTFORCUSTOMER = 750;
 
     public MoneyOrder() {
 

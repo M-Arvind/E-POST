@@ -8,22 +8,21 @@ import javax.swing.border.Border;
 import main.main;
 
 public class Profile_View extends JPanel implements ActionListener, MouseListener {
-    //JPanel ViewPanel;
-
+    //private 
     //Icon
-    Icon ProfIcon, EditIcon, BackIcon;
-    Border emptyBorder = BorderFactory.createEmptyBorder();
-    
-    //Label
-    static JLabel UserNameTop;
-    static JLabel CustomerIDLabel, FirstNameLabel, LastNameLabel, DOBLabel, AgeLabel, ContactNumberLabel, GenderLabel, AddressLabel, BankBalanceLabel, AccountNumberLabel;
-    static JLabel CustomerIDValue, FirstNameValue, LastNameValue, DOBValue, AgeValue, ContactNumberValue, GenderValue, BankBalanceValue, AccountNumberValue;
-   //TextArea
-    static JTextArea AddressValue;
-    JLabel Collon1, Collon2, Collon3, Collon4, Collon5, Collon6, Collon7, Collon8, Collon9, Collon10;
-    JButton ProfIconLabel, BackIconLabel, EditIconLabel;
-    JButton SaveButton;
+    private Icon ProfIcon, EditIcon, BackIcon;
+    private Border emptyBorder = BorderFactory.createEmptyBorder();
 
+    //Label
+    private static JLabel UserNameTop;
+    private static JLabel CustomerIDLabel, FirstNameLabel, LastNameLabel, DOBLabel, AgeLabel, ContactNumberLabel, GenderLabel, AddressLabel, BankBalanceLabel, AccountNumberLabel;
+    private static JLabel CustomerIDValue, FirstNameValue, LastNameValue, DOBValue, AgeValue, ContactNumberValue, GenderValue, BankBalanceValue, AccountNumberValue;
+    //TextArea
+    private static JTextArea AddressValue;
+    private JLabel Collon1, Collon2, Collon3, Collon4, Collon5, Collon6, Collon7, Collon8, Collon9, Collon10;
+    private JButton ProfIconLabel, BackIconLabel, EditIconLabel;
+    private JButton SaveButton;
+    
     private static final int X = 230, Y = 90;
     private static final int R = 34, G = 34, B = 45;
     private static final int labelFontSize = 20;

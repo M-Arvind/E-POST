@@ -11,6 +11,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import java.awt.Image;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -19,8 +20,8 @@ import javax.swing.JTextArea;
 import main.main;
 import warehouse.Warehouse;
 
-public class AdminPanel extends JPanel implements ActionListener, MouseListener 
-{
+public class AdminPanel extends JPanel implements ActionListener, MouseListener {
+
     //Private Variables
     private JLabel LE_Post, IProfile;
     private Icon image = new ImageIcon(getClass().getResource("/Images/ProfileImage.png"));
@@ -35,7 +36,7 @@ public class AdminPanel extends JPanel implements ActionListener, MouseListener
     private Font font = new Font("Bold", Font.BOLD, 20);
     private JLabel userLogo;
     private JLabel lSearch;
-    
+
     //Public Variables
     public static JPanel contentForAdmin;
     public static CardLayout adminCard;
@@ -44,7 +45,7 @@ public class AdminPanel extends JPanel implements ActionListener, MouseListener
 
     //Contructer
     public AdminPanel() {
-        
+
         //Admin Panel
         adminCard = new CardLayout();
         contentForAdmin = new JPanel(adminCard);
@@ -56,6 +57,12 @@ public class AdminPanel extends JPanel implements ActionListener, MouseListener
         pDelivery = new deliveryDetails();
         pStocks = new Stocks();
         pConsignmentDetails = new ConsignmentDetails();
+
+        //Admin Logo
+        ImageIcon logo = new ImageIcon(getClass().getResource("/Images/Group 33.png"));
+        Image ima = logo.getImage();
+        Image newimg = ima.getScaledInstance(100, 50, java.awt.Image.SCALE_SMOOTH);
+        logo = new ImageIcon(newimg);
 
         //Creating Admin Pages
         contentForAdmin.add(pNewconsignment, "NewConsignment");
@@ -70,11 +77,10 @@ public class AdminPanel extends JPanel implements ActionListener, MouseListener
         adminCard.first(contentForAdmin);
         contentForAdmin.setBounds(X_FORCUSTOMER, Y_FORCUSTOMER, WIDTHFORCUSTOMER, HIGHTFORCUSTOMER);
         add(contentForAdmin);
-        
+
         //E Post Label
-        LE_Post = new JLabel("E-Post");
-        LE_Post.setFont(new Font("Segoe UI", Font.BOLD, 30));
-        LE_Post.setBounds(X_FORCUSTOMER, 30, 100, 30);
+        LE_Post = new JLabel(logo);
+        LE_Post.setBounds(X_FORCUSTOMER, 20, 100, 50);
         LE_Post.setForeground(Color.WHITE);
         add(LE_Post);
 
@@ -165,8 +171,7 @@ public class AdminPanel extends JPanel implements ActionListener, MouseListener
         bStocks.setUI(new StyledButtonUi());
         bStocks.addActionListener(this);
         add(bStocks);
-        
-        
+
         this.setLayout(null);
         this.setPreferredSize(new Dimension(1350, 890));
         this.setVisible(true);
@@ -174,7 +179,6 @@ public class AdminPanel extends JPanel implements ActionListener, MouseListener
 
     }
 
-    
     //Action Listener
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -249,7 +253,7 @@ public class AdminPanel extends JPanel implements ActionListener, MouseListener
         }
 
     }
-    
+
     //Mouse Listener
     @Override
     public void mouseClicked(MouseEvent e) {

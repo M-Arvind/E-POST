@@ -5,6 +5,7 @@ import java.sql.Date;
 //Setters and Getters For Encapsulation
 public class CustomerData {
 
+    //private
     private String customer_ID;
     private String first_name;
     private String last_name;

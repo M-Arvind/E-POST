@@ -71,6 +71,7 @@ public class main extends JFrame {
         this.setVisible(true);
         this.setLayout(null);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setTitle("E-Post");
         Front.execute();
     }
 

@@ -5,10 +5,11 @@ import java.util.ArrayList;
 //Setters and Getters For Encapsulation
 public class WalletData {
 
+    //public
     public static ArrayList<String> MoneyOrderValues = new ArrayList<String>();
     public static ArrayList<WalletData> ListForWalletInfo;
+    //private
     private String transactionid;
-
     private String beneficiary;
     private String customerid;
     private String recieverid;

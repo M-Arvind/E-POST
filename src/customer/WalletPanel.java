@@ -18,33 +18,22 @@ import main.main;
 
 public class WalletPanel extends JPanel {
 
-    //Label
-    static public JLabel UserName, Account_no, WalletBalance,icon;
-  
-    //TableModel
-    public static DefaultTableModel model;
-   
-    //Button 
+    // private 
     private JButton bE_pay, bMoney_Order, bAdd_Money;
-    
-    //Table
-    static private JTable table;
-    
-    //ScrollPane
     private JScrollPane sp;
-    
-    //Color
     private Color panel = new Color(254, 254, 254);
     private Color back = new Color(34, 34, 44);
     private Color button = new Color(71, 63, 144);
-    
-    //Font
     private static final int font = 16;
     private Font text = new Font("Verdana", Font.BOLD, font);
-    
+    private static JTable table;
     private int y = 120;
     private static final Object column_name[] = {"ID", "Type", "Date", "Beneficiary", "Receivers Id", "Amount", "Balance"};
     private Object row[] = {};
+
+    //Public
+    public static JLabel UserName, Account_no, WalletBalance, icon;
+    public static DefaultTableModel model;
 
     WalletPanel() {
 

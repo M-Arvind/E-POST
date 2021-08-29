@@ -5,6 +5,7 @@ import java.sql.Date;
 
 public class CustomerProfileData {
 
+    //private
     private static String id;
     private static String firstName;
     private static String lastName;
