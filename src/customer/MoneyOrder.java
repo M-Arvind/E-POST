@@ -111,7 +111,7 @@ public class MoneyOrder extends JPanel implements MouseListener {
         moneyOrder_btn_confirm.addActionListener((l) -> {
                if(!moneyOrder_toUsername_info.getText().isEmpty() && !moneyOrder_amount_info.getText().isEmpty() && !moneyOrder_firstName_info.getText().isEmpty() && !moneyOrder_lastName_info.getText().isEmpty() && !moneyOrder_type_info.getText().isEmpty() && !moneyOrder_address_info.getText().isEmpty() && !moneyOrder_state_info.getText().isEmpty() && !moneyOrder_district_info.getText().isEmpty() && !moneyOrder_pincode_info.getText().isEmpty()){
             
-                if( DatabaseOperations.CheckIdPresentOrNot(moneyOrder_toUsername_info.getText()) &&  pincodeValidate(moneyOrder_amount_info.getText()) && pincodeValidate(moneyOrder_pincode_info.getText()) && (Integer.parseInt(moneyOrder_amount_info.getText())<= Integer.parseInt(CustomerProfileData.getBankBalance()))){
+                if( DatabaseOperations.CheckIdPresentOrNot(moneyOrder_toUsername_info.getText()) &&  pincodeValidate(moneyOrder_amount_info.getText()) && pincodeValidate(moneyOrder_pincode_info.getText()) && (Float.parseFloat(moneyOrder_amount_info.getText())<= Float.parseFloat(CustomerProfileData.getBankBalance()))){
                
                
                         WalletData.MoneyOrderValues.add(moneyOrder_toUsername_info.getText()); //0
@@ -128,7 +128,7 @@ public class MoneyOrder extends JPanel implements MouseListener {
             
             //new Authentication();
                 }
-                else if(Integer.parseInt(moneyOrder_amount_info.getText()) > Integer.parseInt(CustomerProfileData.getBankBalance())){
+                else if(Float.parseFloat(moneyOrder_amount_info.getText()) > Float.parseFloat(CustomerProfileData.getBankBalance())){
                     JOptionPane.showMessageDialog(null,"Insufficient balance");
                 }
                 else if(!pincodeValidate(moneyOrder_amount_info.getText()) && !pincodeValidate(moneyOrder_pincode_info.getText())){

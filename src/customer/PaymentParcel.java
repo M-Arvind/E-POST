@@ -243,7 +243,7 @@ public class PaymentParcel extends JPanel implements MouseListener {
         
       
         p_payment_btn_confirm.addActionListener((o)->{ 
-            if(Integer.parseInt(p_payment_amount_info.getText())<=Integer.parseInt(CustomerProfileData.getBankBalance())){
+            if(Float.parseFloat(p_payment_amount_info.getText())<=Float.parseFloat(CustomerProfileData.getBankBalance())){
                 new AuthenticationForParcel();
             }else{
                 JOptionPane.showMessageDialog(this, "Insufficient BankBalance:"+CustomerProfileData.getBankBalance());
