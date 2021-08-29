@@ -25,7 +25,7 @@ public class AdminProfileUpdate extends JPanel implements MouseListener, ActionL
     private int X = 230, Y = 90;
     private int R = 34, G = 34, B = 45;
     private int labelFontSize = 20;
-    
+
     //Public Variables
     public static JLabel UserNameTop;
     public static JTextArea pAddressValue, tAddressValue;
@@ -152,7 +152,7 @@ public class AdminProfileUpdate extends JPanel implements MouseListener, ActionL
         add(ageLabel);
         add(Collon4);
         add(ageValue);
-       
+
         //Contact Number Label
         contactNoLabel = new JLabel("CONTACT NUMBER");
         contactNoLabel.setBounds(X - 150, Y + 70 + 70, 200, 150);
@@ -352,6 +352,7 @@ public class AdminProfileUpdate extends JPanel implements MouseListener, ActionL
         setVisible(true);
 
     }
+
     //Mouse Listener
     @Override
     public void mouseClicked(MouseEvent e) {
@@ -402,6 +403,7 @@ public class AdminProfileUpdate extends JPanel implements MouseListener, ActionL
     public void mouseExited(MouseEvent e) {
 
     }
+
     //Action Listener
     @Override
     public void actionPerformed(ActionEvent e) {

@@ -1,4 +1,5 @@
 package Admin;
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -16,8 +17,9 @@ import javax.swing.JProgressBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.ScrollPaneConstants;
-public class ConsignmentDetails extends JPanel implements ActionListener{
-    
+
+public class ConsignmentDetails extends JPanel implements ActionListener {
+
     //Private Variables
     private JLabel consignDetail, item, itemPrice, itemWeight, itemCode, agentId, orderDate, deliverDate, payment, status;
     private JLabel billingDetail, senderId, seFirstName, seLastName, seConstact, seAddress;
@@ -28,7 +30,7 @@ public class ConsignmentDetails extends JPanel implements ActionListener{
     private static Color bg = new Color(34, 34, 45);
     private static Color fg = new Color(254, 254, 254);
     private static Color pri = new Color(71, 63, 145);
-    
+
     //Public Variable
     public static JLabel vConsignDetail, vItem, vItemPrice, vItemWeight, vItemCode, vAgentId, vOrderDate, vDeliverDate, vPayment, vStatus;
     public static JLabel vSenderId, vSeFirstName, vSeLastName, vSeConstact;
@@ -36,24 +38,22 @@ public class ConsignmentDetails extends JPanel implements ActionListener{
     public static JTextArea vSeAddress, vReceAdress;
     public static JProgressBar pick_transit, order_pick, transit_complete;
     public static JLabel order, pick, transit, complete;
-    
-    
-    
+
     //Constructer
-    public ConsignmentDetails(){
-        
+    public ConsignmentDetails() {
+
         //Details Panel
         details = new JPanel(null);
         details.setBackground(fg);
         details.setPreferredSize(new Dimension(1260, 590));
-        
+
         //Font
         Font font = new Font("Segoe UI", Font.BOLD, 22);
         Font fon = new Font("Segoe UI", Font.PLAIN, 18);
-        
+
         //Icon
-        icon=new ImageIcon(getClass().getResource("/Images/back.png"));  
-        
+        icon = new ImageIcon(getClass().getResource("/Images/back.png"));
+
         //Back Button
         back = new JButton(icon);
         back.setBounds(10, 10, 30, 30);
@@ -61,7 +61,7 @@ public class ConsignmentDetails extends JPanel implements ActionListener{
         back.setBorder(null);
         back.addActionListener(this);
         details.add(back);
-        
+
         //Consignment Details Label
         consignDetail = new JLabel("Consignment Details");
         consignDetail.setFont(font);
@@ -74,7 +74,7 @@ public class ConsignmentDetails extends JPanel implements ActionListener{
         itemWeight = new JLabel("Item Weight  :");
         itemWeight.setFont(fon);
         itemCode = new JLabel("Item Code   :");
-        itemCode.setFont(fon);     
+        itemCode.setFont(fon);
         agentId = new JLabel("Agent ID      :");
         agentId.setFont(fon);
         orderDate = new JLabel("Order Date  :");
@@ -85,7 +85,7 @@ public class ConsignmentDetails extends JPanel implements ActionListener{
         payment.setFont(fon);
         status = new JLabel("Status            :");
         status.setFont(fon);
-        
+
         vItem = new JLabel("E Post");
         vItem.setFont(fon);
         vItemPrice = new JLabel("5");
@@ -104,21 +104,20 @@ public class ConsignmentDetails extends JPanel implements ActionListener{
         vPayment.setFont(fon);
         vStatus = new JLabel("Delivered");
         vStatus.setFont(fon);
-                  
-        
-        billingDetail = new JLabel("Billint Details");
+
+        billingDetail = new JLabel("Billing Details");
         billingDetail.setFont(font);
         senderId = new JLabel("Sender ID          :");
         senderId.setFont(fon);
         seFirstName = new JLabel("First Name         :");
-        seFirstName.setFont(fon); 
+        seFirstName.setFont(fon);
         seLastName = new JLabel("Last Name         :");
         seLastName.setFont(fon);
         seConstact = new JLabel("Contact Number :");
         seConstact.setFont(fon);
         seAddress = new JLabel("Address            :");
         seAddress.setFont(fon);
-        
+
         vSenderId = new JLabel("1223241");
         vSenderId.setFont(fon);
         vSeFirstName = new JLabel("Keshav");
@@ -132,7 +131,7 @@ public class ConsignmentDetails extends JPanel implements ActionListener{
         vSeAddress.setLineWrap(true);
         vSeAddress.setWrapStyleWord(true);
         vSeAddress.setEditable(false);
-        
+
         shipDetails = new JLabel("Shipping Details");
         shipDetails.setFont(font);
         receId = new JLabel("Reciever ID       :");
@@ -145,7 +144,7 @@ public class ConsignmentDetails extends JPanel implements ActionListener{
         receContact.setFont(fon);
         receAdress = new JLabel("Address            :");
         receAdress.setFont(fon);
-        
+
         vReceId = new JLabel("12345");
         vReceId.setFont(fon);
         vReceFirstName = new JLabel("Arvind");
@@ -154,13 +153,12 @@ public class ConsignmentDetails extends JPanel implements ActionListener{
         vReceLastName.setFont(fon);
         vReceContact = new JLabel("123456789");
         vReceContact.setFont(fon);
-        vReceAdress = new JTextArea();       
+        vReceAdress = new JTextArea();
         vReceAdress.setFont(fon);
         vReceAdress.setLineWrap(true);
         vReceAdress.setWrapStyleWord(true);
         vReceAdress.setEditable(false);
-        
-        
+
         //Consignment Details Bounds
         consignDetail.setBounds(80, 40, 240, 40);
         vConsignDetail.setBounds(1070, 40, 240, 40);
@@ -173,7 +171,7 @@ public class ConsignmentDetails extends JPanel implements ActionListener{
         deliverDate.setBounds(930, 80, 240, 40);
         payment.setBounds(930, 120, 240, 40);
         status.setBounds(930, 160, 240, 40);
-        
+
         vItem.setBounds(220, 80, 240, 40);
         vItemPrice.setBounds(220, 120, 240, 40);
         vItemWeight.setBounds(220, 160, 240, 40);
@@ -183,33 +181,33 @@ public class ConsignmentDetails extends JPanel implements ActionListener{
         vDeliverDate.setBounds(1080, 80, 240, 40);
         vPayment.setBounds(1080, 120, 240, 40);
         vStatus.setBounds(1080, 160, 240, 40);
-        
+
         billingDetail.setBounds(80, 210, 240, 40);
         senderId.setBounds(100, 250, 240, 40);
         seFirstName.setBounds(100, 290, 240, 40);
         seLastName.setBounds(100, 330, 240, 40);
         seConstact.setBounds(100, 370, 240, 40);
         seAddress.setBounds(100, 410, 240, 40);
-        
+
         vSenderId.setBounds(270, 250, 240, 40);
         vSeFirstName.setBounds(270, 290, 240, 40);
         vSeLastName.setBounds(270, 330, 240, 40);
         vSeConstact.setBounds(270, 370, 240, 40);
         vSeAddress.setBounds(270, 420, 350, 80);
-        
+
         shipDetails.setBounds(660, 210, 240, 40);
         receId.setBounds(680, 250, 240, 40);
         receFirstName.setBounds(680, 290, 240, 40);
         receLastName.setBounds(680, 330, 240, 40);
         receContact.setBounds(680, 370, 240, 40);
         receAdress.setBounds(680, 410, 240, 40);
-        
+
         vReceId.setBounds(840, 250, 240, 40);
         vReceFirstName.setBounds(840, 290, 240, 40);
         vReceLastName.setBounds(840, 330, 240, 40);
         vReceContact.setBounds(840, 370, 240, 40);
         vReceAdress.setBounds(840, 420, 350, 80);
-        
+
         details.add(vItem);
         details.add(vConsignDetail);
         details.add(vItemCode);
@@ -220,33 +218,33 @@ public class ConsignmentDetails extends JPanel implements ActionListener{
         details.add(vDeliverDate);
         details.add(vPayment);
         details.add(vStatus);
-        
+
         details.add(vSenderId);
         details.add(vSeFirstName);
         details.add(vSeLastName);
         details.add(vSeConstact);
         details.add(vSeAddress);
-        
+
         details.add(vReceId);
         details.add(vReceFirstName);
         details.add(vReceLastName);
         details.add(vReceContact);
         details.add(vReceAdress);
-        
+
         details.add(shipDetails);
         details.add(receId);
         details.add(receFirstName);
         details.add(receLastName);
         details.add(receContact);
         details.add(receAdress);
-        
+
         details.add(billingDetail);
         details.add(senderId);
         details.add(seFirstName);
         details.add(seLastName);
         details.add(seConstact);
         details.add(seAddress);
-        
+
         details.add(item);
         details.add(itemPrice);
         details.add(itemWeight);
@@ -266,70 +264,70 @@ public class ConsignmentDetails extends JPanel implements ActionListener{
         order_pick.setMaximum(100);
         order_pick.setValue(100);
         details.add(order_pick);
-        
+
         pick_transit = new JProgressBar();
-        pick_transit.setBounds(300+180, 550, 300, 15);
+        pick_transit.setBounds(300 + 180, 550, 300, 15);
         pick_transit.setForeground(bg);
         pick_transit.setUI(new FancyprogressBar());
         pick_transit.setBackground(pri);
         pick_transit.setMaximum(100);
         pick_transit.setMinimum(100);
         details.add(pick_transit);
-        
+
         transit_complete = new JProgressBar();
-        transit_complete.setBounds(300+180+300, 550, 300, 15);
+        transit_complete.setBounds(300 + 180 + 300, 550, 300, 15);
         transit_complete.setForeground(fg);
         transit_complete.setUI(new FancyprogressBar());
         transit_complete.setBackground(pri);
         transit_complete.setMaximum(100);
         transit_complete.setMinimum(0);
         details.add(transit_complete);
-        
+
         order = new JLabel("Order Placed");
         order.setBounds(130, 520, 200, 30);
         order.setFont(font);
         order.setForeground(bg);
         details.add(order);
-        
+
         pick = new JLabel("Picked-Up");
-        pick.setBounds(130+300, 520, 200, 30);
+        pick.setBounds(130 + 300, 520, 200, 30);
         pick.setFont(font);
         pick.setForeground(bg);
         details.add(pick);
-        
+
         transit = new JLabel("In-Transit");
-        transit.setBounds(130+300+300, 520, 200, 30);
+        transit.setBounds(130 + 300 + 300, 520, 200, 30);
         transit.setFont(font);
         transit.setForeground(bg);
         details.add(transit);
-        
+
         complete = new JLabel("Completed");
-        complete.setBounds(130+300+300+300, 520, 200, 30);
+        complete.setBounds(130 + 300 + 300 + 300, 520, 200, 30);
         complete.setFont(font);
         complete.setForeground(bg);
         details.add(complete);
-        
+
         JScrollPane scroll = new JScrollPane(details);
         scroll.setPreferredSize(new Dimension(1260, 570));
         scroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         scroll.setBorder(null);
-        
+
         this.add(scroll);
-        
-       
+
     }
-    
+
     //Action Listener
     @Override
     public void actionPerformed(ActionEvent e) {
         Object o = e.getSource();
-        if(o == back){
+        if (o == back) {
             AdminPanel.adminCard.show(AdminPanel.contentForAdmin, AdminPanel.card);
         }
     }
+
     //Funtion to set the progress bar
-    public static void setProgress(String s){
-        if(s.equals("Order Placed")){
+    public static void setProgress(String s) {
+        if (s.equals("Order Placed")) {
             order_pick.setBackground(pri);
             order_pick.setForeground(fg);
             order_pick.setValue(0);
@@ -343,8 +341,7 @@ public class ConsignmentDetails extends JPanel implements ActionListener{
             pick.setForeground(fg);
             transit.setForeground(fg);
             complete.setForeground(fg);
-        }
-        else if(s.equals("PickedUp")){
+        } else if (s.equals("PickedUp")) {
             order_pick.setBackground(pri);
             order_pick.setForeground(pri);
             order_pick.setValue(100);
@@ -358,8 +355,7 @@ public class ConsignmentDetails extends JPanel implements ActionListener{
             pick.setForeground(pri);
             transit.setForeground(fg);
             complete.setForeground(fg);
-        }
-        else if(s.equals("In-Transit")){
+        } else if (s.equals("In-Transit")) {
             order_pick.setBackground(pri);
             order_pick.setForeground(pri);
             order_pick.setValue(100);
@@ -373,8 +369,7 @@ public class ConsignmentDetails extends JPanel implements ActionListener{
             pick.setForeground(pri);
             transit.setForeground(pri);
             complete.setForeground(fg);
-        }
-        else if(s.equals("Completed")){
+        } else if (s.equals("Completed")) {
             order_pick.setBackground(pri);
             order_pick.setForeground(pri);
             order_pick.setValue(100);
@@ -389,7 +384,7 @@ public class ConsignmentDetails extends JPanel implements ActionListener{
             transit.setForeground(pri);
             complete.setForeground(pri);
         }
-        
+
     }
 
 }

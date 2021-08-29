@@ -20,6 +20,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.ArrayList;
+import javax.swing.JPasswordField;
 import main.main;
 import warehouse.*;
 import profile.*;
@@ -333,7 +334,7 @@ public class DatabaseOperations {
             st1.setDate(15, java.sql.Date.valueOf(java.time.LocalDate.now()));
             st1.setString(16, "completed");
             st1.setString(17, "WH0003");
-            st1.setString(18, "-");
+            st1.setString(18, "Keshav B");
             st1.setFloat(19, 1F);
             st1.executeUpdate();
 
@@ -406,8 +407,10 @@ public class DatabaseOperations {
         return "";
     }
 
+
     //Database Login credentials
     public static ArrayList getLoginCredentials(JTextField usernameTextField, JTextField passwordField) {
+
         ArrayList loginCredentials = new ArrayList();
 
         try {
@@ -1133,6 +1136,7 @@ public class DatabaseOperations {
     public static consignment getConsignmentDetails(String id) {
         consignment ob = new consignment();
         try {
+            System.out.println("ConsignmentDetails start-----");
             Connection con = getConnection();
             Statement st = con.createStatement();
             String query = "select * from consignment where CONSIGNMENT_ID = ?";
@@ -1162,6 +1166,7 @@ public class DatabaseOperations {
                 ob.setStatus(res.getString("status"));
 
             }
+            System.out.println("ConsignmentDetails end-----");
             con.close();
         } catch (Exception e) {
         }

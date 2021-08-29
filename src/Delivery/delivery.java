@@ -180,7 +180,7 @@ public class delivery extends JPanel implements ActionListener, MouseListener {
         BCompleted.setFont(font);
         BCompleted.setBorder(null);
         BCompleted.setUI(new StyledButtonUI());
-        BCompleted.setBounds(X_FORCUSTOMER+1, 120, 160, 30);
+        BCompleted.setBounds(X_FORCUSTOMER + 1, 120, 160, 30);
         BCompleted.setBackground(Buttoncolor);
 
         BCompleted.addActionListener((e1)

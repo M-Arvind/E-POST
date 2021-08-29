@@ -29,7 +29,7 @@ public class Stocks extends JPanel implements ActionListener {
     private JLabel revenueStampQuantity, postageStampQuantity, postageStamp1Quantity, collectorStampQuantity, inlandLetterQuantity, postCardQuantity, envelopeQuantity;
     private ImageIcon revenueStampImage, postageStampImage, postageStamp1Image, collectorStampImage, inlandLetterImage, postCardImage, envelopeImage;
     private Image image, newimg;
-    
+
     //Public Variables
     public static JTextField revenueStampQuantity_Info, postageStampQuantity_Info, postageStamp1Quantity_Info, collectorStampQuantity_Info, inlandLetterQuantity_Info, postCardQuantity_Info, envelopeQuantity_Info;
 
@@ -42,7 +42,7 @@ public class Stocks extends JPanel implements ActionListener {
         Border borde = new LineBorder(new Color(71, 63, 145), 3, true);
         //Font
         Font fon = new Font("Segoe UI", Font.PLAIN, 16);
-        
+
         JPanel prod = new JPanel(null);
         prod.setBackground(fg);
         prod.setPreferredSize(new Dimension(1260, 780));
@@ -177,7 +177,7 @@ public class Stocks extends JPanel implements ActionListener {
         inlandLetter.setBorder(border);
         inlandLetter.setBounds(50, 400, 180, 180);
         inlandLetter.addActionListener(this);
-        
+
         //InlandLetter Label
         inlandLetterName = new JLabel("Item Name  : Inland Letter");
         inlandLetterName.setBounds(50, 600, 240, 40);
@@ -274,7 +274,7 @@ public class Stocks extends JPanel implements ActionListener {
         scroll.setPreferredSize(new Dimension(1260, 570));
         scroll.setHorizontalScrollBarPolicy(HORIZONTAL_SCROLLBAR_NEVER);
         scroll.setBorder(null);
-        
+
         this.add(scroll);
         this.setBackground(fg);
     }

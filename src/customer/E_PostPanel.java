@@ -1,5 +1,6 @@
 package customer;
 
+import Admin.StyledButtonUi;
 import Database.DatabaseOperations;
 import main.*;
 import java.awt.Color;
@@ -32,12 +33,12 @@ import javax.swing.border.Border;
 
 public class E_PostPanel extends JPanel implements ActionListener {
 
-  // private
+    // private
     private JButton BSend;
-    private JLabel LTo, LHardCopy, LSoftCopy, LFirstName, LLastName, LAddress, LState, LDistrict, LPincode, LPhoneNumber, LMessage;
+    private JLabel LTo, LFirstName, LLastName, LAddress, LState, LDistrict, LPincode, LPhoneNumber, LMessage;
     private JTextField TTo, TFirstname, TLastName, TPincode, TPhoneNumber, TSubject;
     private JTextArea TAddress, Message;
-    private JComboBox CState, CDistrict, CPincode;
+    private JComboBox CState, CDistrict;
     private JCheckBox SoftCopy, HardCopy;
     private boolean isSoftCopySelected, isHardCopySelected;
     private Font font = new Font("Segoe UI", Font.PLAIN, 22);
@@ -59,7 +60,7 @@ public class E_PostPanel extends JPanel implements ActionListener {
         add(LTo);
 
         border = BorderFactory.createLineBorder(Color.BLACK, 1);
-        
+
         //To TextField
         TTo = new JTextField();
         TTo.setBounds(40, 70, 200, 28);
@@ -250,13 +251,14 @@ public class E_PostPanel extends JPanel implements ActionListener {
             isHardCopySelected = bMod.isSelected();
         });
         add(HardCopy);
-       
+
         BSend = new JButton("Send");
         BSend.setBounds((1260 / 2) - 20, 520, 120, 30);
         BSend.setBackground(Cbutton);
         BSend.setForeground(Color.white);
         BSend.setFont(font);
         BSend.addActionListener(this);
+        BSend.setUI(new StyledButtonUi());
         add(BSend);
 
     }

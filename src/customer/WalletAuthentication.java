@@ -1,5 +1,6 @@
 package customer;
 
+import Admin.StyledButtonUi;
 import Database.DatabaseOperations;
 import Login.login;
 import static customer.CustomerPanel.contentForCustomer;
@@ -15,6 +16,7 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 public class WalletAuthentication {
@@ -28,7 +30,7 @@ public class WalletAuthentication {
     //Label
     private JLabel auth_password;
     //TextField
-    private JTextField auth_password_info;
+    private JPasswordField auth_password_info;
     //Button 
     private JButton auth_btn_confirm;
 
@@ -44,7 +46,7 @@ public class WalletAuthentication {
         newdialog.add(e_payment_auth);
 
         auth_password = new JLabel("Enter Your Password");
-        auth_password_info = new JTextField();
+        auth_password_info = new JPasswordField();
         auth_btn_confirm = new JButton("Confirm");
 
         auth_password.setBounds(135, 120, 200, 20);
@@ -63,6 +65,7 @@ public class WalletAuthentication {
 
         auth_btn_confirm.setBackground(primary_Color);
         auth_btn_confirm.setBorder(null);
+        auth_btn_confirm.setUI(new StyledButtonUi());
 
         //ActionListener for Confirm Button
         auth_btn_confirm.addActionListener(new ActionListener() {

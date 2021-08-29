@@ -1,5 +1,6 @@
 package customer;
 
+import Admin.StyledButtonUi;
 import Database.DatabaseOperations;
 import Login.login;
 import customer.DatasForCustomer.ConsignmentData;
@@ -15,6 +16,7 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 public class AuthenticationForParcel {
@@ -25,7 +27,7 @@ public class AuthenticationForParcel {
     private Color on_background_Color = new Color(254, 254, 254);
     private Color primary_Color = new Color(71, 63, 145);
     private JLabel auth_password;
-    private JTextField auth_password_info;
+    private JPasswordField auth_password_info;
     private JButton auth_btn_confirm;
 
     public AuthenticationForParcel() {
@@ -40,7 +42,7 @@ public class AuthenticationForParcel {
 
         //Object Creation
         auth_password = new JLabel("Enter Your Password");
-        auth_password_info = new JTextField();
+        auth_password_info = new JPasswordField();
         auth_btn_confirm = new JButton("Confirm");
 
         //setBounds
@@ -63,6 +65,7 @@ public class AuthenticationForParcel {
 
         auth_btn_confirm.setBackground(primary_Color);
         auth_btn_confirm.setBorder(null);
+        auth_btn_confirm.setUI(new StyledButtonUi());
 
         //Action Listener For Confirm Button
         auth_btn_confirm.addActionListener(new ActionListener() {
@@ -70,17 +73,16 @@ public class AuthenticationForParcel {
             public void actionPerformed(ActionEvent e) {
 
                 if (getAuthentication()) {
-                    try{
-                       WalletDataG.setBalence(Float.valueOf(CustomerProfileData.getBankBalance()));//
-                    WalletDataG.setItemCode(DatabaseOperations.getStocks().get(1).getitemCode());
-                    WalletDataG.setTransationType("Parcel");
-                    WalletDataG.setAmount(Float.valueOf(DatabaseOperations.getStocks().get(1).getItemPrice()));//fees for Parcel 1kg
-  
+                    try {
+                        WalletDataG.setBalence(Float.valueOf(CustomerProfileData.getBankBalance()));//
+                        WalletDataG.setItemCode(DatabaseOperations.getStocks().get(1).getitemCode());
+                        WalletDataG.setTransationType("Parcel");
+                        WalletDataG.setAmount(Float.valueOf(DatabaseOperations.getStocks().get(1).getItemPrice()));//fees for Parcel 1kg
+
+                    } catch (Exception l) {
+                        System.out.println("Auatentication Parcel" + l.toString());
                     }
-                    catch(Exception l){
-                        System.out.println("Auatentication Parcel"+l.toString());
-                    }
-                   
+
                     Database.DatabaseOperations.updateConsignment();
                     Database.DatabaseOperations.updateWalletTransaction();
 

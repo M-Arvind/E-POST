@@ -10,7 +10,6 @@ import java.util.ArrayList;
 
 public class DeliveryProfile {
 
-    
     private int salary;
     private int age;
     private String id;

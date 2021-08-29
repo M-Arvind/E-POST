@@ -1,5 +1,6 @@
 package customer.DatasForCustomer;
 //Setters and Getters For Encapsulation
+
 public class ProfileUpdateData {
 
     //private

@@ -18,7 +18,6 @@ import javax.swing.table.TableRowSorter;
 class ConsignmentPanel extends JPanel {
 
     //private
-    private JPanel PConTable;
     private TableModel model;
     private JScrollPane scroll;
     //public
@@ -70,7 +69,6 @@ class ConsignmentPanel extends JPanel {
 
         //Table header
         JTableHeader tab = table.getTableHeader();
-        JTableHeader tableHeader = table.getTableHeader();
         tab.setBackground(new Color(71, 63, 145));
         tab.setForeground(Color.white);
 

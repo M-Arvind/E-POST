@@ -1,7 +1,6 @@
 package customer;
 
 import Database.DatabaseOperations;
-import java.awt.BasicStroke;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -12,14 +11,12 @@ import javax.swing.BorderFactory;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
-import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.border.Border;
 import customer.DatasForCustomer.*;
-import javax.swing.JOptionPane;
 
 public class InboxPanel extends JPanel implements MouseListener {
 
@@ -50,8 +47,8 @@ public class InboxPanel extends JPanel implements MouseListener {
 
         int count = 0;
 
-        i = InboxData.ListForInbox.size()-1;
-        while (i>=0) {
+        i = InboxData.ListForInbox.size() - 1;
+        while (i >= 0) {
 
             JPanel temp = this.getPanel(i, y);
             temp.addMouseListener(this);

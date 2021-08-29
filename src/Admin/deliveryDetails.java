@@ -1,4 +1,3 @@
-
 package Admin;
 
 import java.awt.Color;
@@ -15,18 +14,19 @@ import javax.swing.table.JTableHeader;
 import main.main;
 
 public class deliveryDetails extends JPanel implements ListSelectionListener {
+
     //Private Variables
     private JScrollPane tableScroll;
     //Public Variables
     public static JTable deliveryDetailsTable;
     public static DefaultTableModel deliveryModel;
-    
+
     //Constructer
     public deliveryDetails() {
         //Column Values
-        String[] columns = {"Delivery ID", "First Name","Last Name", "DOB", "Join Date" ,"Contact Number", "Gender", "Salary"};
+        String[] columns = {"Delivery ID", "First Name", "Last Name", "DOB", "Join Date", "Contact Number", "Gender", "Salary"};
         Border border = new LineBorder(new Color(71, 63, 145), 1, true);
-        
+
         //Delivery Table
         deliveryModel = new DefaultTableModel();
         deliveryModel.setColumnIdentifiers(columns);
@@ -34,7 +34,7 @@ public class deliveryDetails extends JPanel implements ListSelectionListener {
         deliveryDetailsTable.setRowHeight(30);
         deliveryDetailsTable.setBorder(border);
         deliveryDetailsTable.setRowSelectionAllowed(true);
-        
+
         //Header
         JTableHeader tableHeader = deliveryDetailsTable.getTableHeader();
         tableHeader.setBackground(new Color(71, 63, 145));
@@ -47,19 +47,19 @@ public class deliveryDetails extends JPanel implements ListSelectionListener {
         tableScroll = new JScrollPane(deliveryDetailsTable);
         tableScroll.setBounds(30, 30, 1200, 500);
         tableScroll.setVisible(true);
-        
+
         this.add(tableScroll);
         this.setBackground(Color.WHITE);
         this.setBounds(45, 250, 1250, 590);
         this.setLayout(null);
         this.setVisible(true);
     }
-    
+
     //Item Listener
     @Override
     public void valueChanged(ListSelectionEvent e) {
         int selectRow = deliveryDetailsTable.getSelectedRow();
-        if(selectRow != -1){
+        if (selectRow != -1) {
             String selectedData = (String) deliveryDetailsTable.getValueAt(selectRow, 0);
             profile.DeliveryProfile.setDeliveryProfile(selectedData);
             main.switchPage("AdminDeliveryprofile");
@@ -67,4 +67,4 @@ public class deliveryDetails extends JPanel implements ListSelectionListener {
         }
     }
 
- }
+}

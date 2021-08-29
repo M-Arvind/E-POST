@@ -1,5 +1,6 @@
 package customer;
 
+import Admin.StyledButtonUi;
 import Database.DatabaseOperations;
 import customer.DatasForCustomer.ParcelData;
 import customer.DatasForCustomer.RecieverProfileData;
@@ -34,10 +35,10 @@ public class ParcelPanel extends JPanel implements ActionListener, KeyListener {
 
     //private
     private JButton BSend;
-    private JLabel LPrice_Description, LItem_Price, LItem_Weight, LTo, LHardCopy, LSoftCopy, LFirstName, LLastName, LAddress, LState, LDistrict, LPincode, LPhoneNumber;
+    private JLabel LPrice_Description, LItem_Price, LItem_Weight, LTo, LFirstName, LLastName, LAddress, LState, LDistrict, LPincode, LPhoneNumber;
     private JTextField TItem_Price, TItem_Weight, TTo, TFirstname, TLastName, TPincode, TPhoneNumber;
-    private JTextArea TAddress, Message;
-    private JComboBox CState, CDistrict, CPincode;
+    private JTextArea TAddress;
+    private JComboBox CState, CDistrict;
     private Font font = new Font("Segoe UI", Font.PLAIN, 22);
     private Font fontForText = new Font("Bold", Font.PLAIN, 17);
     private Border border;
@@ -268,6 +269,7 @@ public class ParcelPanel extends JPanel implements ActionListener, KeyListener {
         BSend.setForeground(Color.white);
         BSend.setFont(font);
         BSend.addActionListener(this);
+        BSend.setUI(new StyledButtonUi());
         add(BSend);
 
     }

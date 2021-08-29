@@ -21,11 +21,12 @@ import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumn;
 import profile.DeliveryProfile;
 
-public class NewConsignment extends JPanel implements ItemListener{
+public class NewConsignment extends JPanel implements ItemListener {
+
     //Private Variables
     public static JTable table;
     public static DefaultTableModel newModel;
-    
+
     //Private Variables
     private JScrollPane scroll;
     private int font = 16;
@@ -35,33 +36,31 @@ public class NewConsignment extends JPanel implements ItemListener{
     private int Select;
     private JComboBox<String> comboBox;
     private String value;
-    
+
     //Constructer
     NewConsignment() {
 
         //Column Values     
-        String[] columns = {"Consignment ID", "From","To", "Item", "Delivery ID", "Payment Method", "Date", "Status"};
-        
+        String[] columns = {"Consignment ID", "From", "To", "Item", "Delivery ID", "Payment Method", "Date", "Status"};
+
         Border border = new LineBorder(new Color(71, 63, 145), 1, true);
-        
+
         newModel = new DefaultTableModel();
         newModel.setColumnIdentifiers(columns);
         //Table
-        table =new JTable(newModel);
+        table = new JTable(newModel);
         table.setRowHeight(30);
         table.setBorder(border);
         table.setRowSelectionAllowed(true);
- 
+
         //List Selection Listener
         ListSelectionModel select = table.getSelectionModel();
         select.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        select.addListSelectionListener(new ListSelectionListener() 
-        {
-            public void valueChanged(ListSelectionEvent e) 
-            {
-                Select=table.getSelectedRow();
+        select.addListSelectionListener(new ListSelectionListener() {
+            public void valueChanged(ListSelectionEvent e) {
+                Select = table.getSelectedRow();
             }
-        });    
+        });
         //Combobox
         TableColumn testColumn = table.getColumnModel().getColumn(4);
         comboBox = new JComboBox<>(NewConsignment.getDeliveryMembers());
@@ -77,36 +76,35 @@ public class NewConsignment extends JPanel implements ItemListener{
         scroll = new JScrollPane(table);
         scroll.setBounds(30, 30, 1200, 500);
         scroll.setVisible(true);
-        
+
         this.add(scroll);
         this.setLayout(null);
         this.setBackground(Color.white);
     }
-    
+
     //Function to get the all the delivery members id to set in new consignment table 
-    public static String[] getDeliveryMembers(){
+    public static String[] getDeliveryMembers() {
         ArrayList<DeliveryProfile> details = Database.DatabaseOperations.getDeliveryDetails();
         String[] delivery = new String[details.size()];
-        for(int i=0;i<details.size();i++){
+        for (int i = 0; i < details.size(); i++) {
             DeliveryProfile temp = details.get(i);
-            if(!temp.getId().equals("Keshav B"))
+            if (!temp.getId().equals("Keshav B")) {
                 delivery[i] = temp.getId();
+            }
         }
-        return delivery;        
+        return delivery;
     }
 
     //Item Listener
     @Override
     public void itemStateChanged(ItemEvent e) {
-        if(Select != -1)
-        {
+        if (Select != -1) {
             int column = 0;
             String newStatus = comboBox.getSelectedItem().toString();
             value = table.getModel().getValueAt(Select, column).toString();
-            DatabaseOperations.updateConsignmentDelivery(newStatus,value); 
+            DatabaseOperations.updateConsignmentDelivery(newStatus, value);
             Consignment.consignment.setNewdAdminConsignmentDetails();
-        }           
+        }
     }
-    
-}
 
+}

@@ -1,5 +1,6 @@
 package customer;
 
+import Admin.StyledButtonUi;
 import Database.DatabaseOperations;
 import Login.login;
 import main.*;
@@ -13,6 +14,7 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 public class AuthenticationForE_Post {
@@ -23,8 +25,9 @@ public class AuthenticationForE_Post {
     private Color on_background_Color = new Color(254, 254, 254);
     private Color primary_Color = new Color(71, 63, 145);
     private JLabel auth_password;
-    private JTextField auth_password_info, userID;
-    private  JButton auth_btn_confirm;
+    private JTextField userID;
+    private JPasswordField auth_password_info;
+    private JButton auth_btn_confirm;
 
     public AuthenticationForE_Post() {
         newdialog.setSize(600, 450);
@@ -37,7 +40,7 @@ public class AuthenticationForE_Post {
         newdialog.add(e_payment_auth);
 
         auth_password = new JLabel("Enter Your Password");
-        auth_password_info = new JTextField();
+        auth_password_info = new JPasswordField();
         userID = new JTextField();
         userID.setText(Login.login.user_ID);
         auth_btn_confirm = new JButton("Confirm");
@@ -62,27 +65,26 @@ public class AuthenticationForE_Post {
         //auth_password_info.setColumns(10);
         auth_btn_confirm.setBackground(primary_Color);
         auth_btn_confirm.setBorder(null);
+        auth_btn_confirm.setUI(new StyledButtonUi());
 
         //Confirm Button
         auth_btn_confirm.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                
 
                 EPostData.setIsPasswordCorrect(getAuthentication());
 
                 if (EPostData.isIsPasswordCorrect()) {
-                    try{
-                   WalletDataG.setBalence(Float.valueOf(CustomerProfileData.getBankBalance()));//customer Balence
-                    WalletDataG.setItemCode(DatabaseOperations.getStocks().get(0).getitemCode());
-                    WalletDataG.setItemPrice(Float.valueOf(DatabaseOperations.getStocks().get(0).getItemPrice()));
-                    WalletDataG.setAmount(Float.valueOf(DatabaseOperations.getStocks().get(0).getItemPrice()));//fees for Parcel 1kg
-                    WalletDataG.setTransationType("E-Post");
+                    try {
+                        WalletDataG.setBalence(Float.valueOf(CustomerProfileData.getBankBalance()));//customer Balence
+                        WalletDataG.setItemCode(DatabaseOperations.getStocks().get(0).getitemCode());
+                        WalletDataG.setItemPrice(Float.valueOf(DatabaseOperations.getStocks().get(0).getItemPrice()));
+                        WalletDataG.setAmount(Float.valueOf(DatabaseOperations.getStocks().get(0).getItemPrice()));//fees for Parcel 1kg
+                        WalletDataG.setTransationType("E-Post");
+                    } catch (Exception y) {
+                        System.out.println("Authentication E-Post" + y.toString());
                     }
-                    catch(Exception y){
-                        System.out.println("Authentication E-Post"+y.toString());
-                    }
-                    
+
                     if (EPostData.isHardCopy() == true && EPostData.isSoftCopy() == true) {
                         Database.DatabaseOperations.updateInbox();
                         Database.DatabaseOperations.updateConsignment();
@@ -90,7 +92,7 @@ public class AuthenticationForE_Post {
                     } else if (EPostData.isHardCopy() == true) {
                         Database.DatabaseOperations.updateConsignment();
                         Database.DatabaseOperations.updateWalletTransaction();
-                    } else if (EPostData.isSoftCopy() == true) {
+                    } else if (EPostData.isSoftCopy()) {
                         Database.DatabaseOperations.updateInbox();
                         Database.DatabaseOperations.updateConsignment();
                         Database.DatabaseOperations.updateWalletTransaction();

@@ -1,5 +1,6 @@
 package customer;
 
+import Admin.StyledButtonUi;
 import Database.DatabaseOperations;
 import Login.login;
 import customer.DatasForCustomer.WalletDataG;
@@ -12,6 +13,7 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 public class EPay {
@@ -30,10 +32,10 @@ public class EPay {
     //Text Field
     private JTextField ePay_to_info;
     private JTextField ePay_amount_info;
-    private JTextField ePay_password_info;
+    private JPasswordField ePay_password_info;
 
     //Confirm Button
-     private JButton ePay_btn_confirm;
+    private JButton ePay_btn_confirm;
 
     public EPay() {
         newdialog.setBounds(375, 100, 600, 600);//1350,890
@@ -53,7 +55,7 @@ public class EPay {
         //Objects For TextField
         ePay_to_info = new JTextField();
         ePay_amount_info = new JTextField();
-        ePay_password_info = new JTextField();
+        ePay_password_info = new JPasswordField();
 
         //Confirm Button
         ePay_btn_confirm = new JButton("Confirm");
@@ -79,6 +81,7 @@ public class EPay {
         ePay_password_info.setForeground(background_Color);
 
         ePay_btn_confirm.setForeground(on_background_Color);
+        ePay_btn_confirm.setUI(new StyledButtonUi());
 
         ePay_to.setFont(new Font("Segoe UI", Font.PLAIN, 22));
         ePay_amount.setFont(new Font("Segoe UI", Font.PLAIN, 22));

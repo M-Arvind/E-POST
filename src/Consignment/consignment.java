@@ -1,4 +1,5 @@
 package Consignment;
+
 import Admin.OnGoingConsignment;
 import Admin.CompletedConsignment;
 import Admin.ConsignmentDetails;
@@ -8,8 +9,9 @@ import Delivery.DeliveryConsignment;
 import Delivery.*;
 import java.util.*;
 import javax.swing.table.DefaultTableModel;
-public class consignment
-{
+
+public class consignment {
+
     //Private Variables
     private String consignment_ID;
     private String customer_ID;
@@ -21,7 +23,7 @@ public class consignment
     private Float item_weight;
     private String receiver_first_name;
     private String receiver_last_name;
-    private String receiver_address;     
+    private String receiver_address;
     private Long receiver_contact_number;
     private String customer_first_name;
     private String customer_last_name;
@@ -30,33 +32,30 @@ public class consignment
     private String payment_method;
     private java.sql.Date order_date;
     private java.sql.Date delivery_date;
-    private String status;    
-   
+    private String status;
+
     //Set Consignment ID
-    public void setConsignment_ID(String consignment_ID) 
-    {
+    public void setConsignment_ID(String consignment_ID) {
         this.consignment_ID = consignment_ID;
-    } 
+    }
+
     //get Consignment ID
-    public String getConsignment_ID() 
-    {
+    public String getConsignment_ID() {
         return consignment_ID;
     }
-   
-   //get customer ID
-    public String getCustomer_ID() 
-    {
+
+    //get customer ID
+    public String getCustomer_ID() {
         return customer_ID;
     }
+
     //Set Customer ID
-    public void setCustomer_ID(String customer_ID) 
-    {
-        this.customer_ID =customer_ID;
+    public void setCustomer_ID(String customer_ID) {
+        this.customer_ID = customer_ID;
     }
 
     //get Delivery ID
-    public String getDelivery_ID() 
-    {
+    public String getDelivery_ID() {
         return delivery_ID;
     }
 
@@ -304,9 +303,9 @@ public class consignment
     public void setStatus(String status) {
         this.status = status;
     }
-    
+
     //function to set all the values for consignment in Consignment page for Admin
-    public static void setConsignmentDetails(String id){
+    public static void setConsignmentDetails(String id) {
         consignment details = DatabaseOperations.getConsignmentDetails(id);
         ConsignmentDetails.vConsignDetail.setText(details.getConsignment_ID());
         ConsignmentDetails.vItem.setText(details.getItem());
@@ -330,9 +329,10 @@ public class consignment
         ConsignmentDetails.vReceAdress.setText(details.getReceiver_address());
         ConsignmentDetails.setProgress(details.getStatus());
     }
+
     //function to set all the values for consignment in Consignment page for Delivery
-    public static void setDeliveryConsignmentDetails(String id){
-        
+    public static void setDeliveryConsignmentDetails(String id) {
+
         consignment details = DatabaseOperations.getConsignmentDetails(id);
         DeliveryConsignment.vConsignDetail.setText(details.getConsignment_ID());
         DeliveryConsignment.vItem.setText(details.getItem());
@@ -358,91 +358,78 @@ public class consignment
     }
 
     //Function to set the values for the table in Ongoing consignment page
-    public static void setOngoingAdminConsignmentDetails()
-    {
-        
+    public static void setOngoingAdminConsignmentDetails() {
 
-            OnGoingConsignment.table.getSelectionModel().clearSelection();
+        OnGoingConsignment.table.getSelectionModel().clearSelection();
 
-            while(OnGoingConsignment.model.getRowCount()>0){
-                OnGoingConsignment.model.removeRow(0);
+        while (OnGoingConsignment.model.getRowCount() > 0) {
+            OnGoingConsignment.model.removeRow(0);
 
-            }
- 
-            ArrayList<consignment> listForDeliveryConsignment = DatabaseOperations.getOngoingAdminConsignmentDetails();         
-            for(int i=0;i<listForDeliveryConsignment.size();i++)
-            {
-                consignment temp = listForDeliveryConsignment.get(i);
-                OnGoingConsignment.model.addRow(new Object[]{temp.getConsignment_ID(),temp.getCustomer_ID(),temp.getReceiver_ID(),temp.getItem(),temp.getDelivery_ID(),temp.getPayment_method(),temp.getDelivery_date(),temp.getStatus()});
-            }
+        }
 
-    }
-     
-    //Function to set values for the table in  completed Consignment page
-    public static void setCompletedAdminConsignmentDetails()
-    {
-            CompletedConsignment.table.getSelectionModel().clearSelection();
-
-            while(CompletedConsignment.model.getRowCount()>0){
-                CompletedConsignment.model.removeRow(0);
-
-            }
- 
-            ArrayList<consignment> listForDeliveryConsignment = DatabaseOperations.getCompletedAdminConsignmentDetails();         
-            for(int i=0;i<listForDeliveryConsignment.size();i++)
-            {
-                consignment temp = listForDeliveryConsignment.get(i);
-                CompletedConsignment.model.addRow(new Object[]{temp.getConsignment_ID(),temp.getCustomer_ID(),temp.getReceiver_ID(),temp.getItem(),temp.getDelivery_ID(),temp.getPayment_method(),temp.getDelivery_date(),temp.getStatus()});
-            }
-    }
-    
-    //Function to set values for the table in  new  Consignment page
-    public static void setNewdAdminConsignmentDetails()
-    {
-            NewConsignment.table.getSelectionModel().clearSelection();
-
-            while(NewConsignment.newModel.getRowCount()>0){
-                NewConsignment.newModel.removeRow(0);
-
-            }
-
-            ArrayList<consignment> listForDeliveryConsignment = DatabaseOperations.getNewAdminConsignmentDetails();
-            for(int i=0;i<listForDeliveryConsignment.size();i++)
-            {
-                consignment temp = listForDeliveryConsignment.get(i);
-                NewConsignment.newModel.addRow(new Object[]{temp.getConsignment_ID(),temp.getCustomer_ID(),temp.getReceiver_ID(),temp.getItem(),"",temp.getPayment_method(),temp.getDelivery_date(),temp.getStatus()});
-            
-            }
-    }
-    
-    //Function to set values for the table in delivery ongoing page 
-    public static void setOngoingDeliveryConsignmentDetails()
-    {
-        ongoing.table.getSelectionModel().clearSelection();
-        DefaultTableModel dm = (DefaultTableModel)ongoing.table.getModel();
-        dm.getDataVector().removeAllElements();
-        dm.fireTableDataChanged();;        
-        ArrayList<consignment> listForDeliveryConsignment = DatabaseOperations.getOnGoingDeliveryConsignmentDetails();         
-        for(int i=0;i<listForDeliveryConsignment.size();i++)
-        {
+        ArrayList<consignment> listForDeliveryConsignment = DatabaseOperations.getOngoingAdminConsignmentDetails();
+        for (int i = 0; i < listForDeliveryConsignment.size(); i++) {
             consignment temp = listForDeliveryConsignment.get(i);
-            ongoing.model.addRow(new Object[]{temp.getConsignment_ID(),temp.getCustomer_ID(),temp.getReceiver_ID(),temp.getItem(),temp.getDelivery_ID(),temp.getPayment_method(),temp.getDelivery_date(),temp.getStatus()});
-        } 
-    }
-    
-    //Function to set Values for the table in delivery Completed page
-    public static void setCompletedDeliveryConsignmentDetails()
-    {
-        while(completed.model1.getRowCount() > 0)
-       {
-         completed.model1.removeRow(0);
-       }
-        ArrayList<consignment> listForCompletedDeliveryConsignment = DatabaseOperations.getCompletedDeliveryConsignmentDetails();         
-        for(int i=0;i<listForCompletedDeliveryConsignment.size();i++)
-        {
-           consignment temp1 = listForCompletedDeliveryConsignment.get(i);
-           completed.model1.addRow(new Object[]{temp1.getConsignment_ID(),temp1.getCustomer_ID(),temp1.getReceiver_ID(),temp1.getItem(),temp1.getDelivery_ID(),temp1.getPayment_method(),temp1.getDelivery_date(),temp1.getStatus()});
-        } 
-    }  
-}
+            OnGoingConsignment.model.addRow(new Object[]{temp.getConsignment_ID(), temp.getCustomer_ID(), temp.getReceiver_ID(), temp.getItem(), temp.getDelivery_ID(), temp.getPayment_method(), temp.getDelivery_date(), temp.getStatus()});
+        }
 
+    }
+
+    //Function to set values for the table in  completed Consignment page
+    public static void setCompletedAdminConsignmentDetails() {
+        CompletedConsignment.table.getSelectionModel().clearSelection();
+
+        while (CompletedConsignment.model.getRowCount() > 0) {
+            CompletedConsignment.model.removeRow(0);
+
+        }
+
+        ArrayList<consignment> listForDeliveryConsignment = DatabaseOperations.getCompletedAdminConsignmentDetails();
+        for (int i = 0; i < listForDeliveryConsignment.size(); i++) {
+            consignment temp = listForDeliveryConsignment.get(i);
+            CompletedConsignment.model.addRow(new Object[]{temp.getConsignment_ID(), temp.getCustomer_ID(), temp.getReceiver_ID(), temp.getItem(), temp.getDelivery_ID(), temp.getPayment_method(), temp.getDelivery_date(), temp.getStatus()});
+        }
+    }
+
+    //Function to set values for the table in  new  Consignment page
+    public static void setNewdAdminConsignmentDetails() {
+        NewConsignment.table.getSelectionModel().clearSelection();
+
+        while (NewConsignment.newModel.getRowCount() > 0) {
+            NewConsignment.newModel.removeRow(0);
+
+        }
+
+        ArrayList<consignment> listForDeliveryConsignment = DatabaseOperations.getNewAdminConsignmentDetails();
+        for (int i = 0; i < listForDeliveryConsignment.size(); i++) {
+            consignment temp = listForDeliveryConsignment.get(i);
+            NewConsignment.newModel.addRow(new Object[]{temp.getConsignment_ID(), temp.getCustomer_ID(), temp.getReceiver_ID(), temp.getItem(), "", temp.getPayment_method(), temp.getDelivery_date(), temp.getStatus()});
+
+        }
+    }
+
+    //Function to set values for the table in delivery ongoing page 
+    public static void setOngoingDeliveryConsignmentDetails() {
+        ongoing.table.getSelectionModel().clearSelection();
+        DefaultTableModel dm = (DefaultTableModel) ongoing.table.getModel();
+        dm.getDataVector().removeAllElements();
+        dm.fireTableDataChanged();;
+        ArrayList<consignment> listForDeliveryConsignment = DatabaseOperations.getOnGoingDeliveryConsignmentDetails();
+        for (int i = 0; i < listForDeliveryConsignment.size(); i++) {
+            consignment temp = listForDeliveryConsignment.get(i);
+            ongoing.model.addRow(new Object[]{temp.getConsignment_ID(), temp.getCustomer_ID(), temp.getReceiver_ID(), temp.getItem(), temp.getDelivery_ID(), temp.getPayment_method(), temp.getDelivery_date(), temp.getStatus()});
+        }
+    }
+
+    //Function to set Values for the table in delivery Completed page
+    public static void setCompletedDeliveryConsignmentDetails() {
+        while (completed.model1.getRowCount() > 0) {
+            completed.model1.removeRow(0);
+        }
+        ArrayList<consignment> listForCompletedDeliveryConsignment = DatabaseOperations.getCompletedDeliveryConsignmentDetails();
+        for (int i = 0; i < listForCompletedDeliveryConsignment.size(); i++) {
+            consignment temp1 = listForCompletedDeliveryConsignment.get(i);
+            completed.model1.addRow(new Object[]{temp1.getConsignment_ID(), temp1.getCustomer_ID(), temp1.getReceiver_ID(), temp1.getItem(), temp1.getDelivery_ID(), temp1.getPayment_method(), temp1.getDelivery_date(), temp1.getStatus()});
+        }
+    }
+}

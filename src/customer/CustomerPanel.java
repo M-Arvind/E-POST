@@ -264,7 +264,10 @@ public class CustomerPanel extends JPanel implements ActionListener, MouseListen
 
         } else if (o == BConsignment) {
             BConsignment.setBounds(X_FORCUSTOMER + 120 + 60, 120, 160, 30);
-            ConsignmentData.listForConsignment.clear();
+            try {
+                ConsignmentData.listForConsignment.clear();
+            } catch (Exception r) {
+            }
 
             CustomerPanel.contentForCustomer.add(new ConsignmentPanel(), "Consignment");
 
@@ -310,8 +313,8 @@ public class CustomerPanel extends JPanel implements ActionListener, MouseListen
 
         } else if (o == BWallet) {
 
-            WalletPanel.Account_no.setText("Username   : " + CustomerProfileData.getAccountNumber());
-            WalletPanel.UserName.setText("Account no : " + CustomerProfileData.getId());
+            WalletPanel.Account_no.setText("Account no : " + CustomerProfileData.getAccountNumber());
+            WalletPanel.UserName.setText("Username   : " + CustomerProfileData.getId());
             BWallet.setBounds(X_FORCUSTOMER + 180 + 180 + 180 + 180 + 180, 120, 160, 30);
             removeWalletCurrentDetails();
             setWalletCurrentDetails();

@@ -9,7 +9,6 @@ import java.util.ArrayList;
 
 public class CustomerProfile {
 
-    
     private int age;
     private String id;
     private String firstName;

@@ -11,13 +11,12 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import main.main;
 
-
 public class Profile_Update extends JPanel implements MouseListener {
 
     //private 
     private Icon ProfIcon, BackIcon;
     private Border emptyBorder = BorderFactory.createEmptyBorder();
-    private JLabel  FirstNameLabel, LastNameLabel, DOBLabel, AgeLabel, ContactNumberLabel, AddressLabel, AccountNumberLabel, PinCodeLabel, StateLabel, DistrictLabel;
+    private JLabel FirstNameLabel, LastNameLabel, DOBLabel, AgeLabel, ContactNumberLabel, AddressLabel, AccountNumberLabel, PinCodeLabel, StateLabel, DistrictLabel;
     private JTextArea FirstNameValue, LastNameValue, DOBValue, AgeValue, ContactNumberValue, AddressValue, AccountNumberValue, StateValue, PinCodeValue, DistrictValue;
     private JLabel Collon2, Collon3, Collon4, Collon5, Collon6, Collon8, Collon9, Collon10, Collon11, Collon12;
     private JButton ProfIconLabel, BackIconLabel;
@@ -25,7 +24,7 @@ public class Profile_Update extends JPanel implements MouseListener {
     private int X = 230, Y = 90;
     private int R = 34, G = 34, B = 45;
     private int labelFontSize = 20;
-    
+
     //public
     public static JLabel UserNameTop;
 
@@ -267,7 +266,7 @@ public class Profile_Update extends JPanel implements MouseListener {
         //button
         SaveButton = new JButton("Save");
         SaveButton.setBounds(X + 400, Y + 750, 100, 30);
-        SaveButton.setForeground(new Color(245,245,245));
+        SaveButton.setForeground(new Color(245, 245, 245));
         SaveButton.setBackground(new Color(71, 63, 145));
         SaveButton.setUI(new StyledButtonUi());
         SaveButton.addActionListener((c) -> {
@@ -299,7 +298,6 @@ public class Profile_Update extends JPanel implements MouseListener {
         setVisible(true);
 
     }
-
 
     //Validations
     static boolean phoneNumberValidation(String number) {

@@ -7,27 +7,26 @@ import javax.swing.border.Border;
 import main.main;
 import profile.DeliveryProfile;
 
-public class DeliveryProfileView extends JPanel implements ActionListener, MouseListener 
-{
+public class DeliveryProfileView extends JPanel implements ActionListener, MouseListener {
+
     //Private Variables
     private Icon ProfIcon, EditIcon, BackIcon;
     private Border emptyBorder = BorderFactory.createEmptyBorder();
     private JLabel UserNameLabel, ContactNoLabel, DOBLabel, AgeLabel, JoinDateLabel, PAddressLabel, TAddressLabel, MaritalStatusLabel, DesignationLabel, GenderLabel, SalaryLabel;
     private JButton ProfIconLabel, BackIconLabel, EditIconLabel;
-    private JButton SaveButton, logoutButton;
+    private JButton logoutButton;
     private JLabel Collon1, Collon2, Collon3, Collon4, Collon5, Collon6, Collon7, Collon8, Collon9, Collon10, Collon11, Collon12;
     private int X = 230, Y = 90;
     private int R = 34, G = 34, B = 45;
     private int labelFontSize = 20;
-    
+
     //Public Variables
-    public static JLabel UserNameTop;    
+    public static JLabel UserNameTop;
     public static JLabel UserNameValue, ContactNoValue, DOBValue, AgeValue, JoinDateValue, PAddressValue, TAddressValue, MaritalValue, DesignationValue, ExperienceValue, GenderValue, SalaryValue;
-   
+
     //Constructior
-    public DeliveryProfileView() 
-    {
-       //Adding A image
+    public DeliveryProfileView() {
+        //Adding A image
         ProfIcon = new ImageIcon(getClass().getResource("/Images/ProfileImage.png"));
         ProfIconLabel = new JButton(ProfIcon);
         ProfIconLabel.setBounds(X - 130, Y - 88, 120, 120);
@@ -74,7 +73,7 @@ public class DeliveryProfileView extends JPanel implements ActionListener, Mouse
         Collon1 = new JLabel(":");
         Collon1.setBounds(X + 200, Y - 30, 20, 150);
         Collon1.setFont(new Font("Bold", Font.BOLD, labelFontSize));
-        Collon1.setForeground(Color.WHITE);        
+        Collon1.setForeground(Color.WHITE);
         UserNameValue = new JLabel("Username");
         UserNameValue.setBounds(X + 240, Y - 30, 800, 150);
         UserNameValue.setFont(new Font("Bold", Font.BOLD, labelFontSize));
@@ -82,7 +81,7 @@ public class DeliveryProfileView extends JPanel implements ActionListener, Mouse
         add(UserNameLabel);
         add(Collon1);
         add(UserNameValue);
-       
+
         ContactNoLabel = new JLabel("Contact Number");
         ContactNoLabel.setBounds(X, Y + 60 - 30, 200, 150);
         ContactNoLabel.setFont(new Font("Bold", Font.BOLD, labelFontSize));
@@ -90,7 +89,7 @@ public class DeliveryProfileView extends JPanel implements ActionListener, Mouse
         Collon2 = new JLabel(":");
         Collon2.setBounds(X + 200, Y + 60 - 30, 20, 150);
         Collon2.setFont(new Font("Bold", Font.BOLD, labelFontSize));
-        Collon2.setForeground(Color.WHITE);       
+        Collon2.setForeground(Color.WHITE);
         ContactNoValue = new JLabel("Contact Number");
         ContactNoValue.setBounds(X + 240, Y + 60 - 30, 800, 150);
         ContactNoValue.setFont(new Font("Bold", Font.BOLD, labelFontSize));
@@ -98,7 +97,7 @@ public class DeliveryProfileView extends JPanel implements ActionListener, Mouse
         add(ContactNoLabel);
         add(Collon2);
         add(ContactNoValue);
-        
+
         DOBLabel = new JLabel("DOB");
         DOBLabel.setBounds(X, Y + 120 - 30, 200, 150);
         DOBLabel.setFont(new Font("Bold", Font.BOLD, labelFontSize));
@@ -106,7 +105,7 @@ public class DeliveryProfileView extends JPanel implements ActionListener, Mouse
         Collon3 = new JLabel(":");
         Collon3.setBounds(X + 200, Y + 120 - 30, 20, 150);
         Collon3.setFont(new Font("Bold", Font.BOLD, labelFontSize));
-        Collon3.setForeground(Color.WHITE);       
+        Collon3.setForeground(Color.WHITE);
         DOBValue = new JLabel("DOB");
         DOBValue.setBounds(X + 240, Y + 120 - 30, 800, 150);
         DOBValue.setFont(new Font("Bold", Font.BOLD, labelFontSize));
@@ -114,7 +113,7 @@ public class DeliveryProfileView extends JPanel implements ActionListener, Mouse
         add(DOBLabel);
         add(Collon3);
         add(DOBValue);
-        
+
         AgeLabel = new JLabel("Age");
         AgeLabel.setBounds(X, Y + 180 - 30, 200, 150);
         AgeLabel.setFont(new Font("Bold", Font.BOLD, labelFontSize));
@@ -123,7 +122,7 @@ public class DeliveryProfileView extends JPanel implements ActionListener, Mouse
         Collon4.setBounds(X + 200, Y + 180 - 30, 20, 150);
         Collon4.setFont(new Font("Bold", Font.BOLD, labelFontSize));
         Collon4.setForeground(Color.WHITE);
-        
+
         AgeValue = new JLabel("Age");
         AgeValue.setBounds(X + 240, Y + 180 - 30, 800, 150);
         AgeValue.setFont(new Font("Bold", Font.BOLD, labelFontSize));
@@ -131,7 +130,7 @@ public class DeliveryProfileView extends JPanel implements ActionListener, Mouse
         add(AgeLabel);
         add(Collon4);
         add(AgeValue);
-        
+
         JoinDateLabel = new JLabel("Join Date");
         JoinDateLabel.setBounds(X, Y + 240 - 30, 200, 150);
         JoinDateLabel.setFont(new Font("Bold", Font.BOLD, labelFontSize));
@@ -139,7 +138,7 @@ public class DeliveryProfileView extends JPanel implements ActionListener, Mouse
         Collon5 = new JLabel(":");
         Collon5.setBounds(X + 200, Y + 240 - 30, 20, 150);
         Collon5.setFont(new Font("Bold", Font.BOLD, labelFontSize));
-        Collon5.setForeground(Color.WHITE);       
+        Collon5.setForeground(Color.WHITE);
         JoinDateValue = new JLabel("Join Date ");
         JoinDateValue.setBounds(X + 240, Y + 240 - 30, 800, 150);
         JoinDateValue.setFont(new Font("Bold", Font.BOLD, labelFontSize));
@@ -147,7 +146,7 @@ public class DeliveryProfileView extends JPanel implements ActionListener, Mouse
         add(JoinDateLabel);
         add(Collon5);
         add(JoinDateValue);
-        
+
         PAddressLabel = new JLabel("Permanent Address");
         PAddressLabel.setBounds(X, Y + 300 - 30, 200, 150);
         PAddressLabel.setFont(new Font("Bold", Font.BOLD, labelFontSize));
@@ -155,7 +154,7 @@ public class DeliveryProfileView extends JPanel implements ActionListener, Mouse
         Collon6 = new JLabel(":");
         Collon6.setBounds(X + 200, Y + 300 - 30, 20, 150);
         Collon6.setFont(new Font("Bold", Font.BOLD, labelFontSize));
-        Collon6.setForeground(Color.WHITE);        
+        Collon6.setForeground(Color.WHITE);
         PAddressValue = new JLabel("Address");
         PAddressValue.setBounds(X + 240, Y + 300 - 30, 800, 150);
         PAddressValue.setFont(new Font("Bold", Font.BOLD, labelFontSize));
@@ -163,7 +162,7 @@ public class DeliveryProfileView extends JPanel implements ActionListener, Mouse
         add(PAddressLabel);
         add(Collon6);
         add(PAddressValue);
-        
+
         TAddressLabel = new JLabel("Temperory Address");
         TAddressLabel.setBounds(X, Y + 390 - 30, 200, 150);
         TAddressLabel.setFont(new Font("Bold", Font.BOLD, labelFontSize));
@@ -171,7 +170,7 @@ public class DeliveryProfileView extends JPanel implements ActionListener, Mouse
         Collon7 = new JLabel(":");
         Collon7.setBounds(X + 200, Y + 390 - 30, 20, 150);
         Collon7.setFont(new Font("Bold", Font.BOLD, labelFontSize));
-        Collon7.setForeground(Color.WHITE);        
+        Collon7.setForeground(Color.WHITE);
         TAddressValue = new JLabel("Address");
         TAddressValue.setBounds(X + 240, Y + 390 - 30, 800, 150);
         TAddressValue.setFont(new Font("Bold", Font.BOLD, labelFontSize));
@@ -180,7 +179,6 @@ public class DeliveryProfileView extends JPanel implements ActionListener, Mouse
         add(Collon7);
         add(TAddressValue);
 
-        
         MaritalStatusLabel = new JLabel("Marital Status");
         MaritalStatusLabel.setBounds(X, Y + 470 - 30, 200, 150);
         MaritalStatusLabel.setFont(new Font("Bold", Font.BOLD, labelFontSize));
@@ -188,7 +186,7 @@ public class DeliveryProfileView extends JPanel implements ActionListener, Mouse
         Collon8 = new JLabel(":");
         Collon8.setBounds(X + 200, Y + 470 - 30, 20, 150);
         Collon8.setFont(new Font("Bold", Font.BOLD, labelFontSize));
-        Collon8.setForeground(Color.WHITE);        
+        Collon8.setForeground(Color.WHITE);
         MaritalValue = new JLabel("Marital Status");
         MaritalValue.setBounds(X + 240, Y + 470 - 30, 800, 150);
         MaritalValue.setFont(new Font("Bold", Font.BOLD, labelFontSize));
@@ -196,7 +194,7 @@ public class DeliveryProfileView extends JPanel implements ActionListener, Mouse
         add(MaritalStatusLabel);
         add(Collon8);
         add(MaritalValue);
-        
+
         DesignationLabel = new JLabel("Designation");
         DesignationLabel.setBounds(X, Y + 530 - 30, 200, 150);
         DesignationLabel.setFont(new Font("Bold", Font.BOLD, labelFontSize));
@@ -204,7 +202,7 @@ public class DeliveryProfileView extends JPanel implements ActionListener, Mouse
         Collon9 = new JLabel(":");
         Collon9.setBounds(X + 200, Y + 530 - 30, 20, 150);
         Collon9.setFont(new Font("Bold", Font.BOLD, labelFontSize));
-        Collon9.setForeground(Color.WHITE);        
+        Collon9.setForeground(Color.WHITE);
         DesignationValue = new JLabel("Designation");
         DesignationValue.setBounds(X + 240, Y + 530 - 30, 800, 150);
         DesignationValue.setFont(new Font("Bold", Font.BOLD, labelFontSize));
@@ -220,7 +218,7 @@ public class DeliveryProfileView extends JPanel implements ActionListener, Mouse
         Collon10 = new JLabel(":");
         Collon10.setBounds(X + 200, Y + 590 - 30, 20, 150);
         Collon10.setFont(new Font("Bold", Font.BOLD, labelFontSize));
-        Collon10.setForeground(Color.WHITE);       
+        Collon10.setForeground(Color.WHITE);
         GenderValue = new JLabel("Gender");
         GenderValue.setBounds(X + 240, Y + 590 - 30, 800, 150);
         GenderValue.setFont(new Font("Bold", Font.BOLD, labelFontSize));
@@ -236,7 +234,7 @@ public class DeliveryProfileView extends JPanel implements ActionListener, Mouse
         Collon12 = new JLabel(":");
         Collon12.setBounds(X + 200, Y + 650 - 30, 20, 150);
         Collon12.setFont(new Font("Bold", Font.BOLD, labelFontSize));
-        Collon12.setForeground(Color.WHITE);        
+        Collon12.setForeground(Color.WHITE);
         SalaryValue = new JLabel("Salary");
         SalaryValue.setBounds(X + 240, Y + 650 - 30, 800, 150);
         SalaryValue.setFont(new Font("Bold", Font.BOLD, labelFontSize));
@@ -250,13 +248,14 @@ public class DeliveryProfileView extends JPanel implements ActionListener, Mouse
         logoutButton.setBounds(X + 400, Y + 750, 100, 30);
         logoutButton.setForeground(Color.WHITE);
         logoutButton.setBackground(new Color(71, 63, 145));
+        logoutButton.setUI(new StyledButtonUI());
         //Listener for Logout Button
-        logoutButton.addActionListener((e1)-> 
-        {
+        logoutButton.addActionListener((e1)
+                -> {
             int choose = JOptionPane.showConfirmDialog(this, "Are you sure?", "Logout", JOptionPane.YES_NO_OPTION);
             if (choose == JOptionPane.YES_OPTION) {
                 main.switchPage("login");
-        }
+            }
         });
         add(logoutButton);
 
@@ -269,18 +268,15 @@ public class DeliveryProfileView extends JPanel implements ActionListener, Mouse
 
     //MouseListener
     @Override
-    public void mouseClicked(MouseEvent e) 
-    {
-        if(e.getSource() == BackIconLabel) 
-        {
+    public void mouseClicked(MouseEvent e) {
+        if (e.getSource() == BackIconLabel) {
             main.switchPage("deliveryPanel");
-        } 
-        else if (e.getSource() == EditIconLabel) 
-        {
+        } else if (e.getSource() == EditIconLabel) {
             DeliveryProfile.setDeliveryProfileUpdate(Login.login.user_ID);
             main.switchPage("deliveryProfileUpdate");
         }
     }
+
     @Override
     public void mousePressed(MouseEvent e) {
 

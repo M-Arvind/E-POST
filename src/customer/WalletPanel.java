@@ -1,5 +1,6 @@
 package customer;
 
+import Admin.StyledButtonUi;
 import Database.DatabaseOperations;
 import customer.DatasForCustomer.CustomerProfileData;
 import customer.DatasForCustomer.WalletData;
@@ -34,20 +35,21 @@ public class WalletPanel extends JPanel {
     //Public
     public static JLabel UserName, Account_no, WalletBalance, icon;
     public static DefaultTableModel model;
-
+    
     WalletPanel() {
-
+        
         this.setLayout(null);
         this.setBounds(55, 150, 1260, 570);
-
+        
         model = new DefaultTableModel();
-
+        
         table = new JTable(model);
         table.setRowHeight(30);
+        table.setFont(new Font("Segoe UI", Font.PLAIN, 18));
         for (Object c : column_name) {
             model.addColumn(c);
         }
-
+        
         JTableHeader tableHeader = table.getTableHeader();
         tableHeader.setBackground(button);
         tableHeader.setForeground(Color.white);
@@ -57,12 +59,12 @@ public class WalletPanel extends JPanel {
         sp = new JScrollPane(table);
         sp.setBounds(160, 100 + 40, 950 + 50, 350);
         sp.setBackground(back);
-        sp.setFont(new Font("arial", Font.BOLD, 20));
+        sp.setFont(new Font("Segoe UI", Font.BOLD, 20));
         sp.setVisible(true);
-
+        
         bMoney_Order = new JButton("Money Order");
         bAdd_Money = new JButton("Add Money");
-
+        
         UserName = new JLabel();
         Account_no = new JLabel();
         WalletBalance = new JLabel(CustomerProfileData.getBankBalance());
@@ -70,39 +72,42 @@ public class WalletPanel extends JPanel {
         bMoney_Order = new JButton("Money Order");
         bAdd_Money = new JButton("Add Money");
         UserName.setBounds(100, 30, 500, 50);
-        UserName.setFont(new Font("arial", Font.PLAIN, font));
-
+        UserName.setFont(new Font("Segoe UI", Font.PLAIN, font));
+        
         Account_no.setBounds(100, 60, 500, 50);
-        Account_no.setFont(new Font("arial", Font.PLAIN, font));
-
+        Account_no.setFont(new Font("Segoe UI", Font.PLAIN, font));
+        
         WalletBalance.setBounds(980, 10, 200, 100);
-        WalletBalance.setFont(new Font("arial", Font.BOLD, 18));
-
+        WalletBalance.setFont(new Font("Segoe UI", Font.BOLD, 18));
+        
         bE_pay.setBounds(350, 520, 150, 30);
         bE_pay.setBackground(button);
         bE_pay.setForeground(Color.white);
-        bE_pay.setFont(new Font("arial", Font.BOLD, font));
+        bE_pay.setFont(new Font("Segoe UI", Font.BOLD, font));
         bE_pay.addActionListener((l) -> {
             new EPay();
         });
-
+        bE_pay.setUI(new StyledButtonUi());
+        
         bMoney_Order.setBounds(550, 520, 150, 30);
         bMoney_Order.setBackground(button);
         bMoney_Order.setForeground(Color.white);
         bMoney_Order.addActionListener((l) -> {//outer Panel switching
             main.switchPage("money order");
         });
-
-        bMoney_Order.setFont(new Font("arial", Font.BOLD, font));
-
+        
+        bMoney_Order.setFont(new Font("Segoe UI", Font.BOLD, font));
+        bMoney_Order.setUI(new StyledButtonUi());
+        
         bAdd_Money.setBounds(750, 520, 150, 30);
         bAdd_Money.setBackground(button);
         bAdd_Money.setForeground(Color.white);
         bAdd_Money.addActionListener((l) -> {
             new AddMoney();
         });
-        bAdd_Money.setFont(new Font("arial", Font.BOLD, font));
-
+        bAdd_Money.setFont(new Font("Segoe UI", Font.BOLD, font));
+        bAdd_Money.setUI(new StyledButtonUi());
+        
         ImageIcon ion = new ImageIcon(getClass().getResource("/Images/wallet.png"));
         icon = new JLabel(ion);
         icon.setBounds(1010, 0, 200, 100);
@@ -115,43 +120,43 @@ public class WalletPanel extends JPanel {
         this.add(bE_pay);
         this.add(bAdd_Money);
         this.add(sp);
-
+        
     }
 
     //setWalletCurrentDetails
     static void setWalletCurrentDetails() {
         ArrayList<WalletData> list = DatabaseOperations.getCurrentWalletDetails();
-
+        
         for (int i = 0; i < list.size(); i++) {
             WalletData temp = list.get(i);
-
+            
             Object row[] = new Object[7];
             row[0] = (temp.getTransactionid());
-
+            
             row[1] = (temp.getTransactiontype());
-
+            
             row[2] = (temp.getTransactiondate());
-
+            
             row[3] = (temp.getBeneficiary());
-
+            
             row[4] = (temp.getRecieverid());
-
+            
             row[5] = (temp.getAmount());
-
+            
             row[6] = (temp.getBalance());
-
+            
             try {
                 model.addRow(row);
             } catch (Exception e) {
                 System.out.println("addrow" + e.toString());
             }
-
+            
         }
         try {
             WalletBalance.setText(list.get(list.size() - 1).getBalance());
         } catch (Exception o) {
         }
-
+        
     }
 
     //removeWalletCurrentDetails
@@ -160,5 +165,5 @@ public class WalletPanel extends JPanel {
             model.removeRow(0);
         }
     }
-
+    
 }

@@ -1,5 +1,6 @@
 package customer;
 
+import Admin.StyledButtonUi;
 import customer.DatasForCustomer.CustomerProfileData;
 import customer.DatasForCustomer.ParcelData;
 import customer.DatasForCustomer.WalletDataG;
@@ -109,6 +110,7 @@ public class PaymentParcel extends JPanel implements MouseListener {
         p_payment_btn_confirm.setText("Confirm");
         p_payment_btn_confirm.setForeground(on_background_Color);
         p_payment_btn_confirm.setBorder(null);
+        p_payment_btn_confirm.setUI(new StyledButtonUi());
 
         p_payment_btn_back.setBounds(25, 25, 40, 40);
         p_payment_btn_back.setBackground(null);
@@ -239,17 +241,13 @@ public class PaymentParcel extends JPanel implements MouseListener {
         add(p_payment_btn_confirm);
         add(p_payment_btn_back);
 
-        
-        
-      
-        p_payment_btn_confirm.addActionListener((o)->{ 
-            if(Integer.parseInt(p_payment_amount_info.getText())<=Integer.parseInt(CustomerProfileData.getBankBalance())){
+        p_payment_btn_confirm.addActionListener((o) -> {
+            if (Float.parseFloat(p_payment_amount_info.getText()) <= Float.parseFloat(CustomerProfileData.getBankBalance())) {
                 new AuthenticationForParcel();
-            }else{
-                JOptionPane.showMessageDialog(this, "Insufficient BankBalance:"+CustomerProfileData.getBankBalance());
+            } else {
+                JOptionPane.showMessageDialog(this, "Insufficient BankBalance:" + CustomerProfileData.getBankBalance());
             }
         });
-
 
         //Panel
         setLayout(null);
