@@ -119,7 +119,7 @@ public class PaymentParcel extends JPanel implements MouseListener {
             Image img = ImageIO.read(getClass().getResource("/Images/arroe_back_button.png"));
             p_payment_btn_back.setIcon(new ImageIcon(img));
         } catch (Exception ex) {
-            System.out.println(ex);
+//            System.out.println(ex);
         }
 
         //Label Bounds

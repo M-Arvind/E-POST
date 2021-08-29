@@ -45,7 +45,7 @@ public class WalletPanel extends JPanel {
         
         table = new JTable(model);
         table.setRowHeight(30);
-        table.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+        table.setFont(new Font("Segoe UI", Font.PLAIN, 16));
         for (Object c : column_name) {
             model.addColumn(c);
         }

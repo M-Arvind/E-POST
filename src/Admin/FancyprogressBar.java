@@ -77,7 +77,6 @@ public class FancyprogressBar extends BasicProgressBarUI {
             } else if (targetProgress > renderProgress && progressDelta < 0) {
                 progressDelta *= -1;
             }
-            System.out.println(progressDelta);
 
             paintTimer.start();
         }

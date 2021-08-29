@@ -4,21 +4,14 @@ import Admin.StyledButtonUi;
 import Database.DatabaseOperations;
 import customer.DatasForCustomer.CustomerProfileData;
 import customer.DatasForCustomer.WalletData;
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import javax.swing.BorderFactory;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -126,14 +119,14 @@ public class MoneyOrder extends JPanel implements MouseListener {
                     new WalletAuthentication();
 
                     //new Authentication();
-                } else if (Float.parseFloat(moneyOrder_amount_info.getText()) > Float.parseFloat(CustomerProfileData.getBankBalance())) {
-                    JOptionPane.showMessageDialog(null, "Insufficient balance");
                 } else if (!pincodeValidate(moneyOrder_amount_info.getText()) && !pincodeValidate(moneyOrder_pincode_info.getText())) {
                     JOptionPane.showMessageDialog(null, "Invalid Amountand Invalid Pincode");
                 } else if (!pincodeValidate(moneyOrder_pincode_info.getText())) {
                     JOptionPane.showMessageDialog(null, "Invalid Pincode");
                 } else if (!pincodeValidate(moneyOrder_amount_info.getText())) {
                     JOptionPane.showMessageDialog(null, "Invalid amount");
+                } else if (Float.parseFloat(moneyOrder_amount_info.getText()) > Float.parseFloat(CustomerProfileData.getBankBalance())) {
+                    JOptionPane.showMessageDialog(null, "Insufficient balance");
                 } else {
                     JOptionPane.showMessageDialog(null, "Invalid userId");
                 }

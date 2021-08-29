@@ -391,11 +391,22 @@ public class E_PostPanel extends JPanel implements ActionListener {
 
     //setting Data in EPost Class For Data Encapsulation
     private void setDataForEPost() {
+        int validCount = 0;
+        String regex4 = "^[0-9]+{10}";
+
+        boolean check4 = phoneNumberValidation(TPhoneNumber.getText());
+        if (!check4) {
+            JOptionPane.showMessageDialog(null, "Enter valid PhoneNumber");
+            validCount++;
+        }
+        else{
+            EPostData.setPhoneNumber(new Long(TPhoneNumber.getText()));
+        }
         EPostData.setTo(TTo.getText());
         EPostData.setFirstName(TFirstname.getText());
         EPostData.setLastName(TLastName.getText());
         EPostData.setPincode(TPincode.getText());
-        EPostData.setPhoneNumber(new Long(TPhoneNumber.getText()));
+        
         EPostData.setSubject(TSubject.getText());
         EPostData.setAddress(TAddress.getText());
         EPostData.setMessage(Message.getText());
@@ -404,7 +415,6 @@ public class E_PostPanel extends JPanel implements ActionListener {
         EPostData.setHardCopy(isHardCopySelected);
         EPostData.setSoftCopy(isSoftCopySelected);
         WalletDataG.setItemWeight(1F);
-        int validCount = 0;
         String regex1 = "^[A-Za-z]+";
         String value1 = EPostData.getFirstName();
         boolean check1 = Pattern.matches(regex1, value1);
@@ -425,20 +435,25 @@ public class E_PostPanel extends JPanel implements ActionListener {
             JOptionPane.showMessageDialog(null, "Enter valid Pincode");
             validCount++;
         }
-        String regex4 = "^[0-9]+{10}";
-
-        boolean check4 = phoneNumberValidation(EPostData.getPhoneNumber().toString());
-        if (!check4) {
-            JOptionPane.showMessageDialog(null, "Enter valid PhoneNumber");
+        if(TSubject.getText().isEmpty()){
             validCount++;
+            JOptionPane.showMessageDialog(null, "Enter  Message Subject");
         }
+        if(TAddress.getText().isEmpty()){
+            validCount++;
+            JOptionPane.showMessageDialog(null, "Enter Address");
+        }
+        if(Message.getText().isEmpty()){
+            validCount++;
+            JOptionPane.showMessageDialog(null, "Enter Message");
+        }
+        
         if (validCount == 0) {
             PaymentEPost.setDataForEPostPayment();
             main.switchPage("paymentEPost");
         }
 
     }
-
     static boolean phoneNumberValidation(String number) {
         String regex = "(0/91)?[7-9][0-9]{9}";
         return number.matches(regex);

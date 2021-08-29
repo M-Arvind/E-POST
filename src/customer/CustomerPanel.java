@@ -23,6 +23,7 @@ import static customer.WalletPanel.setWalletCurrentDetails;
 import javax.swing.plaf.ButtonUI;
 import Database.DatabaseOperations;
 import customer.DatasForCustomer.CustomerProfileData;
+import java.awt.Image;
 import javax.swing.JTextField;
 import javax.swing.RowFilter;
 import javax.swing.event.DocumentEvent;
@@ -79,10 +80,16 @@ public class CustomerPanel extends JPanel implements ActionListener, MouseListen
         setVisible(true);
         setBackground(new Color(R, G, B));
 
+        //Admin Logo
+        ImageIcon logo = new ImageIcon(getClass().getResource("/Images/Group 33.png"));
+        Image ima = logo.getImage();
+        Image newimg = ima.getScaledInstance(100, 50, java.awt.Image.SCALE_SMOOTH);
+        logo = new ImageIcon(newimg);
+        
         //Labels
-        LE_Post = new JLabel("E-Post");
+        LE_Post = new JLabel(logo);
         LE_Post.setFont(new Font("Segoe UI", Font.BOLD, 30));
-        LE_Post.setBounds(X_FORCUSTOMER, 30, 100, 30);
+        LE_Post.setBounds(X_FORCUSTOMER, 20, 100, 50);
         LE_Post.setForeground(Color.WHITE);
         add(LE_Post);
 

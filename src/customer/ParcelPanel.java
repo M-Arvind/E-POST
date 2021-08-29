@@ -418,18 +418,26 @@ public class ParcelPanel extends JPanel implements ActionListener, KeyListener {
 
     //setting Data in EPost Class For Data Encapsulation
     private void setDataForParcel() {
+        int validCount = 0;
+        String regex4 = "^[0-9]+{10}";
+
+        boolean check4 = phoneNumberValidation(TPhoneNumber.getText());
+        if (!check4) {
+            JOptionPane.showMessageDialog(null, "Enter valid PhoneNumber");
+            validCount++;
+        } else {
+            ParcelData.setPhoneNumber(new Long(TPhoneNumber.getText()));
+        }
         ParcelData.setTo(TTo.getText());
         ParcelData.setFirstName(TFirstname.getText());
         ParcelData.setLastName(TLastName.getText());
         ParcelData.setPincode(TPincode.getText());
-        ParcelData.setPhoneNumber(new Long(TPhoneNumber.getText()));
         ParcelData.setAddress(TAddress.getText());
         ParcelData.setState(CState.getSelectedItem().toString());
         ParcelData.setDistrict(CDistrict.getSelectedItem().toString());
 
         ParcelData.setItemPrice(WalletDataG.getItemPrice());
 
-        int validCount = 0;
         String regex1 = "^[A-Za-z]+";
         String value1 = ParcelData.getFirstName();
         boolean check1 = Pattern.matches(regex1, value1);
@@ -450,24 +458,22 @@ public class ParcelPanel extends JPanel implements ActionListener, KeyListener {
             JOptionPane.showMessageDialog(null, "Enter valid Pincode");
             validCount++;
         }
-        String regex4 = "^[0-9]+{10}";
-
-        boolean check4 = phoneNumberValidation(ParcelData.getPhoneNumber().toString());
-        if (!check4) {
-            JOptionPane.showMessageDialog(null, "Enter valid PhoneNumber");
-            validCount++;
-        }
 
         String regex5 = "[+-]?[0-9]+(\\.[0-9]+)?([Ee][+-]?[0-9]+)?";
         String value5 = TItem_Weight.getText();
         boolean check5 = Pattern.matches(regex5, value5);
-        if (!check3 || TItem_Weight.getText().isEmpty()) {
+        if (!check5 || TItem_Weight.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Enter valid Weight");
             validCount++;
         } else {
             ParcelData.setItemWeight(Float.valueOf(TItem_Weight.getText()));
             WalletDataG.setItemWeight(Float.valueOf(TItem_Weight.getText()));
         }
+        if (TAddress.getText().isEmpty()) {
+            validCount++;
+            JOptionPane.showMessageDialog(null, "Enter Address");
+        }
+
         if (validCount == 0) {
             PaymentParcel.setDataForParcelPanel();
             main.switchPage("paymentParcel");
