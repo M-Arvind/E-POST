@@ -319,9 +319,10 @@ public class CustomerPanel extends JPanel implements ActionListener, MouseListen
             BWallet.setBounds(X_FORCUSTOMER + 180 + 180 + 180 + 180 + 180, 110, 160, 30);
 
         } else if (o == BWallet) {
-
+            DatabaseOperations.getCustomerProfileForCustomerPanel(Login.login.user_ID);
             WalletPanel.Account_no.setText("Account no : " + CustomerProfileData.getAccountNumber());
             WalletPanel.UserName.setText("Username   : " + CustomerProfileData.getId());
+            WalletPanel.WalletBalance.setText(CustomerProfileData.getBankBalance());
             BWallet.setBounds(X_FORCUSTOMER + 180 + 180 + 180 + 180 + 180, 120, 160, 30);
             removeWalletCurrentDetails();
             setWalletCurrentDetails();

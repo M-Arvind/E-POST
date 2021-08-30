@@ -140,8 +140,9 @@ public class DatabaseOperations {
 
                     list.add(od);
                 }
-                con.close();
+                
             }
+            con.close();
 
         } catch (Exception ex) {
             System.out.println("Error in OngoingConsignmentDetails---->" + ex.toString());
@@ -521,7 +522,7 @@ public class DatabaseOperations {
                     stmt.setString(9, list.get(8).toString());
                     stmt.setString(10, list.get(9).toString());
                     stmt.setString(11, list.get(10).toString());
-                    stmt.setString(12, list.get(11).toString());
+                    stmt.setFloat(12, (Float)list.get(11));
                     stmt.setString(13, list.get(12).toString());
 
                     stmt.executeUpdate();
@@ -685,7 +686,7 @@ public class DatabaseOperations {
             pst.setString(17, "E-Pay");  //payment_method 
             pst.setDate(18, java.sql.Date.valueOf(java.time.LocalDate.now()));//order_date DATE
             pst.setDate(19, java.sql.Date.valueOf(java.time.LocalDate.now()));  //delivery_date DATE                                                    
-            pst.setString(20, "In-Order");//status 
+            pst.setString(20, "Order Placed");//status 
             pst.executeUpdate();
             con.setAutoCommit(true);
             con.close();

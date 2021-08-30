@@ -1,5 +1,6 @@
 package customer;
 
+
 import Admin.StyledButtonUi;
 import static Database.DatabaseOperations.profileUpdationOnSave;
 import customer.DatasForCustomer.CustomerProfileData;
@@ -17,8 +18,9 @@ public class Profile_Update extends JPanel implements MouseListener {
     private Icon ProfIcon, BackIcon;
     private Border emptyBorder = BorderFactory.createEmptyBorder();
     private JLabel FirstNameLabel, LastNameLabel, DOBLabel, AgeLabel, ContactNumberLabel, AddressLabel, AccountNumberLabel, PinCodeLabel, StateLabel, DistrictLabel;
-    private JTextArea FirstNameValue, LastNameValue, DOBValue, AgeValue, ContactNumberValue, AddressValue, AccountNumberValue, StateValue, PinCodeValue, DistrictValue;
-    private JLabel Collon2, Collon3, Collon4, Collon5, Collon6, Collon8, Collon9, Collon10, Collon11, Collon12;
+    private JTextField FirstNameValue, LastNameValue, DOBValue, AgeValue, ContactNumberValue, AccountNumberValue, StateValue, PinCodeValue, DistrictValue;
+    private JLabel Collon1,Collon2, Collon3, Collon4, Collon5, Collon6, Collon7,Collon8, Collon9, Collon10;
+    private JTextArea AddressValue;
     private JButton ProfIconLabel, BackIconLabel;
     private JButton SaveButton;
     private int X = 230, Y = 90;
@@ -57,215 +59,239 @@ public class Profile_Update extends JPanel implements MouseListener {
         UserNameTop.setFont(new Font("Bold", Font.BOLD, labelFontSize + 20));
         UserNameTop.setForeground(Color.WHITE);
         add(UserNameTop);
-
-        //firstname label
-        FirstNameLabel = new JLabel("First Name");
-        FirstNameLabel.setBounds(X, Y + 30, 200, 150);
-        FirstNameLabel.setFont(new Font("Bold", Font.BOLD, labelFontSize));
+        
+        
+        //First Name Label 
+        FirstNameLabel = new JLabel("FIRST NAME");
+        FirstNameLabel.setBounds(X - 150, Y, 200, 150);
+        FirstNameLabel.setFont(new Font("Segoe UI", Font.BOLD, labelFontSize));
         FirstNameLabel.setForeground(Color.WHITE);
+        Collon1 = new JLabel(":");
+        Collon1.setBounds(X + 60 + 30, Y, 20, 150);
+        Collon1.setFont(new Font("Segoe UI", Font.BOLD, labelFontSize));
+        Collon1.setForeground(Color.WHITE);
+
+        //First Name Value TextField
+        FirstNameValue = new JTextField();
+        FirstNameValue.setBounds(X + 240 - 120, Y + 60, 300, 35);
+        FirstNameValue.setFont(new Font("Segoe UI", Font.PLAIN, labelFontSize));
+        FirstNameValue.setBorder(BorderFactory.createEmptyBorder(0, 10, 0, 10));
+        FirstNameValue.setBackground(Color.WHITE);
+        FirstNameValue.setForeground(Color.GRAY);
+        FirstNameValue.addMouseListener(this);
+
+        add(FirstNameLabel);
+        add(Collon1);
+        add(FirstNameValue);
+
+        //Last Name Label
+        LastNameLabel = new JLabel("LAST NAME");
+        LastNameLabel.setBounds(X + 240 + 220, Y, 200, 150);
+        LastNameLabel.setFont(new Font("Segoe UI", Font.BOLD, labelFontSize));
+        LastNameLabel.setForeground(Color.WHITE);
         Collon2 = new JLabel(":");
-        Collon2.setBounds(X + 200, Y + 30, 20, 150);
+        Collon2.setBounds(X + 450 + 150 + 40 + 30 + 10, Y, 20, 150);
         Collon2.setFont(new Font("Bold", Font.BOLD, labelFontSize));
         Collon2.setForeground(Color.WHITE);
 
-        //firstname value label
-        FirstNameValue = new JTextArea();
-        FirstNameValue.setBounds(X + 240, Y + 94, 800, 35);
-        FirstNameValue.setFont(new Font("Bold", Font.BOLD, labelFontSize));
-        FirstNameValue.setForeground(Color.BLACK);
-        //ContactNoValue.setBackground(new Color(R,G,B));
-
-        add(FirstNameLabel);
-        add(Collon2);
-        add(FirstNameValue);
-
-        //lastname label
-        LastNameLabel = new JLabel("Last Name");
-        LastNameLabel.setBounds(X, Y + 100, 200, 150);
-        LastNameLabel.setFont(new Font("Bold", Font.BOLD, labelFontSize));
-        LastNameLabel.setForeground(Color.WHITE);
-        Collon3 = new JLabel(":");
-        Collon3.setBounds(X + 200, Y + 100, 20, 150);
-        Collon3.setFont(new Font("Bold", Font.BOLD, labelFontSize));
-        Collon3.setForeground(Color.WHITE);
-
-        //last name value label
-        LastNameValue = new JTextArea();
-        LastNameValue.setBounds(X + 240, Y + 164, 800, 35);
-        LastNameValue.setFont(new Font("Bold", Font.BOLD, labelFontSize));
-        //DOBValue.setBackground(new Color(R,G,B));
-        LastNameValue.setForeground(Color.BLACK);
+        //Last Name Values TextField
+        LastNameValue = new JTextField();
+        LastNameValue.setBounds(X + 240 + 300 + 100 + 60 + 10, Y + 60, 300, 35);
+        LastNameValue.setFont(new Font("Segoe UI", Font.PLAIN, labelFontSize));
+        LastNameValue.setBorder(BorderFactory.createEmptyBorder(0, 10, 0, 10));
+        LastNameValue.setBackground(Color.WHITE);
+        LastNameValue.setForeground(Color.GRAY);
+        LastNameValue.addMouseListener(this);
 
         add(LastNameLabel);
-        add(Collon3);
+        add(Collon2);
         add(LastNameValue);
 
-        //dob label
+        //DOB Label
         DOBLabel = new JLabel("DOB");
-        DOBLabel.setBounds(X, Y + 180, 200, 150);
-        DOBLabel.setFont(new Font("Bold", Font.BOLD, labelFontSize));
+        DOBLabel.setBounds(X - 150, Y + 70, 200, 150);
+        DOBLabel.setFont(new Font("Segoe UI", Font.BOLD, labelFontSize));
         DOBLabel.setForeground(Color.WHITE);
+        Collon3 = new JLabel(":");
+        Collon3.setBounds(X + 60 + 30, Y + 70, 20, 150);
+        Collon3.setFont(new Font("Segoe UI", Font.BOLD, labelFontSize));
+        Collon3.setForeground(Color.WHITE);
+
+        //DOB Value TextField
+        DOBValue = new JTextField();
+        DOBValue.setBounds(X + 240 - 120, Y + 60 + 70, 300, 35);
+        DOBValue.setFont(new Font("Segoe UI", Font.PLAIN, labelFontSize));
+        DOBValue.setBorder(BorderFactory.createEmptyBorder(0, 10, 0, 10));
+        DOBValue.setBackground(Color.WHITE);
+        DOBValue.setForeground(Color.GRAY);
+        DOBValue.addMouseListener(this);
+
+        add(DOBLabel);
+        add(Collon3);
+        add(DOBValue);
+
+        //Age Label
+        AgeLabel = new JLabel("AGE");
+        AgeLabel.setBounds(X + 240 + 220, Y + 70, 200, 150);
+        AgeLabel.setFont(new Font("Segoe UI", Font.BOLD, labelFontSize));
+        AgeLabel.setForeground(Color.WHITE);
         Collon4 = new JLabel(":");
-        Collon4.setBounds(X + 200, Y + 180, 20, 150);
+        Collon4.setBounds(X + 450 + 150 + 40 + 30 + 10, Y + 70, 20, 150);
         Collon4.setFont(new Font("Bold", Font.BOLD, labelFontSize));
         Collon4.setForeground(Color.WHITE);
 
-        //dob value label
-        DOBValue = new JTextArea();
-        DOBValue.setBounds(X + 240, Y + 244, 800, 35);
-        DOBValue.setFont(new Font("Bold", Font.BOLD, labelFontSize));
-        //AgeValue.setBackground(new Color(R,G,B));
-        DOBValue.setForeground(Color.BLACK);
-
-        add(DOBLabel);
-        add(Collon4);
-        add(DOBValue);
-
-        //age label 
-        AgeLabel = new JLabel("Age");
-        AgeLabel.setBounds(X, Y + 260, 200, 150);
-        AgeLabel.setFont(new Font("Bold", Font.BOLD, labelFontSize));
-        AgeLabel.setForeground(Color.WHITE);
-        Collon5 = new JLabel(":");
-        Collon5.setBounds(X + 200, Y + 260, 20, 150);
-        Collon5.setFont(new Font("Bold", Font.BOLD, labelFontSize));
-        Collon5.setForeground(Color.WHITE);
-
-        //age value label
-        AgeValue = new JTextArea();
-        AgeValue.setBounds(X + 240, Y + 324, 800, 35);
-        AgeValue.setFont(new Font("Bold", Font.BOLD, labelFontSize));
-        AgeValue.setForeground(Color.BLACK);
-        //JoinDateValue.setBackground(new Color(R,G,B));
+        //Age Value TextField
+        AgeValue = new JTextField();
+        AgeValue.setBounds(X + 240 + 300 + 100 + 60 + 10, Y + 60 + 70, 300, 35);
+        AgeValue.setFont(new Font("Segoe UI", Font.PLAIN, labelFontSize));
+        AgeValue.setBorder(BorderFactory.createEmptyBorder(0, 10, 0, 10));
+        AgeValue.setBackground(Color.WHITE);
+        AgeValue.setForeground(Color.GRAY);
+        AgeValue.addMouseListener(this);
 
         add(AgeLabel);
-        add(Collon5);
+        add(Collon4);
         add(AgeValue);
 
-        //ContactNumber Label
-        ContactNumberLabel = new JLabel("Contact Number");
-        ContactNumberLabel.setBounds(X, Y + 340, 200, 150);
-        ContactNumberLabel.setFont(new Font("Bold", Font.BOLD, labelFontSize));
+        //Contact Number Label
+        ContactNumberLabel = new JLabel("CONTACT NUMBER");
+        ContactNumberLabel.setBounds(X - 150, Y + 70 + 70, 200, 150);
+        ContactNumberLabel.setFont(new Font("Segoe UI", Font.BOLD, labelFontSize));
         ContactNumberLabel.setForeground(Color.WHITE);
+        Collon5 = new JLabel(":");
+        Collon5.setBounds(X + 60 + 30, Y + 70 + 70, 20, 150);
+        Collon5.setFont(new Font("Segoe UI", Font.BOLD, labelFontSize));
+        Collon5.setForeground(Color.WHITE);
+
+        //Contact Number Value TextField
+        ContactNumberValue = new JTextField();
+        ContactNumberValue.setBounds(X + 240 - 120, Y + 60 + 70 + 70, 300, 35);
+        ContactNumberValue.setFont(new Font("Segoe UI", Font.PLAIN, labelFontSize));
+        ContactNumberValue.setBorder(BorderFactory.createEmptyBorder(0, 10, 0, 10));
+        ContactNumberValue.setBackground(Color.WHITE);
+        ContactNumberValue.setForeground(Color.GRAY);
+        ContactNumberValue.addMouseListener(this);
+
+        add(ContactNumberLabel);
+        add(Collon5);
+        add(ContactNumberValue);
+
+        //Martial Status Label
+        AccountNumberLabel = new JLabel("Account Number");
+        AccountNumberLabel.setBounds(X + 240 + 220, Y + 70 + 70, 200, 150);
+        AccountNumberLabel.setFont(new Font("Segoe UI", Font.BOLD, labelFontSize));
+        AccountNumberLabel.setForeground(Color.WHITE);
         Collon6 = new JLabel(":");
-        Collon6.setBounds(X + 200, Y + 340, 20, 150);
+        Collon6.setBounds(X + 450 + 150 + 40 + 30 + 10, Y + 70 + 70, 20, 150);
         Collon6.setFont(new Font("Bold", Font.BOLD, labelFontSize));
         Collon6.setForeground(Color.WHITE);
 
-        //ContactNumber value label
-        ContactNumberValue = new JTextArea();
-        ContactNumberValue.setBounds(X + 240, Y + 404, 800, 35);
-        ContactNumberValue.setFont(new Font("Bold", Font.BOLD, labelFontSize));
-        //PAddressValue.setBackground(new Color(R,G,B));
-        ContactNumberValue.setForeground(Color.BLACK);
-        ContactNumberValue.setLineWrap(true);
+        //Martial Status Value TextField
+        AccountNumberValue = new JTextField();
+        AccountNumberValue.setBounds(X + 240 + 300 + 100 + 60 + 10, Y + 60 + 70 + 70, 300, 35);
+        AccountNumberValue.setFont(new Font("Segoe UI", Font.PLAIN, labelFontSize));
 
-        add(ContactNumberLabel);
+        add(AccountNumberLabel);
         add(Collon6);
-        add(ContactNumberValue);
+        add(AccountNumberValue);
 
-        //Address label
-        AddressLabel = new JLabel("Address");
-        AddressLabel.setBounds(X, Y + 410, 200, 150); //-->470
-        AddressLabel.setFont(new Font("Bold", Font.BOLD, labelFontSize));
-        AddressLabel.setForeground(Color.WHITE);
+        //Salary Label
+        StateLabel = new JLabel("State");
+        StateLabel.setBounds(X - 150, Y + 70 + 70 + 70, 200, 150);
+        StateLabel.setFont(new Font("Segoe UI", Font.BOLD, labelFontSize));
+        StateLabel.setForeground(Color.WHITE);
+        Collon7 = new JLabel(":");
+        Collon7.setBounds(X + 60 + 30, Y + 70 + 70 + 70, 20, 150);
+        Collon7.setFont(new Font("Segoe UI", Font.BOLD, labelFontSize));
+        Collon7.setForeground(Color.WHITE);
+
+        //Salary Value TextField
+        StateValue = new JTextField();
+        StateValue.setBounds(X + 240 - 120, Y + 60 + 70 + 70 + 70, 300, 35);
+        StateValue.setFont(new Font("Segoe UI", Font.PLAIN, labelFontSize));
+        StateValue.setBorder(BorderFactory.createEmptyBorder(0, 10, 0, 10));
+        StateValue.setBackground(Color.WHITE);
+        StateValue.setForeground(Color.GRAY);
+        StateValue.addMouseListener(this);
+
+        add(StateLabel);
+        add(Collon7);
+        add(StateValue);
+
+        //Designation Label
+        DistrictLabel = new JLabel("District");
+        DistrictLabel.setBounds(X + 240 + 220, Y + 70 + 70 + 70, 200, 150);
+        DistrictLabel.setFont(new Font("Segoe UI", Font.BOLD, labelFontSize));
+        DistrictLabel.setForeground(Color.WHITE);
         Collon8 = new JLabel(":");
-        Collon8.setBounds(X + 200, Y + 410, 20, 150); //-->470
+        Collon8.setBounds(X + 450 + 150 + 40 + 30 + 10, Y + 70 + 70 + 70, 20, 150);
         Collon8.setFont(new Font("Bold", Font.BOLD, labelFontSize));
         Collon8.setForeground(Color.WHITE);
 
-        //address value label
-        AddressValue = new JTextArea();
-        AddressValue.setBounds(X + 240, Y + 470, 800, 55); // -->535
-        AddressValue.setFont(new Font("Bold", Font.BOLD, labelFontSize));
+        //Designayion Value TextField
+        DistrictValue = new JTextField();
+        DistrictValue.setBounds(X + 240 + 300 + 100 + 60 + 10, Y + 60 + 70 + 70 + 70, 300, 35);
+        DistrictValue.setFont(new Font("Segoe UI", Font.PLAIN, labelFontSize));
+        DistrictValue.setBorder(BorderFactory.createEmptyBorder(0, 10, 0, 10));
+        DistrictValue.setBackground(Color.WHITE);
+        DistrictValue.setForeground(Color.GRAY);
+        DistrictValue.addMouseListener(this);
 
-        AddressValue.setForeground(Color.BLACK);
-
-        add(AddressLabel);
+        add(DistrictLabel);
         add(Collon8);
-        add(AddressValue);
+        add(DistrictValue);
 
-        PinCodeLabel = new JLabel("Pin Code");
-        PinCodeLabel.setBounds(X, Y + 490, 200, 150);
-        PinCodeLabel.setFont(new Font("Bold", Font.BOLD, labelFontSize));
+        //Premanent Address Label
+        PinCodeLabel = new JLabel("PinCode");
+        PinCodeLabel.setBounds(X - 150, Y + 70 + 70 + 70 + 70, 230, 150);
+        PinCodeLabel.setFont(new Font("Segoe UI", Font.BOLD, labelFontSize));
         PinCodeLabel.setForeground(Color.WHITE);
+        Collon9 = new JLabel(":");
+        Collon9.setBounds(X + 60 + 30, Y + 70 + 70 + 70 + 70, 20, 150);
+        Collon9.setFont(new Font("Segoe UI", Font.BOLD, labelFontSize));
+        Collon9.setForeground(Color.WHITE);
+
+        //Permanent Address Value TextField
+        PinCodeValue = new JTextField();
+        PinCodeValue.setBounds(X + 240 - 120, Y + 60 + 70 + 70 + 70 + 70, 300, 100);
+        PinCodeValue.setFont(new Font("Segoe UI", Font.PLAIN, labelFontSize));
+        PinCodeValue.setBorder(BorderFactory.createEmptyBorder(0, 10, 0, 10));
+        PinCodeValue.setBackground(Color.WHITE);
+        PinCodeValue.setForeground(Color.GRAY);
+        PinCodeValue.addMouseListener(this);
+
+        add(PinCodeLabel);
+        add(Collon9);
+        add(PinCodeValue);
+
+        //Temporary Address Label
+        AddressLabel = new JLabel("ADDRESS");
+        AddressLabel.setBounds(X + 240 + 220, Y + 70 + 70 + 70 + 70, 230, 150);
+        AddressLabel.setFont(new Font("Segoe UI", Font.BOLD, labelFontSize));
+        AddressLabel.setForeground(Color.WHITE);
         Collon10 = new JLabel(":");
-        Collon10.setBounds(X + 200, Y + 490, 20, 150); //-->470
+        Collon10.setBounds(X + 450 + 150 + 40 + 30 + 10, Y + 70 + 70 + 70 + 70, 20, 150);
         Collon10.setFont(new Font("Bold", Font.BOLD, labelFontSize));
         Collon10.setForeground(Color.WHITE);
 
-        PinCodeValue = new JTextArea();
-        PinCodeValue.setBounds(X + 240, Y + 555, 200, 25);
-        PinCodeValue.setFont(new Font("Bold", Font.BOLD, labelFontSize));
+        //Temporary Address Value TextField
+        AddressValue = new JTextArea();
+        AddressValue.setBounds(X + 240 + 300 + 100 + 60 + 10, Y + 60 + 70 + 70 + 70 + 70, 300, 100);
+        AddressValue.setFont(new Font("Segoe UI", Font.PLAIN, labelFontSize));
+        AddressValue.setBorder(BorderFactory.createEmptyBorder(0, 10, 0, 10));
+        AddressValue.setBackground(Color.WHITE);
+        AddressValue.setForeground(Color.GRAY);
+        AddressValue.setLineWrap(true);
+        AddressValue.setWrapStyleWord(true);
+        AddressValue.addMouseListener(this);
 
-        PinCodeValue.setForeground(Color.BLACK);
-
-        add(PinCodeValue);
-        add(PinCodeLabel);
+        add(AddressLabel);
         add(Collon10);
-
-        StateLabel = new JLabel("State");
-        StateLabel.setBounds(X + 500, Y + 490, 100, 150);
-        StateLabel.setFont(new Font("Bold", Font.BOLD, labelFontSize));
-        StateLabel.setForeground(Color.WHITE);
-        Collon11 = new JLabel(":");
-        Collon11.setBounds(X + 600, Y + 490, 20, 150); //-->470
-        Collon11.setFont(new Font("Bold", Font.BOLD, labelFontSize));
-        Collon11.setForeground(Color.WHITE);
-
-        StateValue = new JTextArea();
-        StateValue.setBounds(X + 620, Y + 555, 200, 25);
-        StateValue.setFont(new Font("Bold", Font.BOLD, labelFontSize));
-
-        StateValue.setForeground(Color.BLACK);
-
-        add(StateValue);
-        add(StateLabel);
-        add(Collon11);
-
-        DistrictLabel = new JLabel("District");
-        DistrictLabel.setBounds(X, Y + 550, 200, 150);
-        DistrictLabel.setFont(new Font("Bold", Font.BOLD, labelFontSize));
-        DistrictLabel.setForeground(Color.WHITE);
-        Collon12 = new JLabel(":");
-        Collon12.setBounds(X + 200, Y + 550, 20, 150); //-->470
-        Collon12.setFont(new Font("Bold", Font.BOLD, labelFontSize));
-        Collon12.setForeground(Color.WHITE);
-
-        DistrictValue = new JTextArea();
-        DistrictValue.setBounds(X + 240, Y + 610, 200, 25);
-        DistrictValue.setFont(new Font("Bold", Font.BOLD, labelFontSize));
-
-        DistrictValue.setForeground(Color.BLACK);
-
-        add(DistrictValue);
-        add(DistrictLabel);
-        add(Collon12);
-
-        //account number label
-        AccountNumberLabel = new JLabel("Account Number");
-        AccountNumberLabel.setBounds(X, Y + 610, 200, 150); //-->560
-        AccountNumberLabel.setFont(new Font("Bold", Font.BOLD, labelFontSize));
-        AccountNumberLabel.setForeground(Color.WHITE);
-        Collon9 = new JLabel(":");
-        Collon9.setBounds(X + 200, Y + 610, 20, 150); //-->560
-        Collon9.setFont(new Font("Bold", Font.BOLD, labelFontSize));
-        Collon9.setForeground(Color.WHITE);
-
-        //account number value label
-        AccountNumberValue = new JTextArea();
-        AccountNumberValue.setBounds(X + 240, Y + 675, 800, 25); //-->625
-        AccountNumberValue.setFont(new Font("Bold", Font.BOLD, labelFontSize));
-        //DesignationValue.setBackground(new Color(R,G,B));
-        AccountNumberValue.setForeground(Color.BLACK);
-
-        add(AccountNumberLabel);
-        add(Collon9);
-        add(AccountNumberValue);
+        add(AddressValue);
 
         //button
         SaveButton = new JButton("Save");
-        SaveButton.setBounds(X + 400, Y + 750, 100, 30);
+        SaveButton.setBounds(X + 400, Y + 550, 100, 30);
         SaveButton.setForeground(new Color(245, 245, 245));
         SaveButton.setBackground(new Color(71, 63, 145));
         SaveButton.setUI(new StyledButtonUi());

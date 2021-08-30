@@ -341,7 +341,7 @@ public class register extends JPanel implements ActionListener, ItemListener {
         list.add(state);
         list.add(district);
         list.add(pincode);
-        list.add("0");
+        list.add(new Float(0));
         list.add(accountNumber);
         list.add(password);
         list.add(confirmPassword);

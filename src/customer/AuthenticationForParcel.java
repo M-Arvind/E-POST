@@ -80,7 +80,7 @@ public class AuthenticationForParcel {
                         WalletDataG.setAmount(Float.valueOf(DatabaseOperations.getStocks().get(1).getItemPrice()));//fees for Parcel 1kg
 
                     } catch (Exception l) {
-                        System.out.println("Auatentication Parcel" + l.toString());
+                        System.out.println("Authentication Parcel" + l.toString());
                     }
 
                     Database.DatabaseOperations.updateConsignment();

@@ -350,7 +350,7 @@ public class DeliveryConsignment extends JPanel implements ActionListener {
     //Funtion to set the progress bar
 
     public static void setProgress(String s) {
-        if (s.equals("Order Placed")) {
+        if (s.equals("Order Placed") || s.equals("In-Order")) {
             order_pick.setBackground(pri);
             order_pick.setForeground(fg);
             order_pick.setValue(0);
