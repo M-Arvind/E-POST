@@ -190,6 +190,10 @@ public class Profile_Update extends JPanel implements MouseListener {
         AccountNumberValue = new JTextField();
         AccountNumberValue.setBounds(X + 240 + 300 + 100 + 60 + 10, Y + 60 + 70 + 70, 300, 35);
         AccountNumberValue.setFont(new Font("Segoe UI", Font.PLAIN, labelFontSize));
+        AccountNumberValue.setBorder(BorderFactory.createEmptyBorder(0, 10, 0, 10));
+        AccountNumberValue.setBackground(Color.WHITE);
+        AccountNumberValue.setForeground(Color.GRAY);
+        AccountNumberValue.addMouseListener(this);
 
         add(AccountNumberLabel);
         add(Collon6);
@@ -253,7 +257,7 @@ public class Profile_Update extends JPanel implements MouseListener {
 
         //Permanent Address Value TextField
         PinCodeValue = new JTextField();
-        PinCodeValue.setBounds(X + 240 - 120, Y + 60 + 70 + 70 + 70 + 70, 300, 100);
+        PinCodeValue.setBounds(X + 240 - 120, Y + 60 + 70 + 70 + 70 + 70, 300, 35);
         PinCodeValue.setFont(new Font("Segoe UI", Font.PLAIN, labelFontSize));
         PinCodeValue.setBorder(BorderFactory.createEmptyBorder(0, 10, 0, 10));
         PinCodeValue.setBackground(Color.WHITE);
