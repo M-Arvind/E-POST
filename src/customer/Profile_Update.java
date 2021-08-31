@@ -18,9 +18,9 @@ public class Profile_Update extends JPanel implements MouseListener {
     private Icon ProfIcon, BackIcon;
     private Border emptyBorder = BorderFactory.createEmptyBorder();
     private JLabel FirstNameLabel, LastNameLabel, DOBLabel, AgeLabel, ContactNumberLabel, AddressLabel, AccountNumberLabel, PinCodeLabel, StateLabel, DistrictLabel;
-    private JTextField FirstNameValue, LastNameValue, DOBValue, AgeValue, ContactNumberValue, AccountNumberValue, StateValue, PinCodeValue, DistrictValue;
+    private static JTextField FirstNameValue, LastNameValue, DOBValue, AgeValue, ContactNumberValue, AccountNumberValue, StateValue, PinCodeValue, DistrictValue;
     private JLabel Collon1,Collon2, Collon3, Collon4, Collon5, Collon6, Collon7,Collon8, Collon9, Collon10;
-    private JTextArea AddressValue;
+    private static JTextArea AddressValue;
     private JButton ProfIconLabel, BackIconLabel;
     private JButton SaveButton;
     private int X = 230, Y = 90;
@@ -366,4 +366,18 @@ public class Profile_Update extends JPanel implements MouseListener {
 
     }
 
+    public static void setDataForProfileUpdate(){
+         FirstNameValue.setText(CustomerProfileData.getFirstName());
+            LastNameValue.setText(CustomerProfileData.getLastName());
+            DOBValue.setText(CustomerProfileData.getDob().toString());
+            AgeValue.setText(String.valueOf(CustomerProfileData.getAge()));
+            ContactNumberValue.setText(CustomerProfileData.getContactNumber());
+            PinCodeValue.setText(CustomerProfileData.getPinCode());
+            StateValue.setText(CustomerProfileData.getState());
+            DistrictValue.setText(CustomerProfileData.getDistrict());
+            AddressValue.setText(CustomerProfileData.getAddress());
+            AccountNumberValue.setText(CustomerProfileData.getAccountNumber());
+           
+        
+    }
 }

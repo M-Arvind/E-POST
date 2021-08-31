@@ -139,6 +139,7 @@ public class PaymentProducts implements KeyListener {
                         DatabaseOperations.updateStocks(tempstock);
                         DatabaseOperations.updateConsignment();
                         DatabaseOperations.updateWalletTransaction();
+                        DatabaseOperations.getCustomerProfileForCustomerPanel(Login.login.user_ID);
                         JOptionPane.showMessageDialog(null, "Payment Succesfully");
                         newdialog.dispose();
                         CustomerPanel.contentForCustomer.add(new ConsignmentPanel(), "update");

@@ -67,7 +67,7 @@ public class WalletPanel extends JPanel {
         
         UserName = new JLabel();
         Account_no = new JLabel();
-        WalletBalance = new JLabel(CustomerProfileData.getBankBalance());
+        WalletBalance = new JLabel();
         bE_pay = new JButton("E-Pay");
         bMoney_Order = new JButton("Money Order");
         bAdd_Money = new JButton("Add Money");
@@ -153,7 +153,8 @@ public class WalletPanel extends JPanel {
             
         }
         try {
-            WalletBalance.setText(list.get(list.size() - 1).getBalance());
+            WalletPanel.WalletBalance.setText(CustomerProfileData.getBankBalance());
+           // WalletBalance.setText(list.get(list.size() - 1).getBalance());
         } catch (Exception o) {
         }
         

@@ -34,7 +34,7 @@ public class WalletAuthentication {
     //Button 
     private JButton auth_btn_confirm;
 
-    public WalletAuthentication() {
+   public WalletAuthentication() {
         newdialog.setSize(600, 450);
         newdialog.setLayout(null);
 
@@ -77,6 +77,7 @@ public class WalletAuthentication {
                     main.switchPage("customerPanel");
                     removeWalletCurrentDetails();
                     setWalletCurrentDetails();
+                    DatabaseOperations.getCustomerProfileForCustomerPanel(Login.login.user_ID);
                     customerCard.show(contentForCustomer, "Wallet");
                     newdialog.dispose();
                 } else {

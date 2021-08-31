@@ -295,8 +295,10 @@ public class Profile_View extends JPanel implements ActionListener, MouseListene
     @Override
     public void actionPerformed(ActionEvent e) {
         Profile_Update.UserNameTop.setText(Login.login.user_ID);
-        if(e.getSource() == EditIconLabel)
+        if(e.getSource() == EditIconLabel){
+            Profile_Update.setDataForProfileUpdate();
             main.switchPage("Profile update");
+        }    
         else if(e.getSource() == logoutButton){
             int choose = JOptionPane.showConfirmDialog(this, "Are you sure?", "Logout", JOptionPane.YES_NO_OPTION);
             if (choose == JOptionPane.YES_OPTION) {
