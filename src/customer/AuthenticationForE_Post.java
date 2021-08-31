@@ -105,6 +105,7 @@ public class AuthenticationForE_Post {
                     } catch (Exception q) {
                     }
                     JOptionPane.showMessageDialog(null, "Payment Successfull");
+                    DatabaseOperations.getCustomerProfileForCustomerPanel(Login.login.user_ID);
                     CustomerPanel.contentForCustomer.add(new ConsignmentPanel(), "update");
                     main.switchPage("customerPanel");
                     CustomerPanel.BConsignment.setBounds(55 + 120 + 60, 120, 160, 30);

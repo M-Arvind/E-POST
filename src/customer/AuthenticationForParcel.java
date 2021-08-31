@@ -85,9 +85,9 @@ public class AuthenticationForParcel {
 
                     Database.DatabaseOperations.updateConsignment();
                     Database.DatabaseOperations.updateWalletTransaction();
-
                     ConsignmentData.listForConsignment.clear();
                     ConsignmentData.setIsUpdate(true);
+                    DatabaseOperations.getCustomerProfileForCustomerPanel(Login.login.user_ID);
                     JOptionPane.showMessageDialog(null, "Payment Successfull");
                     CustomerPanel.contentForCustomer.add(new ConsignmentPanel(), "update");
                     main.switchPage("customerPanel");

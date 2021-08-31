@@ -111,6 +111,7 @@ public class AddMoney {
                     DatabaseOperations.updateCustomerBalence();
                     WalletPanel.WalletBalance.setText(String.valueOf(WalletDataG.getBalence()));
                     addMoney_password_info.getText();
+                    DatabaseOperations.getCustomerProfileForCustomerPanel(Login.login.user_ID);
                     JOptionPane.showMessageDialog(null, "Money has been transfered successfully");
                 } else {
                     JOptionPane.showMessageDialog(null, "Incorrect Password");

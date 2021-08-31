@@ -33,7 +33,7 @@ public class DatabaseOperations {
 
         try {
             Class.forName("oracle.jdbc.driver.OracleDriver");
-            connection = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", "E_Post", "123");
+            connection = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE","E_Post", "123");
         } catch (Exception ex) {
             System.out.println("  " + ex);
         }
@@ -340,9 +340,28 @@ public class DatabaseOperations {
 
             con.setAutoCommit(true);
             con.close();
+            updateCustomerBalenceWallet();
+            DatabaseOperations.getCustomerProfileForCustomerPanel(Login.login.user_ID);
+            
 
         } catch (Exception e) {
             System.out.println("Error in WalletUpdatationOnMoneyOrder() in DatabaseOperations------->" + e.toString());
+        }
+    }
+     public static void updateCustomerBalenceWallet() {
+        try {
+            String query = "update customer set bank_balance=? where customer_ID=?";
+            Connection con = DatabaseOperations.getConnection();
+            PreparedStatement pst = con.prepareStatement(query);
+            String balence=Integer.toString(Integer.parseInt(CustomerProfileData.getBankBalance()) - Integer.parseInt(WalletData.MoneyOrderValues.get(1)));
+            pst.setString(1, balence);
+            pst.setString(2, Login.login.user_ID);
+            con.setAutoCommit(true);
+            pst.executeUpdate();
+            con.close();
+            JOptionPane.showMessageDialog(null, "Your Balence Updated Succesfully in Your Wallet and Remaining Balence is: " + balence);
+        } catch (Exception e) {
+           // JOptionPane.showMessageDialog(null, "CustomerBalence Update Failed ID:" + e.toString());
         }
     }
 
@@ -690,6 +709,7 @@ public class DatabaseOperations {
             pst.executeUpdate();
             con.setAutoCommit(true);
             con.close();
+            DatabaseOperations.getCustomerProfileForCustomerPanel(Login.login.user_ID);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Consignment Update Failed ID:" + e.toString());
         }
@@ -743,6 +763,7 @@ public class DatabaseOperations {
             pst.executeUpdate();
             con.setAutoCommit(true);
             con.close();
+            
             updateCustomerBalence();
 
         } catch (Exception e) {
